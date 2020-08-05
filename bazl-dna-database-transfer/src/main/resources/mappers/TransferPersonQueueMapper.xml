@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.transfer.mapper.TransferPersonQueueMapper">
+
+  <resultMap id="BaseResultMap" type="com.bazl.dna.database.transfer.model.po.TransferPersonQueue">
+    <id column="ID" jdbcType="VARCHAR" javaType="java.lang.String" property="id" />
+    <result column="LAB_SERVER_NO" jdbcType="VARCHAR" property="labServerNo" />
+    <result column="PERSON_ID" jdbcType="VARCHAR" javaType="java.lang.String" property="personId" />
+    <result column="TRANSFER_STATUS" jdbcType="INTEGER" javaType="int" property="transferStatus" />
+    <result column="TRANSFER_FILE_ROOT_PATH" jdbcType="VARCHAR" javaType="java.lang.String" property="transferFileRootPath" />
+    <result column="TRANSFER_FILE_NAME" jdbcType="VARCHAR" javaType="java.lang.String" property="transferFileName" />
+    <result column="TRANSFER_ERROR_MSG" jdbcType="VARCHAR" javaType="java.lang.String" property="failedMsg" />
+    <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="transferDatetime" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    q.ID, q.LAB_SERVER_NO, q.PERSON_ID, q.TRANSFER_STATUS, q.TRANSFER_FILE_ROOT_PATH, q.TRANSFER_FILE_NAME,
+    q.TRANSFER_ERROR_MSG, q.CREATE_DATETIME, q.UPDATE_DATETIME
+  </sql>
+
+  <select id="select" resultMap="BaseResultMap" parameterType="com.bazl.dna.database.transfer.model.po.TransferPersonQueue">
+    select
+      <include refid="Base_Column_List" />,
+    c.CONSIGNMENT_ID as consignmentId
+    from transfer_criminal_queue q
+    left join criminal_person_info c on c.id = q.PERSON_ID
+    where q.TRANSFER_STATUS=#{transferStatus, jdbcType=INTEGER}
+    and q.LAB_SERVER_NO=#{labServerNo, jdbcType=VARCHAR}
+  </select>
+
+  <update id="updateStatus" parameterType="com.bazl.dna.database.transfer.model.po.TransferPersonQueue">
+    update transfer_criminal_queue
+    set TRANSFER_STATUS=#{transferStatus, jdbcType=INTEGER},
+        TRANSFER_ERROR_MSG=#{failedMsg, jdbcType=VARCHAR},
+        TRANSFER_FILE_NAME=#{transferFileName, jdbcType=VARCHAR},
+        TRANSFER_FILE_ROOT_PATH=#{transferFileRootPath, jdbcType=VARCHAR},
+        UPDATE_DATETIME=#{transferDatetime, jdbcType=TIMESTAMP}
+    where ID=#{id, jdbcType=VARCHAR}
+  </update>
+
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.AutoCompareSettingsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.AutoCompareSettings">
+        <id column="ID" property="id" />
+        <result column="COMPARE_MODE" property="compareMode" />
+        <result column="INSTORE_DATA_TYPE" property="instoreDataType" />
+        <result column="AUTO_COMPARE_FLAG" property="autoCompareFlag" />
+        <result column="LOWEST_SAME_LIMIT" property="lowestSameLimit" />
+        <result column="MOST_DIFF_LIMIT" property="mostDiffLimit" />
+        <result column="TARGET_DATA_TYPE" property="targetDataType" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        a.ID,a.COMPARE_MODE,a.INSTORE_DATA_TYPE,a.AUTO_COMPARE_FLAG,a.LOWEST_SAME_LIMIT,a.MOST_DIFF_LIMIT,a.TARGET_DATA_TYPE
+    </sql>
+
+    <select id="selectAllCompareSetting"  parameterType="com.bazl.dna.database.service.model.po.AutoCompareSettings" resultMap="BaseResultMap">
+        select
+            <include refid="Base_Column_List"/>,
+             i.type_name as  INSTORE_DATA_NAME
+             from auto_compare_settings a
+             left join instore_data_type i
+             on i.type_code = a.instore_data_type
+            <if test="COMPARE_MODE == '01'">
+               where a.COMPARE_MODE  in ('1','2','3','6')
+            </if>
+           <if test="COMPARE_MODE == '02'">
+              where a.COMPARE_MODE  = '4'
+            </if>
+           <if test="COMPARE_MODE == '03'">
+               where a.COMPARE_MODE = '5'
+           </if>
+
+    </select>
+
+</mapper>

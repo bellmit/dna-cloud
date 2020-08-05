@@ -1,0 +1,39 @@
+eureka:
+  instance:
+    prefer-ip-address: true 
+    lease-expiration-duration-in-seconds: 10
+    lease-renewal-interval-in-seconds: 10
+  client:
+    service-url: 
+      defaultZone: http://root:root@localhost:8700/eureka/
+      
+# mysql 属性配置
+spring: 
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://39.100.79.169:3316/dnatest?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+  jpa:
+    hibernate:
+      #ddl-auto: create #ddl-auto:设为create表示每次都重新建表
+      ddl-auto: update #ddl-auto:设为update表示每次都不会重新建表
+    properties:
+      dialect: org.hibernate.dialect.MySQLDialect
+  
+  cloud: 
+    bus:
+      trace:
+        enabled: true 
+    config:
+      label: master
+      profile: dev
+      discovery: 
+        enabled: true
+        service-id: bazl-dna-config
+        
+  main:    allow-bean-definition-overriding: true
+    
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.bazl.dna.test.entity

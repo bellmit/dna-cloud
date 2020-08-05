@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-caseinfo-accept/bazl-dna-caseinfo-accept.iml" filepath="$PROJECT_DIR$/bazl-dna-caseinfo-accept/bazl-dna-caseinfo-accept.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-caseinfo-reg/bazl-dna-caseinfo-reg.iml" filepath="$PROJECT_DIR$/bazl-dna-caseinfo-reg/bazl-dna-caseinfo-reg.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-common/bazl-dna-common.iml" filepath="$PROJECT_DIR$/bazl-dna-common/bazl-dna-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-config/bazl-dna-config.iml" filepath="$PROJECT_DIR$/bazl-dna-config/bazl-dna-config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-database-compare/bazl-dna-database-compare.iml" filepath="$PROJECT_DIR$/bazl-dna-database-compare/bazl-dna-database-compare.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-database-core/bazl-dna-database-core.iml" filepath="$PROJECT_DIR$/bazl-dna-database-core/bazl-dna-database-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-database-lims-converter/bazl-dna-database-lims-converter.iml" filepath="$PROJECT_DIR$/bazl-dna-database-lims-converter/bazl-dna-database-lims-converter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-database-nation-converter/bazl-dna-database-nation-converter.iml" filepath="$PROJECT_DIR$/bazl-dna-database-nation-converter/bazl-dna-database-nation-converter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-database-service/bazl-dna-database-service.iml" filepath="$PROJECT_DIR$/bazl-dna-database-service/bazl-dna-database-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-database-sync/bazl-dna-database-sync.iml" filepath="$PROJECT_DIR$/bazl-dna-database-sync/bazl-dna-database-sync.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-database-transfer/bazl-dna-database-transfer.iml" filepath="$PROJECT_DIR$/bazl-dna-database-transfer/bazl-dna-database-transfer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-deploy/bazl-dna-deploy.iml" filepath="$PROJECT_DIR$/bazl-dna-deploy/bazl-dna-deploy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-dpznsy/bazl-dna-dpznsy.iml" filepath="$PROJECT_DIR$/bazl-dna-dpznsy/bazl-dna-dpznsy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-elasticsearch/bazl-dna-elasticsearch.iml" filepath="$PROJECT_DIR$/bazl-dna-elasticsearch/bazl-dna-elasticsearch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-eureka/bazl-dna-eureka.iml" filepath="$PROJECT_DIR$/bazl-dna-eureka/bazl-dna-eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-files/bazl-dna-files.iml" filepath="$PROJECT_DIR$/bazl-dna-files/bazl-dna-files.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-lims-blood/bazl-dna-lims-blood.iml" filepath="$PROJECT_DIR$/bazl-dna-lims-blood/bazl-dna-lims-blood.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-lims-connector/bazl-dna-lims-connector.iml" filepath="$PROJECT_DIR$/bazl-dna-lims-connector/bazl-dna-lims-connector.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-lims-core/bazl-dna-lims-core.iml" filepath="$PROJECT_DIR$/bazl-dna-lims-core/bazl-dna-lims-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-lims-manager/bazl-dna-lims-manager.iml" filepath="$PROJECT_DIR$/bazl-dna-lims-manager/bazl-dna-lims-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-lims-service/bazl-dna-lims-service.iml" filepath="$PROJECT_DIR$/bazl-dna-lims-service/bazl-dna-lims-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-mix/bazl-dna-mix.iml" filepath="$PROJECT_DIR$/bazl-dna-mix/bazl-dna-mix.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-mix-compare/bazl-dna-mix-compare.iml" filepath="$PROJECT_DIR$/bazl-dna-mix-compare/bazl-dna-mix-compare.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-nation-connector/bazl-dna-nation-connector.iml" filepath="$PROJECT_DIR$/bazl-dna-nation-connector/bazl-dna-nation-connector.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-stats/bazl-dna-stats.iml" filepath="$PROJECT_DIR$/bazl-dna-stats/bazl-dna-stats.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-system/bazl-dna-system.iml" filepath="$PROJECT_DIR$/bazl-dna-system/bazl-dna-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-test/bazl-dna-test.iml" filepath="$PROJECT_DIR$/bazl-dna-test/bazl-dna-test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-turbine/bazl-dna-turbine.iml" filepath="$PROJECT_DIR$/bazl-dna-turbine/bazl-dna-turbine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazl-dna-zuul/bazl-dna-zuul.iml" filepath="$PROJECT_DIR$/bazl-dna-zuul/bazl-dna-zuul.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dna-cloud.iml" filepath="$PROJECT_DIR$/dna-cloud.iml" />
+    </modules>
+  </component>
+</project>

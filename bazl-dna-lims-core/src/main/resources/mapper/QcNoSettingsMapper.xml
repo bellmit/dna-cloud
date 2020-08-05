@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.lims.core.dao.QcSettingsMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.dna.lims.core.model.po.QcNoSettings" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="LAB_SERVER_NO" property="labServerNo" jdbcType="VARCHAR" />
+    <result column="LAB_SERVER_HEADER" property="labServerHeader" jdbcType="VARCHAR" />
+    <result column="DICT_CODE" property="dictCode" jdbcType="VARCHAR" />
+    <result column="BARCODE" property="barcode" jdbcType="VARCHAR" />
+
+  </resultMap>
+
+  <sql id="Base_column_List">
+    qc.ID,qc.LAB_SERVER_NO,qc.LAB_SERVER_HEADER,qc.DICT_CODE,qc.BARCODE
+  </sql>
+
+<select id="selectByLab" parameterType="com.bazl.dna.lims.core.model.po.QcNoSettings" resultMap="BaseResultMap">
+   select  <include refid="Base_column_List"/>,
+   di.dict_name as dictName,
+   di.dict_desc as dictDesc
+   from QC_NO_SETTINGS qc
+   left join DICT_ITEM di on di.dict_code = qc.dict_code and di.dict_type_code='FILE_CATEGORY'
+   where qc.LAB_SERVER_NO = #{labServerNo,jdbcType=VARCHAR}
+    order by qc.dict_code
+</select>
+
+</mapper>

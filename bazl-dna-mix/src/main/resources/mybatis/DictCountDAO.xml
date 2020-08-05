@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.mix.dao.DictCountDAO">
+    <resultMap id="BaseResultMap" type="com.bazl.dna.mix.model.po.DictCount" >
+        <id column="ID" property="id" jdbcType="VARCHAR" />
+        <result column="DICT_TYPE_CODE" property="dictTypeCode" jdbcType="VARCHAR" />
+        <result column="DICT_COUNT_NUMBER" property="dictCountNumber" jdbcType="VARCHAR" />
+        <result column="YEARS" property="years" jdbcType="VARCHAR" />
+        <result column="MONTHS" property="months" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.bazl.dna.mix.model.po.DictCount" >
+    insert into dict_count (ID, DICT_TYPE_CODE, DICT_COUNT_NUMBER,
+      YEARS, MONTHS)
+    values (#{id,jdbcType=VARCHAR}, #{dictTypeCode,jdbcType=VARCHAR}, #{dictCountNumber,jdbcType=VARCHAR},
+      #{years,jdbcType=VARCHAR}, #{months,jdbcType=VARCHAR})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.bazl.dna.mix.model.po.DictCount" >
+        update dict_count
+        set DICT_TYPE_CODE = #{dictTypeCode,jdbcType=VARCHAR},
+        DICT_COUNT_NUMBER = #{dictCountNumber,jdbcType=VARCHAR},
+        YEARS = #{years,jdbcType=VARCHAR},
+        MONTHS = #{months,jdbcType=VARCHAR}
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select ID, DICT_TYPE_CODE, DICT_COUNT_NUMBER, YEARS, MONTHS
+        from dict_count
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, DICT_TYPE_CODE, DICT_COUNT_NUMBER, YEARS, MONTHS
+    from dict_count
+  </select>
+
+    <!--根据typeCode查询相对应的数据-->
+    <select id="selectMatchedSuspectCount" parameterType="java.lang.String" resultMap="BaseResultMap">
+          SELECT   DICT_TYPE_CODE, DICT_COUNT_NUMBER, YEARS, MONTHS FROM dict_count WHERE  DICT_TYPE_CODE = #{dictTypeCode,jdbcType=VARCHAR}
+    </select>
+
+    <!--定时任务修改首页统计数量-->
+    <update id="updateDictCount" parameterType="com.bazl.dna.mix.dao.DictCountDAO">
+        update dict_count
+        set DICT_COUNT_NUMBER = #{dictCountNumber,jdbcType=VARCHAR},
+          YEARS = #{years,jdbcType=VARCHAR}, MONTHS = #{months,jdbcType=VARCHAR}
+        where DICT_TYPE_CODE = #{dictTypeCode,jdbcType=VARCHAR}
+    </update>
+
+    <!--根据typeCode查询相对应的数据-->
+    <select id="selectByYears" parameterType="com.bazl.dna.mix.dao.DictCountDAO" resultMap="BaseResultMap">
+        SELECT *
+        FROM dict_count
+        <where>
+            <if test="dictTypeCode != null">
+                DICT_TYPE_CODE = #{dictTypeCode,jdbcType=VARCHAR}
+            </if>
+            <if test="years != null">
+                and YEARS = #{years,jdbcType=VARCHAR}
+            </if>
+            <if test="months != null">
+                and MONTHS = #{months,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+</mapper>

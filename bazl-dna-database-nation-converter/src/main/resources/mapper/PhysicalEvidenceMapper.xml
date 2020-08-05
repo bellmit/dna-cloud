@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.database.nation.converter.dao.PhysicalEvidenceMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.dna.database.nation.converter.model.po.PhysicalEvidence" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="INIT_SERVER_NO" property="initServerNo" jdbcType="VARCHAR" />
+    <result column="LAB_ID" property="labId" jdbcType="VARCHAR" />
+    <result column="CONSIGNMENT_ID" property="consignmentId" jdbcType="VARCHAR" />
+    <result column="CONSIGN_ORG_CODE" property="consignOrgCode" jdbcType="VARCHAR" />
+    <result column="PHYSICAL_EVIDENCE_TYPE" property="physicalEvidenceType" jdbcType="VARCHAR" />
+    <result column="PHYSICAL_EVIDENCE_NO" property="physicalEvidenceNo" jdbcType="VARCHAR" />
+    <result column="PHYSICAL_EVIDENCE_NAME" property="physicalEvidenceName" jdbcType="VARCHAR" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="TRUSTY_FLAG" property="trustyFlag" jdbcType="DECIMAL" />
+    <result column="UTILIZATION" property="utilization" jdbcType="VARCHAR" />
+    <result column="SECRECY" property="secrecy" jdbcType="VARCHAR" />
+    <result column="TRANSFER_FLAG" property="transferFlag" jdbcType="DECIMAL" />
+    <result column="TRANSFER_USER" property="transferUser" jdbcType="VARCHAR" />
+    <result column="TRANSFER_DATETIME" property="transferDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="DECIMAL" />
+    <result column="RESERVE1" property="reserve1" jdbcType="VARCHAR" />
+    <result column="RESERVE2" property="reserve2" jdbcType="VARCHAR" />
+    <result column="RESERVE3" property="reserve3" jdbcType="VARCHAR" />
+    <result column="RESERVE4" property="reserve4" jdbcType="VARCHAR" />
+    <result column="RESERVE5" property="reserve5" jdbcType="VARCHAR" />
+    <result column="RESERVE6" property="reserve6" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="DATA_SOURCE" property="dataSource" jdbcType="VARCHAR" />
+    <result column="DATA_LEVEL" property="dataLevel" jdbcType="DECIMAL" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="EXTRACT_DAETTIME" property="extractDaettime" jdbcType="TIMESTAMP" />
+    <result column="PRE_EXAMINE_DESC" property="preExamineDesc" jdbcType="VARCHAR" />
+    <result column="CONSIGN_PURPOSE" property="consignPurpose" jdbcType="VARCHAR" />
+    <result column="TYPE_EXTRA_INFO" property="typeExtraInfo" jdbcType="VARCHAR" />
+    <result column="SPECIAL_DEAL_OPTION" property="specialDealOption" jdbcType="VARCHAR" />
+    <result column="EXTRACT_METHOD" property="extractMethod" jdbcType="VARCHAR" />
+    <result column="PACKAGE_METHOD" property="packageMethod" jdbcType="VARCHAR" />
+    <result column="SAMPLE_SERIAL_NO" property="sampleSerialNo" jdbcType="VARCHAR" />
+    <result column="EXT_ID" property="extId" jdbcType="VARCHAR" />
+    <result column="LOCAL_STORE_DATETIME" property="localStoreDatetime" jdbcType="TIMESTAMP" />
+    <result column="LOCAL_CREATE_DATETIME" property="localCreateDatetime" jdbcType="TIMESTAMP" />
+    <result column="VA" property="va" jdbcType="CLOB" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from PHYSICAL_EVIDENCE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.database.nation.converter.model.po.PhysicalEvidence" >
+    insert into PHYSICAL_EVIDENCE (ID, INIT_SERVER_NO, LAB_ID, 
+      CONSIGNMENT_ID, CONSIGN_ORG_CODE, PHYSICAL_EVIDENCE_TYPE, 
+      PHYSICAL_EVIDENCE_NO, PHYSICAL_EVIDENCE_NAME, 
+      DESCRIPTION, TRUSTY_FLAG, UTILIZATION, 
+      SECRECY, TRANSFER_FLAG, TRANSFER_USER, 
+      TRANSFER_DATETIME, DELETE_FLAG, RESERVE1, 
+      RESERVE2, RESERVE3, RESERVE4, 
+      RESERVE5, RESERVE6, REMARK, 
+      DATA_SOURCE, DATA_LEVEL, CREATE_USER, 
+      CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME, 
+      EXTRACT_DAETTIME, PRE_EXAMINE_DESC, CONSIGN_PURPOSE, 
+      TYPE_EXTRA_INFO, SPECIAL_DEAL_OPTION, EXTRACT_METHOD, 
+      PACKAGE_METHOD, SAMPLE_SERIAL_NO, EXT_ID, 
+      LOCAL_STORE_DATETIME, LOCAL_CREATE_DATETIME, 
+      VA)
+    values (#{id,jdbcType=VARCHAR}, #{initServerNo,jdbcType=VARCHAR}, #{labId,jdbcType=VARCHAR}, 
+      #{consignmentId,jdbcType=VARCHAR}, #{consignOrgCode,jdbcType=VARCHAR}, #{physicalEvidenceType,jdbcType=VARCHAR}, 
+      #{physicalEvidenceNo,jdbcType=VARCHAR}, #{physicalEvidenceName,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{trustyFlag,jdbcType=DECIMAL}, #{utilization,jdbcType=VARCHAR}, 
+      #{secrecy,jdbcType=VARCHAR}, #{transferFlag,jdbcType=DECIMAL}, #{transferUser,jdbcType=VARCHAR}, 
+      #{transferDatetime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=DECIMAL}, #{reserve1,jdbcType=VARCHAR}, 
+      #{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR}, #{reserve4,jdbcType=VARCHAR}, 
+      #{reserve5,jdbcType=VARCHAR}, #{reserve6,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{dataSource,jdbcType=VARCHAR}, #{dataLevel,jdbcType=DECIMAL}, #{createUser,jdbcType=VARCHAR}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}, 
+      #{extractDaettime,jdbcType=TIMESTAMP}, #{preExamineDesc,jdbcType=VARCHAR}, #{consignPurpose,jdbcType=VARCHAR}, 
+      #{typeExtraInfo,jdbcType=VARCHAR}, #{specialDealOption,jdbcType=VARCHAR}, #{extractMethod,jdbcType=VARCHAR}, 
+      #{packageMethod,jdbcType=VARCHAR}, #{sampleSerialNo,jdbcType=VARCHAR}, #{extId,jdbcType=VARCHAR}, 
+      #{localStoreDatetime,jdbcType=TIMESTAMP}, #{localCreateDatetime,jdbcType=TIMESTAMP}, 
+      #{va,jdbcType=CLOB})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.database.nation.converter.model.po.PhysicalEvidence" >
+    update PHYSICAL_EVIDENCE
+    set INIT_SERVER_NO = #{initServerNo,jdbcType=VARCHAR},
+      LAB_ID = #{labId,jdbcType=VARCHAR},
+      CONSIGNMENT_ID = #{consignmentId,jdbcType=VARCHAR},
+      CONSIGN_ORG_CODE = #{consignOrgCode,jdbcType=VARCHAR},
+      PHYSICAL_EVIDENCE_TYPE = #{physicalEvidenceType,jdbcType=VARCHAR},
+      PHYSICAL_EVIDENCE_NO = #{physicalEvidenceNo,jdbcType=VARCHAR},
+      PHYSICAL_EVIDENCE_NAME = #{physicalEvidenceName,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      TRUSTY_FLAG = #{trustyFlag,jdbcType=DECIMAL},
+      UTILIZATION = #{utilization,jdbcType=VARCHAR},
+      SECRECY = #{secrecy,jdbcType=VARCHAR},
+      TRANSFER_FLAG = #{transferFlag,jdbcType=DECIMAL},
+      TRANSFER_USER = #{transferUser,jdbcType=VARCHAR},
+      TRANSFER_DATETIME = #{transferDatetime,jdbcType=TIMESTAMP},
+      DELETE_FLAG = #{deleteFlag,jdbcType=DECIMAL},
+      RESERVE1 = #{reserve1,jdbcType=VARCHAR},
+      RESERVE2 = #{reserve2,jdbcType=VARCHAR},
+      RESERVE3 = #{reserve3,jdbcType=VARCHAR},
+      RESERVE4 = #{reserve4,jdbcType=VARCHAR},
+      RESERVE5 = #{reserve5,jdbcType=VARCHAR},
+      RESERVE6 = #{reserve6,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      DATA_SOURCE = #{dataSource,jdbcType=VARCHAR},
+      DATA_LEVEL = #{dataLevel,jdbcType=DECIMAL},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      EXTRACT_DAETTIME = #{extractDaettime,jdbcType=TIMESTAMP},
+      PRE_EXAMINE_DESC = #{preExamineDesc,jdbcType=VARCHAR},
+      CONSIGN_PURPOSE = #{consignPurpose,jdbcType=VARCHAR},
+      TYPE_EXTRA_INFO = #{typeExtraInfo,jdbcType=VARCHAR},
+      SPECIAL_DEAL_OPTION = #{specialDealOption,jdbcType=VARCHAR},
+      EXTRACT_METHOD = #{extractMethod,jdbcType=VARCHAR},
+      PACKAGE_METHOD = #{packageMethod,jdbcType=VARCHAR},
+      SAMPLE_SERIAL_NO = #{sampleSerialNo,jdbcType=VARCHAR},
+      EXT_ID = #{extId,jdbcType=VARCHAR},
+      LOCAL_STORE_DATETIME = #{localStoreDatetime,jdbcType=TIMESTAMP},
+      LOCAL_CREATE_DATETIME = #{localCreateDatetime,jdbcType=TIMESTAMP},
+      VA = #{va,jdbcType=CLOB}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, INIT_SERVER_NO, LAB_ID, CONSIGNMENT_ID, CONSIGN_ORG_CODE, PHYSICAL_EVIDENCE_TYPE, 
+    PHYSICAL_EVIDENCE_NO, PHYSICAL_EVIDENCE_NAME, DESCRIPTION, TRUSTY_FLAG, UTILIZATION, 
+    SECRECY, TRANSFER_FLAG, TRANSFER_USER, TRANSFER_DATETIME, DELETE_FLAG, RESERVE1, 
+    RESERVE2, RESERVE3, RESERVE4, RESERVE5, RESERVE6, REMARK, DATA_SOURCE, DATA_LEVEL, 
+    CREATE_USER, CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME, EXTRACT_DAETTIME, PRE_EXAMINE_DESC, 
+    CONSIGN_PURPOSE, TYPE_EXTRA_INFO, SPECIAL_DEAL_OPTION, EXTRACT_METHOD, PACKAGE_METHOD, 
+    SAMPLE_SERIAL_NO, EXT_ID, LOCAL_STORE_DATETIME, LOCAL_CREATE_DATETIME, VA
+    from PHYSICAL_EVIDENCE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, INIT_SERVER_NO, LAB_ID, CONSIGNMENT_ID, CONSIGN_ORG_CODE, PHYSICAL_EVIDENCE_TYPE, 
+    PHYSICAL_EVIDENCE_NO, PHYSICAL_EVIDENCE_NAME, DESCRIPTION, TRUSTY_FLAG, UTILIZATION, 
+    SECRECY, TRANSFER_FLAG, TRANSFER_USER, TRANSFER_DATETIME, DELETE_FLAG, RESERVE1, 
+    RESERVE2, RESERVE3, RESERVE4, RESERVE5, RESERVE6, REMARK, DATA_SOURCE, DATA_LEVEL, 
+    CREATE_USER, CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME, EXTRACT_DAETTIME, PRE_EXAMINE_DESC, 
+    CONSIGN_PURPOSE, TYPE_EXTRA_INFO, SPECIAL_DEAL_OPTION, EXTRACT_METHOD, PACKAGE_METHOD, 
+    SAMPLE_SERIAL_NO, EXT_ID, LOCAL_STORE_DATETIME, LOCAL_CREATE_DATETIME, VA
+    from PHYSICAL_EVIDENCE
+  </select>
+</mapper>

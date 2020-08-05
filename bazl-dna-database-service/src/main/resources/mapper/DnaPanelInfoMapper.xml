@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.DnaPanelInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.DnaPanelInfo">
+        <id column="ID" property="id" />
+        <result column="PANEL_TYPE" property="panelType" />
+        <result column="PANEL_CODE" property="panelCode" />
+        <result column="PANEL_NAME" property="panelName" />
+        <result column="PANEL_FULL_NAME" property="panelFullName" />
+        <result column="ALIAS_NAME" property="aliasName" />
+        <result column="PRODUCER_NAME" property="producerName" />
+        <result column="PANEL_VERSION_NO" property="panelVersionNo" />
+        <result column="panel_file_path" property="panelFilePath" />
+        <result column="bins_file_path" property="binsFilePath" />
+        <result column="CREATE_DATETIME" property="createDatetime" />
+        <result column="CREATE_PERSON" property="createPerson" />
+        <result column="CREATE_PERSON_ORG_NAME" property="createPersonOrgName" />
+        <result column="UPDATE_DATETIME" property="updateDatetime" />
+        <result column="UPDATE_PERSON" property="updatePerson" />
+        <result column="UPDATE_PERSON_ORG_NAME" property="updatePersonOrgName" />
+        <result column="PANEL_DESCRIPTION" property="panelDescription" />
+
+    </resultMap>
+
+    <sql id="Base_Column_Sql">
+         dpi.id,dpi.PANEL_TYPE,dpi.PANEL_CODE,dpi.PANEL_NAME,dpi.PANEL_FULL_NAME,dpi.ALIAS_NAME,dpi.PRODUCER_NAME,dpi.PANEL_VERSION_NO,
+         dpi.panel_file_path,dpi.BINS_FILE_PATH,dpi.CREATE_DATETIME,dpi.CREATE_PERSON,dpi.CREATE_PERSON_ORG_NAME,dpi.UPDATE_DATETIME,
+         dpi.UPDATE_PERSON,dpi.UPDATE_PERSON_ORG_NAME,dpi.PANEL_DESCRIPTION
+    </sql>
+
+    <select id="panelInfoQueryList" resultMap="BaseResultMap">
+        SELECT
+       *
+        from dna_panel_info dpi
+        <where>
+            <if test="panelType != null  and panelType != ''" >
+                dpi.PANEL_TYPE = #{type}
+            </if>
+            <if test="aliasName != null  and aliasName != ''" >
+                and dpi.ALIAS_NAME = #{name}
+            </if>
+            <if test="panelName != null  and panelName != ''" >
+                and dpi.PANEL_NAME = #{name}
+            </if>
+            and 1=1
+        </where>
+    </select>
+
+    <select id="panelPaginationQuery" parameterType="com.bazl.dna.database.service.model.qo.DnaPanelInfoQuery" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_Sql" />
+        from dna_panel_info dpi
+        where 1= 1
+        <if test="panelType != null  and panelType != ''" >
+            and dpi.PANEL_TYPE = #{panelType}
+        </if>
+        <if test="aliasName != null  and aliasName != ''" >
+            and dpi.ALIAS_NAME like concat('%',#{aliasName, jdbcType=VARCHAR},'%')
+        </if>
+        <if test="panelName != null  and panelName != ''" >
+            and dpi.PANEL_NAME like concat('%',#{panelName, jdbcType=VARCHAR},'%')
+        </if>
+        order by dpi.ID desc
+        limit #{offset},#{rows}
+    </select>
+
+    <select id="panelPaginationCount" parameterType="com.bazl.dna.database.service.model.qo.DnaPanelInfoQuery" resultType="int">
+        select count(distinct dpi.id)
+        from  dna_panel_info dpi
+        where 1= 1
+        <if test="panelType != null  and panelType != ''" >
+            and dpi.PANEL_TYPE = #{panelType}
+        </if>
+        <if test="aliasName != null  and aliasName != ''" >
+            and dpi.ALIAS_NAME like concat('%',#{aliasName, jdbcType=VARCHAR},'%')
+        </if>
+        <if test="panelName != null  and panelName != ''" >
+            and dpi.PANEL_NAME like concat('%',#{panelName, jdbcType=VARCHAR},'%')
+        </if>
+    </select>
+</mapper>

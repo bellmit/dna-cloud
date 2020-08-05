@@ -1,0 +1,71 @@
+
+登录：
+http://localhost:8704/system/auth/login
+{
+	"userName":"admin",
+	"password":"1"
+}
+
+result:
+{
+    "code": 1,
+    "result": {
+        "realName": "超管",
+        "Expired": 1589680771277,
+        "isAdmin": "1",
+        "accessToken": "eyJhbGciOiJIUzUxMiJ9..wwtboJ1Xd3oa-a3J4F9KH_k30I3_peLdiWBXIm32SNNhFqk81BnmTNOs-TRhLpRg17FY6qd9J3Z3M7P4ZOXKTA",
+        "userId": "1"
+    },
+    "message": null
+}
+
+--------------------------------------------------------------
+以下为 bazl-dna-test 测试范例
+
+Content-Type ：application/json
+Authorization：登陆时获取的accessToken
+
+获取字典类型ID：
+http://localhost:8704/system/item/getTypeById/1
+{
+	"Authorization":"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ7XCJwYXNzd29yZFwiOlwiRTEwQURDMzk0OUJBNTlBQkJFNTZFMDU3RjIwRjg4M0VcIixcImlzQWRtaW5cIjpcIjFcIixcInVzZXJOYW1lXCI6XCJhZG1pblwiLFwicm9sZUxpc3RcIjpcIltcXFwiMVxcXCJdXCIsXCJqb2JMaXN0XCI6XCJbXVwiLFwidG9rZW5UeXBlXCI6XCJsb2dpblwiLFwidXNlcklkXCI6XCIxXCJ9IiwiY3JlYXRlZCI6MTU4NzA4ODc3MTQzMywiZXhwIjoxNTg5NjgwNzcxfQ.hKF6x5XUoaebTy-VHyVdrJX__avEtv44Ql1sX37sxmURkl_ct_E5McOzMeFeH7MhaK_t2Vl7zqfygULS8Xr8zw"
+}
+
+result:
+{
+    "code": 1,
+    "result": {
+        "id": "1",
+        "typeName": "status",
+        "typeCode": "status",
+        "typeDes": "状态",
+        "typeOrder": 1,
+        "delStatus": "0"
+    },
+    "message": null
+}
+
+调用本项目服务
+http://localhost:8704/test/findUserById/1
+
+调用 system 服务 使用@FeignClient指向对应服务
+@FeignClient(value = "bazl-dna-system", fallback = UserServiceFallback.class)
+参考
+http://localhost:8704/test/getTypeById/1
+
+调用文件上传服务 服务为 bazl-dna-files 参考
+http://localhost:8704/test/file/upload
+
+使用 RaabitMQ 参考
+rabbitmq/MyReceiver 接收者
+rabbitmq/MySender   发送者
+
+使用 Redis 缓存注解 目前所有Service没加缓存 如需添加可参考 
+bazl-dna-system SysOrganizationServiceImpl 已加缓存）
+
+使用 elasticsearch 参考
+bazl-dna-elasticsearch 目前不完整
+
+
+
+

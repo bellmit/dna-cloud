@@ -1,0 +1,130 @@
+.part{
+  padding: 4px 10px;
+  margin-bottom: 50px;
+  height: calc(100vh - 100px);
+  overflow-y: scroll;
+  .nav{
+    margin: 4px 0;
+  }
+  .form-part{
+    background-color: #fff;
+    border-radius: 4px;
+    padding-bottom: 15px;
+    .title{
+      border-bottom: 1px solid #3086C1;
+      padding: 8px;
+    }
+    .item-title{
+      color: #00439E;
+      border-top: 1px solid #D2D2D2;
+      border-bottom: 1px solid #D2D2D2;
+      padding: 4px 8px;
+    }
+    .item-title::before{
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 12px;
+      background-color: #00439E;
+    }
+    .item-row{
+      margin: 8px 0;
+      padding: 6px 15px;
+      .item-col{
+        text-align: left;
+        button{
+          margin: 0 8px;
+        }
+        .item-label{
+          display: inline-block;
+          width: 80px;
+        }
+        .item-input,.item-select{
+          width: 240px;
+        }
+      }
+    }
+    .gene-part{
+      border: 1px dashed #3086C1;
+      border-radius: 6px;
+      margin: 15px;
+      padding: 10px 15px;
+      .gene-row{
+        margin: 8px;
+        .gene-col{
+          text-align: left;
+          .gene-label{
+            display: inline-block;
+            width: 80px;
+          }
+          .gene-input{
+            width: 60px;
+          }
+        }
+      }
+    }
+    .data-type{
+      padding: 10px 0;
+      .item-sub{
+        color: #333;
+        margin: 6px 0;
+        padding: 0 15px;
+        .little-title{
+          margin-right: 30px;
+        }
+        .check-all{
+          color: #3086C1;
+        }
+      }
+      .item-row{
+        padding: 0 15px;
+        .item-col{
+          margin: 4px 0;
+          color: #333;
+        }
+      }
+    }
+    .inline-form{
+      padding: 6px 15px;
+      .item-col{
+        .item-label{
+          display: inline-block;
+          color: #333;
+          width: 80px;
+        }
+        .item-input,.item-select{
+          width: 240px;
+        }
+      }
+    }
+  }
+}
+.bazl-modal{
+  .item-sub{
+    padding: 10px 15px 0;
+    span{
+      color: #333;
+      margin-right: 15px;
+    }
+  }
+  .item-row{
+    padding: 10px 15px;
+    .item-col{
+      margin: 6px 0;
+      color: #333;
+    }
+  }
+}
+.codis-modal{
+  .item-row{
+    padding: 8px 15px;
+    .item-label{
+      display: inline-block;
+      width: 80px;
+      color: #333;
+    }
+    .item-input,.item-select{
+      width: 220px;
+    }
+  }
+}

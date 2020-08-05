@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.mix.connector.nation.dao.ReagentLocusMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.dna.mix.connector.nation.model.po.ReagentLocus" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="REAGENT_KIT_ID" property="reagentKitId" jdbcType="VARCHAR" />
+    <result column="LOCUS_ID" property="locusId" jdbcType="VARCHAR" />
+    <result column="ORD" property="ord" jdbcType="DECIMAL" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from REAGENT_LOCUS
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.mix.connector.nation.model.po.ReagentLocus" >
+    insert into REAGENT_LOCUS (ID, REAGENT_KIT_ID, LOCUS_ID, 
+      ORD)
+    values (#{id,jdbcType=VARCHAR}, #{reagentKitId,jdbcType=VARCHAR}, #{locusId,jdbcType=VARCHAR}, 
+      #{ord,jdbcType=DECIMAL})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.mix.connector.nation.model.po.ReagentLocus" >
+    update REAGENT_LOCUS
+    set REAGENT_KIT_ID = #{reagentKitId,jdbcType=VARCHAR},
+      LOCUS_ID = #{locusId,jdbcType=VARCHAR},
+      ORD = #{ord,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, REAGENT_KIT_ID, LOCUS_ID, ORD
+    from REAGENT_LOCUS
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, REAGENT_KIT_ID, LOCUS_ID, ORD
+    from REAGENT_LOCUS
+  </select>
+  <select id="selectByKitIdToLocusID" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select  LOCUS_ID from REAGENT_LOCUS
+    where REAGENT_KIT_ID = #{reagentKitId,jdbcType=VARCHAR}
+  </select>
+</mapper>

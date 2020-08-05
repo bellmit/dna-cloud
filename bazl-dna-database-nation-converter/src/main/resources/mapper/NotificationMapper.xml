@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.database.nation.converter.dao.NotificationMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.dna.database.nation.converter.model.po.Notification" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="MATCH_GENE_TYPE" property="matchGeneType" jdbcType="VARCHAR" />
+    <result column="NOTIFICATION_NO" property="notificationNo" jdbcType="VARCHAR" />
+    <result column="MATCH_DATETIME" property="matchDatetime" jdbcType="TIMESTAMP" />
+    <result column="MATCH_MODE" property="matchMode" jdbcType="VARCHAR" />
+    <result column="MATCH_METHOD" property="matchMethod" jdbcType="VARCHAR" />
+    <result column="MATCH_TYPE" property="matchType" jdbcType="VARCHAR" />
+    <result column="COMPARISON_ALGORITHM" property="comparisonAlgorithm" jdbcType="VARCHAR" />
+    <result column="MATCH_DETAIL" property="matchDetail" jdbcType="VARCHAR" />
+    <result column="LR_VALUE" property="lrValue" jdbcType="VARCHAR" />
+    <result column="SRC_DATA_ID" property="srcDataId" jdbcType="VARCHAR" />
+    <result column="SRC_SERVER_NO" property="srcServerNo" jdbcType="VARCHAR" />
+    <result column="SRC_CLUE_TYPE" property="srcClueType" jdbcType="VARCHAR" />
+    <result column="SRC_REVIEW_TYPE" property="srcReviewType" jdbcType="VARCHAR" />
+    <result column="SRC_REVIEW_DESC" property="srcReviewDesc" jdbcType="VARCHAR" />
+    <result column="SRC_REVIEW_USER" property="srcReviewUser" jdbcType="VARCHAR" />
+    <result column="SRC_REVIEW_DATETIME" property="srcReviewDatetime" jdbcType="TIMESTAMP" />
+    <result column="SRC_JUDGE_TYPE" property="srcJudgeType" jdbcType="VARCHAR" />
+    <result column="SRC_JUDGE_DESC" property="srcJudgeDesc" jdbcType="VARCHAR" />
+    <result column="SRC_JUDGE_USER" property="srcJudgeUser" jdbcType="VARCHAR" />
+    <result column="SRC_JUDGE_DATETIME" property="srcJudgeDatetime" jdbcType="TIMESTAMP" />
+    <result column="MATCH_DATA_ID" property="matchDataId" jdbcType="VARCHAR" />
+    <result column="MATCH_SERVER_NO" property="matchServerNo" jdbcType="VARCHAR" />
+    <result column="MATCH_CLUE_TYPE" property="matchClueType" jdbcType="VARCHAR" />
+    <result column="MATCH_REVIEW_TYPE" property="matchReviewType" jdbcType="VARCHAR" />
+    <result column="MATCH_REVIEW_DESC" property="matchReviewDesc" jdbcType="VARCHAR" />
+    <result column="MATCH_REVIEW_USER" property="matchReviewUser" jdbcType="VARCHAR" />
+    <result column="MATCH_REVIEW_DATETIME" property="matchReviewDatetime" jdbcType="TIMESTAMP" />
+    <result column="MATCH_JUDGE_TYPE" property="matchJudgeType" jdbcType="VARCHAR" />
+    <result column="MATCH_JUDGE_DESC" property="matchJudgeDesc" jdbcType="VARCHAR" />
+    <result column="MATCH_JUDGE_USER" property="matchJudgeUser" jdbcType="VARCHAR" />
+    <result column="MATCH_JUDGE_DATETIME" property="matchJudgeDatetime" jdbcType="TIMESTAMP" />
+    <result column="CONFIRMED_CLUE_TYPE" property="confirmedClueType" jdbcType="VARCHAR" />
+    <result column="CONFIRMED_JUDGE_TYPE" property="confirmedJudgeType" jdbcType="VARCHAR" />
+    <result column="CONFIRMED_JUDGE_USER" property="confirmedJudgeUser" jdbcType="VARCHAR" />
+    <result column="CONFIRMED_JUDGE_DATETIME" property="confirmedJudgeDatetime" jdbcType="TIMESTAMP" />
+    <result column="CONFIRMED_JUDGE_DESC" property="confirmedJudgeDesc" jdbcType="VARCHAR" />
+    <result column="NOTIFICATION_STATUS" property="notificationStatus" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="DATA_SOURCE" property="dataSource" jdbcType="VARCHAR" />
+    <result column="DATA_LEVEL" property="dataLevel" jdbcType="DECIMAL" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="RESERVE1" property="reserve1" jdbcType="VARCHAR" />
+    <result column="RESERVE2" property="reserve2" jdbcType="VARCHAR" />
+    <result column="RESERVE3" property="reserve3" jdbcType="VARCHAR" />
+    <result column="RESERVE4" property="reserve4" jdbcType="VARCHAR" />
+    <result column="RESERVE5" property="reserve5" jdbcType="VARCHAR" />
+    <result column="RESERVE6" property="reserve6" jdbcType="VARCHAR" />
+    <result column="RESERVE7" property="reserve7" jdbcType="VARCHAR" />
+    <result column="RESERVE8" property="reserve8" jdbcType="VARCHAR" />
+    <result column="SRC_IF_BLINDTHAN" property="srcIfBlindthan" jdbcType="DECIMAL" />
+    <result column="MATCH_IF_BLINDTHAN" property="matchIfBlindthan" jdbcType="DECIMAL" />
+    <result column="NATION_IF_BLINDTHAN" property="nationIfBlindthan" jdbcType="DECIMAL" />
+    <result column="LOCAL_STORE_DATETIME" property="localStoreDatetime" jdbcType="TIMESTAMP" />
+    <result column="LRC_RESULT_ID" property="lrcResultId" jdbcType="VARCHAR" />
+    <result column="SRC_REVIEW_CONCLUSION" property="srcReviewConclusion" jdbcType="VARCHAR" />
+    <result column="MATCH_REVIEW_CONCLUSION" property="matchReviewConclusion" jdbcType="VARCHAR" />
+    <result column="SRC_RECEIVE_DATETIME" property="srcReceiveDatetime" jdbcType="TIMESTAMP" />
+    <result column="MATCH_RECEIVE_DATETIME" property="matchReceiveDatetime" jdbcType="TIMESTAMP" />
+    <result column="LOCAL_CREATE_DATETIME" property="localCreateDatetime" jdbcType="TIMESTAMP" />
+    <result column="POLLUTION_MATCH_FLAG" property="pollutionMatchFlag" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from NOTIFICATION
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.database.nation.converter.model.po.Notification" >
+    insert into NOTIFICATION (ID, MATCH_GENE_TYPE, NOTIFICATION_NO, 
+      MATCH_DATETIME, MATCH_MODE, MATCH_METHOD, 
+      MATCH_TYPE, COMPARISON_ALGORITHM, MATCH_DETAIL, 
+      LR_VALUE, SRC_DATA_ID, SRC_SERVER_NO, 
+      SRC_CLUE_TYPE, SRC_REVIEW_TYPE, SRC_REVIEW_DESC, 
+      SRC_REVIEW_USER, SRC_REVIEW_DATETIME, SRC_JUDGE_TYPE, 
+      SRC_JUDGE_DESC, SRC_JUDGE_USER, SRC_JUDGE_DATETIME, 
+      MATCH_DATA_ID, MATCH_SERVER_NO, MATCH_CLUE_TYPE, 
+      MATCH_REVIEW_TYPE, MATCH_REVIEW_DESC, MATCH_REVIEW_USER, 
+      MATCH_REVIEW_DATETIME, MATCH_JUDGE_TYPE, 
+      MATCH_JUDGE_DESC, MATCH_JUDGE_USER, MATCH_JUDGE_DATETIME, 
+      CONFIRMED_CLUE_TYPE, CONFIRMED_JUDGE_TYPE, 
+      CONFIRMED_JUDGE_USER, CONFIRMED_JUDGE_DATETIME, 
+      CONFIRMED_JUDGE_DESC, NOTIFICATION_STATUS, 
+      REMARK, DATA_SOURCE, DATA_LEVEL, 
+      CREATE_USER, CREATE_DATETIME, UPDATE_USER, 
+      UPDATE_DATETIME, RESERVE1, RESERVE2, 
+      RESERVE3, RESERVE4, RESERVE5, 
+      RESERVE6, RESERVE7, RESERVE8, 
+      SRC_IF_BLINDTHAN, MATCH_IF_BLINDTHAN, NATION_IF_BLINDTHAN, 
+      LOCAL_STORE_DATETIME, LRC_RESULT_ID, SRC_REVIEW_CONCLUSION, 
+      MATCH_REVIEW_CONCLUSION, SRC_RECEIVE_DATETIME, 
+      MATCH_RECEIVE_DATETIME, LOCAL_CREATE_DATETIME, 
+      POLLUTION_MATCH_FLAG)
+    values (#{id,jdbcType=VARCHAR}, #{matchGeneType,jdbcType=VARCHAR}, #{notificationNo,jdbcType=VARCHAR}, 
+      #{matchDatetime,jdbcType=TIMESTAMP}, #{matchMode,jdbcType=VARCHAR}, #{matchMethod,jdbcType=VARCHAR}, 
+      #{matchType,jdbcType=VARCHAR}, #{comparisonAlgorithm,jdbcType=VARCHAR}, #{matchDetail,jdbcType=VARCHAR}, 
+      #{lrValue,jdbcType=VARCHAR}, #{srcDataId,jdbcType=VARCHAR}, #{srcServerNo,jdbcType=VARCHAR}, 
+      #{srcClueType,jdbcType=VARCHAR}, #{srcReviewType,jdbcType=VARCHAR}, #{srcReviewDesc,jdbcType=VARCHAR}, 
+      #{srcReviewUser,jdbcType=VARCHAR}, #{srcReviewDatetime,jdbcType=TIMESTAMP}, #{srcJudgeType,jdbcType=VARCHAR}, 
+      #{srcJudgeDesc,jdbcType=VARCHAR}, #{srcJudgeUser,jdbcType=VARCHAR}, #{srcJudgeDatetime,jdbcType=TIMESTAMP}, 
+      #{matchDataId,jdbcType=VARCHAR}, #{matchServerNo,jdbcType=VARCHAR}, #{matchClueType,jdbcType=VARCHAR}, 
+      #{matchReviewType,jdbcType=VARCHAR}, #{matchReviewDesc,jdbcType=VARCHAR}, #{matchReviewUser,jdbcType=VARCHAR}, 
+      #{matchReviewDatetime,jdbcType=TIMESTAMP}, #{matchJudgeType,jdbcType=VARCHAR}, 
+      #{matchJudgeDesc,jdbcType=VARCHAR}, #{matchJudgeUser,jdbcType=VARCHAR}, #{matchJudgeDatetime,jdbcType=TIMESTAMP}, 
+      #{confirmedClueType,jdbcType=VARCHAR}, #{confirmedJudgeType,jdbcType=VARCHAR}, 
+      #{confirmedJudgeUser,jdbcType=VARCHAR}, #{confirmedJudgeDatetime,jdbcType=TIMESTAMP}, 
+      #{confirmedJudgeDesc,jdbcType=VARCHAR}, #{notificationStatus,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{dataSource,jdbcType=VARCHAR}, #{dataLevel,jdbcType=DECIMAL}, 
+      #{createUser,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, 
+      #{reserve3,jdbcType=VARCHAR}, #{reserve4,jdbcType=VARCHAR}, #{reserve5,jdbcType=VARCHAR}, 
+      #{reserve6,jdbcType=VARCHAR}, #{reserve7,jdbcType=VARCHAR}, #{reserve8,jdbcType=VARCHAR}, 
+      #{srcIfBlindthan,jdbcType=DECIMAL}, #{matchIfBlindthan,jdbcType=DECIMAL}, #{nationIfBlindthan,jdbcType=DECIMAL}, 
+      #{localStoreDatetime,jdbcType=TIMESTAMP}, #{lrcResultId,jdbcType=VARCHAR}, #{srcReviewConclusion,jdbcType=VARCHAR}, 
+      #{matchReviewConclusion,jdbcType=VARCHAR}, #{srcReceiveDatetime,jdbcType=TIMESTAMP}, 
+      #{matchReceiveDatetime,jdbcType=TIMESTAMP}, #{localCreateDatetime,jdbcType=TIMESTAMP}, 
+      #{pollutionMatchFlag,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.database.nation.converter.model.po.Notification" >
+    update NOTIFICATION
+    set MATCH_GENE_TYPE = #{matchGeneType,jdbcType=VARCHAR},
+      NOTIFICATION_NO = #{notificationNo,jdbcType=VARCHAR},
+      MATCH_DATETIME = #{matchDatetime,jdbcType=TIMESTAMP},
+      MATCH_MODE = #{matchMode,jdbcType=VARCHAR},
+      MATCH_METHOD = #{matchMethod,jdbcType=VARCHAR},
+      MATCH_TYPE = #{matchType,jdbcType=VARCHAR},
+      COMPARISON_ALGORITHM = #{comparisonAlgorithm,jdbcType=VARCHAR},
+      MATCH_DETAIL = #{matchDetail,jdbcType=VARCHAR},
+      LR_VALUE = #{lrValue,jdbcType=VARCHAR},
+      SRC_DATA_ID = #{srcDataId,jdbcType=VARCHAR},
+      SRC_SERVER_NO = #{srcServerNo,jdbcType=VARCHAR},
+      SRC_CLUE_TYPE = #{srcClueType,jdbcType=VARCHAR},
+      SRC_REVIEW_TYPE = #{srcReviewType,jdbcType=VARCHAR},
+      SRC_REVIEW_DESC = #{srcReviewDesc,jdbcType=VARCHAR},
+      SRC_REVIEW_USER = #{srcReviewUser,jdbcType=VARCHAR},
+      SRC_REVIEW_DATETIME = #{srcReviewDatetime,jdbcType=TIMESTAMP},
+      SRC_JUDGE_TYPE = #{srcJudgeType,jdbcType=VARCHAR},
+      SRC_JUDGE_DESC = #{srcJudgeDesc,jdbcType=VARCHAR},
+      SRC_JUDGE_USER = #{srcJudgeUser,jdbcType=VARCHAR},
+      SRC_JUDGE_DATETIME = #{srcJudgeDatetime,jdbcType=TIMESTAMP},
+      MATCH_DATA_ID = #{matchDataId,jdbcType=VARCHAR},
+      MATCH_SERVER_NO = #{matchServerNo,jdbcType=VARCHAR},
+      MATCH_CLUE_TYPE = #{matchClueType,jdbcType=VARCHAR},
+      MATCH_REVIEW_TYPE = #{matchReviewType,jdbcType=VARCHAR},
+      MATCH_REVIEW_DESC = #{matchReviewDesc,jdbcType=VARCHAR},
+      MATCH_REVIEW_USER = #{matchReviewUser,jdbcType=VARCHAR},
+      MATCH_REVIEW_DATETIME = #{matchReviewDatetime,jdbcType=TIMESTAMP},
+      MATCH_JUDGE_TYPE = #{matchJudgeType,jdbcType=VARCHAR},
+      MATCH_JUDGE_DESC = #{matchJudgeDesc,jdbcType=VARCHAR},
+      MATCH_JUDGE_USER = #{matchJudgeUser,jdbcType=VARCHAR},
+      MATCH_JUDGE_DATETIME = #{matchJudgeDatetime,jdbcType=TIMESTAMP},
+      CONFIRMED_CLUE_TYPE = #{confirmedClueType,jdbcType=VARCHAR},
+      CONFIRMED_JUDGE_TYPE = #{confirmedJudgeType,jdbcType=VARCHAR},
+      CONFIRMED_JUDGE_USER = #{confirmedJudgeUser,jdbcType=VARCHAR},
+      CONFIRMED_JUDGE_DATETIME = #{confirmedJudgeDatetime,jdbcType=TIMESTAMP},
+      CONFIRMED_JUDGE_DESC = #{confirmedJudgeDesc,jdbcType=VARCHAR},
+      NOTIFICATION_STATUS = #{notificationStatus,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      DATA_SOURCE = #{dataSource,jdbcType=VARCHAR},
+      DATA_LEVEL = #{dataLevel,jdbcType=DECIMAL},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      RESERVE1 = #{reserve1,jdbcType=VARCHAR},
+      RESERVE2 = #{reserve2,jdbcType=VARCHAR},
+      RESERVE3 = #{reserve3,jdbcType=VARCHAR},
+      RESERVE4 = #{reserve4,jdbcType=VARCHAR},
+      RESERVE5 = #{reserve5,jdbcType=VARCHAR},
+      RESERVE6 = #{reserve6,jdbcType=VARCHAR},
+      RESERVE7 = #{reserve7,jdbcType=VARCHAR},
+      RESERVE8 = #{reserve8,jdbcType=VARCHAR},
+      SRC_IF_BLINDTHAN = #{srcIfBlindthan,jdbcType=DECIMAL},
+      MATCH_IF_BLINDTHAN = #{matchIfBlindthan,jdbcType=DECIMAL},
+      NATION_IF_BLINDTHAN = #{nationIfBlindthan,jdbcType=DECIMAL},
+      LOCAL_STORE_DATETIME = #{localStoreDatetime,jdbcType=TIMESTAMP},
+      LRC_RESULT_ID = #{lrcResultId,jdbcType=VARCHAR},
+      SRC_REVIEW_CONCLUSION = #{srcReviewConclusion,jdbcType=VARCHAR},
+      MATCH_REVIEW_CONCLUSION = #{matchReviewConclusion,jdbcType=VARCHAR},
+      SRC_RECEIVE_DATETIME = #{srcReceiveDatetime,jdbcType=TIMESTAMP},
+      MATCH_RECEIVE_DATETIME = #{matchReceiveDatetime,jdbcType=TIMESTAMP},
+      LOCAL_CREATE_DATETIME = #{localCreateDatetime,jdbcType=TIMESTAMP},
+      POLLUTION_MATCH_FLAG = #{pollutionMatchFlag,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, MATCH_GENE_TYPE, NOTIFICATION_NO, MATCH_DATETIME, MATCH_MODE, MATCH_METHOD, 
+    MATCH_TYPE, COMPARISON_ALGORITHM, MATCH_DETAIL, LR_VALUE, SRC_DATA_ID, SRC_SERVER_NO, 
+    SRC_CLUE_TYPE, SRC_REVIEW_TYPE, SRC_REVIEW_DESC, SRC_REVIEW_USER, SRC_REVIEW_DATETIME, 
+    SRC_JUDGE_TYPE, SRC_JUDGE_DESC, SRC_JUDGE_USER, SRC_JUDGE_DATETIME, MATCH_DATA_ID, 
+    MATCH_SERVER_NO, MATCH_CLUE_TYPE, MATCH_REVIEW_TYPE, MATCH_REVIEW_DESC, MATCH_REVIEW_USER, 
+    MATCH_REVIEW_DATETIME, MATCH_JUDGE_TYPE, MATCH_JUDGE_DESC, MATCH_JUDGE_USER, MATCH_JUDGE_DATETIME, 
+    CONFIRMED_CLUE_TYPE, CONFIRMED_JUDGE_TYPE, CONFIRMED_JUDGE_USER, CONFIRMED_JUDGE_DATETIME, 
+    CONFIRMED_JUDGE_DESC, NOTIFICATION_STATUS, REMARK, DATA_SOURCE, DATA_LEVEL, CREATE_USER, 
+    CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME, RESERVE1, RESERVE2, RESERVE3, RESERVE4, 
+    RESERVE5, RESERVE6, RESERVE7, RESERVE8, SRC_IF_BLINDTHAN, MATCH_IF_BLINDTHAN, NATION_IF_BLINDTHAN, 
+    LOCAL_STORE_DATETIME, LRC_RESULT_ID, SRC_REVIEW_CONCLUSION, MATCH_REVIEW_CONCLUSION, 
+    SRC_RECEIVE_DATETIME, MATCH_RECEIVE_DATETIME, LOCAL_CREATE_DATETIME, POLLUTION_MATCH_FLAG
+    from NOTIFICATION
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, MATCH_GENE_TYPE, NOTIFICATION_NO, MATCH_DATETIME, MATCH_MODE, MATCH_METHOD, 
+    MATCH_TYPE, COMPARISON_ALGORITHM, MATCH_DETAIL, LR_VALUE, SRC_DATA_ID, SRC_SERVER_NO, 
+    SRC_CLUE_TYPE, SRC_REVIEW_TYPE, SRC_REVIEW_DESC, SRC_REVIEW_USER, SRC_REVIEW_DATETIME, 
+    SRC_JUDGE_TYPE, SRC_JUDGE_DESC, SRC_JUDGE_USER, SRC_JUDGE_DATETIME, MATCH_DATA_ID, 
+    MATCH_SERVER_NO, MATCH_CLUE_TYPE, MATCH_REVIEW_TYPE, MATCH_REVIEW_DESC, MATCH_REVIEW_USER, 
+    MATCH_REVIEW_DATETIME, MATCH_JUDGE_TYPE, MATCH_JUDGE_DESC, MATCH_JUDGE_USER, MATCH_JUDGE_DATETIME, 
+    CONFIRMED_CLUE_TYPE, CONFIRMED_JUDGE_TYPE, CONFIRMED_JUDGE_USER, CONFIRMED_JUDGE_DATETIME, 
+    CONFIRMED_JUDGE_DESC, NOTIFICATION_STATUS, REMARK, DATA_SOURCE, DATA_LEVEL, CREATE_USER, 
+    CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME, RESERVE1, RESERVE2, RESERVE3, RESERVE4, 
+    RESERVE5, RESERVE6, RESERVE7, RESERVE8, SRC_IF_BLINDTHAN, MATCH_IF_BLINDTHAN, NATION_IF_BLINDTHAN, 
+    LOCAL_STORE_DATETIME, LRC_RESULT_ID, SRC_REVIEW_CONCLUSION, MATCH_REVIEW_CONCLUSION, 
+    SRC_RECEIVE_DATETIME, MATCH_RECEIVE_DATETIME, LOCAL_CREATE_DATETIME, POLLUTION_MATCH_FLAG
+    from NOTIFICATION
+  </select>
+</mapper>

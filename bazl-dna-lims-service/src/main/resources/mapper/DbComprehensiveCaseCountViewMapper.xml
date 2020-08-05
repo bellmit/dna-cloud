@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.lims.dao.DbComprehensiveCaseCountViewMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.dna.lims.model.view.DbComprehensiveCaseCountView" >
+    <id column="delegate_org" property="delegateOrg" jdbcType="VARCHAR" />
+    <result column="delegate_org_name" property="delegateOrgName" jdbcType="VARCHAR" />
+    <result column="case_type" property="caseType" jdbcType="VARCHAR" />
+    <result column="accept_at" property="acceptAt" jdbcType="VARCHAR" />
+    <result column="case_count" property="caseCount" jdbcType="VARCHAR" />
+  </resultMap>
+
+    <!--查询单位(分局)-->
+    <select id="selectDelagateOrgList" parameterType="com.bazl.dna.lims.model.view.DbComprehensiveCaseCountView" resultMap="BaseResultMap">
+        SELECT DISTINCT dcs.delegate_org,dcs.delegate_org_name
+        from DB_CASE_SJ_COUNT_VIEW dcs
+        where dcs.delegate_org_name like '%分局%'
+    </select>
+
+    <!--根据分局code查询案件受理数-->
+    <select id="selectSjCaseByOrgCodeList" parameterType="com.bazl.dna.lims.model.view.DbComprehensiveCaseCountView" resultMap="BaseResultMap">
+        SELECT dcs.delegate_org,
+               dcs.delegate_org_name,
+               dcs.case_type,
+               dcs.accept_at,
+               dcs.case_count
+        from DB_CASE_SJ_COUNT_VIEW dcs
+        where dcs.delegate_org like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%' and dcs.case_count !='0'
+        <if test="caseTypeList != null">
+            and dcs.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+        <if test="acceptDatetimeStart != null">
+            and dcs.accept_at &gt; = to_date(#{acceptDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="acceptDatetimeEnd != null">
+            and dcs.accept_at &lt; = to_date(#{acceptDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+
+    </select>
+
+    <!--根据分局code查询案件受理数 SY-->
+    <select id="selectSySjCaseByOrgCodeList" parameterType="com.bazl.dna.lims.model.view.DbComprehensiveCaseCountView" resultMap="BaseResultMap">
+        SELECT dcs.delegate_org,
+        dcs.delegate_org_name,
+        dcs.case_type,
+        dcs.accept_at,
+        dcs.case_count
+        from DB_CASE_SJ_COUNT_SY_VIEW dcs
+        where dcs.delegate_org like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%' and dcs.case_count !='0'
+        <if test="caseTypeList != null">
+            and dcs.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+        <if test="acceptDatetimeStart != null">
+            and dcs.accept_at &gt; = to_date(#{acceptDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="acceptDatetimeEnd != null">
+            and dcs.accept_at &lt; = to_date(#{acceptDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+
+    </select>
+
+    <!--根据分局code查询出具鉴定书数-->
+    <select id="selectCaseBooksByOrgCodeList" parameterType="com.bazl.dna.lims.model.view.DbComprehensiveCaseCountView" resultMap="BaseResultMap">
+        SELECT dcs.delegate_org,
+        dcs.delegate_org_name,
+        dcs.case_type,
+        dcs.accept_at,
+        dcs.case_count
+        from DB_CASE_BOOKS_COUNT_VIEW dcs
+        where dcs.delegate_org like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%' and dcs.case_count !='0'
+        <if test="caseTypeList != null">
+            and dcs.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+        <if test="acceptDatetimeStart != null">
+            and dcs.accept_at &gt; = to_date(#{acceptDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="acceptDatetimeEnd != null">
+            and dcs.accept_at &lt; = to_date(#{acceptDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--根据分局code查询出具鉴定书数 SY-->
+    <select id="selectSyCaseBooksByOrgCodeList" parameterType="com.bazl.dna.lims.model.view.DbComprehensiveCaseCountView" resultMap="BaseResultMap">
+        SELECT dcs.delegate_org,
+        dcs.delegate_org_name,
+        dcs.case_type,
+        dcs.accept_at,
+        dcs.case_count
+        from DB_CASE_BOOKS_COUNT_SY_VIEW dcs
+        where dcs.delegate_org like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%' and dcs.case_count !='0'
+        <if test="caseTypeList != null">
+            and dcs.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+        <if test="acceptDatetimeStart != null">
+            and dcs.accept_at &gt; = to_date(#{acceptDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="acceptDatetimeEnd != null">
+            and dcs.accept_at &lt; = to_date(#{acceptDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--根据分局code查询送检物证数-->
+    <select id="selectSjSampleByOrgCodeList" parameterType="com.bazl.dna.lims.model.view.DbComprehensiveCaseCountView" resultMap="BaseResultMap">
+        SELECT dcs.delegate_org,
+        dcs.delegate_org_name,
+        dcs.case_type,
+        dcs.accept_at,
+        dcs.case_count
+        from DB_WZSAMPLE_SL_COUNT_VIEW dcs
+        where dcs.delegate_org like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%' and dcs.case_count !='0'
+        <if test="caseTypeList != null">
+            and dcs.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+        <if test="acceptDatetimeStart != null">
+            and dcs.accept_at &gt; = to_date(#{acceptDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="acceptDatetimeEnd != null">
+            and dcs.accept_at &lt; = to_date(#{acceptDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--根据分局code查询送检物证数 SY-->
+    <select id="selectSySjSampleByOrgCodeList" parameterType="com.bazl.dna.lims.model.view.DbComprehensiveCaseCountView" resultMap="BaseResultMap">
+        SELECT dcs.delegate_org,
+        dcs.delegate_org_name,
+        dcs.case_type,
+        dcs.accept_at,
+        dcs.case_count
+        from DB_WZSAMPLE_SL_COUNT_SY_VIEW dcs
+        where dcs.delegate_org like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%' and dcs.case_count !='0'
+        <if test="caseTypeList != null">
+            and dcs.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+        <if test="acceptDatetimeStart != null">
+            and dcs.accept_at &gt; = to_date(#{acceptDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="acceptDatetimeEnd != null">
+            and dcs.accept_at &lt; = to_date(#{acceptDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+</mapper>

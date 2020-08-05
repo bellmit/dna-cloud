@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.lims.dao.DbIvDetectionRateViewMapper">
+    <resultMap id="BaseResultMap" type="com.bazl.dna.lims.model.view.DbIvDetectionRateView">
+        <result column="delegate_org" property="delegateOrg" jdbcType="VARCHAR"/>
+        <result column="sample_type" property="sampleType" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询脱落细胞样本总数-->
+    <select id="selectTlxbSampleCount" parameterType="com.bazl.dna.lims.model.view.DbIvDetectionRateView"
+            resultType="int">
+        select count(distinct lsi.sample_no) from LIMS_SAMPLE_INFO_DNA@alims lsi
+        left join lims_consignment_info@alims ci on ci.consignment_id = lsi.consignment_id
+        where lsi.delete_flag='0'
+        and lsi.sample_no is not null
+        and lsi.sample_type =  '03'
+        <if test="delegateOrg != null">
+            and ci.accept_org_id  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="delegateAtStart != null">
+            and ci.delegate_datetime &gt; = to_date(#{delegateAtStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="delegateAtEnd != null">
+            and ci.delegate_datetime &lt; = to_date(#{delegateAtEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--查询物证样本总数-->
+    <select id="selectWzSampleCount" parameterType="com.bazl.dna.lims.model.view.DbIvDetectionRateView"
+            resultType="int">
+        select count(distinct lsi.sample_no) from LIMS_SAMPLE_INFO_DNA@alims lsi
+        left join lims_consignment_info@alims ci on ci.consignment_id = lsi.consignment_id
+        where lsi.delete_flag='0'
+        and lsi.sample_no is not null
+        and lsi.sample_type != '01'
+        <if test="delegateOrg != null">
+            and ci.accept_org_id  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="delegateAtStart != null">
+            and ci.delegate_datetime &gt; = to_date(#{delegateAtStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="delegateAtEnd != null">
+            and ci.delegate_datetime &lt; = to_date(#{delegateAtEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--侵财类案件有比中样本数 lims-->
+    <select id="selectComparisonCount" parameterType="com.bazl.dna.lims.model.view.DbIvDetectionRateView"
+            resultType="int">
+        select count(distinct t.sample_no)
+        from IV_THERE_ARE_BIZ_EC_VIEW t
+        where t.sample_type =  #{sampleType,jdbcType=VARCHAR}
+        <if test="delegateOrg != null">
+           and t.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="delegateAtStart != null">
+            and t.delegate_at &gt; = to_date(#{delegateAtStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="delegateAtEnd != null">
+            and t.delegate_at &lt; = to_date(#{delegateAtEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--侵财类案件有比中样本数 sylims-->
+    <select id="selectComparisonSyCount" parameterType="com.bazl.dna.lims.model.view.DbIvDetectionRateView"
+            resultType="int">
+        select count(distinct t.sample_no)
+        from IV_THERE_ARE_BIZ_EC_SY_VIEW t
+        where t.sample_type =  #{sampleType,jdbcType=VARCHAR}
+        <if test="delegateOrg != null">
+            and t.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="delegateAtStart != null">
+            and t.delegate_at &gt; = to_date(#{delegateAtStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="delegateAtEnd != null">
+            and t.delegate_at &lt; = to_date(#{delegateAtEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--侵财类案件无比中入库样本数 lims-->
+    <select id="selectNotComparisonRkCount" parameterType="com.bazl.dna.lims.model.view.DbIvDetectionRateView"
+            resultType="int">
+        select count(distinct t.sample_no)
+        from IV_NO_COMPARISON_RK_VIEW t
+        where t.sample_type =  #{sampleType,jdbcType=VARCHAR}
+        <if test="delegateOrg != null">
+            and t.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="delegateAtStart != null">
+            and t.delegate_at &gt; = to_date(#{delegateAtStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="delegateAtEnd != null">
+            and t.delegate_at &lt; = to_date(#{delegateAtEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--侵财类案件无比中入库样本数 sylims-->
+    <select id="selectNotComparisonRkSyCount" parameterType="com.bazl.dna.lims.model.view.DbIvDetectionRateView"
+            resultType="int">
+        select count(distinct t.sample_no)
+        from IV_NO_COMPARISON_RK_SY_VIEW t
+        where t.sample_type =  #{sampleType,jdbcType=VARCHAR}
+        <if test="delegateOrg != null">
+            and t.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="delegateAtStart != null">
+            and t.delegate_at &gt; = to_date(#{delegateAtStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="delegateAtEnd != null">
+            and t.delegate_at &lt; = to_date(#{delegateAtEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+</mapper>

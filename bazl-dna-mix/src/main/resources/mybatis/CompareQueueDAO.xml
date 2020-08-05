@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.mix.dao.CompareQueueDAO">
+    <resultMap id="BaseResultMap" type="com.bazl.dna.mix.model.po.CompareQueue">
+        <result column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="SAMPLE_ID" jdbcType="VARCHAR" property="sampleId"/>
+        <result column="QUEUE_TYPE" jdbcType="VARCHAR" property="queueType"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="CREATE_PERSON" jdbcType="VARCHAR" property="createPerson"/>
+        <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="createDatetime"/>
+        <result column="UPDATE_PERESON" jdbcType="VARCHAR" property="updatePereson"/>
+        <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="updateDatetime"/>
+        <result column="MIXSAME_COUNT" jdbcType="DECIMAL" property="mixSameCount"/>
+    </resultMap>
+
+    <resultMap id="BaseResultMapVo" type="com.bazl.dna.mix.model.vo.CompareQueueVo">
+        <result column="ID" jdbcType="VARCHAR" property="entity.id"/>
+        <result column="SAMPLE_ID" jdbcType="VARCHAR" property="entity.sampleId"/>
+        <result column="QUEUE_TYPE" jdbcType="VARCHAR" property="entity.queueType"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="entity.status"/>
+        <result column="CREATE_PERSON" jdbcType="VARCHAR" property="entity.createPerson"/>
+        <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="entity.createDatetime"/>
+        <result column="UPDATE_PERESON" jdbcType="VARCHAR" property="entity.updatePereson"/>
+        <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="entity.updateDatetime"/>
+        <result column="MIXSAME_COUNT" jdbcType="DECIMAL" property="entity.mixSameCount"/>
+    </resultMap>
+
+    <insert id="insertCompareQueue" parameterType="com.bazl.dna.mix.model.po.CompareQueue">
+    insert into compare_queue (ID, SAMPLE_ID, QUEUE_TYPE,
+      STATUS, CREATE_PERSON, CREATE_DATETIME,
+      UPDATE_PERESON, UPDATE_DATETIME,MIXSAME_COUNT)
+    values (#{id,jdbcType=VARCHAR}, #{sampleId,jdbcType=VARCHAR}, #{queueType,jdbcType=VARCHAR},
+      #{status,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP},
+      #{updatePereson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}, #{mixSameCount,jdbcType=DECIMAL})
+    </insert>
+
+    <select id="selectBySampleId" parameterType="com.bazl.dna.mix.model.po.CompareQueue" resultMap="BaseResultMap">
+      select * from compare_queue cq where cq.SAMPLE_ID = #{sampleId,jdbcType=VARCHAR} and cq.QUEUE_TYPE = #{queueType,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectNotMixedSampleGeneCompareQueue" parameterType="java.lang.String" resultMap="BaseResultMap">
+       SELECT t2.*
+      FROM (SELECT t1.*, ROWNUM AS rn
+              FROM (select *
+                      from compare_queue
+                      where STATUS = #{status,jdbcType=VARCHAR} and QUEUE_TYPE = #{queueType,jdbcType=VARCHAR}
+                      ) t1
+             WHERE ROWNUM &lt;= ${endRum}) t2
+     WHERE rn &gt;= ${startRum}
+    </select>
+
+    <update id="updateStatus" parameterType="com.bazl.dna.mix.model.po.CompareQueue">
+      update compare_queue cq
+      set cq.STATUS = #{status,jdbcType=VARCHAR},
+       TARGET_COUNT = #{targetCount,jdbcType=VARCHAR}
+      where cq.ID = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectByMixSameCount" parameterType="com.bazl.dna.mix.model.po.CompareQueue" resultMap="BaseResultMap">
+        select *
+        from compare_queue cq
+        where cq.SAMPLE_ID = #{sampleId,jdbcType=VARCHAR} and cq.MIXSAME_COUNT = #{mixSameCount,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

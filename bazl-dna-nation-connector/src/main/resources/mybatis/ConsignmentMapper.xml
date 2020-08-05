@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.mix.connector.nation.dao.ConsignmentMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.dna.mix.connector.nation.model.po.Consignment" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="INIT_SERVER_NO" property="initServerNo" jdbcType="VARCHAR" />
+    <result column="LAB_ID" property="labId" jdbcType="VARCHAR" />
+    <result column="EVENT_ID" property="eventId" jdbcType="VARCHAR" />
+    <result column="CATEGORY" property="category" jdbcType="VARCHAR" />
+    <result column="CONSIGNMENT_NO" property="consignmentNo" jdbcType="VARCHAR" />
+    <result column="CONSIGN_ORG_REGIONALISM" property="consignOrgRegionalism" jdbcType="VARCHAR" />
+    <result column="CONSIGN_ORG_NAME" property="consignOrgName" jdbcType="VARCHAR" />
+    <result column="CONSIGN_ORG_PHONE" property="consignOrgPhone" jdbcType="VARCHAR" />
+    <result column="CONSIGN_ORG_FAX_NO" property="consignOrgFaxNo" jdbcType="VARCHAR" />
+    <result column="CONSIGN_ORG_ZIP_CODE" property="consignOrgZipCode" jdbcType="VARCHAR" />
+    <result column="CONSIGN_ORG_ADDRESS" property="consignOrgAddress" jdbcType="VARCHAR" />
+    <result column="CONSIGN_DATETIME" property="consignDatetime" jdbcType="TIMESTAMP" />
+    <result column="CONSIGN_BRIEF" property="consignBrief" jdbcType="VARCHAR" />
+    <result column="ORIGINAL_IDENTY_INFO" property="originalIdentyInfo" jdbcType="VARCHAR" />
+    <result column="RE_IDENTY_REASON" property="reIdentyReason" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_NAME" property="consignerName" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_DUTY" property="consignerDuty" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_PHONE" property="consignerPhone" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_CERTIFICATE_TYPE" property="consignerCertificateType" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_CERTIFICATE_NO" property="consignerCertificateNo" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_ADDRESS" property="consignerAddress" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_ZIP_CODE" property="consignerZipCode" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_NAME2" property="consignerName2" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_DUTY2" property="consignerDuty2" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_PHONE2" property="consignerPhone2" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_CERTIFICATE_TYPE2" property="consignerCertificateType2" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_CERTIFICATE_NO2" property="consignerCertificateNo2" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_ADDRESS2" property="consignerAddress2" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_ZIP_CODE2" property="consignerZipCode2" jdbcType="VARCHAR" />
+    <result column="ACCEPT_NO" property="acceptNo" jdbcType="VARCHAR" />
+    <result column="ACCEPTOR_ID" property="acceptorId" jdbcType="VARCHAR" />
+    <result column="ACCEPTOR_NAME" property="acceptorName" jdbcType="VARCHAR" />
+    <result column="ACCEPT_REGIONALISM" property="acceptRegionalism" jdbcType="VARCHAR" />
+    <result column="ACCEPT_ORG_NAME" property="acceptOrgName" jdbcType="VARCHAR" />
+    <result column="ACCEPT_ORG_PHONE" property="acceptOrgPhone" jdbcType="VARCHAR" />
+    <result column="ACCEPT_DATETIME" property="acceptDatetime" jdbcType="TIMESTAMP" />
+    <result column="IDENTIFY_REQUEST" property="identifyRequest" jdbcType="VARCHAR" />
+    <result column="PROMISE" property="promise" jdbcType="VARCHAR" />
+    <result column="SPECIALTY" property="specialty" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="ACCEPT_OPINION" property="acceptOpinion" jdbcType="VARCHAR" />
+    <result column="IDENTIFY_RESULT" property="identifyResult" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="IS_APPEND" property="isAppend" jdbcType="DECIMAL" />
+    <result column="TRANSFER_FLAG" property="transferFlag" jdbcType="DECIMAL" />
+    <result column="TRANSFER_USER" property="transferUser" jdbcType="VARCHAR" />
+    <result column="TRANSFER_DATETIME" property="transferDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_STATUS" property="updateStatus" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="DECIMAL" />
+    <result column="DATA_SOURCE" property="dataSource" jdbcType="VARCHAR" />
+    <result column="SAMPLE_SEQ_NO" property="sampleSeqNo" jdbcType="DECIMAL" />
+    <result column="DATA_LEVEL" property="dataLevel" jdbcType="DECIMAL" />
+    <result column="RESERVE1" property="reserve1" jdbcType="VARCHAR" />
+    <result column="RESERVE2" property="reserve2" jdbcType="VARCHAR" />
+    <result column="RESERVE3" property="reserve3" jdbcType="VARCHAR" />
+    <result column="RESERVE4" property="reserve4" jdbcType="VARCHAR" />
+    <result column="RESERVE5" property="reserve5" jdbcType="VARCHAR" />
+    <result column="RESERVE6" property="reserve6" jdbcType="VARCHAR" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="SAMPLING_REGIONALISM" property="samplingRegionalism" jdbcType="VARCHAR" />
+    <result column="SAMPLING_DATETIME" property="samplingDatetime" jdbcType="TIMESTAMP" />
+    <result column="SAMPLING_NAME" property="samplingName" jdbcType="VARCHAR" />
+    <result column="SAMPLING_PHONE" property="samplingPhone" jdbcType="VARCHAR" />
+    <result column="PARENT_TYPE" property="parentType" jdbcType="VARCHAR" />
+    <result column="SINGLE_CASE" property="singleCase" jdbcType="VARCHAR" />
+    <result column="MAIN_CONSIGNMENT_ID" property="mainConsignmentId" jdbcType="VARCHAR" />
+    <result column="RETRY_COUNT" property="retryCount" jdbcType="DECIMAL" />
+    <result column="ERROR_MSG" property="errorMsg" jdbcType="VARCHAR" />
+    <result column="TASK_NO" property="taskNo" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_FAX_NO" property="consignerFaxNo" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_FAX_NO2" property="consignerFaxNo2" jdbcType="VARCHAR" />
+    <result column="NO_EXAMIN_REASON" property="noExaminReason" jdbcType="VARCHAR" />
+    <result column="EXT_ID" property="extId" jdbcType="VARCHAR" />
+    <result column="LOCAL_STORE_DATETIME" property="localStoreDatetime" jdbcType="TIMESTAMP" />
+    <result column="LOCAL_CREATE_DATETIME" property="localCreateDatetime" jdbcType="TIMESTAMP" />
+    <result column="RECORDER_ORG_REGIONALISM" property="recorderOrgRegionalism" jdbcType="VARCHAR" />
+    <result column="RECORDER_UNITNAME" property="recorderUnitname" jdbcType="VARCHAR" />
+    <result column="RECORDER_PERSON" property="recorderPerson" jdbcType="VARCHAR" />
+    <result column="RECORDER_TEL" property="recorderTel" jdbcType="VARCHAR" />
+    <result column="DG_CASE_NO" property="dgCaseNo" jdbcType="VARCHAR" />
+    <result column="SINGLE_CASE_REASON" property="singleCaseReason" jdbcType="VARCHAR" />
+    <result column="UNIT_REGIONALISM" property="unitRegionalism" jdbcType="VARCHAR" />
+    <result column="RECORDER_TEL2" property="recorderTel2" jdbcType="VARCHAR" />
+    <result column="ORG_STATUS" property="orgStatus" jdbcType="VARCHAR" />
+    <result column="IS_MASTER" property="isMaster" jdbcType="VARCHAR" />
+    <result column="PROSPECTING_TIME" property="prospectingTime" jdbcType="VARCHAR" />
+    <result column="VA" property="va" jdbcType="CLOB" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from CONSIGNMENT
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.mix.connector.nation.model.po.Consignment" >
+    insert into CONSIGNMENT (ID, INIT_SERVER_NO, LAB_ID, 
+      EVENT_ID, CATEGORY, CONSIGNMENT_NO, 
+      CONSIGN_ORG_REGIONALISM, CONSIGN_ORG_NAME, 
+      CONSIGN_ORG_PHONE, CONSIGN_ORG_FAX_NO, CONSIGN_ORG_ZIP_CODE, 
+      CONSIGN_ORG_ADDRESS, CONSIGN_DATETIME, CONSIGN_BRIEF, 
+      ORIGINAL_IDENTY_INFO, RE_IDENTY_REASON, CONSIGNER_NAME, 
+      CONSIGNER_DUTY, CONSIGNER_PHONE, CONSIGNER_CERTIFICATE_TYPE, 
+      CONSIGNER_CERTIFICATE_NO, CONSIGNER_ADDRESS, 
+      CONSIGNER_ZIP_CODE, CONSIGNER_NAME2, CONSIGNER_DUTY2, 
+      CONSIGNER_PHONE2, CONSIGNER_CERTIFICATE_TYPE2, 
+      CONSIGNER_CERTIFICATE_NO2, CONSIGNER_ADDRESS2, 
+      CONSIGNER_ZIP_CODE2, ACCEPT_NO, ACCEPTOR_ID, 
+      ACCEPTOR_NAME, ACCEPT_REGIONALISM, ACCEPT_ORG_NAME, 
+      ACCEPT_ORG_PHONE, ACCEPT_DATETIME, IDENTIFY_REQUEST, 
+      PROMISE, SPECIALTY, REMARK, 
+      ACCEPT_OPINION, IDENTIFY_RESULT, STATUS, 
+      IS_APPEND, TRANSFER_FLAG, TRANSFER_USER, 
+      TRANSFER_DATETIME, UPDATE_STATUS, DELETE_FLAG, 
+      DATA_SOURCE, SAMPLE_SEQ_NO, DATA_LEVEL, 
+      RESERVE1, RESERVE2, RESERVE3, 
+      RESERVE4, RESERVE5, RESERVE6, 
+      CREATE_USER, CREATE_DATETIME, UPDATE_USER, 
+      UPDATE_DATETIME, SAMPLING_REGIONALISM, 
+      SAMPLING_DATETIME, SAMPLING_NAME, SAMPLING_PHONE, 
+      PARENT_TYPE, SINGLE_CASE, MAIN_CONSIGNMENT_ID, 
+      RETRY_COUNT, ERROR_MSG, TASK_NO, 
+      CONSIGNER_FAX_NO, CONSIGNER_FAX_NO2, NO_EXAMIN_REASON, 
+      EXT_ID, LOCAL_STORE_DATETIME, LOCAL_CREATE_DATETIME, 
+      RECORDER_ORG_REGIONALISM, RECORDER_UNITNAME, 
+      RECORDER_PERSON, RECORDER_TEL, DG_CASE_NO, 
+      SINGLE_CASE_REASON, UNIT_REGIONALISM, RECORDER_TEL2, 
+      ORG_STATUS, IS_MASTER, PROSPECTING_TIME, 
+      VA)
+    values (#{id,jdbcType=VARCHAR}, #{initServerNo,jdbcType=VARCHAR}, #{labId,jdbcType=VARCHAR}, 
+      #{eventId,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{consignmentNo,jdbcType=VARCHAR}, 
+      #{consignOrgRegionalism,jdbcType=VARCHAR}, #{consignOrgName,jdbcType=VARCHAR}, 
+      #{consignOrgPhone,jdbcType=VARCHAR}, #{consignOrgFaxNo,jdbcType=VARCHAR}, #{consignOrgZipCode,jdbcType=VARCHAR}, 
+      #{consignOrgAddress,jdbcType=VARCHAR}, #{consignDatetime,jdbcType=TIMESTAMP}, #{consignBrief,jdbcType=VARCHAR}, 
+      #{originalIdentyInfo,jdbcType=VARCHAR}, #{reIdentyReason,jdbcType=VARCHAR}, #{consignerName,jdbcType=VARCHAR}, 
+      #{consignerDuty,jdbcType=VARCHAR}, #{consignerPhone,jdbcType=VARCHAR}, #{consignerCertificateType,jdbcType=VARCHAR}, 
+      #{consignerCertificateNo,jdbcType=VARCHAR}, #{consignerAddress,jdbcType=VARCHAR}, 
+      #{consignerZipCode,jdbcType=VARCHAR}, #{consignerName2,jdbcType=VARCHAR}, #{consignerDuty2,jdbcType=VARCHAR}, 
+      #{consignerPhone2,jdbcType=VARCHAR}, #{consignerCertificateType2,jdbcType=VARCHAR}, 
+      #{consignerCertificateNo2,jdbcType=VARCHAR}, #{consignerAddress2,jdbcType=VARCHAR}, 
+      #{consignerZipCode2,jdbcType=VARCHAR}, #{acceptNo,jdbcType=VARCHAR}, #{acceptorId,jdbcType=VARCHAR}, 
+      #{acceptorName,jdbcType=VARCHAR}, #{acceptRegionalism,jdbcType=VARCHAR}, #{acceptOrgName,jdbcType=VARCHAR}, 
+      #{acceptOrgPhone,jdbcType=VARCHAR}, #{acceptDatetime,jdbcType=TIMESTAMP}, #{identifyRequest,jdbcType=VARCHAR}, 
+      #{promise,jdbcType=VARCHAR}, #{specialty,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{acceptOpinion,jdbcType=VARCHAR}, #{identifyResult,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{isAppend,jdbcType=DECIMAL}, #{transferFlag,jdbcType=DECIMAL}, #{transferUser,jdbcType=VARCHAR}, 
+      #{transferDatetime,jdbcType=TIMESTAMP}, #{updateStatus,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=DECIMAL}, 
+      #{dataSource,jdbcType=VARCHAR}, #{sampleSeqNo,jdbcType=DECIMAL}, #{dataLevel,jdbcType=DECIMAL}, 
+      #{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR}, 
+      #{reserve4,jdbcType=VARCHAR}, #{reserve5,jdbcType=VARCHAR}, #{reserve6,jdbcType=VARCHAR}, 
+      #{createUser,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{samplingRegionalism,jdbcType=VARCHAR}, 
+      #{samplingDatetime,jdbcType=TIMESTAMP}, #{samplingName,jdbcType=VARCHAR}, #{samplingPhone,jdbcType=VARCHAR}, 
+      #{parentType,jdbcType=VARCHAR}, #{singleCase,jdbcType=VARCHAR}, #{mainConsignmentId,jdbcType=VARCHAR}, 
+      #{retryCount,jdbcType=DECIMAL}, #{errorMsg,jdbcType=VARCHAR}, #{taskNo,jdbcType=VARCHAR}, 
+      #{consignerFaxNo,jdbcType=VARCHAR}, #{consignerFaxNo2,jdbcType=VARCHAR}, #{noExaminReason,jdbcType=VARCHAR}, 
+      #{extId,jdbcType=VARCHAR}, #{localStoreDatetime,jdbcType=TIMESTAMP}, #{localCreateDatetime,jdbcType=TIMESTAMP}, 
+      #{recorderOrgRegionalism,jdbcType=VARCHAR}, #{recorderUnitname,jdbcType=VARCHAR}, 
+      #{recorderPerson,jdbcType=VARCHAR}, #{recorderTel,jdbcType=VARCHAR}, #{dgCaseNo,jdbcType=VARCHAR}, 
+      #{singleCaseReason,jdbcType=VARCHAR}, #{unitRegionalism,jdbcType=VARCHAR}, #{recorderTel2,jdbcType=VARCHAR}, 
+      #{orgStatus,jdbcType=VARCHAR}, #{isMaster,jdbcType=VARCHAR}, #{prospectingTime,jdbcType=VARCHAR}, 
+      #{va,jdbcType=CLOB})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.mix.connector.nation.model.po.Consignment" >
+    update CONSIGNMENT
+    set INIT_SERVER_NO = #{initServerNo,jdbcType=VARCHAR},
+      LAB_ID = #{labId,jdbcType=VARCHAR},
+      EVENT_ID = #{eventId,jdbcType=VARCHAR},
+      CATEGORY = #{category,jdbcType=VARCHAR},
+      CONSIGNMENT_NO = #{consignmentNo,jdbcType=VARCHAR},
+      CONSIGN_ORG_REGIONALISM = #{consignOrgRegionalism,jdbcType=VARCHAR},
+      CONSIGN_ORG_NAME = #{consignOrgName,jdbcType=VARCHAR},
+      CONSIGN_ORG_PHONE = #{consignOrgPhone,jdbcType=VARCHAR},
+      CONSIGN_ORG_FAX_NO = #{consignOrgFaxNo,jdbcType=VARCHAR},
+      CONSIGN_ORG_ZIP_CODE = #{consignOrgZipCode,jdbcType=VARCHAR},
+      CONSIGN_ORG_ADDRESS = #{consignOrgAddress,jdbcType=VARCHAR},
+      CONSIGN_DATETIME = #{consignDatetime,jdbcType=TIMESTAMP},
+      CONSIGN_BRIEF = #{consignBrief,jdbcType=VARCHAR},
+      ORIGINAL_IDENTY_INFO = #{originalIdentyInfo,jdbcType=VARCHAR},
+      RE_IDENTY_REASON = #{reIdentyReason,jdbcType=VARCHAR},
+      CONSIGNER_NAME = #{consignerName,jdbcType=VARCHAR},
+      CONSIGNER_DUTY = #{consignerDuty,jdbcType=VARCHAR},
+      CONSIGNER_PHONE = #{consignerPhone,jdbcType=VARCHAR},
+      CONSIGNER_CERTIFICATE_TYPE = #{consignerCertificateType,jdbcType=VARCHAR},
+      CONSIGNER_CERTIFICATE_NO = #{consignerCertificateNo,jdbcType=VARCHAR},
+      CONSIGNER_ADDRESS = #{consignerAddress,jdbcType=VARCHAR},
+      CONSIGNER_ZIP_CODE = #{consignerZipCode,jdbcType=VARCHAR},
+      CONSIGNER_NAME2 = #{consignerName2,jdbcType=VARCHAR},
+      CONSIGNER_DUTY2 = #{consignerDuty2,jdbcType=VARCHAR},
+      CONSIGNER_PHONE2 = #{consignerPhone2,jdbcType=VARCHAR},
+      CONSIGNER_CERTIFICATE_TYPE2 = #{consignerCertificateType2,jdbcType=VARCHAR},
+      CONSIGNER_CERTIFICATE_NO2 = #{consignerCertificateNo2,jdbcType=VARCHAR},
+      CONSIGNER_ADDRESS2 = #{consignerAddress2,jdbcType=VARCHAR},
+      CONSIGNER_ZIP_CODE2 = #{consignerZipCode2,jdbcType=VARCHAR},
+      ACCEPT_NO = #{acceptNo,jdbcType=VARCHAR},
+      ACCEPTOR_ID = #{acceptorId,jdbcType=VARCHAR},
+      ACCEPTOR_NAME = #{acceptorName,jdbcType=VARCHAR},
+      ACCEPT_REGIONALISM = #{acceptRegionalism,jdbcType=VARCHAR},
+      ACCEPT_ORG_NAME = #{acceptOrgName,jdbcType=VARCHAR},
+      ACCEPT_ORG_PHONE = #{acceptOrgPhone,jdbcType=VARCHAR},
+      ACCEPT_DATETIME = #{acceptDatetime,jdbcType=TIMESTAMP},
+      IDENTIFY_REQUEST = #{identifyRequest,jdbcType=VARCHAR},
+      PROMISE = #{promise,jdbcType=VARCHAR},
+      SPECIALTY = #{specialty,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      ACCEPT_OPINION = #{acceptOpinion,jdbcType=VARCHAR},
+      IDENTIFY_RESULT = #{identifyResult,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      IS_APPEND = #{isAppend,jdbcType=DECIMAL},
+      TRANSFER_FLAG = #{transferFlag,jdbcType=DECIMAL},
+      TRANSFER_USER = #{transferUser,jdbcType=VARCHAR},
+      TRANSFER_DATETIME = #{transferDatetime,jdbcType=TIMESTAMP},
+      UPDATE_STATUS = #{updateStatus,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=DECIMAL},
+      DATA_SOURCE = #{dataSource,jdbcType=VARCHAR},
+      SAMPLE_SEQ_NO = #{sampleSeqNo,jdbcType=DECIMAL},
+      DATA_LEVEL = #{dataLevel,jdbcType=DECIMAL},
+      RESERVE1 = #{reserve1,jdbcType=VARCHAR},
+      RESERVE2 = #{reserve2,jdbcType=VARCHAR},
+      RESERVE3 = #{reserve3,jdbcType=VARCHAR},
+      RESERVE4 = #{reserve4,jdbcType=VARCHAR},
+      RESERVE5 = #{reserve5,jdbcType=VARCHAR},
+      RESERVE6 = #{reserve6,jdbcType=VARCHAR},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      SAMPLING_REGIONALISM = #{samplingRegionalism,jdbcType=VARCHAR},
+      SAMPLING_DATETIME = #{samplingDatetime,jdbcType=TIMESTAMP},
+      SAMPLING_NAME = #{samplingName,jdbcType=VARCHAR},
+      SAMPLING_PHONE = #{samplingPhone,jdbcType=VARCHAR},
+      PARENT_TYPE = #{parentType,jdbcType=VARCHAR},
+      SINGLE_CASE = #{singleCase,jdbcType=VARCHAR},
+      MAIN_CONSIGNMENT_ID = #{mainConsignmentId,jdbcType=VARCHAR},
+      RETRY_COUNT = #{retryCount,jdbcType=DECIMAL},
+      ERROR_MSG = #{errorMsg,jdbcType=VARCHAR},
+      TASK_NO = #{taskNo,jdbcType=VARCHAR},
+      CONSIGNER_FAX_NO = #{consignerFaxNo,jdbcType=VARCHAR},
+      CONSIGNER_FAX_NO2 = #{consignerFaxNo2,jdbcType=VARCHAR},
+      NO_EXAMIN_REASON = #{noExaminReason,jdbcType=VARCHAR},
+      EXT_ID = #{extId,jdbcType=VARCHAR},
+      LOCAL_STORE_DATETIME = #{localStoreDatetime,jdbcType=TIMESTAMP},
+      LOCAL_CREATE_DATETIME = #{localCreateDatetime,jdbcType=TIMESTAMP},
+      RECORDER_ORG_REGIONALISM = #{recorderOrgRegionalism,jdbcType=VARCHAR},
+      RECORDER_UNITNAME = #{recorderUnitname,jdbcType=VARCHAR},
+      RECORDER_PERSON = #{recorderPerson,jdbcType=VARCHAR},
+      RECORDER_TEL = #{recorderTel,jdbcType=VARCHAR},
+      DG_CASE_NO = #{dgCaseNo,jdbcType=VARCHAR},
+      SINGLE_CASE_REASON = #{singleCaseReason,jdbcType=VARCHAR},
+      UNIT_REGIONALISM = #{unitRegionalism,jdbcType=VARCHAR},
+      RECORDER_TEL2 = #{recorderTel2,jdbcType=VARCHAR},
+      ORG_STATUS = #{orgStatus,jdbcType=VARCHAR},
+      IS_MASTER = #{isMaster,jdbcType=VARCHAR},
+      PROSPECTING_TIME = #{prospectingTime,jdbcType=VARCHAR},
+      VA = #{va,jdbcType=CLOB}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, INIT_SERVER_NO, LAB_ID, EVENT_ID, CATEGORY, CONSIGNMENT_NO, CONSIGN_ORG_REGIONALISM, 
+    CONSIGN_ORG_NAME, CONSIGN_ORG_PHONE, CONSIGN_ORG_FAX_NO, CONSIGN_ORG_ZIP_CODE, CONSIGN_ORG_ADDRESS, 
+    CONSIGN_DATETIME, CONSIGN_BRIEF, ORIGINAL_IDENTY_INFO, RE_IDENTY_REASON, CONSIGNER_NAME, 
+    CONSIGNER_DUTY, CONSIGNER_PHONE, CONSIGNER_CERTIFICATE_TYPE, CONSIGNER_CERTIFICATE_NO, 
+    CONSIGNER_ADDRESS, CONSIGNER_ZIP_CODE, CONSIGNER_NAME2, CONSIGNER_DUTY2, CONSIGNER_PHONE2, 
+    CONSIGNER_CERTIFICATE_TYPE2, CONSIGNER_CERTIFICATE_NO2, CONSIGNER_ADDRESS2, CONSIGNER_ZIP_CODE2, 
+    ACCEPT_NO, ACCEPTOR_ID, ACCEPTOR_NAME, ACCEPT_REGIONALISM, ACCEPT_ORG_NAME, ACCEPT_ORG_PHONE, 
+    ACCEPT_DATETIME, IDENTIFY_REQUEST, PROMISE, SPECIALTY, REMARK, ACCEPT_OPINION, IDENTIFY_RESULT, 
+    STATUS, IS_APPEND, TRANSFER_FLAG, TRANSFER_USER, TRANSFER_DATETIME, UPDATE_STATUS, 
+    DELETE_FLAG, DATA_SOURCE, SAMPLE_SEQ_NO, DATA_LEVEL, RESERVE1, RESERVE2, RESERVE3, 
+    RESERVE4, RESERVE5, RESERVE6, CREATE_USER, CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME, 
+    SAMPLING_REGIONALISM, SAMPLING_DATETIME, SAMPLING_NAME, SAMPLING_PHONE, PARENT_TYPE, 
+    SINGLE_CASE, MAIN_CONSIGNMENT_ID, RETRY_COUNT, ERROR_MSG, TASK_NO, CONSIGNER_FAX_NO, 
+    CONSIGNER_FAX_NO2, NO_EXAMIN_REASON, EXT_ID, LOCAL_STORE_DATETIME, LOCAL_CREATE_DATETIME, 
+    RECORDER_ORG_REGIONALISM, RECORDER_UNITNAME, RECORDER_PERSON, RECORDER_TEL, DG_CASE_NO, 
+    SINGLE_CASE_REASON, UNIT_REGIONALISM, RECORDER_TEL2, ORG_STATUS, IS_MASTER, PROSPECTING_TIME, 
+    VA
+    from CONSIGNMENT
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, INIT_SERVER_NO, LAB_ID, EVENT_ID, CATEGORY, CONSIGNMENT_NO, CONSIGN_ORG_REGIONALISM, 
+    CONSIGN_ORG_NAME, CONSIGN_ORG_PHONE, CONSIGN_ORG_FAX_NO, CONSIGN_ORG_ZIP_CODE, CONSIGN_ORG_ADDRESS, 
+    CONSIGN_DATETIME, CONSIGN_BRIEF, ORIGINAL_IDENTY_INFO, RE_IDENTY_REASON, CONSIGNER_NAME, 
+    CONSIGNER_DUTY, CONSIGNER_PHONE, CONSIGNER_CERTIFICATE_TYPE, CONSIGNER_CERTIFICATE_NO, 
+    CONSIGNER_ADDRESS, CONSIGNER_ZIP_CODE, CONSIGNER_NAME2, CONSIGNER_DUTY2, CONSIGNER_PHONE2, 
+    CONSIGNER_CERTIFICATE_TYPE2, CONSIGNER_CERTIFICATE_NO2, CONSIGNER_ADDRESS2, CONSIGNER_ZIP_CODE2, 
+    ACCEPT_NO, ACCEPTOR_ID, ACCEPTOR_NAME, ACCEPT_REGIONALISM, ACCEPT_ORG_NAME, ACCEPT_ORG_PHONE, 
+    ACCEPT_DATETIME, IDENTIFY_REQUEST, PROMISE, SPECIALTY, REMARK, ACCEPT_OPINION, IDENTIFY_RESULT, 
+    STATUS, IS_APPEND, TRANSFER_FLAG, TRANSFER_USER, TRANSFER_DATETIME, UPDATE_STATUS, 
+    DELETE_FLAG, DATA_SOURCE, SAMPLE_SEQ_NO, DATA_LEVEL, RESERVE1, RESERVE2, RESERVE3, 
+    RESERVE4, RESERVE5, RESERVE6, CREATE_USER, CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME, 
+    SAMPLING_REGIONALISM, SAMPLING_DATETIME, SAMPLING_NAME, SAMPLING_PHONE, PARENT_TYPE, 
+    SINGLE_CASE, MAIN_CONSIGNMENT_ID, RETRY_COUNT, ERROR_MSG, TASK_NO, CONSIGNER_FAX_NO, 
+    CONSIGNER_FAX_NO2, NO_EXAMIN_REASON, EXT_ID, LOCAL_STORE_DATETIME, LOCAL_CREATE_DATETIME, 
+    RECORDER_ORG_REGIONALISM, RECORDER_UNITNAME, RECORDER_PERSON, RECORDER_TEL, DG_CASE_NO, 
+    SINGLE_CASE_REASON, UNIT_REGIONALISM, RECORDER_TEL2, ORG_STATUS, IS_MASTER, PROSPECTING_TIME, 
+    VA
+    from CONSIGNMENT
+  </select>
+</mapper>

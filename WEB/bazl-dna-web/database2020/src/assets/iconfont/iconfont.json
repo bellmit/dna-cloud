@@ -1,0 +1,79 @@
+{
+  "id": "1835668",
+  "name": "DNA数据库比对管理系统",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "11409105",
+      "name": "普货委托",
+      "font_class": "weituo",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "852299",
+      "name": "计算器",
+      "font_class": "jisuangongju",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "14873175",
+      "name": "首页",
+      "font_class": "shouye",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "14873176",
+      "name": "数据综合管理",
+      "font_class": "shujuzongheguanli",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "14873177",
+      "name": "数据监控管理",
+      "font_class": "shujujiankongguanli",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "14873178",
+      "name": "比中信息管理",
+      "font_class": "bizhongxinxiguanli",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "14873179",
+      "name": "基因数据管理",
+      "font_class": "jiyinshujuguanli",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "14873180",
+      "name": "系统管理",
+      "font_class": "xitongguanli",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "14873181",
+      "name": "系统配置",
+      "font_class": "xitongpeizhi",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "14873182",
+      "name": "快速比对",
+      "font_class": "kuaisubidui",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    }
+  ]
+}

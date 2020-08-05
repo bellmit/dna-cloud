@@ -1,0 +1,16 @@
+server:
+  port: 8703
+
+spring:
+  application:
+    name: bazl-dna-turbine     
+
+turbine: 
+  combine-host-port: true
+  app-config: bazl-dna-system,bazl-dna-zuul,bazl-dna-files,bazl-dna-mix,bazl-dna-nation-connector,bazl-dna-database-core,bazl-dna-mix-compare,bazl-dna-lims-connector,bazl-dna-database-compare,bazl-dna-database-sync,bazl-dna-dpznsy
+  aggregator: 
+    cluster-config: default
+  cluster-name-expression:  new String("default")
+  
+logging:
+  config: classpath:logback-spring.xml

@@ -1,0 +1,15 @@
+
+server:
+  port: 8787
+  undertow:
+    direct-buffers: true
+    io-threads: 4
+    worker-threads: 150
+
+spring:
+  application:
+    name: bazl-dna-test
+
+
+logging:
+  config: classpath:logback-spring.xml

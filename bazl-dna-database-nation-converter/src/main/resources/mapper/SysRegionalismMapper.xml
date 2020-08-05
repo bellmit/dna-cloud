@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.database.nation.converter.dao.SysRegionalismMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.dna.database.nation.converter.model.po.SysRegionalism" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="REGIONALISM_CODE" property="regionalismCode" jdbcType="VARCHAR" />
+    <result column="REGIONALISM_NAME" property="regionalismName" jdbcType="VARCHAR" />
+    <result column="ROOT_FLAG" property="rootFlag" jdbcType="DECIMAL" />
+    <result column="PARENT_CODE" property="parentCode" jdbcType="VARCHAR" />
+    <result column="SPELL_SHORT" property="spellShort" jdbcType="VARCHAR" />
+    <result column="ACTIVE_FLAG" property="activeFlag" jdbcType="DECIMAL" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_REGIONALISM
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.database.nation.converter.model.po.SysRegionalism" >
+    insert into SYS_REGIONALISM (ID, REGIONALISM_CODE, REGIONALISM_NAME, 
+      ROOT_FLAG, PARENT_CODE, SPELL_SHORT, 
+      ACTIVE_FLAG, DELETE_FLAG, REMARK, 
+      CREATE_USER, CREATE_DATETIME, UPDATE_USER, 
+      UPDATE_DATETIME)
+    values (#{id,jdbcType=VARCHAR}, #{regionalismCode,jdbcType=VARCHAR}, #{regionalismName,jdbcType=VARCHAR}, 
+      #{rootFlag,jdbcType=DECIMAL}, #{parentCode,jdbcType=VARCHAR}, #{spellShort,jdbcType=VARCHAR}, 
+      #{activeFlag,jdbcType=DECIMAL}, #{deleteFlag,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{createUser,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.database.nation.converter.model.po.SysRegionalism" >
+    update SYS_REGIONALISM
+    set REGIONALISM_CODE = #{regionalismCode,jdbcType=VARCHAR},
+      REGIONALISM_NAME = #{regionalismName,jdbcType=VARCHAR},
+      ROOT_FLAG = #{rootFlag,jdbcType=DECIMAL},
+      PARENT_CODE = #{parentCode,jdbcType=VARCHAR},
+      SPELL_SHORT = #{spellShort,jdbcType=VARCHAR},
+      ACTIVE_FLAG = #{activeFlag,jdbcType=DECIMAL},
+      DELETE_FLAG = #{deleteFlag,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, REGIONALISM_CODE, REGIONALISM_NAME, ROOT_FLAG, PARENT_CODE, SPELL_SHORT, 
+    ACTIVE_FLAG, DELETE_FLAG, REMARK, CREATE_USER, CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME
+    from SYS_REGIONALISM
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, REGIONALISM_CODE, REGIONALISM_NAME, ROOT_FLAG, PARENT_CODE, SPELL_SHORT, 
+    ACTIVE_FLAG, DELETE_FLAG, REMARK, CREATE_USER, CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME
+    from SYS_REGIONALISM
+  </select>
+
+  <select id="selectProvinceAndCity" parameterType="java.lang.String" resultMap="BaseResultMap" >
+    select ID, REGIONALISM_CODE, REGIONALISM_NAME, ROOT_FLAG, PARENT_CODE
+    from SYS_REGIONALISM WHERE  REGIONALISM_CODE  =  #{code,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectCitys" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select ID, REGIONALISM_CODE, REGIONALISM_NAME, ROOT_FLAG, PARENT_CODE
+    from SYS_REGIONALISM WHERE  PARENT_CODE  = #{code,jdbcType=VARCHAR} order by REGIONALISM_CODE
+  </select>
+
+</mapper>

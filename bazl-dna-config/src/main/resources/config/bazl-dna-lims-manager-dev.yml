@@ -1,0 +1,59 @@
+
+#SpringBoot配置
+spring:
+  #数据源配置
+  datasource:
+    druid:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+      url: jdbc:oracle:thin:@192.168.1.121:1521:orcl
+      username: alims
+      password: alims
+      # 初始化大小，最小，最大
+      initialSize: 30
+      minIdle: 30
+      maxActive: 500
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+
+permission.menu.menuParentPId: '*'
+permission.menu.menuParentName: 菜单
+permission.menu.menuParentEdit: false
+
+#以下为文件上传配置路径
+personImg: D:/ftpimg/person_img/
+sampleImg: D:/ftpimg/sample_img/
+proxyImg: D:/ftpimg/proxy_img/
+appointImg: D:/ftpimg/appoint_img/
+
+#以下为上传ftp所需配置
+ftpIp: 192.168.0.112
+ftpPort: 21
+ftpPersonImg: person_img
+ftpSampleImg: sample_img
+ftpProxyImg: proxy_img
+ftpAppointImg: appoint_img
+ftpUser: test
+ftpPassword: test
+ftpTomcat: 8087
+ftpFilePath: file
+ftpCaseFilePath: doc
+
+#默认实验室对应的orgId
+defaultDnaLabOrgId: 110230000000
+defaultDnaLabName: 北京市公安司法鉴定中心
+
+#侵财类案件字典代码
+assetsCaseSubPropertyList: 0401,2201,2101,13,1301,17,14,15,18,312,31,03,1601
+fenjuOrgList: 110101000000,110102000000,110105000000,110106000000,110107000000,110108000000,110109000000,110111000000,110112000000,110113000000,110114000000,110115000000,110116000000,110117000000,110228000000,110229000000
+
+
+    

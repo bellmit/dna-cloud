@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.lims.dao.DbStatsCaseInfoViewMapper">
+    <resultMap id="BaseResultMap" type="com.bazl.dna.lims.model.view.DbStatsCaseInfoView">
+        <id column="case_type" property="caseType" jdbcType="VARCHAR"/>
+        <result column="delegate_org" property="delegateOrg" jdbcType="VARCHAR"/>
+        <result column="delegate_org_name" property="delegateOrgName" jdbcType="VARCHAR"/>
+        <result column="accept_at" property="acceptDatetime" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单位-->
+    <select id="selecDelegateOrg" parameterType="com.bazl.dna.lims.model.view.DbStatsCaseInfoView"
+            resultMap="BaseResultMap">
+        select t.code as delegate_org,t.name as delegate_org_name from BJ_FENJU t
+        order by t.code asc
+    </select>
+
+    <!--查询案件数-->
+    <select id="selectCaseCntByDelegateOrg" parameterType="com.bazl.dna.lims.model.view.DbStatsCaseInfoView"
+            resultType="int">
+        select count(distinct cno.case_id) from db_stats_case_info_view cno
+        where  1=1
+        <if test="acceptDatetimeStart != null">
+            and cno.accept_at &gt; = to_date(#{acceptDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="acceptDatetimeEnd != null">
+            and cno.accept_at &lt; = to_date(#{acceptDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="delegateOrg != null">
+            and cno.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        </if>
+    </select>
+
+    <!--查询入库案件数-->
+    <select id="selectRkCaseCntByDelegateOrg" parameterType="com.bazl.dna.lims.model.view.DbStatsCaseInfoView"
+            resultType="int">
+        select count(rk.case_id) as rk_case_count
+        from db_stats_case_info_view rk, case@dnadata t2
+        where t2.caseid=rk.case_id
+        <if test="acceptDatetimeStart != null">
+            and rk.accept_at &gt; = to_date(#{acceptDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="acceptDatetimeEnd != null">
+            and rk.accept_at &lt; = to_date(#{acceptDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="delegateOrg != null">
+            and rk.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        </if>
+    </select>
+
+    <!--查询比中嫌疑人案件数-->
+    <select id="selectBzXyrCaseCntByDelegateOrg" parameterType="com.bazl.dna.lims.model.view.DbStatsCaseInfoView"
+            resultType="int">
+        select count(bzcs.case_id) as bz_xyr_case_count from db_stats_case_info_view bzcs,
+        (select distinct t.sourcecaseid as case_id from MATCH_RESULT@dnadata t where t.sourcesampletype=1 and t.targetsampletype in (3,4)
+        union select distinct t.targetcaseid as case_id from MATCH_RESULT@dnadata t where t.targetsampletype=1 and t.sourcesampletype in (3,4)
+        ) t2 where t2.case_id=bzcs.case_id
+        <if test="acceptDatetimeStart != null">
+            and bzcs.accept_at &gt; = to_date(#{acceptDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="acceptDatetimeEnd != null">
+            and bzcs.accept_at &lt; = to_date(#{acceptDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="delegateOrg != null">
+            and bzcs.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        </if>
+    </select>
+
+
+    <!--查询比中物证案件数-->
+    <select id="selectBzWzCaseCntByDelegateOrg" parameterType="com.bazl.dna.lims.model.view.DbStatsCaseInfoView"
+            resultType="int">
+        select count(bzwz.case_id) as bz_wz_case_count from db_stats_case_info_view bzwz,
+        (select distinct t.sourcecaseid as case_id from MATCH_RESULT@dnadata t where t.sourcesampletype=1 and t.targetsampletype=1
+        union select distinct t.targetcaseid as case_id from MATCH_RESULT@dnadata t where t.targetsampletype=1 and t.sourcesampletype=1
+        ) t2 where t2.case_id=bzwz.case_id
+        <if test="acceptDatetimeStart != null">
+            and bzwz.accept_at &gt; = to_date(#{acceptDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="acceptDatetimeEnd != null">
+            and bzwz.accept_at &lt; = to_date(#{acceptDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="delegateOrg != null">
+            and bzwz.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        </if>
+    </select>
+
+</mapper>

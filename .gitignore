@@ -1,0 +1,5 @@
+# Project exclude paths
+/bazl-dna-caseinfo-accept/src/main/webapp/WEB-INF/classes/
+/bazl-dna-caseinfo-reg/src/main/webapp/WEB-INF/classes/
+/bazl-dna-lims-core/src/main/webapp/WEB-INF/classes/
+/bazl-dna-stats/src/main/webapp/WEB-INF/classes/

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.lims.dao.DbCaseSortStatsViewMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.dna.lims.model.view.DbCaseSortStatsView" >
+    <id column="case_id" property="caseId" jdbcType="VARCHAR" />
+    <result column="case_sn" property="caseNo" jdbcType="VARCHAR" />
+    <result column="case_name" property="caseName" jdbcType="VARCHAR" />
+    <result column="case_digest" property="caseDigest" jdbcType="VARCHAR" />
+    <result column="name" property="orgName" jdbcType="VARCHAR" />
+    <result column="case_xk_sn" property="caseXkNo" jdbcType="VARCHAR" />
+    <result column="accept_at" property="acceptDatetime" jdbcType="VARCHAR" />
+    <result column="case_status" property="caseStatus" jdbcType="VARCHAR" />
+    <result column="case_status_name" property="caseStatusName" jdbcType="TIMESTAMP" />
+    <result column="delegate_at" property="delegateDatetime" jdbcType="VARCHAR" />
+    <result column="case_type" property="caseType" jdbcType="VARCHAR" />
+    <result column="fullname" property="acceptName" jdbcType="VARCHAR" />
+    <result column="case_time" property="caseDatetime" jdbcType="VARCHAR" />
+    <result column="barcode" property="sampleNo" jdbcType="VARCHAR" />
+    <result column="sample_name" property="sampleName" jdbcType="VARCHAR" />
+    <result column="sampleno" property="gjkSysNo" jdbcType="VARCHAR" />
+    <result column="samplebid" property="sampleBNo" jdbcType="VARCHAR" />
+    <result column="samplebname" property="sampleBName" jdbcType="VARCHAR" />
+  </resultMap>
+
+    <!--查询单位(分局)-->
+    <select id="selectDelagateOrgList" parameterType="com.bazl.dna.lims.model.view.DbCaseSortStatsView" resultMap="BaseResultMap">
+        SELECT distinct dcr.name
+        from db_case_sort_stats_view dcr
+        where dcr.name is not null
+        order by dcr.name asc
+    </select>
+
+    <select id="selectCaseSortStatsList" parameterType="com.bazl.dna.lims.model.view.DbCaseSortStatsView" resultMap="BaseResultMap">
+        select * from (
+        select rownum as rn, t.* from (
+          SELECT DISTINCT dcr.case_sn,dcr.case_name,dcr.case_digest, dcr.name,
+              dcr.case_xk_sn,dcr.accept_at,dcr.case_status,dcr.case_status_name,
+              dcr.delegate_at,ctp.case_type_new_name1 as case_type,dcr.fullname,dcr.case_time
+        from db_case_sort_stats_view dcr
+        left join case_type_map ctp on ctp.case_type_new_code = dcr.case_type
+        where dcr.case_sn is not null
+        <if test="_parameter != null">
+            <include refid="Query_Where_Clause"/>
+        </if>
+        ) t where  rownum &lt;=#{rows}
+        ) where rn &gt;#{offset}
+    </select>
+
+  <select id="selectCaseSortStatsCount" parameterType="com.bazl.dna.lims.model.view.DbCaseSortStatsView" resultType="int">
+      SELECT count(DISTINCT dcr.case_sn)
+      from db_case_sort_stats_view dcr
+      left join case_type_map ctp on ctp.case_type_new_code = dcr.case_type
+      where dcr.case_sn is not null
+      <if test="_parameter != null">
+          <include refid="Query_Where_Clause"/>
+      </if>
+  </select>
+
+    <select id="selectExportCaseSortList" parameterType="com.bazl.dna.lims.model.view.DbCaseSortStatsView" resultMap="BaseResultMap">
+        SELECT dcr.case_sn,dcr.case_name,dcr.case_digest,dcr.name,dcr.case_xk_sn,dcr.accept_at,
+        dcr.case_status,dcr.case_status_name,dcr.delegate_at,ctp.case_type_new_name1 as case_type,
+        dcr.fullname,dcr.case_time,dcr.barcode,dcr.sample_name,dcr.sampleno,dcr.samplebid,dcr.samplebname
+        from db_case_sort_stats_view dcr
+        left join case_type_map ctp on ctp.case_type_new_code = dcr.case_type
+        where dcr.case_sn is not null
+        <if test="_parameter != null">
+            <include refid="Query_Where_Clause"/>
+        </if>
+    </select>
+
+    <sql id="Query_Where_Clause">
+        <if test="caseNo != null">
+            and dcr.case_sn like '%'||#{caseNo,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="caseName != null">
+            and dcr.case_name = #{caseName,jdbcType=VARCHAR}
+        </if>
+        <if test="caseXkNo != null">
+            and dcr.case_xk_sn like '%'||#{caseXkNo,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="sampleNo != null">
+            and dcr.barcode = #{sampleNo,jdbcType=VARCHAR}
+        </if>
+        <if test="sampleName != null">
+            and dcr.sample_name = #{sampleName,jdbcType=VARCHAR}
+        </if>
+        <if test="orgName != null">
+            and dcr.name = #{orgName,jdbcType=VARCHAR}
+        </if>
+        <if test="acceptName != null">
+            and dcr.fullname = #{acceptName,jdbcType=VARCHAR}
+        </if>
+        <if test="sampleNo != null">
+            and dcr.barcode = #{sampleNo,jdbcType=VARCHAR}
+        </if>
+        <if test="acceptDatetimeStart != null">
+            and dcr.accept_at &gt; = to_date(#{acceptDatetimeStart,jdbcType=VARCHAR},'yyyy-mm-dd')
+        </if>
+        <if test="acceptDatetimeEnd != null">
+            and dcr.accept_at &lt; = to_date(#{acceptDatetimeEnd,jdbcType=VARCHAR},'yyyy-mm-dd')
+        </if>
+
+        <if test="caseStatusName != null">
+            and dcr.case_status_name = #{caseStatusName,jdbcType=VARCHAR}
+        </if>
+
+        <if test="caseTypeList != null">
+            and dcr.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+
+    </sql>
+
+    <!--根据案件编号查询案件信息-->
+    <select id="selectCaseByCaseNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select distinct dcr.case_sn,dcr.case_name,dcr.case_xk_sn
+        from DB_CASE_SORT_STATS_VIEW dcr
+        where dcr.case_sn = #{caseNo,jdbcType=VARCHAR}
+    </select>
+
+    <!--根据案件编号查询样本列表-->
+    <select id="selectCaseSampleByCaseNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select dcr.barcode,dcr.sample_name,dcr.sampleno,dcr.samplebid,dcr.samplebname
+        from DB_CASE_SORT_STATS_VIEW dcr
+        where dcr.case_sn = #{caseNo,jdbcType=VARCHAR}
+    </select>
+
+    <select id="rollback">
+        ROLLBACK
+    </select>
+
+</mapper>

@@ -1,0 +1,99 @@
+
+#SpringBoot配置
+spring:
+  #数据源配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@192.168.1.198:1521:orcl
+    username: dnalims_bj
+    password: dnalims_bj
+    # 初始化大小，最小，最大
+    initialSize: 30
+    minIdle: 30
+    maxActive: 500
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+
+permission.menu.menuParentPId: '*'
+permission.menu.menuParentName: 菜单
+permission.menu.menuParentEdit: false
+
+#以下为文件上传配置路径
+personImg: D:/ftpimg/person_img/
+sampleImg: D:/ftpimg/sample_img/
+proxyImg: D:/ftpimg/proxy_img/
+appointImg: D:/ftpimg/appoint_img/
+
+#以下为上传ftp所需配置
+ftpIp: 127.0.0.1
+ftpPort: 21
+ftpPersonImg: person_img
+ftpSampleImg: sample_img
+ftpUser: sss
+ftpPassword: sssFTP
+ftpTomcat: 8087
+
+defaultDnaLabOrgId: 110113000000
+defaultDnaLabName: 北京市顺义区公安司法鉴定中心
+
+#以下为户籍接口地址
+hjrkAdress: http://localhost:8098/HjrkWebService/ws/HjrkPersonInfoWebService?wsdl
+xkAdress: http://localhost:8080/xkwebservice/xk/getCaseInfoXk.html?caseXkNo=
+
+#shiro session失效时间  60000是一分钟  180000是半小时
+shTime: 180000
+
+#是否开启通知app 1=开启 0=关闭
+Is_App_Inform : 0
+Is_App_Url : 'http://20.1.11.52:5988/http/GA000Comm'
+# FastDFS
+# ===================================================================
+# 分布式文件系统FDFS配置
+# ===================================================================
+fdfs:
+  connect-timeout: 605
+  so-timeout: 1505
+  trackerList: 47.92.219.7:22122
+  thumbImage:
+    height: 150
+    width: 150
+  webServerUrl: http://47.92.219.7/
+  storage:
+    node:
+      flag: true
+      server:
+        ip: 47.92.219.7
+        port: 23000
+  #连接池
+  pool:
+    #连接池最大数量
+    max-total: 200
+    #每个tracker地址的最大连接数
+    max-total-per-key: 50
+    #连接耗尽时等待获取连接的最大毫秒数
+    max-wait-millis: 5000
+#自定义的属性和值
+my-yml:
+    #字符串填充数
+    stringFillCount: 4
+    arrayProps: 1,2,3,4,5
+    listProp1:
+        - name: abc
+          value: abcValue
+        - name: efg
+          value: efgValue
+    listProp2:
+        - config2Value1
+        - config2Vavlue2
+    mapProps:
+        defaultDnaLabPrefix: SY
+

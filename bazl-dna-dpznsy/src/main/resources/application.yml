@@ -1,0 +1,30 @@
+#端口
+server:
+  port: 8090
+  servlet:
+    session:
+      timeout: 30m
+spring:
+  application:
+    name: bazl-dna-dpznsy
+
+  jpa:
+    database-platform: org.hibernate.dialect.OracleDialect
+  #设置上传文件大小
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100000000
+      max-request-size: 100000000
+
+
+#整合mybatis框架配置
+mybatis:
+    type-aliases-package: com.bazl.dna.dpznsy.model.po
+    mapper-locations: classpath:mybatis/*.xml
+    configuration:
+          log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging:
+  config: classpath:logback-spring.xml  
+  

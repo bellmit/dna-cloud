@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.QcSampleInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.QcSampleInfo">
+        <id column="ID" property="id" />
+        <result column="LAB_SERVER_NO" property="labServerNo" />
+        <result column="QC_SAMPLE_TYPE" property="qcSampleType" />
+        <result column="QC_SAMPLE_NAME" property="qcSampleName" />
+        <result column="QC_SAMPLE_NO" property="qcSampleNo" />
+        <result column="QC_PERSON_TYPE" property="qcPersonType" />
+        <result column="QC_PERSON_NAME" property="qcPersonName" />
+        <result column="QC_PERSON_IDCARD_NO" property="qcPersonIdcardNo" />
+        <result column="QC_PERSON_GENDER" property="qcPersonGender" />
+        <result column="QC_PERSON_ORG_ID" property="qcPersonOrgId" />
+        <result column="QC_PERSON_ORG_NAME" property="qcPersonOrgName" />
+        <result column="STR_PANEL_ID" property="strPanelId" />
+        <result column="STR_PANEL_NAME" property="strPanelName" />
+        <result column="YSTR_PANEL_ID" property="yStrPanelId" />
+        <result column="YSTR_PANEL_NAME" property="yStrPanelName" />
+        <result column="STR_GENE_INFO" jdbcType="VARCHAR" property="strGeneInfo"/>
+        <result column="YSTR_GENE_INFO" jdbcType="VARCHAR" property="yStrGeneInfo"/>
+        <result column="CREATE_DATETIME" property="createDatetime" />
+        <result column="CREATE_PERSON_NAME" property="createPersonName" />
+        <result column="UPDATE_DATETIME" property="updateDatetime" />
+        <result column="UPDATE_PERSON_NAME" property="updatePersonName" />
+    </resultMap>
+
+<resultMap id="BaseResultMapVo" type="com.bazl.dna.database.service.model.vo.QcSampleInfoVo" extends="BaseResultMap">
+</resultMap>
+
+<sql id="Base_Column_List">
+qc.ID, qc.LAB_SERVER_NO, qc.QC_SAMPLE_TYPE, qc.QC_SAMPLE_NAME, qc.QC_SAMPLE_NO, qc.QC_PERSON_TYPE, qc.QC_PERSON_NAME,
+qc.QC_PERSON_IDCARD_NO, qc.QC_PERSON_GENDER, qc.QC_PERSON_ORG_ID, qc.QC_PERSON_ORG_NAME, qc.STR_PANEL_ID, qc.STR_PANEL_NAME,
+qc.YSTR_PANEL_ID, qc.YSTR_PANEL_NAME, qc.STR_GENE_INFO,
+qc.YSTR_GENE_INFO,qc.CREATE_DATETIME, qc.CREATE_PERSON_NAME, qc.UPDATE_DATETIME, qc.UPDATE_PERSON_NAME
+</sql>
+
+
+
+<select id="currencyCriminalQuery" parameterType="com.bazl.dna.database.service.model.po.CurrencyQcResult" resultMap="BaseResultMap"  >
+select * from qc_sample_info qc
+<where>
+    <if test="qcSampleType != null  and qcSampleType != ''" >
+        qc.QC_SAMPLE_TYPE = #{qcSampleType}
+    </if>
+    <if test="qcSampleNo != null  and qcSampleNo != ''" >
+        and qc.QC_SAMPLE_NO = #{qcSampleNo}
+    </if>
+    <if test="qcPersonType != null  and qcPersonType != ''" >x
+        and qc.QC_PERSON_TYPE = #{qcPersonType}
+    </if>
+    <if test="qcSampleName != null  and qcSampleName != ''" >
+        and qc.QC_SAMPLE_NAME = #{qcSampleName}
+    </if>
+    <if test="qcPersonName != null  and qcPersonName != ''" >
+        and qc.QC_PERSON_NAME = #{qcPersonName}
+    </if>
+    <if test="qcPersonIdcardNo != null  and qcPersonIdcardNo != ''" >
+        and qc.QC_PERSON_IDCARD_NO = #{qcPersonIdcardNo}
+    </if>
+    <if test="qcPersonOrgName != null  and qcPersonOrgName != ''" >
+        and qc.QC_PERSON_ORG_NAME = #{qcPersonOrgName}
+    </if>
+    and qc.IS_DELETED=0
+</where>
+limit #{offset},#{size}
+</select>
+
+<!--selectListPaging-->
+    <select id="selectListPaging" parameterType="com.bazl.dna.database.service.model.qo.QcSampleInfoQuery"
+            resultMap="BaseResultMapVo"  >
+        select
+        qc.ID, lsi.LAB_SERVER_NAME, qc.QC_SAMPLE_NAME, qc.QC_SAMPLE_NO, qc.QC_PERSON_NAME,
+        qc.QC_PERSON_IDCARD_NO, qc.QC_PERSON_ORG_NAME, qc.STR_PANEL_NAME,
+        qc.YSTR_PANEL_NAME,qc.QC_SAMPLE_TYPE,qc.QC_PERSON_TYPE, qc.QC_PERSON_GENDER
+        from qc_sample_info qc
+        left join lab_server_info lsi on qc.LAB_SERVER_NO=lsi.LAB_SERVER_NO
+        <where>
+            1=1
+            <if test="_parameter != null">
+                <include refid="QUERY_WHERE_CLAUSE" />
+            </if>
+            and qc.IS_DELETED=0
+        </where>
+        LIMIT #{offset},#{rows}
+    </select>
+
+    <!--selectListPagingCount-->
+    <select id="selectListPagingCount" parameterType="com.bazl.dna.database.service.model.qo.QcSampleInfoQuery" resultType="java.lang.Integer"  >
+        select count(qc.ID) from qc_sample_info qc
+        <where>
+            1=1
+            <if test="_parameter != null">
+                <include refid="QUERY_WHERE_CLAUSE" />
+            </if>
+            and qc.IS_DELETED=0
+        </where>
+    </select>
+
+    <sql id="QUERY_WHERE_CLAUSE">
+        <if test="qcSampleType != null  and qcSampleType != ''" >
+            and qc.QC_SAMPLE_TYPE = #{qcSampleType}
+        </if>
+
+        <if test="qcSampleNo != null  and qcSampleNo != ''" >
+            <choose>
+                <when test="qcSampleNoCondition == 1">
+                    and qc.QC_SAMPLE_NO = #{qcSampleNo}
+                </when>
+                <otherwise>
+                    and qc.QC_SAMPLE_NO like concat('%',#{qcSampleNo, jdbcType=VARCHAR},'%')
+                </otherwise>
+            </choose>
+        </if>
+
+        <if test="qcSampleName != null  and qcSampleName != ''" >
+            <choose>
+                <when test="qcSampleNameCondition == 1">
+                    and qc.QC_SAMPLE_NAME = #{qcSampleName}
+                </when>
+                <otherwise>
+                    and qc.QC_SAMPLE_NAME like concat('%',#{qcSampleName, jdbcType=VARCHAR},'%')
+                </otherwise>
+            </choose>
+        </if>
+
+        <if test="qcPersonType != null  and qcPersonType != ''" >
+            and qc.QC_PERSON_TYPE = #{qcPersonType}
+        </if>
+
+        <if test="qcPersonGender != null  and qcPersonGender != ''" >
+            and qc.QC_PERSON_GENDER = #{qcPersonGender}
+        </if>
+
+        <if test="qcPersonName != null  and qcPersonName != ''" >
+            <choose>
+                <when test="qcPersonNameCondition == 1">
+                    and qc.QC_PERSON_NAME = #{qcPersonName}
+                </when>
+                <otherwise>
+                    and qc.QC_PERSON_NAME like concat('%',#{qcPersonName, jdbcType=VARCHAR},'%')
+                </otherwise>
+            </choose>
+        </if>
+
+        <if test="qcPersonIdcardNo != null  and qcPersonIdcardNo != ''" >
+            <choose>
+                <when test="qcPersonIdcardNoCondition == 1">
+                    and qc.QC_PERSON_IDCARD_NO = #{qcPersonIdcardNo}
+                </when>
+                <otherwise>
+                    and qc.QC_PERSON_IDCARD_NO like concat('%',#{qcPersonIdcardNo, jdbcType=VARCHAR},'%')
+                </otherwise>
+            </choose>
+        </if>
+
+        <if test="qcPersonOrgName != null  and qcPersonOrgName != ''" >
+            and qc.QC_PERSON_ORG_NAME = #{qcPersonOrgName}
+        </if>
+
+    </sql>
+
+    <!--selectVoById-->
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from qc_sample_info qc
+        where qc.ID=#{id} and qc.IS_DELETED = 0
+    </select>
+
+    <!--updateByIdOverride-->
+    <update id="updateByIdOverride" parameterType="com.bazl.dna.database.service.model.po.QcSampleInfo">
+        update qc_sample_info
+        set LAB_SERVER_NO = #{labServerNo},
+        QC_SAMPLE_TYPE= #{qcSampleType},
+        QC_SAMPLE_NAME= #{qcSampleName},
+        QC_SAMPLE_NO = #{qcSampleNo},
+        QC_PERSON_TYPE = #{qcPersonType},
+        QC_PERSON_NAME = #{qcPersonName},
+        QC_PERSON_IDCARD_NO = #{qcPersonIdcardNo},
+        QC_PERSON_GENDER = #{qcPersonGender},
+        QC_PERSON_ORG_ID = #{qcPersonOrgId},
+        QC_PERSON_ORG_NAME = #{qcPersonOrgName},
+        STR_PANEL_ID = #{strPanelId},
+        STR_PANEL_NAME = #{strPanelName},
+        YSTR_PANEL_ID = #{yStrPanelId},
+        YSTR_PANEL_NAME = #{yStrPanelName},
+        STR_GENE_INFO = #{strGeneInfo},
+        YSTR_GENE_INFO = #{yStrGeneInfo},
+        CREATE_DATETIME = #{createDatetime},
+        CREATE_PERSON_NAME = #{createPersonName},
+        UPDATE_DATETIME = #{updateDatetime},
+        UPDATE_PERSON_NAME = #{updatePersonName}
+        where ID = #{id}
+    </update>
+
+    <!--deleteByIdOverride-->
+    <update id="deleteByIdOverride" parameterType="java.lang.Integer">
+        update qc_sample_info
+        set IS_DELETED = 1
+        where ID = #{id}
+    </update>
+
+    <!--insertAdd-->
+    <insert id="insertAdd" keyColumn="ID" keyProperty="id" parameterType="com.bazl.dna.database.service.model.po.QcSampleInfo" useGeneratedKeys="true">
+    insert into qc_sample_info (LAB_SERVER_NO, QC_SAMPLE_TYPE, QC_SAMPLE_NAME, QC_SAMPLE_NO,
+      QC_PERSON_TYPE, QC_PERSON_NAME, QC_PERSON_IDCARD_NO,
+      QC_PERSON_GENDER, QC_PERSON_ORG_ID, QC_PERSON_ORG_NAME,STR_PANEL_ID, STR_PANEL_NAME,
+      YSTR_PANEL_ID, YSTR_PANEL_NAME,STR_GENE_INFO, YSTR_GENE_INFO,
+      CREATE_DATETIME, CREATE_PERSON_NAME, UPDATE_DATETIME,
+      UPDATE_PERSON_NAME)
+    values (#{labServerNo}, #{qcSampleType}, #{qcSampleName}, #{qcSampleNo},
+      #{qcPersonType}, #{qcPersonName}, #{qcPersonIdcardNo},
+      #{qcPersonGender}, #{qcPersonOrgId}, #{qcPersonOrgName},
+      #{strPanelId}, #{strPanelName}, #{yStrPanelId}, #{yStrPanelName}, #{strGeneInfo}, #{yStrGeneInfo},
+      #{createDatetime}, #{createPersonName}, #{updateDatetime}, #{updatePersonName})
+  </insert>
+
+</mapper>

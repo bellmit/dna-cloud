@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.mix.dao.SingleSampleGeneDAO">
+    <resultMap id="BaseResultMap" type="com.bazl.dna.mix.model.po.SingleSampleGene">
+        <result column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="CASE_ID" jdbcType="VARCHAR" property="caseID"/>
+        <result column="SAMPLE_ID" jdbcType="VARCHAR" property="sampleId"/>
+        <result column="REAGENT_NAME" jdbcType="VARCHAR" property="reagentName"/>
+        <result column="BOARD_BARCODE" jdbcType="VARCHAR" property="boardBarcode"/>
+        <result column="GNNE_PICTURE" jdbcType="VARCHAR" property="genePicture"/>
+        <result column="CREATE_PERSON" jdbcType="VARCHAR" property="createPerson"/>
+        <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="createDatetime"/>
+        <result column="UPDATE_PERESON" jdbcType="VARCHAR" property="updatePereson"/>
+        <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="updateDatetime"/>
+        <result column="GENE_INFO" jdbcType="VARCHAR" property="geneInfo"/>
+    </resultMap>
+
+    <resultMap id="VOBaseResultMap" type="com.bazl.dna.mix.model.vo.SingleSampleGeneVo">
+        <id column="ID" jdbcType="VARCHAR" property="entity.id"/>
+        <result column="SAMPLE_ID" jdbcType="VARCHAR" property="entity.sampleId"/>
+        <result column="REAGENT_NAME" jdbcType="VARCHAR" property="entity.reagentName"/>
+        <result column="BOARD_BARCODE" jdbcType="VARCHAR" property="entity.boardBarcode"/>
+        <result column="GNNE_PICTURE" jdbcType="VARCHAR" property="entity.genePicture"/>
+        <result column="CREATE_PERSON" jdbcType="VARCHAR" property="entity.createPerson"/>
+        <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="entity.createDatetime"/>
+        <result column="UPDATE_PERESON" jdbcType="VARCHAR" property="entity.updatePereson"/>
+        <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="entity.updateDatetime"/>
+        <result column="GENE_INFO" jdbcType="VARCHAR" property="entity.geneInfo"/>
+
+        <result column="CASE_ID" jdbcType="VARCHAR" property="caseId"/>
+        <result column="SAMPLE_NO" jdbcType="VARCHAR" property="sampleNo"/>
+        <result column="SAMPLE_NAME" jdbcType="VARCHAR" property="sampleName"/>
+        <result column="SAMPLE_TYPE" jdbcType="VARCHAR" property="sampleType"/>
+        <result column="SAMPLE_FLAG" jdbcType="VARCHAR" property="sampleFlag"/>
+        <result column="REF_PERSON_ID" jdbcType="VARCHAR" property="refPersonId"/>
+        <result column="REMARK" jdbcType="VARCHAR" property="remark"/>
+        <result column="CASE_NO" jdbcType="VARCHAR" property="caseNo"/>
+        <result column="CASE_NAME" jdbcType="VARCHAR" property="caseName"/>
+        <result column="GENE_INFO" jdbcType="VARCHAR" property="geneInfo"/>
+        <result column="PERSON_NAME" jdbcType="VARCHAR" property="personName"/>
+        <result column="SAMPLE_ID" jdbcType="VARCHAR" property="smpleId"/>
+        <result column="PERSON_ID" jdbcType="VARCHAR" property="personId"/>
+
+    </resultMap>
+
+    <sql id="Blob_Column_List">
+     ID, SAMPLE_ID, REAGENT_NAME, BOARD_BARCODE, GNNE_PICTURE, CREATE_PERSON, CREATE_DATETIME, UPDATE_PERESON, UPDATE_DATETIME, GENE_INFO
+  </sql>
+    <insert id="insert" parameterType="com.bazl.dna.mix.model.po.SingleSampleGene">
+     insert into single_sample_gene (ID, SAMPLE_ID, REAGENT_NAME,
+      BOARD_BARCODE, GNNE_PICTURE, CREATE_PERSON,
+      CREATE_DATETIME, UPDATE_PERESON, UPDATE_DATETIME,
+      GENE_INFO)
+    values (#{id,jdbcType=VARCHAR}, #{sampleId,jdbcType=VARCHAR}, #{reagentName,jdbcType=VARCHAR},
+      #{boardBarcode,jdbcType=VARCHAR}, #{genePicture,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR},
+      #{createDatetime,jdbcType=TIMESTAMP}, #{updatePereson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP},
+      #{geneInfo,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.bazl.dna.mix.model.po.SingleSampleGene">
+        insert into single_sample_gene
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="sampleId != null">
+                SAMPLE_ID,
+            </if>
+            <if test="reagentName != null">
+                REAGENT_NAME,
+            </if>
+            <if test="boardBarcode != null">
+                BOARD_BARCODE,
+            </if>
+            <if test="genePicture != null">
+                GNNE_PICTURE,
+            </if>
+            <if test="createPerson != null">
+                CREATE_PERSON,
+            </if>
+            <if test="createDatetime != null">
+                CREATE_DATETIME,
+            </if>
+            <if test="updatePereson != null">
+                UPDATE_PERESON,
+            </if>
+            <if test="updateDatetime != null">
+                UPDATE_DATETIME,
+            </if>
+            <if test="geneInfo != null">
+                GENE_INFO,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="sampleId != null">
+                #{sampleId,jdbcType=VARCHAR},
+            </if>
+            <if test="reagentName != null">
+                #{reagentName,jdbcType=VARCHAR},
+            </if>
+            <if test="boardBarcode != null">
+                #{boardBarcode,jdbcType=VARCHAR},
+            </if>
+            <if test="genePicture != null">
+                #{genePicture,jdbcType=VARCHAR},
+            </if>
+            <if test="createPerson != null">
+                #{createPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="createDatetime != null">
+                #{createDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatePereson != null">
+                #{updatePereson,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDatetime != null">
+                #{updateDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="geneInfo != null">
+                #{geneInfo,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <!--查询单一基因总数-->
+    <select id="selectSingleSampleGeneCount" resultType="int">
+    SELECT COUNT(si.ID)
+            FROM single_sample_gene ssg
+            left join sample_info si on ssg.SAMPLE_ID = si.ID
+  </select>
+    <!--查看单一样本基因分型及图谱-->
+    <select id="selectSingleSampleGeneDetails" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Blob_Column_List"/>
+        from single_sample_gene
+        where ID = #{geneID, jdbcType=VARCHAR}
+    </select>
+
+    <!--根据比中编号查询单一样本-->
+    <select id="selectSingleSampleGeneBySampleNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+  SELECT CAS.id AS CASE_ID,SSS.ID, SSS.SAMPLE_ID,SSS.REAGENT_NAME, SSS.BOARD_BARCODE, SSS.GNNE_PICTURE,
+       SSS.CREATE_PERSON,SSS.CREATE_DATETIME, SSS.UPDATE_PERESON, SSS.UPDATE_DATETIME,SSS.GENE_INFO
+    FROM single_sample_gene SSS
+    LEFT JOIN sample_info SAMPL  ON SAMPL.ID = SSS.SAMPLE_ID
+    LEFT JOIN person_info PERSONINFO  ON SAMPL.REF_PERSON_ID = PERSONINFO.ID
+    LEFT JOIN case_info CAS  ON SAMPL.CASE_ID = CAS.ID AND PERSONINFO.CASE_ID = CAS.ID
+     WHERE SSS.ID =#{ratiogeneId,jdbcType=VARCHAR}
+  </select>
+
+    <!--根据id查询单一审核通过基因型信息-->
+    <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from single_sample_gene where ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+    <update id="updateSingleSampleGene" parameterType="com.bazl.dna.mix.model.po.SingleSampleGene">
+        update single_sample_gene
+        <set>
+            <if test="sampleId != null">
+                SAMPLE_ID=#{sampleId,jdbcType=VARCHAR},
+            </if>
+            <if test="reagentName != null">
+                REAGENT_NAME= #{reagentName,jdbcType=VARCHAR},
+            </if>
+            <if test="boardBarcode != null">
+                BOARD_BARCODE=#{boardBarcode,jdbcType=VARCHAR},
+            </if>
+            <if test="genePicture != null">
+                GNNE_PICTURE=#{genePicture,jdbcType=VARCHAR},
+            </if>
+            <if test="createPerson != null">
+                CREATE_PERSON=#{createPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="createDatetime != null">
+                CREATE_DATETIME=#{createDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatePereson != null">
+                UPDATE_PERESON= #{updatePereson,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDatetime != null">
+                UPDATE_DATETIME=#{updateDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="geneInfo != null">
+                GENE_INFO= #{geneInfo,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+    <!--根据案件id查询单一样本-->
+    <select id="selectSingleSampleGeneList" parameterType="java.lang.String" resultMap="VOBaseResultMap">
+       SELECT SSG.ID,       SSG.SAMPLE_ID,
+           SSG.REAGENT_NAME,       SSG.BOARD_BARCODE,
+           SSG.GNNE_PICTURE,       SSG.CREATE_PERSON,
+           SSG.CREATE_DATETIME,       SSG.UPDATE_PERESON,
+           SSG.UPDATE_DATETIME,       SSG.GENE_INFO
+           FROM single_sample_gene SSG
+      LEFT JOIN sample_info SI    ON SSG.SAMPLE_ID = SI.ID
+     WHERE SI.CASE_ID =#{caseId,jdbcType=VARCHAR}
+  </select>
+    <!--查询单一样本信息-->
+    <select id="selectSingleSampleGeneVoList" parameterType="java.lang.String" resultMap="VOBaseResultMap">
+       SELECT SSG.ID, SSG.SAMPLE_ID, SSG.REAGENT_NAME, SSG.BOARD_BARCODE, SSG.GNNE_PICTURE, SSG.CREATE_PERSON,
+        SSG.CREATE_DATETIME, SSG.UPDATE_PERESON, SSG.UPDATE_DATETIME, SSG.GENE_INFO ,CI.CASE_NO     AS CASE_NO,
+       CI.CASE_NAME   AS CASE_NAME, SI.SAMPLE_NO   AS SAMPLE_NO,
+       SI.SAMPLE_NAME AS SAMPLE_NAME
+      FROM single_sample_gene SSG
+      LEFT JOIN sample_info SI    ON SSG.SAMPLE_ID = SI.ID
+      LEFT JOIN case_info CI    ON SI.CASE_ID = CI.ID
+    WHERE SSG.ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+    <!--获取嫌疑人的基因信息-->
+    <select id="selectSingleSampleGeneAll" resultMap="BaseResultMap">
+    SELECT t2.*
+      FROM (SELECT t1.*, ROWNUM AS rn
+              FROM (select SSS.ID,        SSS.SAMPLE_ID,        SSS.REAGENT_NAME,        SSS.BOARD_BARCODE,
+               SSS. GNNE_PICTURE,        SSS.CREATE_PERSON,        SSS.CREATE_DATETIME,      SSS. UPDATE_PERESON,
+              SSS. UPDATE_DATETIME,       SSS.GENE_INFO from  single_sample_gene SSS
+                 ) t1
+             WHERE ROWNUM &lt;= ${endRum}) t2
+     WHERE rn &gt;= ${startRum}
+  </select>
+    <!-- LEFT JOIN SAMPLE_INFO SAMPL ON SAMPL.ID = SSS.SAMPLE_ID
+        LEFT JOIN CASE_INFO CAS ON SAMPL.CASE_ID = CAS.ID
+        LEFT JOIN PERSON_INFO PERSONINFO ON SAMPL.REF_PERSON_ID = PERSONINFO.ID AND PERSONINFO.CASE_ID = CAS.ID
+        WHERE    PERSONINFO.PERSON_TYPE = '01' -->
+
+    <!--提交本案查询物证信息list-->
+    <select id="selectSampleTypeCaseIdById" parameterType="com.bazl.dna.mix.model.vo.SingleSampleGeneVo"
+            resultMap="VOBaseResultMap">
+        SELECT t2.*  FROM (
+              SELECT t1.*, ROWNUM AS rn FROM (
+              select distinct caa.ID AS CASE_ID,caa.CASE_NO AS CASE_NO,caa.CASE_NAME AS CASE_NAME,
+               sifo.SAMPLE_NO AS SAMPLE_NO,
+               sifo.SAMPLE_NAME AS SAMPLE_NAME,
+           CASE WHEN sifo.SAMPLE_FLAG='0' THEN '现场物证' WHEN sifo.SAMPLE_FLAG='1' THEN '人员类型' END as SAMPLE_FLAG,
+                sig.ID, sig.SAMPLE_ID, sig.GNNE_PICTURE
+        from single_sample_gene sig
+        left JOIN sample_info sifo on sig.sample_id=sifo.id
+        LEFT JOIN case_info caa ON caa.id=sifo.case_id
+        WHERE sifo.SAMPLE_FLAG=#{sampleflag,jdbcType=VARCHAR}   and caa.ID=#{caseId,jdbcType=VARCHAR}
+           ) t1
+        WHERE ROWNUM &lt;= ${endRum} ) t2
+        WHERE rn &gt;= ${startRum}
+    </select>
+    <!--提交全库物证信息list-->
+    <select id="selectSampleTypeSampleflag" parameterType="com.bazl.dna.mix.model.vo.SingleSampleGeneVo"
+            resultMap="VOBaseResultMap">
+         SELECT t2.*
+      FROM (SELECT t1.*, ROWNUM AS rn
+              FROM (
+              select caa.ID AS CASE_ID,caa.CASE_NO AS CASE_NO,caa.CASE_NAME AS CASE_NAME,
+                         sifo.SAMPLE_NO AS SAMPLE_NO, sifo.SAMPLE_NAME AS SAMPLE_NAME,
+           CASE WHEN sifo.SAMPLE_FLAG='0' THEN '现场物证' WHEN sifo.SAMPLE_FLAG='1' THEN '人员类型' END as SAMPLE_FLAG,
+        sig.ID, sig.SAMPLE_ID, sig.GNNE_PICTURE,        sig.GENE_INFO
+        from single_sample_gene sig
+        left JOIN sample_info sifo on sig.sample_id=sifo.id
+        LEFT JOIN case_info caa ON caa.id=sifo.case_id
+        WHERE  sifo.SAMPLE_FLAG=#{sampleflag,jdbcType=VARCHAR}
+         ) t1
+             WHERE ROWNUM &lt;= ${endRum}) t2
+     WHERE rn &gt;= ${startRum}
+    </select>
+    <!--提交全库物证信息list-->
+    <select id="selectSampleTypeSample" parameterType="java.lang.String" resultMap="VOBaseResultMap">
+          select distinct caa.ID AS CASE_ID,caa.CASE_NO AS CASE_NO,caa.CASE_NAME AS CASE_NAME,
+                         sifo.SAMPLE_NO AS SAMPLE_NO, sifo.SAMPLE_NAME AS SAMPLE_NAME,
+           CASE WHEN sifo.SAMPLE_FLAG='0' THEN '现场物证' WHEN sifo.SAMPLE_FLAG='1' THEN '人员类型' END as SAMPLE_FLAG,
+        sig.ID, sig.SAMPLE_ID, sig.GNNE_PICTURE
+        from single_sample_gene sig
+        left JOIN sample_info sifo on sig.sample_id=sifo.id
+        LEFT JOIN case_info caa ON caa.id=sifo.case_id
+        WHERE  sifo.SAMPLE_FLAG=#{sampleflag,jdbcType=VARCHAR}
+    </select>
+
+    <sql id="VO_Query_Where_Clauses">
+        <if test="sampleflag != null">
+            and sifo.SAMPLE_FLAG=#{sampleflag,jdbcType=VARCHAR}
+        </if>
+        <if test="caseId != null">
+            and caa.ID=#{caseId,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <!--提交本库人员查询物证信息list-->
+    <select id="selectPersonSampleflag" parameterType="com.bazl.dna.mix.model.vo.SingleSampleGeneVo"
+            resultMap="VOBaseResultMap">
+    SELECT t2.*  FROM (
+        SELECT t1.*, ROWNUM AS rn FROM (
+           select caa.ID AS CASE_ID,caa.CASE_NO AS CASE_NO,caa.CASE_NAME AS CASE_NAME,   sifo.SAMPLE_NO AS SAMPLE_NO,
+        sifo.SAMPLE_NAME AS SAMPLE_NAME, dice.dict_name AS SAMPLE_FLAG,
+        sig.ID, sig.SAMPLE_ID, sig.GNNE_PICTURE,sig.GENE_INFO
+        from single_sample_gene sig
+        left JOIN sample_info sifo on sig.sample_id=sifo.id
+        LEFT JOIN case_info caa ON caa.id=sifo.case_id
+        JOIN person_info pidfo on pidfo.id=sifo.REF_PERSON_ID
+        JOIN dict_item dice ON dice.dict_code= pidfo.PERSON_TYPE
+        WHERE dice.dict_type_code='PERSON_TYPE'  AND sifo.SAMPLE_FLAG='1' and pidfo.PERSON_TYPE=#{sampleflag,jdbcType=VARCHAR}) t1
+        WHERE ROWNUM &lt;= ${endRum} ) t2
+        WHERE rn &gt;= ${startRum}
+    </select>
+    <!--提交本库人员查询物证信息list-->
+    <select id="selectPersonSample" parameterType="java.lang.String" resultMap="VOBaseResultMap">
+      select distinct caa.ID AS CASE_ID,caa.CASE_NO AS CASE_NO,caa.CASE_NAME AS CASE_NAME,   sifo.SAMPLE_NO AS SAMPLE_NO,
+        sifo.SAMPLE_NAME AS SAMPLE_NAME, dice.dict_name AS SAMPLE_FLAG,
+        sig.ID, sig.SAMPLE_ID, sig.GNNE_PICTURE
+        from single_sample_gene sig
+        left JOIN sample_info sifo on sig.sample_id=sifo.id
+        LEFT JOIN case_info caa ON caa.id=sifo.case_id
+        JOIN person_info pidfo on pidfo.id=sifo.REF_PERSON_ID
+        JOIN dict_item dice ON dice.dict_code= pidfo.PERSON_TYPE
+        WHERE dice.dict_type_code='PERSON_TYPE'  AND sifo.SAMPLE_FLAG='1' and pidfo.PERSON_TYPE=#{sampleflag,jdbcType=VARCHAR}
+    </select>
+    <!--提交本案人员查询物证信息list-->
+    <select id="selectPersonTypeCaseIdById" parameterType="com.bazl.dna.mix.model.vo.SingleSampleGeneVo"
+            resultMap="VOBaseResultMap">
+        SELECT t2.*  FROM (
+        SELECT t1.*, ROWNUM AS rn FROM ( select distinct caa.ID AS CASE_ID,caa.CASE_NO AS CASE_NO,caa.CASE_NAME AS CASE_NAME,
+        sifo.SAMPLE_NO AS SAMPLE_NO,
+        sifo.SAMPLE_NAME AS SAMPLE_NAME,dice.dict_name AS SAMPLE_FLAG,
+        sig.ID, sig.SAMPLE_ID, sig.GNNE_PICTURE
+        from single_sample_gene sig
+        left JOIN sample_info sifo on sig.sample_id=sifo.id
+        LEFT JOIN case_info caa ON caa.id=sifo.case_id
+        JOIN person_info pidfo on pidfo.id=sifo.REF_PERSON_ID
+        JOIN dict_item dice ON dice.dict_code= pidfo.PERSON_TYPE
+        WHERE dice.dict_type_code='PERSON_TYPE' AND sifo.SAMPLE_FLAG='1'and pidfo.PERSON_TYPE=#{sampleflag,jdbcType=VARCHAR}  and caa.ID=#{caseId,jdbcType=VARCHAR}
+        ) t1
+        WHERE ROWNUM &lt;= ${endRum} ) t2
+        WHERE rn &gt;= ${startRum}
+    </select>
+
+    <select id="selectSingleById" parameterType="java.lang.String" resultMap="VOBaseResultMap">
+      select si.SAMPLE_NO, si.SAMPLE_NAME, ssg.GENE_INFO
+      from single_sample_gene ssg
+      left join sample_info si
+        on ssg.SAMPLE_ID = si.ID
+     where ssg.ID = #{id,jdbcType=VARCHAR}
+  </select>
+    <!--根据混合比单一的详情表，获取单一基因样本信息-->
+    <select id="selectSampleTypeGenneIdByIds" parameterType="java.lang.String" resultMap="VOBaseResultMap">
+        SELECT
+        CAS.ID AS CASE_ID,
+        CAS.CASE_NO AS CASE_NO,
+        CAS.CASE_NAME AS CASE_NAME,
+        SAMPL.ID AS SAMPLE_ID,
+        SAMPL.SAMPLE_NO AS SAMPLE_NO,
+        SAMPL.SAMPLE_NAME AS SAMPLE_NAME,
+        PERSONINFO.ID AS PERSON_ID,
+        PERSONINFO.PERSON_NAME AS PERSON_NAME,
+        SSS.ID, SSS.SAMPLE_ID,        SSS.REAGENT_NAME,
+        SSS.BOARD_BARCODE,        SSS.GNNE_PICTURE,
+        SSS.CREATE_PERSON,        SSS.CREATE_DATETIME,
+        SSS.UPDATE_PERESON,        SSS.UPDATE_DATETIME,
+        SSS.GENE_INFO
+        FROM single_sample_gene SSS
+        LEFT JOIN sample_info SAMPL ON SAMPL.ID = SSS.SAMPLE_ID
+        LEFT JOIN case_info CAS ON SAMPL.CASE_ID = CAS.ID
+        LEFT JOIN person_info PERSONINFO ON SAMPL.REF_PERSON_ID = PERSONINFO.ID AND PERSONINFO.CASE_ID = CAS.ID  AND  SAMPL.SAMPLE_FLAG='1'
+        JOIN  dict_item dice ON dice.dict_code= PERSONINFO.PERSON_TYPE AND  dice.dict_type_code='PERSON_TYPE' AND dice.DICT_CODE='01'
+        WHERE SSS.ID =#{singlegeneId,jdbcType=VARCHAR}
+    </select>
+
+    <!--查询全库比对结果-->
+    <select id="selectComparisonAll" parameterType="com.bazl.dna.mix.model.vo.SingleSampleGeneVo" resultMap="VOBaseResultMap">
+      select caa.ID AS CASE_ID,caa.CASE_NO AS CASE_NO,caa.CASE_NAME AS CASE_NAME,sifo.SAMPLE_NO AS SAMPLE_NO, sifo.SAMPLE_NAME AS SAMPLE_NAME,
+      CASE WHEN sifo.SAMPLE_FLAG='0' THEN '现场物证' WHEN sifo.SAMPLE_FLAG='1' THEN '人员类型' END as SAMPLE_FLAG,
+      sig.ID, sig.SAMPLE_ID, sig.GNNE_PICTURE, sig.GENE_INFO,sifo.REF_PERSON_ID as REF_PERSON_ID
+      from single_sample_gene sig
+      left JOIN sample_info sifo on sig.sample_id=sifo.id
+      LEFT JOIN case_info caa ON caa.id=sifo.case_id
+      WHERE  sig.ID=#{entity.id,jdbcType=VARCHAR}
+    </select>
+
+    <!--根据j检材id查询单一信息-->
+    <select id="selectBySampleId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select *
+        from single_sample_gene where SAMPLE_ID = #{sampleId,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

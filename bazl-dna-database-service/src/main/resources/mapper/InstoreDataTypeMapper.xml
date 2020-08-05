@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.InstoreDataTypeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.InstoreDataType">
+        <id column="ID" property="id" />
+        <result column="TYPE_CODE" property="typeCode" />
+        <result column="TYPE_NAME" property="typeName" />
+        <result column="NATION_TYPE_CODE" property="nationTypeCode" />
+        <result column="NATION_TYPE_NAME" property="nationTypeName" />
+    </resultMap>
+
+</mapper>

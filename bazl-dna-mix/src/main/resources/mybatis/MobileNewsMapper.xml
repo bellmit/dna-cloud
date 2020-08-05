@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.mix.dao.MobileNewsMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.dna.mix.model.po.MobileNews" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="COMPARE_ID" property="compareId" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="DECIMAL" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="DECIMAL" />
+    <result column="USERID" property="userid" jdbcType="VARCHAR" />
+    <result column="CASEID" property="caseId" jdbcType="VARCHAR" />
+    <result column="USERORGID" property="userOrg" jdbcType="VARCHAR" />
+    <result column="MESSAGETYPE" property="messageType" jdbcType="DECIMAL" />
+    <result column="MOBILE_FLAG" property="mobileFlag" jdbcType="DECIMAL" />
+
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from mobile_news
+    where ID = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.mix.model.po.MobileNews" >
+    insert into mobile_news (ID,CASEID,TITLE,COMPARE_ID, CONTENT,
+      STATE,  CREATE_DATETIME, UPDATE_DATETIME, `TYPE`, USERID,
+      USERORGID,MESSAGETYPE, MOBILE_FLAG)
+    values (#{id,jdbcType=VARCHAR},#{caseId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{compareId,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR},
+      #{state,jdbcType=DECIMAL}, #{createDatetime,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=VARCHAR}, #{type,jdbcType=DECIMAL},#{userid,jdbcType=VARCHAR} ,
+      #{userOrg,jdbcType=VARCHAR},#{messageType,jdbcType=DECIMAL}, #{mobileFlag,jdbcType=DECIMAL})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.mix.model.po.MobileNews" >
+    update mobile_news
+    set TITLE = #{title},
+      COMPARE_ID = #{compareId},
+      CONTENT = #{content},
+      STATE = #{state},
+      CREATE_DATETIME = #{createDatetime},
+      UPDATE_DATETIME = #{updateDatetime},
+      TYPE = #{type},
+      USERID = #{userid},
+      CASEID = #{caseId},
+      USERORGID=#{userOrg},
+      MESSAGETYPE = #{messageType},
+      MOBILE_FLAG = #{mobileFlag}
+    where ID = #{id}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from mobile_news
+    where ID = #{id}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select *
+    from mobile_news
+  </select>
+  <select id="getUserMobileNumber" parameterType="String" resultType="java.util.HashMap">
+    SELECT count(*) as count
+    FROM
+      mobile_news m
+    where
+      m.userid = #{0}
+  </select>
+  <select id="selectPageAll" parameterType="com.bazl.dna.mix.model.po.MobileNews" resultMap="BaseResultMap">
+      select * from mobile_news where 1 = 1 AND USERID = #{userid}
+      <if test="null != title and  '' != title">
+        AND TITLE like CONCAT(CONCAT('%',#{title}),'%')
+      </if>
+      <if test="null != state">
+        AND  STATE = #{state}
+      </if>
+     order by CREATE_DATETIME desc
+  </select>
+
+  <select id="getUserNewsList" parameterType="com.bazl.dna.mix.model.po.MobileNews" resultMap="BaseResultMap">
+    select t.* from mobile_news t
+    where t.USERID = #{userid}
+    AND t.TYPE = #{type} AND t.STATE = 0
+    order by t.CREATE_DATETIME desc
+  </select>
+
+  <select id="selectPageCount" parameterType="com.bazl.dna.mix.model.po.MobileNews" resultType="java.lang.Integer">
+    select count(t.id) from mobile_news t WHERE   1 = 1 AND t.USERID = #{userid}
+    <if test="null != title and  '' != title">
+      and t.TITLE like CONCAT(CONCAT('%',#{title}),'%')
+    </if>
+    <if test="null != state">
+      AND  t.STATE = #{state}
+    </if>
+  </select>
+
+  <select id="selectCount" parameterType="com.bazl.dna.mix.model.po.MobileNews" resultType="java.lang.Integer">
+    select count(t.id) from mobile_news t WHERE   1 = 1
+    AND t.TITLE = #{title}
+    AND  t.USERID = #{userid}
+  </select>
+
+  <select id="selectPcList" parameterType="com.bazl.dna.mix.model.po.MobileNews" resultMap="BaseResultMap">
+    SELECT
+        s.*
+    FROM
+        mobile_news s
+    WHERE
+        1=1
+        AND s.USERID='pc'
+        AND s.MESSAGETYPE = 2
+        AND s.USERORGID = #{userOrg}
+  </select>
+
+  <select id="selectByMobileFlag" parameterType="String" resultType="int">
+    SELECT count(*)
+    FROM
+    mobile_news m
+    where
+    m.userid = #{userid} and m.MOBILE_FLAG = '0'
+  </select>
+
+</mapper>

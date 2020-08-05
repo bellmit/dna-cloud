@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.lims.dao.FugitivesMiddleTableMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.dna.lims.model.po.FugitivesMiddleTable" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="FUGITIVES_INFO_ID" property="fugitivesInfoId" jdbcType="VARCHAR" />
+    <result column="CONSIGNMENT_INFO_ID" property="consignmentInfoId" jdbcType="VARCHAR" />
+    <result column="CASE_ID" property="caseId" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from FUGITIVES_MIDDLE_TABLE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.lims.model.po.FugitivesMiddleTable" >
+    insert into FUGITIVES_MIDDLE_TABLE (ID, FUGITIVES_INFO_ID, CONSIGNMENT_INFO_ID, CASE_ID,
+      CREATE_DATETIME, CREATE_PERSON, DELETE_PERSON, UPDATE_DATETIME,
+      UPDATE_PERSON)
+    values (#{id,jdbcType=VARCHAR}, #{fugitivesInfoId,jdbcType=VARCHAR}, #{consignmentInfoId,jdbcType=VARCHAR}, 
+      #{caseId,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR},
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.lims.model.po.FugitivesMiddleTable" >
+    update FUGITIVES_MIDDLE_TABLE
+    set FUGITIVES_INFO_ID = #{fugitivesInfoId,jdbcType=VARCHAR},
+      CONSIGNMENT_INFO_ID = #{consignmentInfoId,jdbcType=VARCHAR},
+      CASE_ID = #{caseId,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+      DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+      DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, FUGITIVES_INFO_ID, CONSIGNMENT_INFO_ID, CASE_ID, CREATE_DATETIME, CREATE_PERSON,
+    DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON, UPDATE_DATETIME, UPDATE_PERSON
+    from FUGITIVES_MIDDLE_TABLE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, FUGITIVES_INFO_ID, CONSIGNMENT_INFO_ID, CASE_ID, CREATE_DATETIME, CREATE_PERSON,
+    DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON, UPDATE_DATETIME, UPDATE_PERSON
+    from FUGITIVES_MIDDLE_TABLE
+  </select>
+</mapper>

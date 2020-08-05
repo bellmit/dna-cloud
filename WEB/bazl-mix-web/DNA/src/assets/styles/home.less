@@ -1,0 +1,396 @@
+.clearfix:after{
+  content: "";
+  display: block;
+  height: 0;
+  clear:both;
+  visibility: hidden;
+}
+.clearfix{
+  *zoom: 1;/*ie6清除浮动的方式 *号只有IE6-IE7执行，其他浏览器不执行*/
+}
+.widthDiv{
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  // padding: 20px;
+  margin: 0 auto;
+}
+.home-box{
+  .home-top-box{
+    background: #fff;
+    div:first-child{
+      display: flex;
+      height: 100px;
+      span{
+        margin-top:15px;
+        margin-right:15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        width:24%;
+        height:70px;
+        border:1px solid rgba(0,0,0,0);
+        font-weight: bold;
+        color: #fff;
+        // opacity:0.9;
+        // counter-reset: ;
+        cursor:pointer;
+        border-radius:85px;
+        img{
+          width: 43px;
+          height: 40px;
+          margin-right: 10px;
+        }
+      }
+      span:hover{
+        box-shadow: 5px 10px 10px 2px #ccc;
+      }
+      span:nth-child(1){
+        margin-left:15px;
+        background:linear-gradient(360deg,rgba(255,135,63,1) 0%,rgba(255,31,29,1) 100%);
+      }
+      span:nth-child(2){
+        background:linear-gradient(360deg,rgba(251,185,59,1) 0%,rgba(250,115,0,1) 100%);
+      }
+      span:nth-child(3){
+        background:linear-gradient(180deg,rgba(74,101,246,1) 0%,rgba(98,158,255,1) 100%);
+      }
+      span:nth-child(4){
+        background:linear-gradient(180deg,rgba(103,47,221,1) 0%,rgba(146,69,201,1) 100%);
+      }
+    }
+  }
+  .home-center-box>div>div{
+    float: left;
+  }
+  .home-center-box{
+    width: 100%;
+    margin-top:10px;
+    .home-center-leftbox{
+      width: 65%;
+      height: 425px;
+      margin-right: 0.6%;
+      background: #fff;
+      padding:15px;
+    }
+    .home-center-rightbox{
+      width: 34.4%;
+      height: 425px;
+    }
+  }
+  .home-bottom-box{
+    margin-top:10px;
+    // margin-bottom: 60px;
+    // .widthDiv{
+    //   border: solid 1px red;
+    //   height: 300px;
+    // }
+  }
+}
+.home-DNA-body{
+  float: right;
+  width: 49.5%;
+  height: 415px;
+  overflow: hidden;
+  background: #fff;
+}
+// 人员类型图表样式
+.home-type-body{
+  float: left;
+  width: 50%;
+  height: 415px;
+  overflow: hidden;
+  // padding: 15px;
+  background: #fff;
+}
+.zx-title{
+  // font-size: 18px;
+  // font-weight: bold;
+  width: 100%;
+  height: 35px;
+  // display: flex;
+  // align-items: center;
+  font-family: '微软雅黑';
+  color: #000;
+  // padding: 10px 15px 0px 15px;
+  div:nth-child(1){
+    float: left;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  div:nth-child(2){
+    float: right;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  // margin:10px 0px 20px 10px;
+}
+.table-body{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding: 15px; 
+  float: right;
+}
+// 人员类型图表容器
+.MyTypeCharts-con{
+  width: 100%;
+  height: 100%;
+  // margin:0 auto;
+  // height: 200px;
+}
+// DNA样本数据图标容器
+.MyDNACharts-con{
+  width: 100%;
+  height: 100%;
+}
+// 混合样本数量 查分分型样本数量 样式
+.home-center-rightbox{
+  overflow: hidden;
+  background: #fff;
+  .rightbox-title{
+    font-size: 18px;
+    font-weight: bold;
+    font-family: '微软雅黑';
+    color: #000;
+    margin:10px 0px 0px 10px;
+  }
+  .rightbox-body>div{
+    float: left;
+  }
+  .rightbox-body{
+    width: 100%;
+    height: 300px;
+    .radius-charts-1{
+      position: relative;
+      width: 50%;
+      height: 300px;
+      .radiusCharts-con{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .radius-charts-2{
+      position: relative;
+      width: 50%;
+      height: 300px;
+      .radiusCharts-con{
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+.radius-charts-1,.radius-charts-2{
+  .item-p{
+    width: 100px;
+    text-align: center;
+    position: absolute;
+    font-size: 20px;
+    bottom: 10px;
+    left: 50%;
+    color: #000;
+    margin-left: -50px;
+  }
+}
+.table-style{
+  th{
+    background: #d8eeff !important;
+  }
+  .ivu-table-body{
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 250px;
+  }
+}
+.table-style .ivu-table-body::-webkit-scrollbar-track-piece {
+    background-color:#f8f8f8;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius: 2em;
+  }
+  /*滚动条的宽度*/
+  .table-style .ivu-table-body::-webkit-scrollbar {
+    width:6px; 
+    height: 6px;
+  }
+  /*滚动条的设置*/
+  .table-style .ivu-table-body::-webkit-scrollbar-thumb {
+    background-color:#dddddd;
+    background-clip:padding-box;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius: 2em;
+  }
+  /*滚动条鼠标移上去*/
+  .table-style .ivu-table-body::-webkit-scrollbar-thumb:hover {
+    background-color:#bbb;
+  }
+  .padding{
+    padding: 10px 15px 10px 15px;
+  }
+  .blue-dot::before{
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    content: '';
+    background: #9CCCFD;
+    border-radius: 50%;
+    margin-right: 4px;
+  }
+  .font-wei{
+    font-weight: bold;
+  }
+  .details-container:hover{
+    box-shadow:0px 0px 10px rgba(0,0,0,1);
+    .details-posiAbs{
+      background: #0076FF;
+    }
+  }
+  .details-container{
+    // width: 32% !important;
+    // margin-right: 10px;
+    height: 320px;
+    border: 0.5px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    span{
+      display:inline-block;
+    }
+    .details-title{
+      background: #EDEDED;
+      div{
+        margin-bottom: 10px;
+        span:first-child{
+          width: 95px;
+          font-size: 14px;
+          font-weight: bold;
+        }
+      }
+    }
+    .over_li{
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap; 
+      text-overflow:ellipsis;
+    }
+    .details-item{
+      padding: 10px 6px 10px 6px;
+      li{
+        margin-bottom: 9px;
+        span:first-child{
+           width: 100px;
+          font-size: 14px;
+          font-weight: bold;
+        }
+      }
+    }
+    .details-footer{
+      border-top:1px dashed #ccc;
+      display: flex;
+      justify-content: center;
+      div{
+        padding: 2px 0px 5px 0px;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        img{
+          margin-right: 5px;
+        }
+      }
+    }
+    .details-posiAbs{
+      position: absolute;
+      top: -15px;
+      left: -15px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #B4D6FF;
+    }
+  }
+  .left:hover{
+    // border: 1px solid #007AFD;
+  }
+  .right:hover{
+    // border: 1px solid #007AFD;
+  }
+  .detailModel-style{
+    width: 100%;
+    // height: 35px;
+    .detailModel-footer{
+      // width: 400px;
+      // height: 35px;
+      padding: 10px;
+      margin:0 auto;
+      display: flex;
+      align-items: center;
+      background: #FFF7ED;
+      span{
+        font-size: 14px;
+        font-weight: bold;
+        color:#E27E00;
+        margin-right: 50px;
+      }
+    }
+    .ivu-modal-header{
+      background: #C8E8FF;
+    }
+    .ivu-modal-footer{
+      display: none !important;
+    }
+    .ivu-modal-body{
+      padding: 0;
+    }
+    .ivu-modal-content{
+      border-radius: 5px !important;
+    }
+    .ivu-modal-header{
+      p{
+        color: #0C81F5 !important;
+        font-size: 16px;
+      }
+      
+    } 
+  }
+  @media screen and (max-width:1800px) {
+    .home-center-box{
+      .widthDiv{
+        .home-center-leftbox{
+          width: 78%;
+        }
+        .home-center-rightbox{
+          width: 21.4%;
+        }
+      }
+    }
+    .details-container{
+      height: 305px;
+      .details-item{
+        li{
+          margin-bottom: 7px;
+        }
+      }
+    }
+    .home-DNA-body{
+      height: 255px;
+    }
+    .home-type-body{
+      height: 255px;
+    }
+    .home-box{
+      .home-center-box{
+        .home-center-leftbox{
+          height: 375px;
+        }
+        .home-center-rightbox{
+          height: 375px;
+        }
+      }
+    }
+  }

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.MatchResultYstrGroupMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.MatchResultYstrGroup">
+        <id column="ID" property="id" />
+        <result column="GROUP_NO" property="groupNo" />
+        <result column="FIRST_MATCH_TIME" property="firstMatchTime" />
+        <result column="LATEST_MATCH_TIME" property="latestMatchTime" />
+        <result column="GROUP_SAMPLE_COUNT" property="groupSampleCount" />
+    </resultMap>
+    
+    <resultMap id="MatchYstrResultMap" type="com.bazl.dna.database.service.model.qo.MatchYstrResultQuery">
+        <id column="id" property="id" />
+        <result column="MATCH_GROUP_ID" property="groupId" />
+        <result column="SAMPLE_EVIDENCE_NO" property="sampleNo" />
+        <result column="SAMPLE_NAME" property="sampleName" />
+        <result column="SAMPLE_TYPE" property="sampleType" />
+        <result column="MATCH_LOCUS_COUNT" property="matchLocusCount" />
+        <result column="MATCH_DATETIME" property="matchDateTime" />
+        <result column="STORE_DATETIME" property="caseAcceptDateTime" />
+        <result column="CASE_ID" property="caseId" />
+        <result column="CASE_NAME" property="caseName" />
+        <result column="CASE_ACCEPT_NO" property="caseAcceptNo" />
+        <result column="SYS_XK_NO" property="sysXkNo" />
+        <result column="CASE_PROPERTY" property="caseProperty" />
+        <result column="ORG_CODE" property="orgCode" />
+        <result column="ORG_NAME" property="orgName" />
+        <result column="CASE_STATUS" property="caseStates" />
+        <result column="REVIEW_FLAG" property="reviewFlag" />
+        <result column="REVIEW_RESULT_CODE" property="reviewResultCode" />
+    </resultMap>
+
+
+    <resultMap id="MatchYstrDetailMap" type="com.bazl.dna.database.service.model.qo.MatchYstrDetailResultQuery">
+        <id column="id" property="id" />
+        <result column="GROUP_NO" property="groupId" />
+        <result column="caseName" property="caseName" />
+        <result column="compareCaseName" property="compareCaseName" />
+        <result column="sampleName" property="sampleName" />
+        <result column="compareSampleName" property="compareSampleName" />
+        <result column="sampleType" property="sampleType" />
+        <result column="personName" property="personName" />
+        <result column="reviewFlag" property="reviewFlag" />
+        <result column="createDatetime" property="createDatetime" />
+    </resultMap>
+    
+    <sql id="paginationQueryWhereClause">
+        <if test="id != null  and id != 0" >
+            and ci.ID=#{id}
+        </if>
+        <if test="sampleNo != null  and sampleNo != ''" >
+            and dsi.SAMPLE_LAB_NO=#{sampleNo}
+        </if>
+        <if test="sampleName != null  and sampleName != ''" >
+            and dsi.SAMPLE_NAME like concat('%',#{sampleName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="sampleType != null  and sampleType != 0" >
+            and dsi.SAMPLE_TYPE=#{sampleType}
+        </if>
+        <if test="sampleTypes != null and sampleTypes.length > 0">
+			and dsi.SAMPLE_TYPE in
+			<foreach collection="sampleTypes" item="id" open="(" close=")"
+				separator=",">
+				#{id}
+			</foreach>
+		</if>
+        <if test="matchLocusCount != null  and matchLocusCount != 0" >
+            and ms.MATCH_LOCUS_COUNT=#{matchLocusCount}
+        </if>
+        <if test="caseName != null  and caseName != ''" >
+            and ci.CASE_NAME like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="caseAcceptNo != null  and caseAcceptNo != ''" >
+            and ci.CASE_ACCEPT_NO=#{caseAcceptNo}
+        </if>
+        <if test="sysXkNo != null  and sysXkNo != ''" >
+            and ci.SYS_XK_NO=#{sysXkNo}
+        </if>
+        <if test="caseProperty != null  and caseProperty != 0" >
+            and ci.CASE_PROPERTY=#{caseProperty}
+        </if>
+        <if test="casePropertys != null and casePropertys.length > 0">
+			and ci.CASE_PROPERTY in
+			<foreach collection="casePropertys" item="id" open="(" close=")"
+				separator=",">
+				#{id}
+			</foreach>
+		</if>
+        <if test="reviewFlag != null  and reviewFlag != 0" >
+            and ms.REVIEW_FLAG=#{reviewFlag}
+        </if>
+        <if test="compareStartDatetime != null and compareEndDatetime != null">
+        		and ms.MATCH_DATETIME between #{compareStartDatetime} and #{compareEndDatetime}
+        </if>
+        <if test="caseAcceptStartDatetime != null and caseAcceptEndDatetime != null">
+        		and ci.STORE_DATETIME between #{caseAcceptStartDatetime} and #{caseAcceptEndDatetime}
+        </if>
+        <if test= "clientOrgList != null and clientOrgList.size > 0">
+        		and dsi.LAB_SERVER_NO in
+				<foreach collection="clientOrgList" item="id" open="(" close=")"
+					separator=",">
+					#{id}
+				</foreach> 
+        </if>
+    </sql>
+
+    <sql id="datailQueryWhereClause">
+        <if test="id != null  and id != 0" >
+            and ms.id=#{id}
+        </if>
+        <if test="caseName != null  and caseName != ''" >
+            and cia.CASE_NAME like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="groupId != null  and groupId != 0" >
+            and ms.MATCH_GROUP_ID=#{groupId}
+        </if>
+        <if test="sampleName != null  and sampleName != ''" >
+            and dsia.SAMPLE_NAME like concat('%',#{sampleName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="personName != null  and personName != ''" >
+            and cia.STORE_PERSON_NAME=#{personName}
+        </if>
+    </sql>
+    
+    <select id="resultCount"
+            parameterType="com.bazl.dna.database.service.model.qo.MatchYstrResultQuery"
+            resultType="int"  >
+        select count(ms.id)
+        FROM
+			match_result_ystr ms	
+			LEFT JOIN dna_sample_info dsi ON ms.SAMPLEA_ID = dsi.id
+			LEFT JOIN case_info ci ON dsi.case_id = ci.id 
+			LEFT JOIN match_result_ystr_group msr ON ms.MATCH_GROUP_ID = msr.id
+		WHERE ms.REVIEW_RESULT_CODE &lt;&gt; '2'
+        <if test="_parameter != null">
+            <include refid="paginationQueryWhereClause" />
+        </if>
+
+    </select>
+
+    <select id="resultInfo"
+            parameterType="com.bazl.dna.database.service.model.qo.MatchYstrResultQuery"
+            resultMap="MatchYstrResultMap"  >
+        SELECT
+			ms.id, ms.MATCH_GROUP_ID, msr.GROUP_NO, msr.FIRST_MATCH_TIME, ms.MATCH_LOCUS_COUNT,
+			msr.LATEST_MATCH_TIME, msr.GROUP_SAMPLE_COUNT as groupSampleCount,ms.MATCH_DATETIME,
+			ci.id as CASE_ID, ci.CASE_NAME, ci.CASE_ACCEPT_NO,ci.CASE_STATUS,ci.CASE_TYPE,ci.SYS_XK_NO,ci.CASE_PROPERTY,ci.CASE_SUB_PROPERTY,ci.STORE_DATETIME,
+			dsi.id as sampleId, dsi.SAMPLE_NAME, dsi.SAMPLE_DESC, dsi.SAMPLE_LAB_NO as SAMPLE_EVIDENCE_NO,dsi.SAMPLE_TYPE,
+			ms.SAMPLEB_ID as MATCH_SAMPLE_ID, ms.REVIEW_FLAG, ms.REVIEW_RESULT_CODE
+		FROM
+			match_result_ystr ms	
+			LEFT JOIN dna_sample_info dsi ON ms.SAMPLEA_ID = dsi.id
+			LEFT JOIN case_info ci ON dsi.case_id = ci.id 
+			LEFT JOIN match_result_ystr_group msr ON ms.MATCH_GROUP_ID = msr.id
+		WHERE ms.REVIEW_RESULT_CODE &lt;&gt; '2'
+        <if test="_parameter != null">
+            <include refid="paginationQueryWhereClause" />
+        </if>
+
+    </select>
+
+
+
+    <select id="detailCount"
+            parameterType="com.bazl.dna.database.service.model.qo.MatchYstrDetailQuery"
+            resultType="int"  >
+        select count(ms.ID)
+        		from match_result_same ms
+        left join dna_sample_info dsia  on ms.SAMPLEA_ID = dsia.id
+        left join  dna_sample_info dsib  on ms.SAMPLEB_ID = dsib.id
+        left join case_info cia on cia.id = dsia.case_id
+        left join case_info cib on cib.id = dsib.case_id 
+        WHERE ms.REVIEW_RESULT_CODE &lt;&gt; '2'
+        <if test="_parameter != null">
+            <include refid="datailQueryWhereClause" />
+        </if>
+
+    </select>
+
+    <select id="detailInfo"
+            parameterType="com.bazl.dna.database.service.model.qo.MatchYstrDetailResultQuery"
+            resultMap="MatchYstrDetailMap"  >
+        select ms.id, cia.STORE_PERSON_NAME as personName,
+        		cia.CASE_NAME as caseName,cib.CASE_NAME as compareCaseName,
+			dsia.SAMPLE_NAME as sampleName,dsib.SAMPLE_NAME as compareSampleName,dsib.SAMPLE_TYPE as sampleType,ms.REVIEW_FLAG as reviewFlag,ms.MATCH_DATETIME as createDatetime
+          from match_result_same ms
+        left join dna_sample_info dsia  on ms.SAMPLEA_ID = dsia.id
+        left join  dna_sample_info dsib  on ms.SAMPLEB_ID = dsib.id
+        left join case_info cia on cia.id = dsia.case_id
+        left join case_info cib on cib.id = dsib.case_id 
+        WHERE ms.REVIEW_RESULT_CODE &lt;&gt; '2'
+        <if test="_parameter != null">
+            <include refid="datailQueryWhereClause" />
+        </if>
+
+    </select>
+    
+    <select id="getNextval" resultType="int">
+    		select nextval('seq_match_result_ystr_group') as seq
+    </select>
+
+</mapper>

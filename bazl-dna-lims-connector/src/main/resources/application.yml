@@ -1,0 +1,17 @@
+server:
+  port: 8718
+    
+spring:
+  application:
+    name: bazl-dna-lims-connector
+    
+task:
+  maxPoolSize: 60
+  corePoolSize: 40
+  queueCapacity: 100
+  keepAliveSeconds: 90
+  threadNamePrefix: LimsDataTask-
+  
+mybatis:
+  mapper-locations: classpath:mybatis/*.xml
+  type-aliases-package: com.bazl.dna.lims.connector.model.po

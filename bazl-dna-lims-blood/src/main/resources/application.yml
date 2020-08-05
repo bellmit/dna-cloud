@@ -1,0 +1,14 @@
+server:
+  port: 8725
+    
+spring:
+  application:
+    name: bazl-dna-lims-blood
+    
+    
+task:
+  maxPoolSize: 60
+  corePoolSize: 40
+  queueCapacity: 100
+  keepAliveSeconds: 90
+  threadNamePrefix: LimsBloodTask-

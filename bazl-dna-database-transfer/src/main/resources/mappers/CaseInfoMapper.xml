@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.transfer.mapper.CaseInfoMapper">
+
+  <select id="selectCaseInfoModelByCaseId"
+          parameterType="java.lang.String" resultType="com.bazl.dna.database.transfer.model.po.CaseInfoModel">
+    <![CDATA[
+         	select
+         		   ci.id                      as id,
+			       ci.CASE_ACCEPT_NO     	  as caseNo,
+			       ci.CASE_NAME              as caseName,
+			       null    as externalSysNo,
+			       ci.SYS_XK_NO             as caseXkSn,
+			       ci.SYS_CASE_ANO            as caseOldSn,
+			       ci.OCCURRENCE_DATETIME              as occurrenceDate,
+			       ci.SCENE_REGIONALISM           as sceneRegionalism,
+			       ci.SCENE_PLACE as scenePlace,
+			       ci.CASE_LEVEL             as caseLevel,
+			       ci.CASE_SUMMARY            as caseSummary,
+			       cbi.id      as caseBaseId,
+			       ci.CASE_TYPE       as caseType,
+			       ci.CASE_PROPERTY              as caseProperty,
+			       null            as caseStatus,
+			       ci.STORE_PERSON_NAME			  as createUser,
+			       ci.STORE_DATETIME			  as createDatetime,
+			       cbi.ACCEPT_PERSON_ID as acceptor,
+			       cbi.ACCEPT_PERSON_NAME as acceptorName,
+			       cbi.UPDATE_PERSON_NAME				  as updateUser,
+			       cbi.UPDATE_DATETIME			  as updateDatetime,
+			       null     as externalSysType,
+			       cbi.SYS_XK_WTNO         as xckyConsignNo,
+			       cbi.CONSIGN_ORG_CODE           as delegateOrgCode
+         	from case_info ci, consignment_info cbi
+         	where ci.id = cbi.case_id  and ci.id=#{_parameter, jdbcType=VARCHAR}
+         ]]>
+  </select>
+
+  <select id="selectConsignmentModelByCaseId"
+          parameterType="java.lang.String" resultType="com.bazl.dna.database.transfer.model.po.ConsignmentModel">
+    <![CDATA[
+         	select
+         		   ci.CASE_ACCEPT_NO              as acceptNo,
+         		   ci.id              as eventId,
+			       ci.CASE_TYPE     as category,
+                   cbi.id as id,
+			       cbi.CONSIGN_ORG_CODE         as agencyRegionalism,
+                   cbi.CONSIGN_ORG_NAME as agencyName,
+			       cbi.SYS_XK_WTNO       as consignmentNo,
+			       cbi.CONSIGN_ORG_ZIP_CODE as consignOrgZipCode,
+			       cbi.CONSIGN_ORG_ADDRESS as consignOrgAddress,
+			       cbi.CONSIGN_PERSON1_NAME            as consignerName,
+			       cbi.CONSIGN_PERSON1_PHONE      as consignerPhone,
+			       cbi.CONSIGN_PERSON1_CERTIFICATE_TYPE      as consignerCertificateType,
+			       cbi.CONSIGN_PERSON1_CERTIFICATE_NO        as consignerCertificateNo,
+			       cbi.CONSIGN_PERSON2_NAME           as consignerName2,
+			       cbi.CONSIGN_PERSON2_PHONE       as consignerPhone2,
+			       cbi.CONSIGN_PERSON2_CERTIFICATE_TYPE     as consignerCertificateType2,
+			       cbi.CONSIGN_PERSON2_CERTIFICATE_NO       as consignerCertificateNo2,
+			       cbi.LAB_SERVER_NO           as acceptRegionalism,
+			       cbi.IDENTIFY_REQUIREMENT    as identifiyRequest,
+			       cbi.CONSIGN_ORG_PHONE   as agencyPhone,
+			       cbi.CONSIGN_ORG_FAX  as consignOrgFaxNo,
+			       cbi.CONSIGNMENT_REG_DATETIME          as consignDate,
+			       cbi.CONSIGN_PERSON1_POSITION_NAME             as consignerDuty,
+			       cbi.CONSIGN_PERSON2_POSITION_NAME            as consignerDuty2,
+			       cbi.ACCEPT_DATETIME            as acceptDatetime,
+			       cbi.ACCEPT_PERSON_ID             as receptionManId,
+			       cbi.ACCEPT_PERSON_NAME as receptionManName,
+			       null           as acceptOrgName,
+			       null           as acceptOrgPhone,
+			       cbi.APPEND_FLAG       as isAppend,
+			       cbi.STORE_PERSON_NAME             as createUser,
+			       cbi.STORE_DATETIME            as createDatetime,
+			       cbi.UPDATE_PERSON_NAME             as updateUser,
+			       cbi.UPDATE_DATETIME            as updateDatetime
+         	from case_info ci, consignment_info cbi
+         	where ci.id = cbi.case_id  and ci.id=#{_parameter, jdbcType=VARCHAR}
+         ]]>
+  </select>
+
+  <select id="selectConsignmentModelByConsignmentId"
+          parameterType="java.lang.String" resultType="com.bazl.dna.database.transfer.model.po.ConsignmentModel">
+    <![CDATA[
+         	select
+         		   '2003-FY1301'              as acceptNo,
+			       '4'     as category,
+                   cbi.id as id,
+			       cbi.CONSIGN_ORG_CODE         as agencyRegionalism,
+                   cbi.CONSIGN_ORG_NAME as agencyName,
+			       cbi.SYS_XK_WTNO       as consignmentNo,
+			       cbi.CONSIGN_ORG_ZIP_CODE as consignOrgZipCode,
+			       cbi.CONSIGN_ORG_ADDRESS as consignOrgAddress,
+			       cbi.CONSIGN_PERSON1_NAME            as consignerName,
+			       cbi.CONSIGN_PERSON1_PHONE      as consignerPhone,
+			       cbi.CONSIGN_PERSON1_CERTIFICATE_TYPE      as consignerCertificateType,
+			       cbi.CONSIGN_PERSON1_CERTIFICATE_NO        as consignerCertificateNo,
+			       cbi.CONSIGN_PERSON2_NAME           as consignerName2,
+			       cbi.CONSIGN_PERSON2_PHONE       as consignerPhone2,
+			       cbi.CONSIGN_PERSON2_CERTIFICATE_TYPE     as consignerCertificateType2,
+			       cbi.CONSIGN_PERSON2_CERTIFICATE_NO       as consignerCertificateNo2,
+			       cbi.LAB_SERVER_NO           as acceptRegionalism,
+			       cbi.IDENTIFY_REQUIREMENT    as identifiyRequest,
+			       cbi.CONSIGN_ORG_PHONE   as agencyPhone,
+			       cbi.CONSIGN_ORG_FAX  as consignOrgFaxNo,
+			       cbi.CONSIGNMENT_REG_DATETIME          as consignDate,
+			       cbi.CONSIGN_PERSON1_POSITION_NAME             as consignerDuty,
+			       cbi.CONSIGN_PERSON2_POSITION_NAME            as consignerDuty2,
+			       cbi.ACCEPT_DATETIME            as acceptDatetime,
+			       cbi.ACCEPT_PERSON_ID             as receptionManId,
+			       cbi.ACCEPT_PERSON_NAME as receptionManName,
+			       null           as acceptOrgName,
+			       null           as acceptOrgPhone,
+			       cbi.APPEND_FLAG       as isAppend,
+			       cbi.STORE_PERSON_NAME             as createUser,
+			       cbi.STORE_DATETIME            as createDatetime,
+			       cbi.UPDATE_PERSON_NAME             as updateUser,
+			       cbi.UPDATE_DATETIME            as updateDatetime
+         	from consignment_info cbi
+         	where cbi.id=#{_parameter, jdbcType=VARCHAR}
+         ]]>
+  </select>
+
+
+  <update id="updateLabNoByCaseId" parameterType="com.bazl.dna.database.transfer.model.po.CaseInfoModel">
+       update
+          case_info t
+        set
+        t.NATION_SYS_NO= #{caseLabNo,jdbcType=VARCHAR},
+        t.TRANSFER_NATION_FLAG = '1'
+        where t.ID = #{caseId,jdbcType=VARCHAR}
+  </update>
+    <update id="updateLabNoByCaseId2" parameterType="com.bazl.dna.database.transfer.model.po.CaseInfoModel">
+       update
+          case@link2dna
+        set
+        LABNO= #{caseLabNo,jdbcType=VARCHAR}
+        where CASEID = #{caseId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="bazl-dna-common" />
+        <module name="bazl-dna-nation-connector" />
+        <module name="bazl-dna-caseinfo-reg" />
+        <module name="bazl-dna-lims-blood" />
+        <module name="bazl-dna-lims-connector" />
+        <module name="bazl-dna-caseinfo-accept" />
+        <module name="bazl-dna-lims-core" />
+        <module name="bazl-dna-lims-manager" />
+        <module name="bazl-dna-database-core" />
+        <module name="bazl-dna-mix-compare" />
+        <module name="bazl-dna-database-sync" />
+        <module name="bazl-dna-turbine" />
+        <module name="bazl-dna-mix" />
+        <module name="bazl-dna-files" />
+        <module name="bazl-dna-elasticsearch" />
+        <module name="bazl-dna-database-lims-converter" />
+        <module name="bazl-dna-deploy" />
+        <module name="bazl-dna-database-transfer" />
+        <module name="bazl-dna-stats" />
+        <module name="bazl-dna-database-service" />
+        <module name="bazl-dna-database-nation-converter" />
+        <module name="bazl-dna-eureka" />
+        <module name="bazl-dna-test" />
+        <module name="bazl-dna-dpznsy" />
+        <module name="bazl-dna-config" />
+        <module name="bazl-dna-zuul" />
+        <module name="bazl-dna-database-compare" />
+        <module name="bazl-dna-system" />
+        <module name="bazl-dna-lims-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bazl-dna-caseinfo-accept" target="1.8" />
+      <module name="bazl-dna-caseinfo-reg" target="1.8" />
+      <module name="bazl-dna-common" target="1.8" />
+      <module name="bazl-dna-config" target="1.8" />
+      <module name="bazl-dna-database-compare" target="1.8" />
+      <module name="bazl-dna-database-core" target="1.8" />
+      <module name="bazl-dna-database-lims-converter" target="1.8" />
+      <module name="bazl-dna-database-nation-converter" target="1.8" />
+      <module name="bazl-dna-database-service" target="1.8" />
+      <module name="bazl-dna-database-sync" target="1.8" />
+      <module name="bazl-dna-database-transfer" target="1.8" />
+      <module name="bazl-dna-deploy" target="1.8" />
+      <module name="bazl-dna-dpznsy" target="1.8" />
+      <module name="bazl-dna-elasticsearch" target="1.8" />
+      <module name="bazl-dna-eureka" target="1.8" />
+      <module name="bazl-dna-files" target="1.8" />
+      <module name="bazl-dna-lims-blood" target="1.8" />
+      <module name="bazl-dna-lims-connector" target="1.8" />
+      <module name="bazl-dna-lims-core" target="1.8" />
+      <module name="bazl-dna-lims-manager" target="1.8" />
+      <module name="bazl-dna-lims-service" target="1.8" />
+      <module name="bazl-dna-mix" target="1.8" />
+      <module name="bazl-dna-mix-compare" target="1.8" />
+      <module name="bazl-dna-nation-connector" target="1.8" />
+      <module name="bazl-dna-stats" target="1.8" />
+      <module name="bazl-dna-system" target="1.8" />
+      <module name="bazl-dna-test" target="1.8" />
+      <module name="bazl-dna-turbine" target="1.8" />
+      <module name="bazl-dna-zuul" target="1.8" />
+      <module name="dna-cloud" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="bazl-dna-caseinfo-accept" options="-parameters" />
+      <module name="bazl-dna-caseinfo-reg" options="-parameters" />
+      <module name="bazl-dna-common" options="-parameters" />
+      <module name="bazl-dna-config" options="-parameters" />
+      <module name="bazl-dna-database-compare" options="-parameters" />
+      <module name="bazl-dna-database-core" options="-parameters" />
+      <module name="bazl-dna-database-lims-converter" options="-parameters" />
+      <module name="bazl-dna-database-nation-converter" options="-parameters" />
+      <module name="bazl-dna-database-service" options="-parameters" />
+      <module name="bazl-dna-database-sync" options="-parameters" />
+      <module name="bazl-dna-database-transfer" options="-parameters" />
+      <module name="bazl-dna-deploy" options="-parameters" />
+      <module name="bazl-dna-dpznsy" options="-parameters" />
+      <module name="bazl-dna-elasticsearch" options="-parameters" />
+      <module name="bazl-dna-eureka" options="-parameters" />
+      <module name="bazl-dna-files" options="-parameters" />
+      <module name="bazl-dna-lims-blood" options="-parameters" />
+      <module name="bazl-dna-lims-connector" options="-parameters" />
+      <module name="bazl-dna-lims-core" options="-parameters" />
+      <module name="bazl-dna-lims-manager" options="-parameters" />
+      <module name="bazl-dna-lims-service" options="-parameters" />
+      <module name="bazl-dna-mix" options="-parameters" />
+      <module name="bazl-dna-mix-compare" options="-parameters" />
+      <module name="bazl-dna-nation-connector" options="-parameters" />
+      <module name="bazl-dna-stats" options="-parameters" />
+      <module name="bazl-dna-system" options="-parameters" />
+      <module name="bazl-dna-test" options="-parameters" />
+      <module name="bazl-dna-turbine" options="-parameters" />
+      <module name="bazl-dna-zuul" options="-parameters" />
+    </option>
+  </component>
+</project>

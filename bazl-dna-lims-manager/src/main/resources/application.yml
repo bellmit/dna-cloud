@@ -1,0 +1,34 @@
+server:
+  port: 8726
+    
+spring:
+  application:
+    name: bazl-dna-lims-manager
+ 
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+      exclude: static/**,public/**,WEB-INF/**   
+    
+task:
+  maxPoolSize: 60
+  corePoolSize: 40
+  queueCapacity: 100
+  keepAliveSeconds: 90
+  threadNamePrefix: LimsManagerTask-
+
+mybatis:
+  type-aliases-package: com.bazl.dna.lims.model.po # 注意：对应实体类的路径
+  mapper-locations: classpath:mapper/*.xml
+
+mapper:
+  mappers:
+    - com.bazl.dna.lims.dao.BaseMapper
+  not-empty: false
+  identity: oracle
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    com.bazl.dna.lims.dao: debug

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.AlleleFrequencyInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.AlleleFrequencyInfo">
+        <id column="ID" property="id" />
+        <result column="POPULATION_FREQUENCY_ID" property="populationFrequencyId" />
+        <result column="LOCUS_ID" property="locusId" />
+        <result column="LOCUS_NAME" property="locusName" />
+        <result column="ALLELE_VALUE" property="alleleValue" />
+        <result column="PROBABILITY" property="probability" jdbcType="DECIMAL" />
+    </resultMap>
+
+    <resultMap id="BaseResultMapVo" type="com.bazl.dna.database.service.model.vo.AlleleFrequencyInfoVo" extends="BaseResultMap">
+    </resultMap>
+
+    <sql id="Base_column_list">
+        ID, POPULATION_FREQUENCY_ID, LOCUS_ID, LOCUS_NAME, ALLELE_VALUE, PROBABILITY
+    </sql>
+
+    <sql id="Base_Column_List_With_Prefix">
+        afi.ID, afi.POPULATION_FREQUENCY_ID, afi.LOCUS_ID, afi.LOCUS_NAME, afi.ALLELE_VALUE, afi.PROBABILITY
+    </sql>
+
+    <select id="listOfDefaultPopulation" resultMap="BaseResultMap">
+      select
+        <include refid="Base_Column_List_With_Prefix"/>
+      from allele_frequency_info afi, population_frequency_info p
+      where afi.POPULATION_FREQUENCY_ID=p.ID and p.DEFAULT_FLAG=1
+    </select>
+
+    <!--listByPopulationId-->
+    <select id="listByPopulationId" parameterType="java.lang.Integer" resultMap="BaseResultMapVo">
+        SELECT ID, POPULATION_FREQUENCY_ID, LOCUS_ID, LOCUS_NAME,COUNT(afi.LOCUS_NAME) as locusCount
+        FROM (
+        SELECT ID, POPULATION_FREQUENCY_ID, LOCUS_ID, LOCUS_NAME FROM allele_frequency_info
+        ) afi
+        where afi.POPULATION_FREQUENCY_ID=#{populationId}
+        GROUP BY afi.LOCUS_NAME
+    </select>
+
+    <!--listByPopulationIdAndLocusName-->
+    <select id="listByPopulationIdAndLocusName" resultMap="BaseResultMap">
+        select
+        ID, LOCUS_ID,POPULATION_FREQUENCY_ID,LOCUS_NAME, ALLELE_VALUE, PROBABILITY
+        from allele_frequency_info afi
+        where afi.POPULATION_FREQUENCY_ID=#{populationId} and afi.LOCUS_NAME=#{locusName}
+    </select>
+
+    <delete id="deleteAlleleFrequency" parameterType="com.bazl.dna.database.service.model.po.AlleleFrequencyInfo">
+       delete from  allele_frequency_info
+       where POPULATION_FREQUENCY_ID=#{populationFrequencyId,jdbcType=INTEGER}
+       and LOCUS_NAME =#{locusName,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteAlleleFrequencyById" parameterType="com.bazl.dna.database.service.model.po.AlleleFrequencyInfo">
+        delete from allele_frequency_info
+        where id = #{alleleFrequencyId}
+    </delete>
+
+</mapper>

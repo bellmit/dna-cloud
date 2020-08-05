@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.MatchResultSameMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.MatchResultSame">
+        <result column="ID" property="id" />
+        <result column="MATCH_GROUP_ID" property="matchGroupId" />
+        <result column="MATCH_DATETIME" property="matchDatetime" />
+        <result column="MATCH_LOCUS_COUNT" property="matchLocusCount" />
+        <result column="SAMPLEA_ID" property="sampleaId" />
+        <result column="SAMPLEB_ID" property="samplebId" />
+        <result column="MATCHED_GENE_DETAILS" property="matchedGeneDetails" />
+        <result column="REVIEW_FLAG" property="reviewFlag" jdbcType="TINYINT" javaType="java.lang.Integer" />
+        <result column="REVIEW_DATETIME" property="reviewDatetime" />
+        <result column="REVIEW_PERSON_ID" property="reviewPersonId" />
+        <result column="REVIEW_PERSON_NAME" property="reviewPersonName" />
+        <result column="REVIEW_RESULT_CODE" property="reviewResultCode" />
+        <result column="REVIEW_RESULT_DESC" property="reviewResultDesc" />
+        <result column="CREATE_DATETIME" property="createDatetime" />
+        <result column="UPDATE_DATETIME" property="updateDatetime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        mrs.ID,mrs.MATCH_GROUP_ID,mrs.MATCH_DATETIME,mrs.MATCH_LOCUS_COUNT,mrs.SAMPLEA_ID,mrs.SAMPLEB_ID,
+        mrs.MATCHED_GENE_DETAILS,mrs.REVIEW_FLAG,mrs.REVIEW_DATETIME,mrs.REVIEW_PERSON_ID,mrs.REVIEW_PERSON_NAME,
+        mrs.REVIEW_RESULT_CODE,mrs.REVIEW_RESULT_DESC,mrs.CREATE_DATETIME,mrs.UPDATE_DATETIME
+    </sql>
+
+    <select id="getMatchResultGroupNo" resultType="int" parameterType="map">
+    		SELECT MATCH_GROUP_ID from match_result_same
+    			where SAMPLEA_ID in (${sampleAId},${sampleBId}) or SAMPLEB_ID in (${sampleAId},${sampleBId}) limit 1
+    </select>
+
+    <select id="selectLatestTenList" resultMap="BaseResultMap"  parameterType="java.lang.String">
+           select
+           <include refid="Base_Column_List"/>
+           from match_result_same mrs
+           where exists (select 1 from match_result_same_group m
+           where mrs.MATCH_GROUP_ID = m.id
+           and m.GROUP_TYPE = #{groupType,jdbcType=VARCHAR}
+           )
+           order by  mrs.MATCH_DATETIME desc
+           limit 0,10
+    </select>
+
+    <select id="selectListByGroupType" parameterType="com.bazl.dna.database.service.model.po.MatchResultSame" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from match_result_same mrs
+        where exists (select 1 from match_result_same_group m
+        where mrs.MATCH_GROUP_ID = m.id
+        and m.GROUP_TYPE = #{groupType,jdbcType=VARCHAR}
+        )
+    </select>
+
+    <select id ="selectListByGroupId"  parameterType="com.bazl.dna.database.service.model.po.MatchResultSame" resultMap="BaseResultMap">
+      select
+     <include refid="Base_Column_List"/>
+     from match_result_same mrs
+     where mrs.MATCH_GROUP_ID = #{matchGroupId,jdbcType =VARCHAR}
+    </select>
+</mapper>

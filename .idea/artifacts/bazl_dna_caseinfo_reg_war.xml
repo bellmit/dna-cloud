@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="bazl-dna-caseinfo-reg:war">
+    <output-path>$PROJECT_DIR$/bazl-dna-caseinfo-reg/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>bazl-dna-caseinfo-reg</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="bazl-dna-caseinfo-reg.war">
+      <element id="artifact" artifact-name="bazl-dna-caseinfo-reg:war exploded" />
+    </root>
+  </artifact>
+</component>

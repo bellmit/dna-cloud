@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.nation.converter.dao.PersonInfoMapper">
+  <resultMap id="BaseResultMap" type="com.bazl.dna.database.nation.converter.model.po.PersonInfo">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="INIT_SERVER_NO" jdbcType="VARCHAR" property="initServerNo" />
+    <result column="LAB_ID" jdbcType="VARCHAR" property="labId" />
+    <result column="CONSIGNMENT_ID" jdbcType="VARCHAR" property="consignmentId" />
+    <result column="CONSIGN_ORG_CODE" jdbcType="VARCHAR" property="consignOrgCode" />
+    <result column="INPUT_CATEGORY" jdbcType="VARCHAR" property="inputCategory" />
+    <result column="DB_CATEGORY" jdbcType="VARCHAR" property="dbCategory" />
+    <result column="SUB_CATEGORY" jdbcType="VARCHAR" property="subCategory" />
+    <result column="PERSON_NO" jdbcType="VARCHAR" property="personNo" />
+    <result column="PERSON_NAME" jdbcType="VARCHAR" property="personName" />
+    <result column="GENERATE_MODE" jdbcType="VARCHAR" property="generateMode" />
+    <result column="ALIAS" jdbcType="VARCHAR" property="alias" />
+    <result column="GENDER" jdbcType="VARCHAR" property="gender" />
+    <result column="BIRTH_DATETIME" jdbcType="TIMESTAMP" property="birthDatetime" />
+    <result column="AGE" jdbcType="DECIMAL" property="age" />
+    <result column="ID_CARD_NO" jdbcType="VARCHAR" property="idCardNo" />
+    <result column="CERTIFICATE_TYPE" jdbcType="VARCHAR" property="certificateType" />
+    <result column="CERTIFICATE_NO" jdbcType="VARCHAR" property="certificateNo" />
+    <result column="RACE" jdbcType="VARCHAR" property="race" />
+    <result column="NATIONALITY" jdbcType="VARCHAR" property="nationality" />
+    <result column="MOBILE_PHONE" jdbcType="VARCHAR" property="mobilePhone" />
+    <result column="HOME_PHONE" jdbcType="VARCHAR" property="homePhone" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="EDUCATION_LEVEL" jdbcType="VARCHAR" property="educationLevel" />
+    <result column="IDENTITY" jdbcType="VARCHAR" property="identity" />
+    <result column="OCCUPATION" jdbcType="VARCHAR" property="occupation" />
+    <result column="NATIVE_PLACE_REGIONALISM" jdbcType="VARCHAR" property="nativePlaceRegionalism" />
+    <result column="NATIVE_PLACE_ADDR" jdbcType="VARCHAR" property="nativePlaceAddr" />
+    <result column="RESIDENCE_REGIONALISM" jdbcType="VARCHAR" property="residenceRegionalism" />
+    <result column="RESIDENCE_ADDR" jdbcType="VARCHAR" property="residenceAddr" />
+    <result column="FINGERPRINT_NO" jdbcType="VARCHAR" property="fingerprintNo" />
+    <result column="BLOOD_TYPE" jdbcType="VARCHAR" property="bloodType" />
+    <result column="HEIGHT" jdbcType="VARCHAR" property="height" />
+    <result column="BODILY_FORM" jdbcType="VARCHAR" property="bodilyForm" />
+    <result column="BIRTH_DATE_FROM" jdbcType="TIMESTAMP" property="birthDateFrom" />
+    <result column="BIRTH_DATE_TO" jdbcType="TIMESTAMP" property="birthDateTo" />
+    <result column="ROUGH_AGE" jdbcType="VARCHAR" property="roughAge" />
+    <result column="ROUGHLY_BIRTHDATE" jdbcType="TIMESTAMP" property="roughlyBirthdate" />
+    <result column="MISSING_TYPE" jdbcType="VARCHAR" property="missingType" />
+    <result column="MISSING_TIME" jdbcType="TIMESTAMP" property="missingTime" />
+    <result column="MISSING_PLACE" jdbcType="VARCHAR" property="missingPlace" />
+    <result column="EXTRINSIC_SIGN" jdbcType="VARCHAR" property="extrinsicSign" />
+    <result column="SPECIAL_SIGN" jdbcType="VARCHAR" property="specialSign" />
+    <result column="INVOLVED_CASE_NAME" jdbcType="VARCHAR" property="involvedCaseName" />
+    <result column="INVOLVED_CASE_NO" jdbcType="VARCHAR" property="involvedCaseNo" />
+    <result column="CASE_PROPERTY" jdbcType="VARCHAR" property="caseProperty" />
+    <result column="PRISON_TYPE" jdbcType="VARCHAR" property="prisonType" />
+    <result column="PRISON_NO" jdbcType="VARCHAR" property="prisonNo" />
+    <result column="DEATH_FLAG" jdbcType="DECIMAL" property="deathFlag" />
+    <result column="DELETE_FLAG" jdbcType="DECIMAL" property="deleteFlag" />
+    <result column="INDEX_FLAG" jdbcType="VARCHAR" property="indexFlag" />
+    <result column="TRANSFER_FLAG" jdbcType="DECIMAL" property="transferFlag" />
+    <result column="TRANSFER_USER" jdbcType="VARCHAR" property="transferUser" />
+    <result column="TRANSFER_DATETIME" jdbcType="TIMESTAMP" property="transferDatetime" />
+    <result column="DATA_SOURCE" jdbcType="VARCHAR" property="dataSource" />
+    <result column="DATA_LEVEL" jdbcType="DECIMAL" property="dataLevel" />
+    <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1" />
+    <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2" />
+    <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3" />
+    <result column="RESERVE4" jdbcType="VARCHAR" property="reserve4" />
+    <result column="RESERVE5" jdbcType="VARCHAR" property="reserve5" />
+    <result column="RESERVE6" jdbcType="VARCHAR" property="reserve6" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="CREATE_USER" jdbcType="VARCHAR" property="createUser" />
+    <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="UPDATE_USER" jdbcType="VARCHAR" property="updateUser" />
+    <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="updateDatetime" />
+    <result column="PERSON_LABEL" jdbcType="VARCHAR" property="personLabel" />
+    <result column="ABDUCT_TYPE" jdbcType="VARCHAR" property="abductType" />
+    <result column="IF_SAMPLING" jdbcType="DECIMAL" property="ifSampling" />
+    <result column="SAMPLING_DATETIME" jdbcType="VARCHAR" property="samplingDatetime" />
+    <result column="SAMPLING_REGIONALISM" jdbcType="VARCHAR" property="samplingRegionalism" />
+    <result column="IF_TESTDNA" jdbcType="DECIMAL" property="ifTestdna" />
+    <result column="TEST_DATETIME" jdbcType="VARCHAR" property="testDatetime" />
+    <result column="TEST_REGIONALISM" jdbcType="VARCHAR" property="testRegionalism" />
+    <result column="UNIT" jdbcType="VARCHAR" property="unit" />
+    <result column="IS_ARRESTED" jdbcType="VARCHAR" property="isArrested" />
+    <result column="ARREST_DAETTIME" jdbcType="TIMESTAMP" property="arrestDaettime" />
+    <result column="IS_OFFENDER" jdbcType="VARCHAR" property="isOffender" />
+    <result column="EXT_ID" jdbcType="VARCHAR" property="extId" />
+    <result column="FAMILY_NO" jdbcType="VARCHAR" property="familyNo" />
+    <result column="FAMILY_NAME" jdbcType="VARCHAR" property="familyName" />
+    <result column="LOCAL_STORE_DATETIME" jdbcType="TIMESTAMP" property="localStoreDatetime" />
+    <result column="LOCAL_CREATE_DATETIME" jdbcType="TIMESTAMP" property="localCreateDatetime" />
+    <result column="HIREDATE" jdbcType="TIMESTAMP" property="hiredate" />
+    <result column="DG_CASE_NAME" jdbcType="VARCHAR" property="dgCaseName" />
+    <result column="IF_FINGER" jdbcType="VARCHAR" property="ifFinger" />
+    <result column="DG_DATA_TYPE" jdbcType="VARCHAR" property="dgDataType" />
+    <result column="POST" jdbcType="VARCHAR" property="post" />
+    <result column="COMMUNICATION_ADDRESS" jdbcType="VARCHAR" property="communicationAddress" />
+    <result column="GUARDIAN_DATE" jdbcType="TIMESTAMP" property="guardianDate" />
+    <result column="COMMUNICATION_REGIONALISM" jdbcType="VARCHAR" property="communicationRegionalism" />
+    <result column="MEMORY" jdbcType="VARCHAR" property="memory" />
+    <result column="OTHER_INFO" jdbcType="VARCHAR" property="otherInfo" />
+    <result column="MISSING_PLACE_REGIONALISM" jdbcType="VARCHAR" property="missingPlaceRegionalism" />
+    <result column="P_STATUS" jdbcType="VARCHAR" property="pStatus" />
+    <result column="P_MSG" jdbcType="VARCHAR" property="pMsg" />
+    <result column="P_DATE" jdbcType="TIMESTAMP" property="pDate" />
+    <result column="IS_INFER_AGE" jdbcType="DECIMAL" property="isInferAge" />
+    <result column="VA" jdbcType="CLOB" property="va" />
+    <result column="CASE_ID" jdbcType="VARCHAR" property="caseID" />
+    <result column="CREATE_PERSON" jdbcType="VARCHAR" property="createPerson" />
+    <result column="UPDATE_PERESON" jdbcType="VARCHAR" property="updatePereson" />
+    <result column="IDCARD" jdbcType="VARCHAR" property="idCard" />
+    <result column="PERSON_TYPE" jdbcType="VARCHAR" property="personType" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from PERSON_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.database.nation.converter.model.po.PersonInfo">
+    insert into PERSON_INFO (ID, INIT_SERVER_NO, LAB_ID, 
+      CONSIGNMENT_ID, CONSIGN_ORG_CODE, INPUT_CATEGORY, 
+      DB_CATEGORY, SUB_CATEGORY, PERSON_NO, 
+      PERSON_NAME, GENERATE_MODE, ALIAS, 
+      GENDER, BIRTH_DATETIME, AGE, 
+      ID_CARD_NO, CERTIFICATE_TYPE, CERTIFICATE_NO, 
+      RACE, NATIONALITY, MOBILE_PHONE, 
+      HOME_PHONE, EMAIL, EDUCATION_LEVEL, 
+      IDENTITY, OCCUPATION, NATIVE_PLACE_REGIONALISM, 
+      NATIVE_PLACE_ADDR, RESIDENCE_REGIONALISM, 
+      RESIDENCE_ADDR, FINGERPRINT_NO, BLOOD_TYPE, 
+      HEIGHT, BODILY_FORM, BIRTH_DATE_FROM, 
+      BIRTH_DATE_TO, ROUGH_AGE, ROUGHLY_BIRTHDATE, 
+      MISSING_TYPE, MISSING_TIME, MISSING_PLACE, 
+      EXTRINSIC_SIGN, SPECIAL_SIGN, INVOLVED_CASE_NAME, 
+      INVOLVED_CASE_NO, CASE_PROPERTY, PRISON_TYPE, 
+      PRISON_NO, DEATH_FLAG, DELETE_FLAG, 
+      INDEX_FLAG, TRANSFER_FLAG, TRANSFER_USER, 
+      TRANSFER_DATETIME, DATA_SOURCE, DATA_LEVEL, 
+      RESERVE1, RESERVE2, RESERVE3, 
+      RESERVE4, RESERVE5, RESERVE6, 
+      REMARK, CREATE_USER, CREATE_DATETIME, 
+      UPDATE_USER, UPDATE_DATETIME, PERSON_LABEL, 
+      ABDUCT_TYPE, IF_SAMPLING, SAMPLING_DATETIME, 
+      SAMPLING_REGIONALISM, IF_TESTDNA, TEST_DATETIME, 
+      TEST_REGIONALISM, UNIT, IS_ARRESTED, 
+      ARREST_DAETTIME, IS_OFFENDER, EXT_ID, 
+      FAMILY_NO, FAMILY_NAME, LOCAL_STORE_DATETIME, 
+      LOCAL_CREATE_DATETIME, HIREDATE, DG_CASE_NAME, 
+      IF_FINGER, DG_DATA_TYPE, POST, 
+      COMMUNICATION_ADDRESS, GUARDIAN_DATE, COMMUNICATION_REGIONALISM, 
+      MEMORY, OTHER_INFO, MISSING_PLACE_REGIONALISM, 
+      P_STATUS, P_MSG, P_DATE, 
+      IS_INFER_AGE, VA)
+    values (#{id,jdbcType=VARCHAR}, #{initServerNo,jdbcType=VARCHAR}, #{labId,jdbcType=VARCHAR}, 
+      #{consignmentId,jdbcType=VARCHAR}, #{consignOrgCode,jdbcType=VARCHAR}, #{inputCategory,jdbcType=VARCHAR}, 
+      #{dbCategory,jdbcType=VARCHAR}, #{subCategory,jdbcType=VARCHAR}, #{personNo,jdbcType=VARCHAR}, 
+      #{personName,jdbcType=VARCHAR}, #{generateMode,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=VARCHAR}, #{birthDatetime,jdbcType=TIMESTAMP}, #{age,jdbcType=DECIMAL}, 
+      #{idCardNo,jdbcType=VARCHAR}, #{certificateType,jdbcType=VARCHAR}, #{certificateNo,jdbcType=VARCHAR}, 
+      #{race,jdbcType=VARCHAR}, #{nationality,jdbcType=VARCHAR}, #{mobilePhone,jdbcType=VARCHAR}, 
+      #{homePhone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{educationLevel,jdbcType=VARCHAR}, 
+      #{identity,jdbcType=VARCHAR}, #{occupation,jdbcType=VARCHAR}, #{nativePlaceRegionalism,jdbcType=VARCHAR}, 
+      #{nativePlaceAddr,jdbcType=VARCHAR}, #{residenceRegionalism,jdbcType=VARCHAR}, 
+      #{residenceAddr,jdbcType=VARCHAR}, #{fingerprintNo,jdbcType=VARCHAR}, #{bloodType,jdbcType=VARCHAR}, 
+      #{height,jdbcType=VARCHAR}, #{bodilyForm,jdbcType=VARCHAR}, #{birthDateFrom,jdbcType=TIMESTAMP}, 
+      #{birthDateTo,jdbcType=TIMESTAMP}, #{roughAge,jdbcType=VARCHAR}, #{roughlyBirthdate,jdbcType=TIMESTAMP}, 
+      #{missingType,jdbcType=VARCHAR}, #{missingTime,jdbcType=TIMESTAMP}, #{missingPlace,jdbcType=VARCHAR}, 
+      #{extrinsicSign,jdbcType=VARCHAR}, #{specialSign,jdbcType=VARCHAR}, #{involvedCaseName,jdbcType=VARCHAR}, 
+      #{involvedCaseNo,jdbcType=VARCHAR}, #{caseProperty,jdbcType=VARCHAR}, #{prisonType,jdbcType=VARCHAR}, 
+      #{prisonNo,jdbcType=VARCHAR}, #{deathFlag,jdbcType=DECIMAL}, #{deleteFlag,jdbcType=DECIMAL}, 
+      #{indexFlag,jdbcType=VARCHAR}, #{transferFlag,jdbcType=DECIMAL}, #{transferUser,jdbcType=VARCHAR}, 
+      #{transferDatetime,jdbcType=TIMESTAMP}, #{dataSource,jdbcType=VARCHAR}, #{dataLevel,jdbcType=DECIMAL}, 
+      #{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR}, 
+      #{reserve4,jdbcType=VARCHAR}, #{reserve5,jdbcType=VARCHAR}, #{reserve6,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}, #{personLabel,jdbcType=VARCHAR}, 
+      #{abductType,jdbcType=VARCHAR}, #{ifSampling,jdbcType=DECIMAL}, #{samplingDatetime,jdbcType=VARCHAR}, 
+      #{samplingRegionalism,jdbcType=VARCHAR}, #{ifTestdna,jdbcType=DECIMAL}, #{testDatetime,jdbcType=VARCHAR}, 
+      #{testRegionalism,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{isArrested,jdbcType=VARCHAR}, 
+      #{arrestDaettime,jdbcType=TIMESTAMP}, #{isOffender,jdbcType=VARCHAR}, #{extId,jdbcType=VARCHAR}, 
+      #{familyNo,jdbcType=VARCHAR}, #{familyName,jdbcType=VARCHAR}, #{localStoreDatetime,jdbcType=TIMESTAMP}, 
+      #{localCreateDatetime,jdbcType=TIMESTAMP}, #{hiredate,jdbcType=TIMESTAMP}, #{dgCaseName,jdbcType=VARCHAR}, 
+      #{ifFinger,jdbcType=VARCHAR}, #{dgDataType,jdbcType=VARCHAR}, #{post,jdbcType=VARCHAR}, 
+      #{communicationAddress,jdbcType=VARCHAR}, #{guardianDate,jdbcType=TIMESTAMP}, #{communicationRegionalism,jdbcType=VARCHAR}, 
+      #{memory,jdbcType=VARCHAR}, #{otherInfo,jdbcType=VARCHAR}, #{missingPlaceRegionalism,jdbcType=VARCHAR}, 
+      #{pStatus,jdbcType=VARCHAR}, #{pMsg,jdbcType=VARCHAR}, #{pDate,jdbcType=TIMESTAMP}, 
+      #{isInferAge,jdbcType=DECIMAL}, #{va,jdbcType=CLOB})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.database.nation.converter.model.po.PersonInfo">
+    update PERSON_INFO
+    set INIT_SERVER_NO = #{initServerNo,jdbcType=VARCHAR},
+      LAB_ID = #{labId,jdbcType=VARCHAR},
+      CONSIGNMENT_ID = #{consignmentId,jdbcType=VARCHAR},
+      CONSIGN_ORG_CODE = #{consignOrgCode,jdbcType=VARCHAR},
+      INPUT_CATEGORY = #{inputCategory,jdbcType=VARCHAR},
+      DB_CATEGORY = #{dbCategory,jdbcType=VARCHAR},
+      SUB_CATEGORY = #{subCategory,jdbcType=VARCHAR},
+      PERSON_NO = #{personNo,jdbcType=VARCHAR},
+      PERSON_NAME = #{personName,jdbcType=VARCHAR},
+      GENERATE_MODE = #{generateMode,jdbcType=VARCHAR},
+      ALIAS = #{alias,jdbcType=VARCHAR},
+      GENDER = #{gender,jdbcType=VARCHAR},
+      BIRTH_DATETIME = #{birthDatetime,jdbcType=TIMESTAMP},
+      AGE = #{age,jdbcType=DECIMAL},
+      ID_CARD_NO = #{idCardNo,jdbcType=VARCHAR},
+      CERTIFICATE_TYPE = #{certificateType,jdbcType=VARCHAR},
+      CERTIFICATE_NO = #{certificateNo,jdbcType=VARCHAR},
+      RACE = #{race,jdbcType=VARCHAR},
+      NATIONALITY = #{nationality,jdbcType=VARCHAR},
+      MOBILE_PHONE = #{mobilePhone,jdbcType=VARCHAR},
+      HOME_PHONE = #{homePhone,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      EDUCATION_LEVEL = #{educationLevel,jdbcType=VARCHAR},
+      IDENTITY = #{identity,jdbcType=VARCHAR},
+      OCCUPATION = #{occupation,jdbcType=VARCHAR},
+      NATIVE_PLACE_REGIONALISM = #{nativePlaceRegionalism,jdbcType=VARCHAR},
+      NATIVE_PLACE_ADDR = #{nativePlaceAddr,jdbcType=VARCHAR},
+      RESIDENCE_REGIONALISM = #{residenceRegionalism,jdbcType=VARCHAR},
+      RESIDENCE_ADDR = #{residenceAddr,jdbcType=VARCHAR},
+      FINGERPRINT_NO = #{fingerprintNo,jdbcType=VARCHAR},
+      BLOOD_TYPE = #{bloodType,jdbcType=VARCHAR},
+      HEIGHT = #{height,jdbcType=VARCHAR},
+      BODILY_FORM = #{bodilyForm,jdbcType=VARCHAR},
+      BIRTH_DATE_FROM = #{birthDateFrom,jdbcType=TIMESTAMP},
+      BIRTH_DATE_TO = #{birthDateTo,jdbcType=TIMESTAMP},
+      ROUGH_AGE = #{roughAge,jdbcType=VARCHAR},
+      ROUGHLY_BIRTHDATE = #{roughlyBirthdate,jdbcType=TIMESTAMP},
+      MISSING_TYPE = #{missingType,jdbcType=VARCHAR},
+      MISSING_TIME = #{missingTime,jdbcType=TIMESTAMP},
+      MISSING_PLACE = #{missingPlace,jdbcType=VARCHAR},
+      EXTRINSIC_SIGN = #{extrinsicSign,jdbcType=VARCHAR},
+      SPECIAL_SIGN = #{specialSign,jdbcType=VARCHAR},
+      INVOLVED_CASE_NAME = #{involvedCaseName,jdbcType=VARCHAR},
+      INVOLVED_CASE_NO = #{involvedCaseNo,jdbcType=VARCHAR},
+      CASE_PROPERTY = #{caseProperty,jdbcType=VARCHAR},
+      PRISON_TYPE = #{prisonType,jdbcType=VARCHAR},
+      PRISON_NO = #{prisonNo,jdbcType=VARCHAR},
+      DEATH_FLAG = #{deathFlag,jdbcType=DECIMAL},
+      DELETE_FLAG = #{deleteFlag,jdbcType=DECIMAL},
+      INDEX_FLAG = #{indexFlag,jdbcType=VARCHAR},
+      TRANSFER_FLAG = #{transferFlag,jdbcType=DECIMAL},
+      TRANSFER_USER = #{transferUser,jdbcType=VARCHAR},
+      TRANSFER_DATETIME = #{transferDatetime,jdbcType=TIMESTAMP},
+      DATA_SOURCE = #{dataSource,jdbcType=VARCHAR},
+      DATA_LEVEL = #{dataLevel,jdbcType=DECIMAL},
+      RESERVE1 = #{reserve1,jdbcType=VARCHAR},
+      RESERVE2 = #{reserve2,jdbcType=VARCHAR},
+      RESERVE3 = #{reserve3,jdbcType=VARCHAR},
+      RESERVE4 = #{reserve4,jdbcType=VARCHAR},
+      RESERVE5 = #{reserve5,jdbcType=VARCHAR},
+      RESERVE6 = #{reserve6,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      PERSON_LABEL = #{personLabel,jdbcType=VARCHAR},
+      ABDUCT_TYPE = #{abductType,jdbcType=VARCHAR},
+      IF_SAMPLING = #{ifSampling,jdbcType=DECIMAL},
+      SAMPLING_DATETIME = #{samplingDatetime,jdbcType=VARCHAR},
+      SAMPLING_REGIONALISM = #{samplingRegionalism,jdbcType=VARCHAR},
+      IF_TESTDNA = #{ifTestdna,jdbcType=DECIMAL},
+      TEST_DATETIME = #{testDatetime,jdbcType=VARCHAR},
+      TEST_REGIONALISM = #{testRegionalism,jdbcType=VARCHAR},
+      UNIT = #{unit,jdbcType=VARCHAR},
+      IS_ARRESTED = #{isArrested,jdbcType=VARCHAR},
+      ARREST_DAETTIME = #{arrestDaettime,jdbcType=TIMESTAMP},
+      IS_OFFENDER = #{isOffender,jdbcType=VARCHAR},
+      EXT_ID = #{extId,jdbcType=VARCHAR},
+      FAMILY_NO = #{familyNo,jdbcType=VARCHAR},
+      FAMILY_NAME = #{familyName,jdbcType=VARCHAR},
+      LOCAL_STORE_DATETIME = #{localStoreDatetime,jdbcType=TIMESTAMP},
+      LOCAL_CREATE_DATETIME = #{localCreateDatetime,jdbcType=TIMESTAMP},
+      HIREDATE = #{hiredate,jdbcType=TIMESTAMP},
+      DG_CASE_NAME = #{dgCaseName,jdbcType=VARCHAR},
+      IF_FINGER = #{ifFinger,jdbcType=VARCHAR},
+      DG_DATA_TYPE = #{dgDataType,jdbcType=VARCHAR},
+      POST = #{post,jdbcType=VARCHAR},
+      COMMUNICATION_ADDRESS = #{communicationAddress,jdbcType=VARCHAR},
+      GUARDIAN_DATE = #{guardianDate,jdbcType=TIMESTAMP},
+      COMMUNICATION_REGIONALISM = #{communicationRegionalism,jdbcType=VARCHAR},
+      MEMORY = #{memory,jdbcType=VARCHAR},
+      OTHER_INFO = #{otherInfo,jdbcType=VARCHAR},
+      MISSING_PLACE_REGIONALISM = #{missingPlaceRegionalism,jdbcType=VARCHAR},
+      P_STATUS = #{pStatus,jdbcType=VARCHAR},
+      P_MSG = #{pMsg,jdbcType=VARCHAR},
+      P_DATE = #{pDate,jdbcType=TIMESTAMP},
+      IS_INFER_AGE = #{isInferAge,jdbcType=DECIMAL},
+      VA = #{va,jdbcType=CLOB}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="com.bazl.dna.database.nation.converter.model.po.PersonInfo" resultMap="BaseResultMap">
+    select ID, INIT_SERVER_NO, LAB_ID, CONSIGNMENT_ID, CONSIGN_ORG_CODE, INPUT_CATEGORY, 
+    DB_CATEGORY, SUB_CATEGORY, PERSON_NO, PERSON_NAME, GENERATE_MODE, ALIAS, GENDER, 
+    BIRTH_DATETIME, AGE, ID_CARD_NO, CERTIFICATE_TYPE, CERTIFICATE_NO, RACE, NATIONALITY, 
+    MOBILE_PHONE, HOME_PHONE, EMAIL, EDUCATION_LEVEL, IDENTITY, OCCUPATION, NATIVE_PLACE_REGIONALISM, 
+    NATIVE_PLACE_ADDR, RESIDENCE_REGIONALISM, RESIDENCE_ADDR, FINGERPRINT_NO, BLOOD_TYPE, 
+    HEIGHT, BODILY_FORM, BIRTH_DATE_FROM, BIRTH_DATE_TO, ROUGH_AGE, ROUGHLY_BIRTHDATE, 
+    MISSING_TYPE, MISSING_TIME, MISSING_PLACE, EXTRINSIC_SIGN, SPECIAL_SIGN, INVOLVED_CASE_NAME, 
+    INVOLVED_CASE_NO, CASE_PROPERTY, PRISON_TYPE, PRISON_NO, DEATH_FLAG, DELETE_FLAG, 
+    INDEX_FLAG, TRANSFER_FLAG, TRANSFER_USER, TRANSFER_DATETIME, DATA_SOURCE, DATA_LEVEL, 
+    RESERVE1, RESERVE2, RESERVE3, RESERVE4, RESERVE5, RESERVE6, REMARK, CREATE_USER, 
+    CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME, PERSON_LABEL, ABDUCT_TYPE, IF_SAMPLING, 
+    SAMPLING_DATETIME, SAMPLING_REGIONALISM, IF_TESTDNA, TEST_DATETIME, TEST_REGIONALISM, 
+    UNIT, IS_ARRESTED, ARREST_DAETTIME, IS_OFFENDER, EXT_ID, FAMILY_NO, FAMILY_NAME, 
+    LOCAL_STORE_DATETIME, LOCAL_CREATE_DATETIME, HIREDATE, DG_CASE_NAME, IF_FINGER, DG_DATA_TYPE, 
+    POST, COMMUNICATION_ADDRESS, GUARDIAN_DATE, COMMUNICATION_REGIONALISM, MEMORY, OTHER_INFO, 
+    MISSING_PLACE_REGIONALISM, P_STATUS, P_MSG, P_DATE, IS_INFER_AGE, VA
+    from PERSON_INFO
+    where ID = #{id,jdbcType=VARCHAR} and DELETE_FLAG = 0
+    <if test=" initServerNoLike != null and initServerNoLike != '' ">
+      and  INIT_SERVER_NO like ''||#{initServerNoLike,jdbcType=VARCHAR}||'%'
+    </if>
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select ID, INIT_SERVER_NO, LAB_ID, CONSIGNMENT_ID, CONSIGN_ORG_CODE, INPUT_CATEGORY, 
+    DB_CATEGORY, SUB_CATEGORY, PERSON_NO, PERSON_NAME, GENERATE_MODE, ALIAS, GENDER, 
+    BIRTH_DATETIME, AGE, ID_CARD_NO, CERTIFICATE_TYPE, CERTIFICATE_NO, RACE, NATIONALITY, 
+    MOBILE_PHONE, HOME_PHONE, EMAIL, EDUCATION_LEVEL, IDENTITY, OCCUPATION, NATIVE_PLACE_REGIONALISM, 
+    NATIVE_PLACE_ADDR, RESIDENCE_REGIONALISM, RESIDENCE_ADDR, FINGERPRINT_NO, BLOOD_TYPE, 
+    HEIGHT, BODILY_FORM, BIRTH_DATE_FROM, BIRTH_DATE_TO, ROUGH_AGE, ROUGHLY_BIRTHDATE, 
+    MISSING_TYPE, MISSING_TIME, MISSING_PLACE, EXTRINSIC_SIGN, SPECIAL_SIGN, INVOLVED_CASE_NAME, 
+    INVOLVED_CASE_NO, CASE_PROPERTY, PRISON_TYPE, PRISON_NO, DEATH_FLAG, DELETE_FLAG, 
+    INDEX_FLAG, TRANSFER_FLAG, TRANSFER_USER, TRANSFER_DATETIME, DATA_SOURCE, DATA_LEVEL, 
+    RESERVE1, RESERVE2, RESERVE3, RESERVE4, RESERVE5, RESERVE6, REMARK, CREATE_USER, 
+    CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME, PERSON_LABEL, ABDUCT_TYPE, IF_SAMPLING, 
+    SAMPLING_DATETIME, SAMPLING_REGIONALISM, IF_TESTDNA, TEST_DATETIME, TEST_REGIONALISM, 
+    UNIT, IS_ARRESTED, ARREST_DAETTIME, IS_OFFENDER, EXT_ID, FAMILY_NO, FAMILY_NAME, 
+    LOCAL_STORE_DATETIME, LOCAL_CREATE_DATETIME, HIREDATE, DG_CASE_NAME, IF_FINGER, DG_DATA_TYPE, 
+    POST, COMMUNICATION_ADDRESS, GUARDIAN_DATE, COMMUNICATION_REGIONALISM, MEMORY, OTHER_INFO, 
+    MISSING_PLACE_REGIONALISM, P_STATUS, P_MSG, P_DATE, IS_INFER_AGE, VA
+    from PERSON_INFO
+  </select>
+
+  <select id="selectAuditPersonByCaseId" parameterType="java.lang.String" resultMap="BaseResultMap">
+       SELECT ci.id  as CASE_ID,
+               pi.*
+       FROM
+              PERSON_INFO pi ,consignment ct,case_info ci  where
+              pi.consignment_id = ct.id and ct.event_id = ci.id and pi.delete_flag ='0'  and ci.id =#{caseId,jdbcType=VARCHAR}
+  </select>
+
+  <sql id="Base_Column_List">
+    pi.ID, pi.INIT_SERVER_NO, pi.LAB_ID, pi.CONSIGNMENT_ID, pi.CONSIGN_ORG_CODE, pi.INPUT_CATEGORY,
+    pi.DB_CATEGORY, pi.SUB_CATEGORY, pi.PERSON_NO, pi.PERSON_NAME, pi.GENERATE_MODE, pi.ALIAS, pi.GENDER,
+    pi.BIRTH_DATETIME, pi.AGE, pi.ID_CARD_NO, pi.CERTIFICATE_TYPE, pi.CERTIFICATE_NO, pi.RACE, pi.NATIONALITY,
+    pi.MOBILE_PHONE, pi.HOME_PHONE, pi.EMAIL, pi.EDUCATION_LEVEL, pi.IDENTITY, pi.OCCUPATION, pi.NATIVE_PLACE_REGIONALISM,
+    pi.NATIVE_PLACE_ADDR, pi.RESIDENCE_REGIONALISM, pi.RESIDENCE_ADDR, pi.FINGERPRINT_NO, pi.BLOOD_TYPE,
+    pi.HEIGHT, pi.BODILY_FORM, pi.BIRTH_DATE_FROM, pi.BIRTH_DATE_TO, pi.ROUGH_AGE, pi.ROUGHLY_BIRTHDATE,
+    pi.MISSING_TYPE, pi.MISSING_TIME, pi.MISSING_PLACE, pi.EXTRINSIC_SIGN, pi.SPECIAL_SIGN, pi.INVOLVED_CASE_NAME,
+    pi.INVOLVED_CASE_NO, pi.CASE_PROPERTY, pi.PRISON_TYPE, pi.PRISON_NO, pi.DEATH_FLAG, pi.DELETE_FLAG,
+    pi.INDEX_FLAG, pi.TRANSFER_FLAG, pi.TRANSFER_USER, pi.TRANSFER_DATETIME, pi.DATA_SOURCE, pi.DATA_LEVEL,
+    pi.RESERVE1, pi.RESERVE2, pi.RESERVE3, pi.RESERVE4, pi.RESERVE5, pi.RESERVE6, pi.REMARK, pi.CREATE_USER,
+    pi.CREATE_DATETIME, pi.UPDATE_USER, pi.UPDATE_DATETIME, pi.PERSON_LABEL, pi.ABDUCT_TYPE, pi.IF_SAMPLING,
+    pi.SAMPLING_DATETIME, pi.SAMPLING_REGIONALISM, pi.IF_TESTDNA, pi.TEST_DATETIME, pi.TEST_REGIONALISM,
+    pi.UNIT, pi.IS_ARRESTED, pi.ARREST_DAETTIME, pi.IS_OFFENDER, pi.EXT_ID, pi.FAMILY_NO, pi.FAMILY_NAME,
+    pi.LOCAL_STORE_DATETIME, pi.LOCAL_CREATE_DATETIME, pi.HIREDATE, pi.DG_CASE_NAME, pi.IF_FINGER, pi.DG_DATA_TYPE,
+    pi.POST, pi.COMMUNICATION_ADDRESS, pi.GUARDIAN_DATE, pi.COMMUNICATION_REGIONALISM, pi.MEMORY, pi.OTHER_INFO,
+    pi.MISSING_PLACE_REGIONALISM, pi.P_STATUS, pi.P_MSG, pi.P_DATE, pi.IS_INFER_AGE, pi.VA
+  </sql>
+
+  <select id="selectRealPersonByConsignmentId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>
+    from PERSON_INFO pi, SAMPLE_PERSON_MAP spm
+    where pi.ID=spm.PERSON_OBJECT_ID
+        and pi.CONSIGNMENT_ID=#{consignmentId, jdbcType=VARCHAR}
+        and spm.RELATION in (#{selfRelation,jdbcType=VARCHAR}, #{selfPossibleRelation,jdbcType=VARCHAR})
+        and pi.DELETE_FLAG=0
+  </select>
+
+
+  <select id="selectAllPersonByConsignmentId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from PERSON_INFO pi
+    where pi.CONSIGNMENT_ID=#{consignmentId, jdbcType=VARCHAR} and pi.DELETE_FLAG=0
+  </select>
+
+</mapper>

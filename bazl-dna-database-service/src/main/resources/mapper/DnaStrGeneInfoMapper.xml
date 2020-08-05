@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.DnaStrGeneInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.DnaStrGeneInfo">
+        <id column="ID" property="id" />
+        <result column="LAB_SERVER_NO" property="labServerNo" />
+        <result column="GENE_TYPE" property="geneType" />
+        <result column="DNA_PANEL_ID" property="dnaPanelId" />
+        <result column="DATA_SOURCE" property="dataSource" />
+        <result column="SAMPLE_ID" property="sampleId" />
+        <result column="LOCUS_COUNT" property="locusCount" />
+        <result column="GENE_INFO" property="geneInfo" />
+        <result column="GENE_IMAGE" property="geneImage" />
+        <result column="TRANSFER_FLAG" property="transferFlag" />
+        <result column="TRANSFER_DATETIME" property="transferDatetime" />
+        <result column="TRANSFER_PERSON_ID" property="transferPersonId" />
+        <result column="TRANSFER_PERSON_NAME" property="transferPersonName" />
+        <result column="DELETE_FLAG" property="deleteFlag" />
+        <result column="DELETE_DATETIME" property="deleteDatetime" />
+        <result column="DELETE_REASON" property="deleteReason" />
+        <result column="DELETE_PERSON_ID" property="deletePersonId" />
+        <result column="DELETE_PERSON_NAME" property="deletePersonName" />
+        <result column="STORE_DATETIME" property="storeDatetime" />
+        <result column="STORE_PERSON_ID" property="storePersonId" />
+        <result column="STORE_PERSON_NAME" property="storePersonName" />
+        <result column="UPDATE_DATETIME" property="updateDatetime" />
+        <result column="UPDATE_PERSON_ID" property="updatePersonId" />
+        <result column="UPDATE_PERSON_NAME" property="updatePersonName" />
+    </resultMap>
+
+	<resultMap id="BaseResultMapVo" type="com.bazl.dna.database.service.model.vo.DnaSampleInfoVo">
+	</resultMap>
+
+	<sql id="Base_column_List">
+	   g.id,g.LAB_SERVER_NO,g.GENE_TYPE,g.DNA_PANEL_ID,g.DATA_SOURCE,g.SAMPLE_ID,g.LOCUS_COUNT,g.GENE_INFO,
+	   g.GENE_IMAGE,g.TRANSFER_FLAG,g.TRANSFER_DATETIME,g.TRANSFER_PERSON_ID,g.TRANSFER_PERSON_NAME,g.DELETE_FLAG,
+	   g.DELETE_DATETIME,g.DELETE_REASON,g.DELETE_PERSON_ID,g.DELETE_PERSON_NAME,g.STORE_DATETIME,g.STORE_PERSON_ID,
+	   g.STORE_PERSON_NAME,g.UPDATE_DATETIME,g.UPDATE_PERSON_ID,g.UPDATE_PERSON_NAME
+	</sql>
+
+	<select id="findCompareList" parameterType="map" resultType="java.util.Map">
+		select g.id from dna_sample_info s, dna_str_gene_info g where 1=1
+			and s.id = g.SAMPLE_ID and g.id != #{geneId}
+			<foreach collection="params.keys" item="key">
+				and g.${key} = #{params[${key}]}
+			</foreach>	
+	</select>
+	
+	<select id="findRelativeCompareList" parameterType="map" resultType="java.util.Map">
+		SELECT id, SAMPLE_ID as sampleId, GENE_INFO as geneInfo FROM `dna_str_gene_info` WHERE id >= (SELECT id FROM  
+			`dna_str_gene_info` ORDER BY id LIMIT #{offset} , 1) LIMIT #{rows}
+		<!-- select g.id, s.id as sampleId, g.GENE_INFO as geneInfo from dna_sample_info s, dna_str_gene_info g
+			where s.id = g.SAMPLE_ID
+			<if test="serverNo != null and serverNo.size > 0">
+				and s.LAB_SERVER_NO in
+				<foreach collection="serverNo" item="id" open="(" close=")"
+					separator=",">
+					#{id}
+				</foreach>
+			</if>
+			<if test="dataType != null and dataType.size > 0">
+				and s.INSTORE_DATA_TYPE in
+				<foreach collection="dataType" item="id" open="(" close=")"
+					separator=",">
+					#{id}
+				</foreach>
+			</if> -->
+	</select>
+
+	<select id="selectBySampleId" resultMap="BaseResultMapVo" parameterType="java.lang.Integer" >
+		SELECT si.*, di.DICT_NAME as SAMPLE_TYPE_NAME,
+		sgi.GENE_INFO,sgi.GENE_IMAGE,dpi.PANEL_NAME,sgi.LOCUS_COUNT
+		FROM dna_str_gene_info sgi
+		left join dna_sample_info si on si.ID = sgi.SAMPLE_ID
+		left join dna_panel_info dpi on dpi.ID = sgi.DNA_PANEL_ID
+		left join DICT_ITEM di on di.DICT_CODE = si.SAMPLE_TYPE and di.DICT_TYPE_CODE='SAMPLE_TYPE'
+		where sgi.DELETE_FLAG = '0' and si.DELETE_FLAG = '0'
+		and si.ID = #{sampleId}
+	</select>
+
+	<select id="selectSampleByDataSource" resultMap="BaseResultMapVo" parameterType="java.lang.Integer" >
+		SELECT si.*, di.DICT_NAME as SAMPLE_TYPE_NAME,
+		sgi.GENE_INFO,sgi.GENE_IMAGE,dpi.PANEL_NAME,sgi.LOCUS_COUNT
+		FROM dna_str_gene_info sgi
+		left join dna_sample_info si on si.ID = sgi.SAMPLE_ID
+		left join dna_panel_info dpi on dpi.ID = sgi.DNA_PANEL_ID
+		left join DICT_ITEM di on di.DICT_CODE = si.SAMPLE_TYPE and di.DICT_TYPE_CODE='SAMPLE_TYPE'
+		where sgi.DELETE_FLAG = '0' and si.DELETE_FLAG = '0'
+		and si.ID = #{sampleId}  and sgi.DATA_SOURCE = #{dataSource}
+	</select>
+
+
+	<select id="findQuickCompareList" parameterType="map" resultType="java.util.Map">
+		select g.id from dna_str_gene_info g where 1=1
+			<foreach collection="params.keys" item="key">
+				and g.${key} = #{params[${key}]}
+			</foreach>	
+	</select>
+	
+	<select id="insertVirtualColumn" parameterType="java.lang.String">
+		ALTER TABLE dnadata.dna_str_gene_info ADD COLUMN `v_${key}` VARCHAR(50) GENERATED ALWAYS AS (`gene_info` ->> '$.${key}')
+	</select>
+	
+	<select id="checkVirtualColumn" parameterType="java.lang.String" resultType="int">
+		SELECT count(column_name) FROM information_schema.columns 
+			WHERE table_schema='dnadata' and table_name='dna_str_gene_info' AND column_name='${columnName}'
+	</select>
+	
+	<select id="insertVirtualIndex" parameterType="java.lang.String">
+		CREATE INDEX `idx_g_${key}` ON `dna_str_gene_info`(`v_${key}`)
+	</select>
+	
+	<select id="checkVirtualIndex" parameterType="java.lang.String" resultType="int">
+		SELECT count(column_name) FROM information_schema.statistics
+			WHERE table_name='dna_str_gene_info' AND index_name='${indexName}'
+	</select>
+	
+	<select id="findVirtualIndexList" resultType="java.lang.String">
+		SELECT INDEX_NAME FROM information_schema.statistics 
+			WHERE table_schema='dnadata' and table_name='dna_str_gene_info' and column_name like 'v_%'
+	</select>
+	<select id="deleteVirtualIndex" parameterType="java.lang.String">
+		DROP INDEX `${key}` ON dna_str_gene_info
+	</select>
+
+	<select id="selectBySampleLabNo" resultMap="BaseResultMapVo" parameterType="java.lang.String" >
+		SELECT
+		 DISTINCT si.id,
+		 sgi.GENE_INFO, sgi.DNA_PANEL_ID as PANEL_ID,si.SAMPLE_NAME,si.SAMPLE_LAB_NO,dpi.PANEL_NAME
+		FROM dna_str_gene_info sgi
+		join dna_sample_info si on si.ID = sgi.SAMPLE_ID
+		left join dna_panel_info dpi on dpi.ID = sgi.DNA_PANEL_ID
+		where sgi.DELETE_FLAG = '0' and si.DELETE_FLAG = '0'
+		and si.SAMPLE_LAB_NO = #{sampleLabNo, jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectListByLabServerNo" resultMap="BaseResultMap" parameterType="com.bazl.dna.database.service.model.po.DnaStrGeneInfo">
+        select
+         <include refid="Base_column_List"/>
+		from dna_str_gene_info g
+	    where g.LAB_SERVER_NO = #{labServerNo,jdbcType=VARCHAR}
+	</select>
+
+	<select id ="selectAllGeneCount" resultType="int" parameterType="com.bazl.dna.database.service.model.po.DnaStrGeneInfo">
+		select count(distinct sgi.id) from  dna_str_gene_info sgi
+		where sgi.delete_flag = '0'
+	</select>
+	
+	<select id="findList" parameterType="map" resultType="java.util.Map">
+		SELECT id, SAMPLE_ID as sampleId, GENE_INFO as geneInfo, LAB_SERVER_NO as labServerNo FROM `dna_str_gene_info` WHERE id >= (SELECT id FROM
+			`dna_str_gene_info` ORDER BY id LIMIT #{offset} , 1) LIMIT #{rows}
+	</select>
+
+</mapper>

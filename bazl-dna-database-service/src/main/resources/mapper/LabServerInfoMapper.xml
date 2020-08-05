@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.LabServerInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.LabServerInfo">
+        <id column="ID" property="id" />
+        <result column="LAB_SERVER_NO" property="labServerNo" />
+        <result column="ORG_ID" property="orgId" />
+        <result column="LAB_SERVER_NAME" property="labServerName" />
+        <result column="LAB_SERVER_IPADDR" property="labServerIpaddr" />
+        <result column="LAB_SERVER_PORT" property="labServerPort" />
+    </resultMap>
+
+    <sql id="Base_column_list">
+        ID, LAB_SERVER_NO, ORG_ID, LAB_SERVER_NAME, LAB_SERVER_IPADDR, LAB_SERVER_PORT
+    </sql>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from lab_server_info
+    </select>
+
+
+    <select id="selectByOrgCode" parameterType="com.bazl.dna.database.service.model.po.LabServerInfo" resultMap="BaseResultMap">
+           select
+            <include refid="Base_column_list"/>
+           from lab_server_info where org_Id = #{orgId}
+    </select>
+</mapper>

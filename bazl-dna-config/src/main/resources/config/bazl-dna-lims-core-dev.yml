@@ -1,0 +1,187 @@
+
+#SpringBoot配置
+spring:
+  #数据源配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@192.168.1.198:1521:orcl
+    username: dnalims_bj
+    password: dnalims_bj
+    # 初始化大小，最小，最大
+    initialSize: 30
+    minIdle: 30
+    maxActive: 500
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+
+# FastDFS
+# ===================================================================
+# 分布式文件系统FDFS配置
+# ===================================================================
+fdfs:
+  connect-timeout: 605
+  so-timeout: 1505
+  trackerList: 47.92.219.7:22122
+  thumbImage:
+    height: 150
+    width: 150
+  webServerUrl: http://47.92.219.7/
+  storage:
+    node:
+      flag: true
+      server:
+        ip: 47.92.219.7
+        port: 23000
+  #连接池
+  pool:
+    #连接池最大数量
+    max-total: 200
+    #每个tracker地址的最大连接数
+    max-total-per-key: 50
+    #连接耗尽时等待获取连接的最大毫秒数
+    max-wait-millis: 5000
+    
+#默认实验室对应的orgId
+defaultDnaLabOrgId: 110230000000
+defaultDnaLabName: 北京市公安司法鉴定中心
+
+#受控号，各实验室差异化配置
+#确认书
+querenshu_control_no: SYGJ-2019-CX11-E
+#补送确认书
+busong_querenshu_control_no: SYGJ-2019-CX11-F
+#预实验记录表
+yushiyan_control_no: SYGJ-2019-CX32-J
+#常规提取记录
+routine_extraction_records_no: SYGJ-2019-CX32-K
+#精斑提取记录
+seminal_extraction_no: SYGJ-2019-CX32-L
+#扩增记录
+amplified_records_no: SYGJ-2019-CX32-M
+#电泳记录
+electrophoretic_recording_no: SYGJ-2019-CX32-N
+#入库单
+warehouse_receipt_no: SYGJ-2019-CX32-P
+#实验室记录封皮
+laboratory_record_cover: SYGJ-2019-CX32-I
+#自动提取页面，生成电泳分离记录
+electrophoretic_automatic_no: SYGJ-2019-CX32-Q
+
+
+#以下为文件上传配置路径
+personImg: D:/ftpimg/person_img/
+sampleImg: D:/ftpimg/sample_img/
+proxyImg: D:/ftpimg/proxy_img/
+appointImg: D:/ftpimg/appoint_img/
+
+#以下为上传ftp所需配置
+ftpIp: 192.168.0.112
+ftpPort: 21
+ftpPersonImg: person_img
+ftpSampleImg: sample_img
+ftpProxyImg: proxy_img
+ftpAppointImg: appoint_img
+ftpUser: test
+ftpPassword: test
+ftpTomcat: 8087
+ftpFilePath: file
+ftpCaseFilePath: doc
+
+bendiFilePath: D:\\download2\\
+
+samplePhotosRootDir: D:\\samplePhotos\\
+
+page: 1
+
+#shiro session失效时间  60000是一分钟  1800000是半小时
+shTime: 3600000
+
+#同一入库比对的匹配下限设置
+minSameCount: 13
+#亲缘入库比对的匹配下限设置
+RelativeMinSameCount: 13
+RelativeHalfDiffCount: 2
+PopulationId: 25
+
+#本案比对的匹配下限设置
+minSameCaseCount: 13
+minSameRelationCount: 13
+minSameMixCount: 13
+halfDiffCount: 1
+
+permission.menu.menuParentPId: '*'
+permission.menu.menuParentName: 菜单
+permission.menu.menuParentEdit: false
+
+#是否入本地库
+#顺义系统必须设置为true，否则会导致数据无法入库到北京全市本地库（edit by lizhihua)
+isInStorge: true
+labServerNo: 110113
+
+#本地库比对定时
+localComparTaskActived: false
+
+#法医中心版本=1, 顺义法医中心(0)
+#limsEdition : 0
+
+#默认显示为检验人柴嘉\复核人为赵强\授权签字人审核为李学合
+inspector1 : 柴嘉
+inspector1Post : 法医师
+inspector2 : 赵强
+inspector2Post : 副主任法医师
+inspector3 : 李学合
+inspector3Post : 副主任法医师
+
+
+#STR入库基因位点个数
+strInstoreGeneCountLimit: 8
+#Y-STR入库基因位点个数
+ystrInstoreGeneCountLimit: 13
+
+#本案比对默认参数设定
+sameCompareMatchLimit: 13
+sameCompareDiffLimit: 1
+relativeCompareMatchLimit: 13
+relativeCompareDiffLimit: 1
+mixContributorsCountLimit: 2
+mixCompareMatchLimit: 13
+mixCompareDiffLimit: 1
+
+#是否开启通知app 1=开启 0=关闭
+Is_App_Inform : 0
+Is_App_Url : 'http://20.1.11.52:5988/http/GA000Comm'
+
+#委托系统URL
+commissionSystemUrL: http://192.168.1.151:8081/dna-delegate
+#绩效考核URL
+commissionAssesUrL: http://127.0.0.1:8088/
+#DNA系统
+dna_url: http://127.0.0.1:8704
+#打印插件访问url
+#printUrl: http://192.168.43.37:927/PrintDoc?jquest=2342
+
+#检验过程URL
+inspectCourseUrl: 'http://192.168.1.138:70'
+#DNA数据统计系统URL
+limsDataStatsUrl: 'http://192.168.1.103:8088/dna-stats/loginFromLims'
+#试剂耗材系统URL
+dnaReagentUrl: 'http://192.168.1.165:8080/dna-reagent/submitLogin'
+#获取签发平台token的url
+#getTokenUrl: http://192.168.1.156:9090/fwgl/PostController/getToken.html
+#uploadIdentifyBookUrl: http://192.168.1.156:9090/fwgl/PostController/alimsUpload.html
+#jumpPageUrl: http://192.168.1.156:9090/fwgl/login.html
+getTokenUrl: http://192.168.1.165:8082/dna-issue/PostController/getToken.html
+uploadIdentifyBookUrl: http://192.168.1.165:8082/dna-issue/PostController/alimsUpload.html
+jumpPageUrl: http://192.168.1.165:8082/dna-issue/login.html
+
+
+

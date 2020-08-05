@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.transfer.mapper.SampleInfoMapper">
+
+  <select id="selectSampleTypeByCaseId"
+          parameterType="java.lang.String" resultType="java.lang.String">
+    <![CDATA[
+         	select t.INSTORE_DATA_TYPE
+         	from dna_sample_info t
+         	where t.CASE_ID=#{_parameter, jdbcType=VARCHAR}
+         ]]>
+  </select>
+
+
+  <select id="selectPhysicalEvidenceByQueueId" parameterType="java.lang.String"
+            resultType="com.bazl.dna.database.transfer.model.po.PhysicalEvidenceModel">
+    <![CDATA[
+         	select
+             s.sample_type  as physicalEvidenceType,
+             s.SAMPLE_LAB_NO     as physicalEvidenceNo,
+             s.sample_name  as physicalEvidenceName,
+             s.sample_desc as description,
+             s.TRANSFER_FLAG  as transferFlag,
+             s.DELETE_FLAG  as deleteFlag,
+             null    as remark,
+             s.ID  as id,
+             null  as externalSysType,
+             s.SAMPLE_EVIDENCE_NO  as externalSysNo
+           from transfer_case_sample q
+              left join dna_sample_info s on q.DNA_SAMPLE_ID = s.ID
+           where q.TRANSFER_CASE_QUEUE_ID = #{_parameter, jdbcType=VARCHAR}
+                and s.DELETE_FLAG = '0' and s.EVIDENCE_FLAG = '1'
+         ]]>
+  </select>
+
+  <select id="selectSampleInfoByQueueId"
+          parameterType="java.lang.String" resultType="com.bazl.dna.database.transfer.model.po.SampleInfoModel">
+    <![CDATA[
+         	select
+             t.case_id as caseId,
+             t.REF_PERSON_ID as personnelNo,
+             lpi.PERSON_TYPE   as personnelType,
+             lpi.PERSON_TYPE   as relationWithCase,
+             lpi.PERSON_NAME    as personnelName,
+             lpi.PERSON_ALIAS      as alias,
+             lpi.PERSON_GENDER    as gender,
+             lpi.PERSON_AGE      as age,
+             null    as birthDate,
+             lpi.PERSON_RACE      as race,
+             lpi.NATIONALITY   as nationality,
+             lpi.PERSON_IDCARD_NO     as idCardNo,
+             lpi.PERSON_ADDR    as nativePlaceAddr,
+             null  as residenceAddr,
+             null   as fingerprintNo,
+             lpi.PERSON_HEIGHT    as stature,
+             lpi.PERSON_WEIGHT    as bodilyForm,
+             null  as extrinsicSign,
+             null  as externalSysType,
+             t.SAMPLE_EVIDENCE_NO   as externalSysNo,
+             '无'  as involvedCaseNo,
+             t.ID      as id,
+             lpr.RELATION_TYPE_CODE   as relativeType,
+             lpr.RELATION_TYPE_CODE   as relationWithTarget,
+             t.SAMPLE_EVIDENCE_NO     as evidenceNo,
+             t.SAMPLE_LAB_NO    as evidenceCode,
+             t.SAMPLE_NAME   as evidenceName,
+             t.SAMPLE_CARRIER  as carrierCode,
+             null  as carrierName,
+             t.EVIDENCE_FLAG      as sampleFlag,
+             t.sample_type   as sampleType,
+             t.SAMPLE_PACKAGE   as samplePackaging,
+             t.SAMPLE_LAB_NO    as sampleLabNo,
+             null  as collectPos,
+             null  as collectDate,
+             null    as collectBy,
+             t.sample_desc   as sampleDescription,
+             t.STORE_PERSON_NAME    as examineUser1,
+             t.TRANSFER_FLAG    as storeFlag,
+             t.DELETE_FLAG    as deleteFlag,
+             null      as remark,
+             t.INSTORE_DATA_TYPE      as instoreSampleType,
+             lsg.TRANSFER_DATETIME as updateDatetime
+        from transfer_case_sample q
+              left join dna_sample_info t on q.DNA_SAMPLE_ID = t.ID
+              left join case_person_info lpi on t.REF_PERSON_ID = lpi.ID
+              left join person_relative_info lpr on lpr.RELATION_PERSON_UUID = lpi.ID
+              left join dna_str_gene_info lsg on t.id = lsg.SAMPLE_ID
+        where q.TRANSFER_CASE_QUEUE_ID = #{_parameter, jdbcType=VARCHAR} and t.DELETE_FLAG='0'
+         ]]>
+  </select>
+
+  <select id="selectSampleInfoByBarcode" parameterType="java.lang.String" resultType="com.bazl.dna.database.transfer.model.po.SampleInfoModel">
+         <![CDATA[
+           select
+                ci.ID as caseId,
+                ci.CASE_TYPE as caseType,
+         		t.REF_PERSON_ID as personnelNo,
+         		lpi.PERSON_TYPE   as personnelType,
+         		lpi.PERSON_TYPE  as relationWithCase,
+                lpi.PERSON_NAME    as personnelName,
+                lpi.PERSON_ALIAS      as alias,
+                lpi.PERSON_GENDER    as gender,
+                lpi.PERSON_AGE      as age,
+                null    as birthDate,
+                lpi.PERSON_RACE      as race,
+                lpi.NATIONALITY   as nationality,
+                lpi.PERSON_IDCARD_NO     as idCardNo,
+                lpi.PERSON_ADDR    as nativePlaceAddr,
+                null  as residenceAddr,
+                null   as fingerprintNo,
+                lpi.PERSON_HEIGHT    as stature,
+                lpi.PERSON_WEIGHT    as bodilyForm,
+                null  as extrinsicSign,
+                null  as externalSysType,
+                t.SAMPLE_EVIDENCE_NO   as externalSysNo,
+                '无'  as involvedCaseNo,
+         		t.ID		as id,
+         		lpr.RELATION_TYPE_CODE   as relativeType,
+         		lpr.RELATION_TYPE_CODE   as relationWithTarget,
+         		t.SAMPLE_EVIDENCE_NO     as evidenceNo,
+         		t.SAMPLE_LAB_NO		as evidenceCode,
+         		t.SAMPLE_NAME   as evidenceName,
+         		t.SAMPLE_CARRIER  as carrierCode,
+         		null  as carrierName,
+         		t.EVIDENCE_FLAG			as sampleFlag,
+         		t.sample_type   as sampleType,
+         		t.SAMPLE_PACKAGE   as samplePackaging,
+         		t.SAMPLE_LAB_NO		as sampleLabNo,
+                null  as collectPos,
+                null  as collectDate,
+                null    as collectBy,
+         		t.sample_desc   as sampleDescription,
+         		t.STORE_PERSON_NAME		as examineUser1,
+                t.TRANSFER_FLAG    as storeFlag,
+                t.DELETE_FLAG    as deleteFlag,
+                null      as remark,
+                t.INSTORE_DATA_TYPE      as instoreSampleType,
+                lsg.TRANSFER_DATETIME as updateDatetime
+  			from dna_sample_info t
+  			left join case_info ci on t.case_id = ci.ID
+            left join case_person_info lpi on t.REF_PERSON_ID = lpi.ID
+            left join person_relative_info lpr on lpr.RELATION_PERSON_UUID = lpi.ID
+            left join dna_str_gene_info lsg on t.id = lsg.SAMPLE_ID
+            where t.SAMPLE_LAB_NO =#{_parameter, jdbcType=VARCHAR} and t.DELETE_FLAG='0'
+	 		]]>
+  </select>
+
+  <select id="selectCriminalSampleInfoByPersonId" parameterType="java.lang.String" resultType="com.bazl.dna.database.transfer.model.po.SampleInfoModel">
+    <![CDATA[
+           select
+         		t.REF_PERSON_ID as personnelNo,
+         		lpi.CRIMINAL_PERSON_TYPE   as personnelType,
+         		lpi.CRIMINAL_PERSON_TYPE  as relationWithCase,
+                lpi.PERSON_NAME    as personnelName,
+                null      as alias,
+                lpi.PERSON_GENDER    as gender,
+                null      as age,
+                null    as birthDate,
+                lpi.PERSON_RACE      as race,
+                lpi.PERSON_NATION   as nationality,
+                lpi.PERSON_IDCARD_NO     as idCardNo,
+                null    as nativePlaceAddr,
+                null  as residenceAddr,
+                null   as fingerprintNo,
+                lpi.PERSON_HEIGHT    as stature,
+                lpi.PERSON_WEIGHT    as bodilyForm,
+                null  as extrinsicSign,
+                null  as externalSysType,
+                null   as externalSysNo,
+                '无'  as involvedCaseNo,
+         		t.ID		as id,
+         		null     as evidenceNo,
+         		t.SAMPLE_LAB_NO		as evidenceCode,
+         		t.SAMPLE_NAME   as evidenceName,
+         		t.SAMPLE_CARRIER  as carrierCode,
+         		null  as carrierName,
+         		null			as sampleFlag,
+         		t.sample_type   as sampleType,
+         		t.SAMPLE_PACKAGE   as samplePackaging,
+         		t.SAMPLE_LAB_NO		as sampleLabNo,
+                null  as collectPos,
+                null  as collectDate,
+                null    as collectBy,
+         		t.sample_desc   as sampleDescription,
+         		t.STORE_PERSON_NAME		as examineUser1,
+                t.TRANSFER_FLAG    as storeFlag,
+                t.DELETE_FLAG    as deleteFlag,
+                null      as remark,
+                t.INSTORE_DATA_TYPE      as instoreSampleType,
+                t.UPDATE_PERSON_NAME      as updateUser,
+                lsg.TRANSFER_DATETIME as updateDatetime
+  			from criminal_sample_info t
+            left join criminal_person_info lpi on t.REF_PERSON_ID = lpi.ID
+            left join dna_str_gene_info lsg on t.id = lsg.SAMPLE_ID
+            where t.REF_PERSON_ID =#{_parameter, jdbcType=VARCHAR} and t.DELETE_FLAG='0'
+	 		]]>
+  </select>
+
+  <select id="selectNewSampleInfoByBarcode" parameterType="java.lang.String" resultType="com.bazl.dna.database.transfer.model.po.SampleInfoModel">
+    <![CDATA[
+         select
+                ci.case_id as caseId,
+                ci.CASE_TYPE as caseType,
+         		t.LINK_ID as personnelNo,
+         		m.person_type   as personnelType,
+         		m.person_type   as relationWithCase,
+                m.PERSON_NAME    as personnelName,
+                m.PERSON_ALIAS      as alias,
+                m.PERSON_GENDER    as gender,
+                m.PEROSN_AGE      as age,
+                m.PERSON_BORN_DATE    as birthDate,
+                m.PERSON_RACE      as race,
+                m.PERSON_NATIONALITY   as nationality,
+                m.PERSON_ID_CARD     as idCardNo,
+                m.PERSON_RESIDENCE_ADDRESS    as nativePlaceAddr,
+                m.PERSON_CURRENT_ADDRESS  as residenceAddr,
+                m.FINGERPRINT_NO   as fingerprintNo,
+                m.PERSON_HEIGHT    as stature,
+                m.PERSON_WEIGHT    as bodilyForm,
+                m.PERSON_BODY_FEATURE  as extrinsicSign,
+                null  as externalSysType,
+                t.EVIDENCE_NO   as externalSysNo,
+         		t.sample_id		as id,
+         		lpr.RELATION_TYPE   as relativeType,
+         		lpr.RELATION_TYPE   as relationWithTarget,
+         		t.EVIDENCE_NO     as evidenceNo,
+         		t.SAMPLE_NO		as evidenceCode,
+         		t.sample_name   as evidenceName,
+         		t.SAMPLE_CARRIER  as carrierCode,
+         		di_1.DICT_NAME  as carrierName,
+         		t.SAMPLE_FLAG			as sampleFlag,
+         		t.sample_type   as sampleType,
+         		di_2.DICT_NAME   as samplePackaging,
+         		t.SAMPLE_NO		as sampleLabNo,
+                t.EXTRACT_PART  as collectPos,
+                t.EXTRACT_DATETIME  as collectDate,
+                t.EXTRACT_PERSON    as collectBy,
+         		t.sample_desc   as sampleDescription,
+         		t.CREATE_PERSON		as examineUser1,
+                t.INSTORED_FLAG    as storeFlag,
+                t.DELETE_FLAG    as deleteFlag,
+                t.SAMPLE_REMARK      as remark,
+                t.INSTORED_TYPE      as instoreSampleType,
+                lsg.AUDIT_DATETIME as updateDatetime
+  			from LIMS_SAMPLE_INFO_DNA t
+  			left join LIMS_CASE_INFO ci on t.case_id = ci.CASE_ID
+            left join dict_item di_1 on di_1.DICT_CODE = t.SAMPLE_CARRIER and di_1.DICT_TYPE_CODE = 'SAMPLE_CARRIER'
+            left join dict_item di_2 on di_2.DICT_CODE = t.SAMPLE_PACKING and di_2.DICT_TYPE_CODE = 'PACK_METHOD'
+            left join LIMS_PERSON_INFO lpi on t.LINK_ID = lpi.PERSON_ID
+            left join PERSON_DETAIL m on m.PERSON_DETAIL_ID = lpi.PERSON_DETAIL_ID
+            left join LIMS_PEROSN_RELATION lpr on lpr.SOURCE_PERSON_ID = lpi.PERSON_ID
+            left join LIMS_SAMPLE_GENE lsg on t.SAMPLE_ID = lsg.SAMPLE_ID and lsg.AUDIT_STATUS='1'
+            where t.SAMPLE_NO =#{_parameter, jdbcType=VARCHAR} and t.DELETE_FLAG='0'
+    ]]>
+  </select>
+
+  <select id="selectInstoreSampleInfoBySampleBarcode" parameterType="java.lang.String"
+          resultType="com.bazl.dna.database.transfer.model.po.InstoreSampleInfo">
+      select
+        t.labno,
+        t.sampleno as sampleNo,
+        t.sampleid,
+        t.sampleid as sampleLabNumber,
+        t.caseid,
+        t.personid,
+        t.sampletype,
+        t.samplename,
+        t.submitorg,
+        t.submitoperator,
+        t.submittime,
+        t.analysissoftware,
+        t.panelid,
+        t.panelname,
+        t.additionalinfo,
+        t.comments,
+        t.state,
+        t.reserve1,
+        t.reserve2,
+        t.reserve3,
+        t.reserve4,
+        t.reserve5,
+        t.reserve6
+      from sampleinfo t
+      where upper(t.sampleid)=#{_parameter, jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectSingleRelation" parameterType="java.lang.String" resultType="java.lang.String">
+    SELECT MATCHTYPEID FROM REL_SINGLE_LIB WHERE sampleid=#{_parameter, jdbcType=VARCHAR}
+  </select>
+
+  <select id="getSampleinfo" parameterType="java.lang.String" resultType="com.bazl.dna.database.transfer.model.po.HttpSampleInfoModel">
+    select lci.ACCEPT_PERSON_ID AS acceptorid, lc.CASE_ACCEPT_NO AS sampleNo
+    from consignment_info lci, case_info lc
+    where lc.id=lci.case_id and  lci.case_id= #{caseId, jdbcType=VARCHAR}
+    and lci.APPEND_FLAG='0'
+  </select>
+
+  <select id="selectRelativeSampleBySampleBarcode" parameterType="java.lang.String"
+          resultType="com.bazl.dna.database.transfer.model.po.RelativeSampleInfo">
+      <![CDATA[
+     select
+        t.id,
+        dai.SAMPLE_LAB_NO as sampleNo,
+        t.RELATION_PERSON_UUID as relationPersonId,
+        t.TARGET_PERSON_UUID as targetPersonId,
+        t.RELATION_TYPE_CODE as relationTypeCode
+      from person_relative_info t
+      left join dna_sample_info dai on dai.id = t.RELATION_PERSON_UUID
+      where dai.SAMPLE_LAB_NO=#{_parameter, jdbcType=VARCHAR}
+	 ]]>
+  </select>
+
+  <select id="selectRelativeSampleByTargetPersonId" parameterType="java.lang.String"
+          resultType="com.bazl.dna.database.transfer.model.po.RelativeSampleInfo">
+      <![CDATA[
+     select
+        t.id,
+        dai.SAMPLE_LAB_NO as sampleNo,
+        t.RELATION_PERSON_UUID as relationPersonId,
+        t.TARGET_PERSON_UUID as targetPersonId,
+        t.RELATION_TYPE_CODE as relationTypeCode
+      from person_relative_info t
+      left join dna_sample_info dai on dai.id = t.RELATION_PERSON_UUID
+      where t.TARGET_PERSON_UUID=#{_parameter, jdbcType=VARCHAR}
+	 ]]>
+  </select>
+
+  <select id="selectStrDnaLibViewBySampleBarcode" parameterType="java.lang.String"
+          resultType="com.bazl.dna.database.transfer.model.po.StrDnaLibView">
+    select
+      t.id,
+      dsi.SAMPLE_LAB_NO as sampleNo,
+      dsi.INSTORE_DATA_TYPE as sampleTypeId,
+      t.DNA_PANEL_NAME as panelName
+    from dna_str_gene_info t
+    left join dna_sample_info dsi on dsi.ID = t.SAMPLE_ID and dsi.DELETE_FLAG='0'
+    where dsi.SAMPLE_LAB_NO=#{_parameterType, jdbcType=VARCHAR}
+  </select>
+
+  <select id="getSampleGeneListByQueueId"
+          parameterType="java.lang.String" resultType="com.bazl.dna.database.transfer.model.po.SampleGeneInfoModel">
+    <![CDATA[
+       select
+             dsg.ID as id,
+             t.ID      as sampleId,
+             dsg.LOCUS_COUNT   as alleleCount,
+             dsg.GENE_TYPE   as geneType,
+             dsg.DNA_PANEL_NAME   as reagentKit,
+             dsg.GENE_INFO   as geneInfo,
+             dsg.STORE_DATETIME as updateDatetime
+        from transfer_case_sample tcs
+              left join dna_sample_info t on tcs.DNA_SAMPLE_ID = t.ID and t.DELETE_FLAG='0'
+              left join dna_str_gene_info dsg on dsg.SAMPLE_ID = t.ID and dsg.DELETE_FLAG='0'
+        where tcs.TRANSFER_CASE_QUEUE_ID = #{_parameter, jdbcType=VARCHAR}
+     ]]>
+  </select>
+
+  <select id="getCriminalSampleGeneListByQueueId"
+          parameterType="java.lang.String" resultType="com.bazl.dna.database.transfer.model.po.SampleGeneInfoModel">
+    <![CDATA[
+       select
+             dsg.ID as id,
+             t.ID      as sampleId,
+             dsg.LOCUS_COUNT   as alleleCount,
+             dsg.GENE_TYPE   as geneType,
+             dsg.DNA_PANEL_NAME   as reagentKit,
+             dsg.GENE_INFO   as geneInfo,
+             dsg.STORE_DATETIME as updateDatetime
+        from transfer_criminal_queue tcq
+              left join criminal_sample_info t on tcq.PERSON_ID = t.REF_PERSON_ID and t.DELETE_FLAG='0'
+              left join dna_str_gene_info dsg on dsg.SAMPLE_ID = t.ID and dsg.DELETE_FLAG='0'
+        where tcq.ID = #{_parameter, jdbcType=VARCHAR}
+     ]]>
+  </select>
+
+  <select id="selectStrMarkernames" resultType="com.bazl.dna.database.transfer.model.po.LimsMarkernames">
+     select
+     t.LOCUS_ORD as locusName,
+     t.LOCUS_NAME as fieldName
+    from dna_locus_info t
+    where t.LOCUS_TYPE=#{_parameterType, jdbcType=VARCHAR}
+    order by t.LOCUS_ORD
+  </select>
+
+    <select id="selectYstrDnaLibViewBySampleBarcode" parameterType="java.lang.String"
+            resultType="com.bazl.dna.database.transfer.model.po.YstrDnaLibView">
+      select
+        t.ID,
+        t.SAMPLEID as sampleId,
+         t.SAMPLETYPEID as sampleTypeId,
+         t.PANELNAME as panelName,
+        t.MARKERALLEL as geneInfo,
+        t.REAL_PANEL_NAME as realPanelName
+       from YSTR_DNA_LIB_VIEW t
+        where t.SAMPLEID=#{_parameter, jdbcType=VARCHAR}
+    </select>
+
+  <select id="selectYstrDnaLibViewList" parameterType="java.lang.Integer"
+          resultType="com.bazl.dna.database.transfer.model.po.YstrDnaLibView">
+    select * from (
+    select rownum as rn, t.* from (
+    select y.* from YSTR_DNA_LIB_VIEW y
+    order by y.SAMPLEID asc
+    ) t
+    where rownum &lt;=#{rows, jdbcType=INTEGER})
+    where rn &gt;#{offset, jdbcType=INTEGER}
+  </select>
+
+  <select id="selectInstoreSampleList" parameterType="java.lang.Integer"
+          resultType="com.bazl.dna.database.transfer.model.po.SampleInfoModel">
+    select * from (
+    select rownum as rn, t.* from (
+    select
+      ci.case_id as caseId,
+      si.ref_member_id as personnelNo,
+      si.xk_address   as externalSysType,
+      si.xk_number   as externalPersonnelNo,
+      si.sample_id      as id,
+      si.samplerelation   as relativeType,
+      si.samplerelation   as relationWithTarget,
+      si.xk_number     as evidenceNo,
+      si.barcode    as evidenceCode,
+      si.sample_name   as evidenceName,
+      si.carrier_code  as carrierCode,
+      si.carrier_name  as carrierName,
+      si.flag      as sampleFlag,
+      si.sample_type   as sampleType,
+      si.pack_method   as samplePackaging,
+      si.barcode    as sampleLabNo,
+      si.extract_position  as collectPos,
+      si.extract_date  as collectDate,
+      si.extractor    as collectBy,
+      si.sample_desc   as sampleDescription,
+      si.tester    as examineUser1,
+      si.is_store    as storeFlag,
+      si.is_deleted    as deleteFlag,
+      si.xk_address  as externalSubType,
+      si.comments      as remark
+    from sample_info si
+    left join case_info ci on ci.case_id = si.case_id
+    where si.is_store='1' and ci.case_handle_type in ('1','2')
+    ) t
+    where rownum &lt;=#{rows, jdbcType=INTEGER})
+    where rn &gt;#{offset, jdbcType=INTEGER}
+  </select>
+
+    <select id="selectRelationByBarcode" parameterType="java.lang.String"
+            resultType="com.bazl.dna.database.transfer.model.po.RelativeDefModel">
+        <![CDATA[
+         	select
+	         	t.sample_id			as id,
+	         	t.samplerelation	as relation,
+         		m.member_id 		as relative1Id
+         	from sample_info t left join member_info m on t.ref_member_id = m.member_id
+         	where  t.barcode = #barcode#
+         ]]>
+    </select>
+
+    <select id="getMemberList" parameterType="java.lang.String"
+            resultType="com.bazl.dna.database.transfer.model.po.PersonInfoModel">
+        <![CDATA[
+         	select
+	         	m.member_id as id,
+			    m.fullname  as personName,
+			    m.gender    as gender
+         	from member_info m
+         	where  1=1
+            and case_id = #{caseId, jdbcType=VARCHAR}
+            and person_type =  #{personType, jdbcType=VARCHAR}
+            ]]>
+    </select>
+
+    <update id="updateSampleNoAndStateByBarcode" parameterType="com.bazl.dna.database.transfer.model.po.InstoreSampleInfo">
+       update
+          dna_sample_info t
+        set
+        t.NATION_SYS_NO= #{sampleNo,jdbcType=VARCHAR}
+        where t.SAMPLE_LAB_NO = #{sampleid,jdbcType=VARCHAR}
+    </update>
+
+  <update id="updateSampleNoAndStateByBarcode2" parameterType="com.bazl.dna.database.transfer.model.po.InstoreSampleInfo">
+       update
+          sampleinfo
+        set
+        SAMPLENO= #{sampleNo,jdbcType=VARCHAR},
+        STATE= #{state,jdbcType=INTEGER}
+        where SAMPLEID = #{sampleid,jdbcType=VARCHAR}
+    </update>
+
+  <update id="updateCriminalSampleNo" parameterType="com.bazl.dna.database.transfer.model.po.InstoreSampleInfo">
+       update
+          criminal_sample_info
+        set
+        t.NATION_SYS_NO= #{sampleNo,jdbcType=VARCHAR}
+        where t.SAMPLE_LAB_NO = #{sampleid,jdbcType=VARCHAR}
+    </update>
+
+  <select id="selectCriminalSampleTypeByPersonId" parameterType="java.lang.String" resultType="java.lang.String">
+   <![CDATA[
+         	select c.INSTORE_DATA_TYPE
+         	from criminal_sample_info c
+         	where c.REF_PERSON_ID=#{_parameter, jdbcType=VARCHAR} and c.DELETE_FLAG='0'
+         ]]>
+  </select>
+</mapper>

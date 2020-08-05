@@ -1,0 +1,29 @@
+
+server: 
+  port: 8707
+  undertow:
+    direct-buffers: true
+    io-threads: 4
+    worker-threads: 150
+    
+spring:
+  application:
+    name: bazl-dna-system
+  jpa: 
+    hibernate:
+      #ddl-auto: create #ddl-auto:设为create表示每次都重新建表
+      ddl-auto: none #ddl-auto:设为update表示每次都不会重新建表
+    show-sql: false
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8 
+    
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.bazl.dna.sys.entity
+  
+        
+logging:
+  config: classpath:logback-spring.xml

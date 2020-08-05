@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.mix.connector.nation.dao.LocusInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.dna.mix.connector.nation.model.po.LocusInfo" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="LOCUS_TYPE" property="locusType" jdbcType="VARCHAR" />
+    <result column="LOCUS_NAME" property="locusName" jdbcType="VARCHAR" />
+    <result column="NATIONAL_LOCUS_NAME" property="nationalLocusName" jdbcType="VARCHAR" />
+    <result column="ALIAS" property="alias" jdbcType="VARCHAR" />
+    <result column="VALUE_SCOPE" property="valueScope" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="ORD" property="ord" jdbcType="DECIMAL" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="DECIMAL" />
+    <result column="DOWNLOAD_FLAG" property="downloadFlag" jdbcType="DECIMAL" />
+    <result column="READONLY_FLAG" property="readonlyFlag" jdbcType="DECIMAL" />
+    <result column="CORE_LOCUS_FLAG" property="coreLocusFlag" jdbcType="DECIMAL" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <resultMap id="BaseResultMap2" type="java.util.Map">
+    <id column="ID" property="id" jdbcType="VARCHAR"/>
+    <result column="LOCUS_NAME" property="locusName" jdbcType="VARCHAR"/>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from LOCUS_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.mix.connector.nation.model.po.LocusInfo" >
+    insert into LOCUS_INFO (ID, LOCUS_TYPE, LOCUS_NAME, 
+      NATIONAL_LOCUS_NAME, ALIAS, VALUE_SCOPE, 
+      REMARK, ORD, DELETE_FLAG, 
+      DOWNLOAD_FLAG, READONLY_FLAG, CORE_LOCUS_FLAG, 
+      CREATE_USER, CREATE_DATETIME, UPDATE_USER, 
+      UPDATE_DATETIME)
+    values (#{id,jdbcType=VARCHAR}, #{locusType,jdbcType=VARCHAR}, #{locusName,jdbcType=VARCHAR}, 
+      #{nationalLocusName,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, #{valueScope,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{ord,jdbcType=DECIMAL}, #{deleteFlag,jdbcType=DECIMAL}, 
+      #{downloadFlag,jdbcType=DECIMAL}, #{readonlyFlag,jdbcType=DECIMAL}, #{coreLocusFlag,jdbcType=DECIMAL}, 
+      #{createUser,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.mix.connector.nation.model.po.LocusInfo" >
+    update LOCUS_INFO
+    set LOCUS_TYPE = #{locusType,jdbcType=VARCHAR},
+      LOCUS_NAME = #{locusName,jdbcType=VARCHAR},
+      NATIONAL_LOCUS_NAME = #{nationalLocusName,jdbcType=VARCHAR},
+      ALIAS = #{alias,jdbcType=VARCHAR},
+      VALUE_SCOPE = #{valueScope,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      ORD = #{ord,jdbcType=DECIMAL},
+      DELETE_FLAG = #{deleteFlag,jdbcType=DECIMAL},
+      DOWNLOAD_FLAG = #{downloadFlag,jdbcType=DECIMAL},
+      READONLY_FLAG = #{readonlyFlag,jdbcType=DECIMAL},
+      CORE_LOCUS_FLAG = #{coreLocusFlag,jdbcType=DECIMAL},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, LOCUS_TYPE, LOCUS_NAME, NATIONAL_LOCUS_NAME, ALIAS, VALUE_SCOPE, REMARK, 
+    ORD, DELETE_FLAG, DOWNLOAD_FLAG, READONLY_FLAG, CORE_LOCUS_FLAG, CREATE_USER, CREATE_DATETIME, 
+    UPDATE_USER, UPDATE_DATETIME
+    from LOCUS_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, LOCUS_TYPE, LOCUS_NAME, NATIONAL_LOCUS_NAME, ALIAS, VALUE_SCOPE, REMARK, 
+    ORD, DELETE_FLAG, DOWNLOAD_FLAG, READONLY_FLAG, CORE_LOCUS_FLAG, CREATE_USER, CREATE_DATETIME, 
+    UPDATE_USER, UPDATE_DATETIME
+    from LOCUS_INFO
+  </select>
+
+  <select id="selectLocusName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, LOCUS_TYPE, LOCUS_NAME
+    from LOCUS_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectLocusInfo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *  from LOCUS_INFO where ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <!--根据登录名查询人员信息-->
+  <select id="selectByLocusName" resultMap="BaseResultMap2">
+       select t.LOCUS_NAME from LOCUS_INFO t WHERE  t.LOCUS_TYPE ='1' order by t.ord ASC
+  </select>
+
+  <select id="selectLocusInfoList" resultMap="BaseResultMap"  parameterType="java.lang.String">
+        select  l.*  from  locus_info l,reagent_locus t, reagent_kit r
+        where t.reagent_kit_id=r.id and l.id=t.locus_id and t.reagent_kit_id=#{reagentKitId,jdbcType=VARCHAR}
+        order by  t.ord ASC
+   </select>
+
+  <select id="selectLocusNameList" resultMap="BaseResultMap2"  parameterType="java.lang.String" >
+      select  l.LOCUS_NAME from  locus_info l,reagent_locus t, reagent_kit r
+      where t.reagent_kit_id=r.id and l.id=t.locus_id and r.name=#{reagentKitName,jdbcType=VARCHAR}
+      order by  t.ord ASC
+  </select>
+
+  <!--基因座名称模糊查询-->
+  <select id="selectByNameVague" resultMap="BaseResultMap2">
+    select t.LOCUS_NAME
+    from LOCUS_INFO t
+    WHERE  t.LOCUS_TYPE ='1' and t.locus_name like '%'||#{locusName,jdbcType=VARCHAR}||'%'
+    order by t.ord ASC
+  </select>
+</mapper>

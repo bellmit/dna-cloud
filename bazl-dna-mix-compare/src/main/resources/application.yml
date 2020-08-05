@@ -1,0 +1,15 @@
+server:
+  port: 8721
+  
+spring:
+  application:
+    name: bazl-dna-mix-compare
+    
+task:
+  maxPoolSize: 30
+  corePoolSize: 20
+  queueCapacity: 100
+  keepAliveSeconds: 120
+  threadNamePrefix: mixTamilyTask-
+
+

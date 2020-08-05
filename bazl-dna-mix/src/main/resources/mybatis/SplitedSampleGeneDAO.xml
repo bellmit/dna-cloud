@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.mix.dao.SplitedSampleGeneDAO">
+
+    <resultMap id="BaseResultMap" type="com.bazl.dna.mix.model.po.SplitedSampleGene">
+        <result column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="MIXED_SAMPLE_GENE_ID" jdbcType="VARCHAR" property="mixedSampleGeneId"/>
+        <result column="GENE_INFO" property="geneInfo" jdbcType="VARCHAR" />
+        <result column="CREATE_PERSON" jdbcType="VARCHAR" property="createPerson"/>
+        <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="createDatetime"/>
+        <result column="UPDATE_PERESON" jdbcType="VARCHAR" property="updatePereson"/>
+        <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="updateDatetime"/>
+        <result column="COMPARE_QUEUE_ID" jdbcType="VARCHAR" property="compareQueueId"/>
+    </resultMap>
+
+    <resultMap id="VOBaseResultMap" type="com.bazl.dna.mix.model.vo.SplitedSampleGeneVo">
+        <result column="ID" jdbcType="VARCHAR" property="entity.id"/>
+        <result column="MIXED_SAMPLE_GENE_ID" jdbcType="VARCHAR" property="entity.mixedSampleGeneId"/>
+        <result column="CREATE_PERSON" jdbcType="VARCHAR" property="entity.createPerson"/>
+        <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="entity.createDatetime"/>
+        <result column="UPDATE_PERESON" jdbcType="VARCHAR" property="entity.updatePereson"/>
+        <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="entity.updateDatetime"/>
+        <result column="GENE_INFO" jdbcType="VARCHAR" property="entity.geneInfo"/>
+
+        <result column="SAMPLE_NO" jdbcType="VARCHAR" property="sampleNo"/>
+        <result column="SAMPLE_NAME" jdbcType="VARCHAR" property="sampleName"/>
+        <result column="GENE_INFO" jdbcType="VARCHAR" property="geneInfo"/>
+    </resultMap>
+    <sql id="Blob_Column_List">
+
+  </sql>
+    <insert id="insert" parameterType="com.bazl.dna.mix.model.po.SplitedSampleGene">
+     insert into splited_sample_gene (ID, MIXED_SAMPLE_GENE_ID, CREATE_PERSON,
+      CREATE_DATETIME, UPDATE_PERESON, UPDATE_DATETIME,
+      GENE_INFO,COMPARE_QUEUE_ID)
+    values (#{id,jdbcType=VARCHAR}, #{mixedSampleGeneId,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR},
+      #{createDatetime,jdbcType=TIMESTAMP}, #{updatePereson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP},
+      #{geneInfo,jdbcType=VARCHAR},#{compareQueueId,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.bazl.dna.mix.model.po.SplitedSampleGene">
+        insert into splited_sample_gene
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="mixedSampleGeneId != null">
+                MIXED_SAMPLE_GENE_ID,
+            </if>
+            <if test="createPerson != null">
+                CREATE_PERSON,
+            </if>
+            <if test="createDatetime != null">
+                CREATE_DATETIME,
+            </if>
+            <if test="updatePereson != null">
+                UPDATE_PERESON,
+            </if>
+            <if test="updateDatetime != null">
+                UPDATE_DATETIME,
+            </if>
+            <if test="geneInfo != null">
+                GENE_INFO,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="mixedSampleGeneId != null">
+                #{mixedSampleGeneId,jdbcType=VARCHAR},
+            </if>
+            <if test="createPerson != null">
+                #{createPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="createDatetime != null">
+                #{createDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatePereson != null">
+                #{updatePereson,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDatetime != null">
+                #{updateDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="geneInfo != null">
+                #{geneInfo,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from splited_sample_gene
+        where ID = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from splited_sample_gene ssg where ssg.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <update id="update" parameterType="com.bazl.dna.mix.model.po.SplitedSampleGene">
+        update splited_sample_gene set
+        <if test="mixedSampleGeneId != null">
+            #{mixedSampleGeneId,jdbcType=VARCHAR},
+        </if>
+        <if test="createPerson != null">
+            #{createPerson,jdbcType=VARCHAR},
+        </if>
+        <if test="createDatetime != null">
+            #{createDatetime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="updatePereson != null">
+            #{updatePereson,jdbcType=VARCHAR},
+        </if>
+        <if test="updateDatetime != null">
+            #{updateDatetime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="geneInfo != null">
+            #{geneInfo,jdbcType=VARCHAR}
+        </if>
+        <if test="compareQueueId != null">
+            #{compareQueueId,jdbcType=VARCHAR}
+        </if>
+        where
+        <if test="id != null">
+            #{id,jdbcType=VARCHAR}
+        </if>
+    </update>
+    <!--查询已拆分样本总数-->
+    <select id="selectSplitedSampleGeneCount" resultType="int">
+        SELECT COUNT(spl.ID)    FROM splited_sample_gene spl
+  </select>
+
+    <!--根据混合id查询拆分基因信息-->
+    <select id="selectSplitedSampleGeneByMixedSampleGeneId" parameterType="java.lang.String" resultMap="BaseResultMap">
+     select ID, MIXED_SAMPLE_GENE_ID, CREATE_PERSON,
+      CREATE_DATETIME, UPDATE_PERESON, UPDATE_DATETIME,
+      GENE_INFO,COMPARE_QUEUE_ID from splited_sample_gene  where MIXED_SAMPLE_GENE_ID = #{mixedSampleGeneId,jdbcType=VARCHAR}
+  </select>
+    <!--根据拆分id查询拆分信息-->
+    <select id="selectSplitedSampleGeneList" parameterType="java.lang.String" resultMap="BaseResultMap">
+     select * from SPLITED_SAMPLE_GENE ssg where ssg.id = #{sampleGeneId,jdbcType=VARCHAR}
+  </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+   SELECT t2.*   FROM (SELECT t1.*, ROWNUM AS rn
+              FROM ( select ID, MIXED_SAMPLE_GENE_ID, CREATE_PERSON,      CREATE_DATETIME, UPDATE_PERESON, UPDATE_DATETIME,
+                  GENE_INFO,COMPARE_QUEUE_ID from splited_sample_gene
+              ) t1
+             WHERE ROWNUM &lt;= ${endRum}) t2
+     WHERE rn &gt;= ${startRum}
+  </select>
+
+    <select id="selectBySplitedId" parameterType="java.lang.String" resultMap="VOBaseResultMap">
+    select si.SAMPLE_NO, si.SAMPLE_NAME, sg.GENE_INFO
+      from splited_sample_gene sg
+      left join MIXED_SAMPLE_GENE msg
+        on sg.MIXED_SAMPLE_GENE_ID = msg.ID
+      left join SAMPLE_INFO si
+        on msg.SAMPLE_ID = si.ID
+     where sg.ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+    <!--通过队列id查询-->
+    <select id="selectByCompareQueueId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select *
+        from splited_sample_gene
+        where COMPARE_QUEUE_ID = #{compareQueueId,jdbcType=VARCHAR}
+    </select>
+
+    <!--selectByMixedId-->
+    <select id="selectByMixedId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select *
+        from splited_sample_gene
+        where MIXED_SAMPLE_GENE_ID = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <!--selectById-->
+    <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select *
+        from splited_sample_gene
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+
+
+</mapper>

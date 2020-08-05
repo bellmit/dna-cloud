@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.mix.connector.nation.dao.SampleDnaGeneMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.dna.mix.connector.nation.model.po.SampleDnaGene" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="INIT_SERVER_NO" property="initServerNo" jdbcType="VARCHAR" />
+    <result column="LAB_ID" property="labId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_ID" property="sampleId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_FLAG" property="sampleFlag" jdbcType="VARCHAR" />
+    <result column="GENE_TYPE" property="geneType" jdbcType="VARCHAR" />
+    <result column="REAGENT_KIT" property="reagentKit" jdbcType="VARCHAR" />
+    <result column="ALLELE_COUNT" property="alleleCount" jdbcType="DECIMAL" />
+    <result column="STORE_FLAG" property="storeFlag" jdbcType="DECIMAL" />
+    <result column="STORE_DATETIME" property="storeDatetime" jdbcType="TIMESTAMP" />
+    <result column="STORE_USER" property="storeUser" jdbcType="VARCHAR" />
+    <result column="REVIEW_STATUS" property="reviewStatus" jdbcType="VARCHAR" />
+    <result column="REVIEW_IDEA" property="reviewIdea" jdbcType="VARCHAR" />
+    <result column="REVIEW_USER" property="reviewUser" jdbcType="VARCHAR" />
+    <result column="REVIEW_DATETIME" property="reviewDatetime" jdbcType="TIMESTAMP" />
+    <result column="TRANSFER_FLAG" property="transferFlag" jdbcType="DECIMAL" />
+    <result column="TRANSFER_USER" property="transferUser" jdbcType="VARCHAR" />
+    <result column="TRANSFER_DATETIME" property="transferDatetime" jdbcType="TIMESTAMP" />
+    <result column="MATCHED_STATUS" property="matchedStatus" jdbcType="VARCHAR" />
+    <result column="MIX_FLAG" property="mixFlag" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="DECIMAL" />
+    <result column="DATA_SOURCE" property="dataSource" jdbcType="VARCHAR" />
+    <result column="DATA_LEVEL" property="dataLevel" jdbcType="DECIMAL" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="EXT_ID" property="extId" jdbcType="VARCHAR" />
+    <result column="LOCAL_CREATE_DATETIME" property="localCreateDatetime" jdbcType="TIMESTAMP" />
+    <result column="REVIEW_USER_ID" property="reviewUserId" jdbcType="VARCHAR" />
+    <result column="GENE_INFO" property="geneInfo" jdbcType="CLOB" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_PERSON" property="updatePereson" jdbcType="VARCHAR" />
+    <result column="REAGENT_NAME" property="reagentName" jdbcType="VARCHAR" />
+    <result column="BOARD_BARCODE" property="boardBarcode" jdbcType="VARCHAR" />
+    <result column="GENE_PICTURE" property="genePicture" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="BaseResultMapVo" type="com.bazl.dna.mix.connector.nation.model.vo.SampleDnaGeneVo" >
+    <result column="ID" property="entity.id" jdbcType="VARCHAR" />
+    <result column="INIT_SERVER_NO" property="entity.initServerNo" jdbcType="VARCHAR" />
+    <result column="LAB_ID" property="entity.labId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_ID" property="entity.sampleId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_FLAG" property="entity.sampleFlag" jdbcType="VARCHAR" />
+    <result column="GENE_TYPE" property="entity.geneType" jdbcType="VARCHAR" />
+    <result column="REAGENT_KIT" property="entity.reagentKit" jdbcType="VARCHAR" />
+    <result column="ALLELE_COUNT" property="entity.alleleCount" jdbcType="DECIMAL" />
+    <result column="STORE_FLAG" property="entity.storeFlag" jdbcType="DECIMAL" />
+    <result column="STORE_DATETIME" property="entity.storeDatetime" jdbcType="TIMESTAMP" />
+    <result column="STORE_USER" property="entity.storeUser" jdbcType="VARCHAR" />
+    <result column="REVIEW_STATUS" property="entity.reviewStatus" jdbcType="VARCHAR" />
+    <result column="REVIEW_IDEA" property="entity.reviewIdea" jdbcType="VARCHAR" />
+    <result column="REVIEW_USER" property="entity.reviewUser" jdbcType="VARCHAR" />
+    <result column="REVIEW_DATETIME" property="entity.reviewDatetime" jdbcType="TIMESTAMP" />
+    <result column="TRANSFER_FLAG" property="entity.transferFlag" jdbcType="DECIMAL" />
+    <result column="TRANSFER_USER" property="entity.transferUser" jdbcType="VARCHAR" />
+    <result column="TRANSFER_DATETIME" property="entity.transferDatetime" jdbcType="TIMESTAMP" />
+    <result column="MATCHED_STATUS" property="entity.matchedStatus" jdbcType="VARCHAR" />
+    <result column="MIX_FLAG" property="entity.mixFlag" jdbcType="DECIMAL" />
+    <result column="REMARK" property="entity.remark" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="entity.deleteFlag" jdbcType="DECIMAL" />
+    <result column="DATA_SOURCE" property="entity.dataSource" jdbcType="VARCHAR" />
+    <result column="DATA_LEVEL" property="entity.dataLevel" jdbcType="DECIMAL" />
+    <result column="CREATE_USER" property="entity.createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="entity.createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USER" property="entity.updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="entity.updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="EXT_ID" property="entity.extId" jdbcType="VARCHAR" />
+    <result column="LOCAL_CREATE_DATETIME" property="entity.localCreateDatetime" jdbcType="TIMESTAMP" />
+    <result column="REVIEW_USER_ID" property="entity.reviewUserId" jdbcType="VARCHAR" />
+    <result column="GENE_INFO" property="entity.geneInfo" jdbcType="CLOB" />
+    <result column="CREATE_PERSON" property="entity.createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_PERSON" property="entity.updatePereson" jdbcType="VARCHAR" />
+    <result column="REAGENT_NAME" property="entity.reagentName" jdbcType="VARCHAR" />
+    <result column="BOARD_BARCODE" property="entity.boardBarcode" jdbcType="VARCHAR" />
+    <result column="GENE_PICTURE" property="entity.genePicture" jdbcType="VARCHAR" />
+    <result column="case_id" property="caseId" jdbcType="VARCHAR" />
+    <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+    <result column="case_name" property="caseName" jdbcType="VARCHAR" />
+    <result column="sample_no" property="sampleNo" jdbcType="VARCHAR" />
+    <result column="sample_name" property="sampleName" jdbcType="VARCHAR" />
+    <result column="sample_type" property="sampleType" jdbcType="VARCHAR" />
+    <result column="REGIONALISM_CODE" property="regionalismCode" jdbcType="VARCHAR" />
+    <result column="REGIONALISM_NAME" property="regionalismName" jdbcType="VARCHAR" />
+    <result column="PARENT_CODE" property="parentCode" jdbcType="VARCHAR" />
+    <result column="person_code" property="personCode" jdbcType="VARCHAR" />
+    <result column="person_name" property="personName" jdbcType="VARCHAR" />
+    <result column="person_sex" property="personSex" jdbcType="VARCHAR" />
+    <result column="person_type" property="personType" jdbcType="VARCHAR" />
+    <result column="sample_type_name" property="sampleTypeName" jdbcType="VARCHAR" />
+    <result column="KIT_NAME" property="kitName" jdbcType="VARCHAR" />
+    <result column="KIT_ID" property="kitId" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SAMPLE_DNA_GENE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.mix.connector.nation.model.po.SampleDnaGene" >
+    insert into SAMPLE_DNA_GENE (ID, INIT_SERVER_NO, LAB_ID, 
+      SAMPLE_ID, SAMPLE_FLAG, GENE_TYPE, 
+      REAGENT_KIT, ALLELE_COUNT, STORE_FLAG, 
+      STORE_DATETIME, STORE_USER, REVIEW_STATUS, 
+      REVIEW_IDEA, REVIEW_USER, REVIEW_DATETIME, 
+      TRANSFER_FLAG, TRANSFER_USER, TRANSFER_DATETIME, 
+      MATCHED_STATUS, MIX_FLAG, REMARK, 
+      DELETE_FLAG, DATA_SOURCE, DATA_LEVEL, 
+      CREATE_USER, CREATE_DATETIME, UPDATE_USER, 
+      UPDATE_DATETIME, EXT_ID, LOCAL_CREATE_DATETIME, 
+      REVIEW_USER_ID, GENE_INFO)
+    values (#{id,jdbcType=VARCHAR}, #{initServerNo,jdbcType=VARCHAR}, #{labId,jdbcType=VARCHAR}, 
+      #{sampleId,jdbcType=VARCHAR}, #{sampleFlag,jdbcType=VARCHAR}, #{geneType,jdbcType=VARCHAR}, 
+      #{reagentKit,jdbcType=VARCHAR}, #{alleleCount,jdbcType=DECIMAL}, #{storeFlag,jdbcType=DECIMAL}, 
+      #{storeDatetime,jdbcType=TIMESTAMP}, #{storeUser,jdbcType=VARCHAR}, #{reviewStatus,jdbcType=VARCHAR}, 
+      #{reviewIdea,jdbcType=VARCHAR}, #{reviewUser,jdbcType=VARCHAR}, #{reviewDatetime,jdbcType=TIMESTAMP}, 
+      #{transferFlag,jdbcType=DECIMAL}, #{transferUser,jdbcType=VARCHAR}, #{transferDatetime,jdbcType=TIMESTAMP}, 
+      #{matchedStatus,jdbcType=VARCHAR}, #{mixFlag,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{deleteFlag,jdbcType=DECIMAL}, #{dataSource,jdbcType=VARCHAR}, #{dataLevel,jdbcType=DECIMAL}, 
+      #{createUser,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{extId,jdbcType=VARCHAR}, #{localCreateDatetime,jdbcType=TIMESTAMP}, 
+      #{reviewUserId,jdbcType=VARCHAR}, #{geneInfo,jdbcType=CLOB})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.mix.connector.nation.model.po.SampleDnaGene" >
+    update SAMPLE_DNA_GENE
+    set INIT_SERVER_NO = #{initServerNo,jdbcType=VARCHAR},
+      LAB_ID = #{labId,jdbcType=VARCHAR},
+      SAMPLE_ID = #{sampleId,jdbcType=VARCHAR},
+      SAMPLE_FLAG = #{sampleFlag,jdbcType=VARCHAR},
+      GENE_TYPE = #{geneType,jdbcType=VARCHAR},
+      REAGENT_KIT = #{reagentKit,jdbcType=VARCHAR},
+      ALLELE_COUNT = #{alleleCount,jdbcType=DECIMAL},
+      STORE_FLAG = #{storeFlag,jdbcType=DECIMAL},
+      STORE_DATETIME = #{storeDatetime,jdbcType=TIMESTAMP},
+      STORE_USER = #{storeUser,jdbcType=VARCHAR},
+      REVIEW_STATUS = #{reviewStatus,jdbcType=VARCHAR},
+      REVIEW_IDEA = #{reviewIdea,jdbcType=VARCHAR},
+      REVIEW_USER = #{reviewUser,jdbcType=VARCHAR},
+      REVIEW_DATETIME = #{reviewDatetime,jdbcType=TIMESTAMP},
+      TRANSFER_FLAG = #{transferFlag,jdbcType=DECIMAL},
+      TRANSFER_USER = #{transferUser,jdbcType=VARCHAR},
+      TRANSFER_DATETIME = #{transferDatetime,jdbcType=TIMESTAMP},
+      MATCHED_STATUS = #{matchedStatus,jdbcType=VARCHAR},
+      MIX_FLAG = #{mixFlag,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=DECIMAL},
+      DATA_SOURCE = #{dataSource,jdbcType=VARCHAR},
+      DATA_LEVEL = #{dataLevel,jdbcType=DECIMAL},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      EXT_ID = #{extId,jdbcType=VARCHAR},
+      LOCAL_CREATE_DATETIME = #{localCreateDatetime,jdbcType=TIMESTAMP},
+      REVIEW_USER_ID = #{reviewUserId,jdbcType=VARCHAR},
+      GENE_INFO = #{geneInfo,jdbcType=CLOB}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, INIT_SERVER_NO, LAB_ID, SAMPLE_ID, SAMPLE_FLAG, GENE_TYPE, REAGENT_KIT, 
+    ALLELE_COUNT, STORE_FLAG, STORE_DATETIME, STORE_USER, REVIEW_STATUS, REVIEW_IDEA, 
+    REVIEW_USER, REVIEW_DATETIME, TRANSFER_FLAG, TRANSFER_USER, TRANSFER_DATETIME, MATCHED_STATUS, 
+    MIX_FLAG, REMARK, DELETE_FLAG, DATA_SOURCE, DATA_LEVEL, CREATE_USER, CREATE_DATETIME, 
+    UPDATE_USER, UPDATE_DATETIME, EXT_ID, LOCAL_CREATE_DATETIME, REVIEW_USER_ID, GENE_INFO
+    from SAMPLE_DNA_GENE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, INIT_SERVER_NO, LAB_ID, SAMPLE_ID, SAMPLE_FLAG, GENE_TYPE, REAGENT_KIT, 
+    ALLELE_COUNT, STORE_FLAG, STORE_DATETIME, STORE_USER, REVIEW_STATUS, REVIEW_IDEA, 
+    REVIEW_USER, REVIEW_DATETIME, TRANSFER_FLAG, TRANSFER_USER, TRANSFER_DATETIME, MATCHED_STATUS, 
+    MIX_FLAG, REMARK, DELETE_FLAG, DATA_SOURCE, DATA_LEVEL, CREATE_USER, CREATE_DATETIME, 
+    UPDATE_USER, UPDATE_DATETIME, EXT_ID, LOCAL_CREATE_DATETIME, REVIEW_USER_ID, GENE_INFO
+    from SAMPLE_DNA_GENE
+  </select>
+
+  <select id="selectByCaseToSingleGeneList" resultMap="BaseResultMap" parameterType="java.lang.String" >
+      SELECT ff.*,rk.name as REAGENT_NAME FROM (
+      select
+      ci.id as case_id,ci.case_name as case_name,ci.case_no as caseNo,
+      si.sample_no as sample_no,si.sample_name as sample_name ,t.id,
+      t.SAMPLE_ID ,t.reagent_kit,null as BOARD_BARCODE,t.GENE_INFO ,
+      null as GENE_PICTURE,t.CREATE_USER as CREATE_PERSON , t.CREATE_DATETIME ,
+      t.UPDATE_USER as UPDATE_PERSON , t.UPDATE_DATETIME
+      from SAMPLE_DNA_GENE t , CONSIGNMENT cot, SAMPLE_INFO si,CASE_INFO ci
+      where   t.SAMPLE_ID = si.ID  and si.CONSIGNMENT_ID = cot.ID
+      AND cot.EVENT_ID = ci.ID  AND t.DELETE_FLAG ='0' AND
+      t.mix_flag='0'
+      <if test="_parameter != null and _parameter!='' ">
+          and ci.id = #{caseId,jdbcType=VARCHAR}
+      </if>
+      ) ff  left  join REAGENT_KIT rk on  rk.id = ff.reagent_kit
+  </select>
+
+  <select id="selectByCaseToMixSampleDnaGeneList" resultMap="BaseResultMap" parameterType="java.lang.String" >
+      SELECT ff.*,rk.name as REAGENT_NAME FROM (
+      select
+      ci.id as case_id,ci.case_name as case_name,ci.case_no as caseNo,
+      si.sample_no as sample_no,si.sample_name as sample_name ,t.id,
+      t.SAMPLE_ID ,t.reagent_kit,null as BOARD_BARCODE,t.GENE_INFO ,
+      null as GENE_PICTURE,t.CREATE_USER as CREATE_PERSON , t.CREATE_DATETIME ,
+      t.UPDATE_USER as UPDATE_PERSON , t.UPDATE_DATETIME
+      from SAMPLE_DNA_GENE t , CONSIGNMENT cot, SAMPLE_INFO si,CASE_INFO ci
+      where   t.SAMPLE_ID = si.ID  and si.CONSIGNMENT_ID = cot.ID
+      AND cot.EVENT_ID = ci.ID  AND t.DELETE_FLAG ='0' AND
+      t.mix_flag='1'
+      <if test="_parameter != null and _parameter!='' ">
+          and ci.id = #{caseId,jdbcType=VARCHAR}
+      </if>
+      ) ff  left  join REAGENT_KIT rk on  rk.id = ff.reagent_kit
+</select>
+
+  <select id="queryByMixDnaGene" resultMap="BaseResultMapVo"  >
+      SELECT /*+ FULL(@SEL$3 T) */ *  from (
+       select rownum as rn , f.* from (
+              select
+              cot.accept_no as case_no,ci.case_name as case_name ,si.sample_lab_no as sample_no ,si.sample_name as sample_name,t.*
+              from SAMPLE_DNA_GENE t , CONSIGNMENT cot, SAMPLE_INFO si,CASE_INFO ci
+              where t.SAMPLE_ID = si.ID  AND si.CONSIGNMENT_ID = cot.ID AND cot.EVENT_ID = ci.ID AND t.DELETE_FLAG ='0' AND  t.mix_flag='1'
+              <if test=" sampleDnaGeneVo.caseNo!= null and sampleDnaGeneVo.caseNo!='' ">
+                  and cot.accept_no  like '%'||#{sampleDnaGeneVo.caseNo,jdbcType=VARCHAR}||'%'
+              </if>
+              <if test=" sampleDnaGeneVo.caseName!= null and sampleDnaGeneVo.caseName!='' ">
+                  and ci.case_name like '%'||#{sampleDnaGeneVo.caseName,jdbcType=VARCHAR}||'%'
+              </if>
+              <if test=" sampleDnaGeneVo.sampleNo!= null and sampleDnaGeneVo.sampleNo!='' ">
+                  and si.sample_lab_no like '%'||#{sampleDnaGeneVo.sampleNo,jdbcType=VARCHAR}||'%'
+              </if>
+              <if test=" sampleDnaGeneVo.sampleName!= null and sampleDnaGeneVo.sampleName!='' ">
+                  and si.sample_name like '%'||#{sampleDnaGeneVo.sampleName,jdbcType=VARCHAR}||'%'
+              </if>
+    ) f where rownum &lt;=${endRum}
+    ) where rn &gt;${startRum}
+  </select>
+
+
+  <update id="updateSampleDnaGeneDF" parameterType="java.lang.String">
+     update  SAMPLE_DNA_GENE  set DELETE_FLAG = '1' where ID = #{sampleGeneId,jdbcType=VARCHAR}
+  </update>
+
+
+  <select id="selectMixGeneByCwsd" resultType="java.lang.Integer"  >
+      select count(sdg.ID)
+      from SAMPLE_DNA_GENE  sdg
+      where sdg.DELETE_FLAG = '0' and sdg.MIX_FLAG = '1'
+  </select>
+
+  <select id="selectSingleGeneByCwsd" resultType="java.lang.Integer" >
+      select count(sdg.ID)
+      from SAMPLE_DNA_GENE  sdg
+      where sdg.DELETE_FLAG = '0' and sdg.MIX_FLAG = '0'
+  </select>
+
+    <select id="selectSingleCountByDate" resultType="java.lang.Integer" parameterType="com.bazl.dna.mix.connector.nation.model.po.SampleDnaGene" >
+        select count(sdg.ID)
+        from SAMPLE_DNA_GENE  sdg
+        where sdg.DELETE_FLAG = '0' and sdg.MIX_FLAG = '0'
+        and sdg.create_datetime &gt;= #{createDatetime,jdbcType=TIMESTAMP}
+    </select>
+
+
+  <select id="selectMixGeneByCwsdPage" resultMap="BaseResultMapVo"  >
+      select * from (
+          select rownum as rn, t.* from (
+                select
+                ci.id as case_id ,ci.case_no as case_no,ci.case_name as case_name ,
+                si.sample_no as sample_no ,si.sample_name as sample_name,sr.REGIONALISM_CODE as REGIONALISM_CODE,
+                sr.REGIONALISM_NAME as REGIONALISM_NAME,sr.PARENT_CODE as PARENT_CODE,pi.DB_CATEGORY as person_code,pi.person_name as person_name,
+                pi.gender as person_sex , sd.dict_value1 as person_type, sdg.*
+                from
+                SAMPLE_DNA_GENE sdg,CONSIGNMENT cot, CASE_INFO ci,SYS_REGIONALISM sr,PERSON_INFO pi,SAMPLE_INFO si,
+                SAMPLE_PERSON_MAP spm,SYS_DICT sd
+                where
+                sdg.SAMPLE_ID = si.id and si.id = spm.SAMPLE_ID  and spm.PERSON_OBJECT_ID = pi.id and pi.CONSIGNMENT_ID = cot.id
+                and cot.EVENT_ID = ci.id and  ci.SCENE_REGIONALISM = sr.REGIONALISM_CODE  and pi.db_category = sd.dict_key
+                and sd.dict_category='PERSON_CATEGORY' and sdg.DELETE_FLAG ='0' and sdg.MIX_FLAG = '1'
+          ) t where rownum &lt;=#{rows}
+       ) where rn &gt;#{offset}
+
+  </select>
+
+
+  <!--<select id="selectSingleGeneByCwsdPage" resultMap="BaseResultMapVo"  >
+         select * from (
+          select rownum as rn, t.* from (
+              select
+              si.sample_no        as sample_no,
+              si.sample_name      as sample_name,
+              si.sample_type      as sample_type,
+              sr.REGIONALISM_CODE as REGIONALISM_CODE,
+              sr.REGIONALISM_NAME as REGIONALISM_NAME,
+              sr.PARENT_CODE      as PARENT_CODE,
+              pi.DB_CATEGORY      as person_code,
+              pi.person_name      as person_name,
+              pi.gender           as person_sex,
+              sd.dict_value1      as person_type,
+              sdg.*
+              from SAMPLE_DNA_GENE  sdg
+              left join SAMPLE_INFO si on  sdg.SAMPLE_ID = si.id
+              left join SAMPLE_PERSON_MAP spm on si.id = spm.SAMPLE_ID
+              left join PERSON_INFO pi on  spm.PERSON_OBJECT_ID = pi.id
+              left join CONSIGNMENT cot on pi.CONSIGNMENT_ID = cot.id
+              left join CASE_INFO ci on  cot.EVENT_ID = ci.id
+              left join SYS_REGIONALISM sr on ci.SCENE_REGIONALISM = sr.REGIONALISM_CODE
+              left join SYS_DICT sd on pi.db_category = sd.dict_key
+              where
+              1=1
+              and sd.dict_category = 'PERSON_CATEGORY'
+              and sdg.DELETE_FLAG = '0'
+              and sdg.MIX_FLAG = '0'
+              <if test="isAll == 0">
+                  and to_char (  sdg.CREATE_DATETIME  , 'yyyy-MM-dd') = to_char( sysdate-1 , 'yyyy-MM-dd')
+              </if>
+          ) t where rownum &lt;=#{rows}
+        ) where rn &gt;#{offset}
+  </select>-->
+
+    <select id="selectSingleGeneByCwsdPage" resultMap="BaseResultMapVo"  >
+        select tt.*, pi.DB_CATEGORY as person_code, pi.INIT_SERVER_NO as INIT_SERVER_NO
+        from(
+        select * from (
+            select rownum as rn, t.* from (
+              select sdg.* from SAMPLE_DNA_GENE  sdg where sdg.DELETE_FLAG = '0' and sdg.MIX_FLAG = '0'
+            ) t where rownum &lt;=#{rows}
+        ) where rn &gt;#{offset}
+        ) tt
+        left join SAMPLE_PERSON_MAP spm on tt.SAMPLE_ID = spm.SAMPLE_ID and spm.relation = '9'
+        left join PERSON_INFO pi on  spm.PERSON_OBJECT_ID = pi.id
+    </select>
+
+    <select id="selectSingByDatePage" resultMap="BaseResultMapVo" >
+        select tt.*, pi.DB_CATEGORY as person_code, pi.INIT_SERVER_NO as INIT_SERVER_NO
+        from(
+            select * from (
+                select rownum as rn, t.* from (
+                select sdg.*
+                from SAMPLE_DNA_GENE sdg
+                where sdg.DELETE_FLAG = '0' and sdg.MIX_FLAG = '0'
+                and sdg.create_datetime &gt;= #{entity.createDatetime,jdbcType=TIMESTAMP}
+                ) t where rownum &lt;=#{rows}
+            ) where rn &gt;#{offset}
+        ) tt
+        left join SAMPLE_PERSON_MAP spm on tt.SAMPLE_ID = spm.SAMPLE_ID and spm.relation = '9'
+        left join PERSON_INFO pi on  spm.PERSON_OBJECT_ID = pi.id
+    </select>
+
+    <select id="countMixDnaGene" resultMap="BaseResultMapVo">
+            select
+            ci.case_no as case_no,ci.case_name as case_name ,si.sample_no as sample_no ,si.sample_name as sample_name,t.id
+            from SAMPLE_DNA_GENE t , CONSIGNMENT cot, SAMPLE_INFO si,CASE_INFO ci
+            where t.SAMPLE_ID = si.ID  AND
+            si.CONSIGNMENT_ID = cot.ID AND cot.EVENT_ID = ci.ID AND t.DELETE_FLAG ='0' AND  t.mix_flag='1'
+   </select>
+
+
+    <select id="queryByMixDnaGenes" parameterType="com.bazl.dna.mix.connector.nation.model.vo.SampleDnaGeneVo" resultMap="BaseResultMapVo"  >
+        SELECT /*+ FULL(@SEL$3 T) */ *  from (
+        select rownum as rn , f.* from (
+            select
+            cot.accept_no as case_no,ci.case_name as case_name ,si.sample_lab_no as sample_no ,si.sample_name as sample_name,t.*
+            from SAMPLE_DNA_GENE t , CONSIGNMENT cot, SAMPLE_INFO si,CASE_INFO ci
+            where t.SAMPLE_ID = si.ID  AND si.CONSIGNMENT_ID = cot.ID AND cot.EVENT_ID = ci.ID AND t.DELETE_FLAG ='0' AND  t.mix_flag='1'
+            <if test="_parameter != null">
+                <if test=" caseNo!= null and caseNo!='' ">
+                    and cot.accept_no  like '%'||#{caseNo,jdbcType=VARCHAR}||'%'
+                </if>
+                <if test=" caseName!= null and caseName!='' ">
+                    and ci.case_name like '%'||#{caseName,jdbcType=VARCHAR}||'%'
+                </if>
+                <if test=" sampleNo!= null and sampleNo!='' ">
+                    and si.sample_lab_no like '%'||#{sampleNo,jdbcType=VARCHAR}||'%'
+                </if>
+                <if test=" sampleName!= null and sampleName!='' ">
+                    and si.sample_name like '%'||#{sampleName,jdbcType=VARCHAR}||'%'
+                </if>
+            </if>
+        ) f where  rownum &lt;=#{rows}
+        ) where rn &gt;#{offset}
+    </select>
+
+    <select id="countMixDnaGenes" resultType="java.lang.Integer">
+        select  count(t.id)
+        from SAMPLE_DNA_GENE t ,CONSIGNMENT cot, SAMPLE_INFO si,CASE_INFO ci
+        WHERE
+            t.SAMPLE_ID = si.ID  AND si.CONSIGNMENT_ID = cot.ID AND cot.EVENT_ID = ci.ID
+            AND t.DELETE_FLAG ='0' AND  t.mix_flag='1'
+                <if test="_parameter != null">
+                    <if test="null != caseNo and caseNo != ''">
+                       and  cot.accept_no  like '%'||#{caseNo,jdbcType=VARCHAR}||'%'
+                    </if>
+                    <if test="null != caseName and caseName != ''">
+                       and  ci.case_name like '%'||#{caseName,jdbcType=VARCHAR}||'%'
+                    </if>
+                    <if test="null != sampleNo and sampleNo != ''">
+                       and si.sample_lab_no like '%'||#{sampleNo,jdbcType=VARCHAR}||'%'
+                    </if>
+                    <if test="null != sampleName and sampleName != ''">
+                        and si.sample_name like '%'||#{sampleName,jdbcType=VARCHAR}||'%'
+                    </if>
+                </if>
+    </select>
+
+    <!--检材编号模糊查询-->
+  <select id="selectBySampleNoList" resultMap="BaseResultMapVo" parameterType="java.lang.String" >
+      select distinct ci.ID AS CASE_ID, si.SAMPLE_NO, si.SAMPLE_NAME, ci.case_no as case_no,
+          ci.case_name as case_name, si.SAMPLE_TYPE,si.SAMPLE_TYPE,
+          t.sample_flag as SAMPLE_FLAG, si.REMARK,si.CREATE_USER as CREATE_PERSON,
+           null as INSTORED_FLAG, t.id, t.SAMPLE_ID , t.reagent_kit,
+          null as BOARD_BARCODE, null as GENE_PICTURE
+      from SAMPLE_DNA_GENE t
+      left join SAMPLE_INFO si on t.SAMPLE_ID = si.ID
+      left join consignment ct on si.CONSIGNMENT_ID = ct.ID
+      left join case_info ci on ct.EVENT_ID = ci.ID
+      where  t.DELETE_FLAG ='0' AND si.SAMPLE_NO = #{sampleNo,jdbcType=VARCHAR}
+  </select>
+
+    <!--selectSingleGeneBySampleNo-->
+    <select id="selectSingleGeneBySampleNo" parameterType="com.bazl.dna.mix.connector.nation.model.vo.SampleDnaGeneVo" resultMap="BaseResultMapVo"  >
+        select
+        ci.id as case_id ,ci.case_no as case_no,ci.case_name as case_name ,
+        si.sample_no as sample_no ,si.sample_name as sample_name,si.sample_type as sample_type, sr.REGIONALISM_CODE as
+        REGIONALISM_CODE,
+        sr.REGIONALISM_NAME as REGIONALISM_NAME,sr.PARENT_CODE as PARENT_CODE,pi.DB_CATEGORY as
+        person_code,pi.person_name as person_name,
+        pi.gender as person_sex ,sd.dict_value1 as person_type, sdg.*
+        from
+        SAMPLE_DNA_GENE sdg,CONSIGNMENT cot, CASE_INFO ci,SYS_REGIONALISM sr,PERSON_INFO pi,SAMPLE_INFO si,
+        SAMPLE_PERSON_MAP spm,SYS_DICT sd
+        where
+        sdg.SAMPLE_ID = si.id and si.id = spm.SAMPLE_ID and spm.PERSON_OBJECT_ID = pi.id and pi.CONSIGNMENT_ID = cot.id
+        and cot.EVENT_ID = ci.id and ci.SCENE_REGIONALISM = sr.REGIONALISM_CODE and pi.db_category = sd.dict_key
+        and sd.dict_category='PERSON_CATEGORY' and sdg.DELETE_FLAG ='0' and sdg.MIX_FLAG = '0'
+        <!--<if test="isAll == 0">-->
+            <!--and to_char (  sdg.CREATE_DATETIME  , 'yyyy-MM-dd') = to_char( sysdate-1 , 'yyyy-MM-dd')-->
+        <!--</if>-->
+        <if test="sampleNo != null">
+            and si.sample_no like '%'||#{sampleNo,jdbcType=VARCHAR}||'%'
+        </if>
+    </select>
+    <select id="selectSingleGene" parameterType="String" resultMap="SampleGeneMap" >
+        select t.ID,t.LAB_ID ,t.SAMPLE_NO ,t.SAMPLE_LAB_NO ,t.SAMPLE_NAME ,t.SAMPLE_TYPE ,sd.dict_value1 as person_type_name,
+            ca.id as CASE_ID,ca.CASE_NO as CASE_NO,ca.CASE_NAME,pi.db_category as person_type_code, sdg.REAGENT_KIT as REAGENT_KIT,
+            pi.ID_CARD_NO as ID_CARD_NO, pi.PERSON_NAME as PERSON_NAME,pi.INIT_SERVER_NO as LAB_SERVER_NO
+          from SAMPLE_DNA_GENE sdg
+          left join SAMPLE_INFO t on sdg.sample_id = t.id
+          left join consignment ct on t.consignment_id = ct.id
+          left join case_info ca on ct.event_id = ca.id
+          left join SAMPLE_PERSON_MAP spm on spm.sample_id = t.id
+          left join PERSON_INFO pi on pi.id = spm.person_object_id
+          left join SYS_DICT sd on pi.db_category = sd.dict_key and sd.dict_category='PERSON_CATEGORY'
+        where sdg.id = #{sampleId,jdbcType=VARCHAR} and pi.db_category = #{personCodeType,jdbcType=VARCHAR}
+         and sdg.GENE_TYPE = '1'
+    </select>
+
+
+    <resultMap id="SampleGeneMap" type="com.bazl.dna.mix.connector.nation.model.po.newSampleInfo">
+        <id column="ID" jdbcType="VARCHAR" property="id" />
+        <result column="LAB_ID" jdbcType="VARCHAR" property="labId" />
+        <result column="SAMPLE_NO" jdbcType="VARCHAR" property="sampleNo" />
+        <result column="SAMPLE_LAB_NO" jdbcType="VARCHAR" property="sampleLabNo" />
+        <result column="SAMPLE_NAME" jdbcType="VARCHAR" property="sampleName" />
+        <result column="SAMPLE_TYPE" jdbcType="VARCHAR" property="sampleType" />
+        <result column="CASE_ID" jdbcType="VARCHAR" property="caseId" />
+        <result column="CASE_NO" jdbcType="VARCHAR" property="caseNo" />
+        <result column="CASE_NAME" jdbcType="VARCHAR" property="caseName" />
+        <result column="person_type_name" property="personTypeName" jdbcType="VARCHAR" />
+        <result column="person_type_code" property="personTypeCode" jdbcType="VARCHAR" />
+        <result column="ID_CARD_NO" property="idCardNo" jdbcType="VARCHAR" />
+        <result column="REAGENT_KIT" property="reagentKit" jdbcType="VARCHAR" />
+        <result column="PERSON_NAME" property="personName" jdbcType="VARCHAR" />
+        <result column="LAB_SERVER_NO" property="labServerNo" jdbcType="VARCHAR" />
+        <result column="LAB_SERVER_NAME" property="labServerName" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!--selectMixedSampleGeneList-->
+    <select id="selectMixedSampleGeneList" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+     SELECT MSG.*   FROM MIXED_SAMPLE_GENE MSG
+      LEFT JOIN SAMPLE_INFO SI    ON MSG.SAMPLE_ID = SI.ID
+         WHERE SI.CASE_ID = #{caseId,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

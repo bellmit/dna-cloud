@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.mix.dao.DictItemDAO">
+  <resultMap id="BaseResultMap" type="com.bazl.dna.mix.model.po.DictItem">
+    <id column="DICT_ITEM_ID" jdbcType="VARCHAR" property="dictItemId" />
+    <result column="DICT_INFO_ID" jdbcType="VARCHAR" property="dictInfoId" />
+    <result column="DICT_TYPE_CODE" jdbcType="VARCHAR" property="dictTypeCode" />
+    <result column="DICT_CODE" jdbcType="VARCHAR" property="dictCode" />
+    <result column="DICT_NAME" jdbcType="VARCHAR" property="dictName" />
+    <result column="DICT_DESC" jdbcType="VARCHAR" property="dictDesc" />
+    <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="CREATE_PERSON" jdbcType="VARCHAR" property="createPerson" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    DICT_ITEM_ID, DICT_INFO_ID, DICT_TYPE_CODE, DICT_CODE, DICT_NAME, DICT_DESC, CREATE_DATETIME, 
+    CREATE_PERSON
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dict_item
+    where DICT_ITEM_ID = #{dictItemId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from dict_item
+    where DICT_ITEM_ID = #{dictItemId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.mix.model.po.DictItem">
+    insert into dict_item (DICT_ITEM_ID, DICT_INFO_ID, DICT_TYPE_CODE,
+      DICT_CODE, DICT_NAME, DICT_DESC, 
+      CREATE_DATETIME, CREATE_PERSON)
+    values (#{dictItemId,jdbcType=VARCHAR}, #{dictInfoId,jdbcType=VARCHAR}, #{dictTypeCode,jdbcType=VARCHAR}, 
+      #{dictCode,jdbcType=VARCHAR}, #{dictName,jdbcType=VARCHAR}, #{dictDesc,jdbcType=VARCHAR}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bazl.dna.mix.model.po.DictItem">
+    insert into dict_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dictItemId != null">
+        DICT_ITEM_ID,
+      </if>
+      <if test="dictInfoId != null">
+        DICT_INFO_ID,
+      </if>
+      <if test="dictTypeCode != null">
+        DICT_TYPE_CODE,
+      </if>
+      <if test="dictCode != null">
+        DICT_CODE,
+      </if>
+      <if test="dictName != null">
+        DICT_NAME,
+      </if>
+      <if test="dictDesc != null">
+        DICT_DESC,
+      </if>
+      <if test="createDatetime != null">
+        CREATE_DATETIME,
+      </if>
+      <if test="createPerson != null">
+        CREATE_PERSON,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dictItemId != null">
+        #{dictItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="dictInfoId != null">
+        #{dictInfoId,jdbcType=VARCHAR},
+      </if>
+      <if test="dictTypeCode != null">
+        #{dictTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictCode != null">
+        #{dictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictName != null">
+        #{dictName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictDesc != null">
+        #{dictDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPerson != null">
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bazl.dna.mix.model.po.DictItem">
+    update dict_item
+    <set>
+      <if test="dictInfoId != null">
+        DICT_INFO_ID = #{dictInfoId,jdbcType=VARCHAR},
+      </if>
+      <if test="dictTypeCode != null">
+        DICT_TYPE_CODE = #{dictTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictCode != null">
+        DICT_CODE = #{dictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictName != null">
+        DICT_NAME = #{dictName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictDesc != null">
+        DICT_DESC = #{dictDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null">
+        CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPerson != null">
+        CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DICT_ITEM_ID = #{dictItemId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.mix.model.po.DictItem">
+    update dict_item
+    set DICT_INFO_ID = #{dictInfoId,jdbcType=VARCHAR},
+      DICT_TYPE_CODE = #{dictTypeCode,jdbcType=VARCHAR},
+      DICT_CODE = #{dictCode,jdbcType=VARCHAR},
+      DICT_NAME = #{dictName,jdbcType=VARCHAR},
+      DICT_DESC = #{dictDesc,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR}
+    where DICT_ITEM_ID = #{dictItemId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectListByDictCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dict_item di
+    where di.DICT_CODE = #{dictCode,jdbcType=VARCHAR}
+    order by di.CREATE_DATETIME
+  </select>
+
+  <select id="selectAllCode" resultMap="BaseResultMap" >
+    select DICT_ITEM_ID, DICT_INFO_ID, DICT_TYPE_CODE, DICT_CODE, DICT_NAME, DICT_DESC,
+    CREATE_DATETIME, CREATE_PERSON
+    from dict_item order by DICT_CODE ASC
+  </select>
+
+  <select id="selectListByDictTypeCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dict_item di
+    where di.DICT_TYPE_CODE = #{dictTypeCode,jdbcType=VARCHAR}
+    order by di.CREATE_DATETIME
+  </select>
+
+  <select id="selectListByDictType" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dict_item di
+    where di.DICT_TYPE_CODE = #{dictTypeCode,jdbcType=VARCHAR}
+      AND  di.CREATE_PERSON = #{createPerson,jdbcType=VARCHAR}
+    order by di.CREATE_DATETIME
+  </select>
+
+
+</mapper>

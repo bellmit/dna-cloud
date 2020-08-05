@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.nation.converter.dao.CaseInfoMapper">
+  <resultMap id="BaseResultMap" type="com.bazl.dna.database.nation.converter.model.po.CaseInfo">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="INIT_SERVER_NO" jdbcType="VARCHAR" property="initServerNo" />
+    <result column="LAB_ID" jdbcType="VARCHAR" property="labId" />
+    <result column="CASE_NO" jdbcType="VARCHAR" property="caseNo" />
+    <result column="CASE_NAME" jdbcType="VARCHAR" property="caseName" />
+    <result column="SCENE_REGIONALISM" jdbcType="VARCHAR" property="sceneRegionalism" />
+    <result column="SCENE_PLACE" jdbcType="VARCHAR" property="scenePlace" />
+    <result column="OCCURRENCE_DATETIME" jdbcType="TIMESTAMP" property="occurrenceDatetime" />
+    <result column="CASE_LEVEL" jdbcType="VARCHAR" property="caseLevel" />
+    <result column="CASE_TYPE" jdbcType="VARCHAR" property="caseType" />
+    <result column="CASE_PROPERTY" jdbcType="VARCHAR" property="caseProperty" />
+    <result column="HARM_LEVEL" jdbcType="VARCHAR" property="harmLevel" />
+    <result column="SCENE_AREA_TYPE" jdbcType="VARCHAR" property="sceneAreaType" />
+    <result column="CASE_INFO_ORIGIN" jdbcType="VARCHAR" property="caseInfoOrigin" />
+    <result column="CASE_BRIEF" jdbcType="VARCHAR" property="caseBrief" />
+    <result column="CASE_STATUS" jdbcType="VARCHAR" property="caseStatus" />
+    <result column="DELETE_FLAG" jdbcType="DECIMAL" property="deleteFlag" />
+    <result column="TRANSFER_FLAG" jdbcType="DECIMAL" property="transferFlag" />
+    <result column="TRANSFER_USER" jdbcType="VARCHAR" property="transferUser" />
+    <result column="TRANSFER_DATETIME" jdbcType="TIMESTAMP" property="transferDatetime" />
+    <result column="IDENTIFY_FLAG" jdbcType="DECIMAL" property="identifyFlag" />
+    <result column="IDENTIFY_ROLE" jdbcType="VARCHAR" property="identifyRole" />
+    <result column="DATA_SOURCE" jdbcType="VARCHAR" property="dataSource" />
+    <result column="DATA_LEVEL" jdbcType="DECIMAL" property="dataLevel" />
+    <result column="PHY_EVIDENCE_FLAG" jdbcType="DECIMAL" property="phyEvidenceFlag" />
+    <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2" />
+    <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3" />
+    <result column="RESERVE4" jdbcType="VARCHAR" property="reserve4" />
+    <result column="RESERVE5" jdbcType="VARCHAR" property="reserve5" />
+    <result column="RESERVE6" jdbcType="VARCHAR" property="reserve6" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="CREATE_USER" jdbcType="VARCHAR" property="createUser" />
+    <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="updateDatetime" />
+    <result column="UPDATE_USER" jdbcType="VARCHAR" property="updateUser" />
+    <result column="CASE_VERSION3_NO" jdbcType="VARCHAR" property="caseVersion3No" />
+    <result column="CASE_ACCEPTOR_PHONE" jdbcType="VARCHAR" property="caseAcceptorPhone" />
+    <result column="IS_URGENT" jdbcType="VARCHAR" property="isUrgent" />
+    <result column="IS_MURDER" jdbcType="VARCHAR" property="isMurder" />
+    <result column="INVOLVE_DEATH" jdbcType="VARCHAR" property="involveDeath" />
+    <result column="DEATH_NUM" jdbcType="DECIMAL" property="deathNum" />
+    <result column="PERSON_IN_CHARGE" jdbcType="VARCHAR" property="personInCharge" />
+    <result column="PIC_DUTY" jdbcType="VARCHAR" property="picDuty" />
+    <result column="PIC_PHONE" jdbcType="VARCHAR" property="picPhone" />
+    <result column="PIC_CERTIFICATE_TYPE" jdbcType="VARCHAR" property="picCertificateType" />
+    <result column="PIC_CERTIFICATE_NO" jdbcType="VARCHAR" property="picCertificateNo" />
+    <result column="AUDITOR" jdbcType="VARCHAR" property="auditor" />
+    <result column="AUDITOR_PHONE" jdbcType="VARCHAR" property="auditorPhone" />
+    <result column="AUDIT_DATETIME" jdbcType="TIMESTAMP" property="auditDatetime" />
+    <result column="SYSTEM_CASE_NO" jdbcType="VARCHAR" property="systemCaseNo" />
+    <result column="CASE_SERIAL_NO" jdbcType="VARCHAR" property="caseSerialNo" />
+    <result column="IS_REGISTERED" jdbcType="VARCHAR" property="isRegistered" />
+    <result column="EXT_ID" jdbcType="VARCHAR" property="extId" />
+    <result column="INTERNAL_MATCH" jdbcType="VARCHAR" property="internalMatch" />
+    <result column="LOCAL_STORE_DATETIME" jdbcType="TIMESTAMP" property="localStoreDatetime" />
+    <result column="LOCAL_CREATE_DATETIME" jdbcType="TIMESTAMP" property="localCreateDatetime" />
+    <result column="VA" jdbcType="CLOB" property="va" />
+    <result column="CREATE_PERSON" jdbcType="VARCHAR" property="createPerson" />
+    <result column="UPDATE_PERESON" jdbcType="VARCHAR" property="updatePereson" />
+    <result column="EXTERNAL_SYS_NO" jdbcType="VARCHAR" property="sysXkNo" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from CASE_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.database.nation.converter.model.po.CaseInfo">
+    insert into CASE_INFO (ID, INIT_SERVER_NO, LAB_ID,
+    CASE_NO, CASE_NAME, SCENE_REGIONALISM,
+    SCENE_PLACE, OCCURRENCE_DATETIME, CASE_LEVEL,
+    CASE_TYPE, CASE_PROPERTY, HARM_LEVEL,
+    SCENE_AREA_TYPE, CASE_INFO_ORIGIN, CASE_BRIEF,
+    CASE_STATUS, DELETE_FLAG, TRANSFER_FLAG,
+    TRANSFER_USER, TRANSFER_DATETIME, IDENTIFY_FLAG,
+    IDENTIFY_ROLE, DATA_SOURCE, DATA_LEVEL,
+    PHY_EVIDENCE_FLAG, RESERVE2, RESERVE3,
+    RESERVE4, RESERVE5, RESERVE6,
+    REMARK, CREATE_DATETIME, CREATE_USER,
+    UPDATE_DATETIME, UPDATE_USER, CASE_VERSION3_NO,
+    CASE_ACCEPTOR_PHONE, IS_URGENT, IS_MURDER,
+    INVOLVE_DEATH, DEATH_NUM, PERSON_IN_CHARGE,
+    PIC_DUTY, PIC_PHONE, PIC_CERTIFICATE_TYPE,
+    PIC_CERTIFICATE_NO, AUDITOR, AUDITOR_PHONE,
+    AUDIT_DATETIME, SYSTEM_CASE_NO, CASE_SERIAL_NO,
+    IS_REGISTERED, EXT_ID, INTERNAL_MATCH,
+    LOCAL_STORE_DATETIME, LOCAL_CREATE_DATETIME,
+    VA)
+    values (#{id,jdbcType=VARCHAR}, #{initServerNo,jdbcType=VARCHAR}, #{labId,jdbcType=VARCHAR},
+    #{caseNo,jdbcType=VARCHAR}, #{caseName,jdbcType=VARCHAR}, #{sceneRegionalism,jdbcType=VARCHAR},
+    #{scenePlace,jdbcType=VARCHAR}, #{occurrenceDatetime,jdbcType=TIMESTAMP}, #{caseLevel,jdbcType=VARCHAR},
+    #{caseType,jdbcType=VARCHAR}, #{caseProperty,jdbcType=VARCHAR}, #{harmLevel,jdbcType=VARCHAR},
+    #{sceneAreaType,jdbcType=VARCHAR}, #{caseInfoOrigin,jdbcType=VARCHAR}, #{caseBrief,jdbcType=VARCHAR},
+    #{caseStatus,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=DECIMAL}, #{transferFlag,jdbcType=DECIMAL},
+    #{transferUser,jdbcType=VARCHAR}, #{transferDatetime,jdbcType=TIMESTAMP}, #{identifyFlag,jdbcType=DECIMAL},
+    #{identifyRole,jdbcType=VARCHAR}, #{dataSource,jdbcType=VARCHAR}, #{dataLevel,jdbcType=DECIMAL},
+    #{phyEvidenceFlag,jdbcType=DECIMAL}, #{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR},
+    #{reserve4,jdbcType=VARCHAR}, #{reserve5,jdbcType=VARCHAR}, #{reserve6,jdbcType=VARCHAR},
+    #{remark,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR},
+    #{updateDatetime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{caseVersion3No,jdbcType=VARCHAR},
+    #{caseAcceptorPhone,jdbcType=VARCHAR}, #{isUrgent,jdbcType=VARCHAR}, #{isMurder,jdbcType=VARCHAR},
+    #{involveDeath,jdbcType=VARCHAR}, #{deathNum,jdbcType=DECIMAL}, #{personInCharge,jdbcType=VARCHAR},
+    #{picDuty,jdbcType=VARCHAR}, #{picPhone,jdbcType=VARCHAR}, #{picCertificateType,jdbcType=VARCHAR},
+    #{picCertificateNo,jdbcType=VARCHAR}, #{auditor,jdbcType=VARCHAR}, #{auditorPhone,jdbcType=VARCHAR},
+    #{auditDatetime,jdbcType=TIMESTAMP}, #{systemCaseNo,jdbcType=VARCHAR}, #{caseSerialNo,jdbcType=VARCHAR},
+    #{isRegistered,jdbcType=VARCHAR}, #{extId,jdbcType=VARCHAR}, #{internalMatch,jdbcType=VARCHAR},
+    #{localStoreDatetime,jdbcType=TIMESTAMP}, #{localCreateDatetime,jdbcType=TIMESTAMP},
+    #{va,jdbcType=CLOB})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.database.nation.converter.model.po.CaseInfo">
+    update CASE_INFO
+    set INIT_SERVER_NO = #{initServerNo,jdbcType=VARCHAR},
+    LAB_ID = #{labId,jdbcType=VARCHAR},
+    CASE_NO = #{caseNo,jdbcType=VARCHAR},
+    CASE_NAME = #{caseName,jdbcType=VARCHAR},
+    SCENE_REGIONALISM = #{sceneRegionalism,jdbcType=VARCHAR},
+    SCENE_PLACE = #{scenePlace,jdbcType=VARCHAR},
+    OCCURRENCE_DATETIME = #{occurrenceDatetime,jdbcType=TIMESTAMP},
+    CASE_LEVEL = #{caseLevel,jdbcType=VARCHAR},
+    CASE_TYPE = #{caseType,jdbcType=VARCHAR},
+    CASE_PROPERTY = #{caseProperty,jdbcType=VARCHAR},
+    HARM_LEVEL = #{harmLevel,jdbcType=VARCHAR},
+    SCENE_AREA_TYPE = #{sceneAreaType,jdbcType=VARCHAR},
+    CASE_INFO_ORIGIN = #{caseInfoOrigin,jdbcType=VARCHAR},
+    CASE_BRIEF = #{caseBrief,jdbcType=VARCHAR},
+    CASE_STATUS = #{caseStatus,jdbcType=VARCHAR},
+    DELETE_FLAG = #{deleteFlag,jdbcType=DECIMAL},
+    TRANSFER_FLAG = #{transferFlag,jdbcType=DECIMAL},
+    TRANSFER_USER = #{transferUser,jdbcType=VARCHAR},
+    TRANSFER_DATETIME = #{transferDatetime,jdbcType=TIMESTAMP},
+    IDENTIFY_FLAG = #{identifyFlag,jdbcType=DECIMAL},
+    IDENTIFY_ROLE = #{identifyRole,jdbcType=VARCHAR},
+    DATA_SOURCE = #{dataSource,jdbcType=VARCHAR},
+    DATA_LEVEL = #{dataLevel,jdbcType=DECIMAL},
+    PHY_EVIDENCE_FLAG = #{phyEvidenceFlag,jdbcType=DECIMAL},
+    RESERVE2 = #{reserve2,jdbcType=VARCHAR},
+    RESERVE3 = #{reserve3,jdbcType=VARCHAR},
+    RESERVE4 = #{reserve4,jdbcType=VARCHAR},
+    RESERVE5 = #{reserve5,jdbcType=VARCHAR},
+    RESERVE6 = #{reserve6,jdbcType=VARCHAR},
+    REMARK = #{remark,jdbcType=VARCHAR},
+    CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+    CREATE_USER = #{createUser,jdbcType=VARCHAR},
+    UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+    UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+    CASE_VERSION3_NO = #{caseVersion3No,jdbcType=VARCHAR},
+    CASE_ACCEPTOR_PHONE = #{caseAcceptorPhone,jdbcType=VARCHAR},
+    IS_URGENT = #{isUrgent,jdbcType=VARCHAR},
+    IS_MURDER = #{isMurder,jdbcType=VARCHAR},
+    INVOLVE_DEATH = #{involveDeath,jdbcType=VARCHAR},
+    DEATH_NUM = #{deathNum,jdbcType=DECIMAL},
+    PERSON_IN_CHARGE = #{personInCharge,jdbcType=VARCHAR},
+    PIC_DUTY = #{picDuty,jdbcType=VARCHAR},
+    PIC_PHONE = #{picPhone,jdbcType=VARCHAR},
+    PIC_CERTIFICATE_TYPE = #{picCertificateType,jdbcType=VARCHAR},
+    PIC_CERTIFICATE_NO = #{picCertificateNo,jdbcType=VARCHAR},
+    AUDITOR = #{auditor,jdbcType=VARCHAR},
+    AUDITOR_PHONE = #{auditorPhone,jdbcType=VARCHAR},
+    AUDIT_DATETIME = #{auditDatetime,jdbcType=TIMESTAMP},
+    SYSTEM_CASE_NO = #{systemCaseNo,jdbcType=VARCHAR},
+    CASE_SERIAL_NO = #{caseSerialNo,jdbcType=VARCHAR},
+    IS_REGISTERED = #{isRegistered,jdbcType=VARCHAR},
+    EXT_ID = #{extId,jdbcType=VARCHAR},
+    INTERNAL_MATCH = #{internalMatch,jdbcType=VARCHAR},
+    LOCAL_STORE_DATETIME = #{localStoreDatetime,jdbcType=TIMESTAMP},
+    LOCAL_CREATE_DATETIME = #{localCreateDatetime,jdbcType=TIMESTAMP},
+    VA = #{va,jdbcType=CLOB}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select ID, INIT_SERVER_NO, LAB_ID, CASE_NO, CASE_NAME, SCENE_REGIONALISM, SCENE_PLACE,
+    OCCURRENCE_DATETIME, CASE_LEVEL, CASE_TYPE, CASE_PROPERTY, HARM_LEVEL, SCENE_AREA_TYPE,
+    CASE_INFO_ORIGIN, CASE_BRIEF, CASE_STATUS, DELETE_FLAG, TRANSFER_FLAG, TRANSFER_USER,
+    TRANSFER_DATETIME, IDENTIFY_FLAG, IDENTIFY_ROLE, DATA_SOURCE, DATA_LEVEL, PHY_EVIDENCE_FLAG,
+    RESERVE2, RESERVE3, RESERVE4, RESERVE5, RESERVE6, REMARK, CREATE_DATETIME, CREATE_USER,
+    UPDATE_DATETIME, UPDATE_USER, CASE_VERSION3_NO, CASE_ACCEPTOR_PHONE, IS_URGENT, IS_MURDER,
+    INVOLVE_DEATH, DEATH_NUM, PERSON_IN_CHARGE, PIC_DUTY, PIC_PHONE, PIC_CERTIFICATE_TYPE,
+    PIC_CERTIFICATE_NO, AUDITOR, AUDITOR_PHONE, AUDIT_DATETIME, SYSTEM_CASE_NO, CASE_SERIAL_NO,
+    IS_REGISTERED, EXT_ID, INTERNAL_MATCH, LOCAL_STORE_DATETIME, LOCAL_CREATE_DATETIME,
+    VA
+    from CASE_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select ID, INIT_SERVER_NO, LAB_ID, CASE_NO, CASE_NAME, SCENE_REGIONALISM, SCENE_PLACE,
+    OCCURRENCE_DATETIME, CASE_LEVEL, CASE_TYPE, CASE_PROPERTY, HARM_LEVEL, SCENE_AREA_TYPE,
+    CASE_INFO_ORIGIN, CASE_BRIEF, CASE_STATUS, DELETE_FLAG, TRANSFER_FLAG, TRANSFER_USER,
+    TRANSFER_DATETIME, IDENTIFY_FLAG, IDENTIFY_ROLE, DATA_SOURCE, DATA_LEVEL, PHY_EVIDENCE_FLAG,
+    RESERVE2, RESERVE3, RESERVE4, RESERVE5, RESERVE6, REMARK, CREATE_DATETIME, CREATE_USER,
+    UPDATE_DATETIME, UPDATE_USER, CASE_VERSION3_NO, CASE_ACCEPTOR_PHONE, IS_URGENT, IS_MURDER,
+    INVOLVE_DEATH, DEATH_NUM, PERSON_IN_CHARGE, PIC_DUTY, PIC_PHONE, PIC_CERTIFICATE_TYPE,
+    PIC_CERTIFICATE_NO, AUDITOR, AUDITOR_PHONE, AUDIT_DATETIME, SYSTEM_CASE_NO, CASE_SERIAL_NO,
+    IS_REGISTERED, EXT_ID, INTERNAL_MATCH, LOCAL_STORE_DATETIME, LOCAL_CREATE_DATETIME,
+    VA
+    from CASE_INFO ORDER BY CREATE_DATETIME DESC
+  </select>
+
+  <select id="selectCaseInfoListData"  resultMap="BaseResultMap">
+    select * from (
+        select rownum as rn, t.* from (
+            select c.ID,
+               c.INIT_SERVER_NO,
+               c.LAB_ID,
+               c.CASE_NO,
+               c.CASE_NAME,
+               c.SCENE_REGIONALISM,
+               c.SCENE_PLACE,
+               c.OCCURRENCE_DATETIME,
+               c.CASE_LEVEL,
+               c.CASE_TYPE,
+               c.CASE_PROPERTY,
+               c.HARM_LEVEL,
+               c.SCENE_AREA_TYPE,
+               c.CASE_INFO_ORIGIN,
+               c.CASE_BRIEF,
+               c.CASE_STATUS,
+               c.DELETE_FLAG,
+               c.TRANSFER_FLAG,
+               c.TRANSFER_USER,
+               c.TRANSFER_DATETIME,
+               c.IDENTIFY_FLAG,
+               c.IDENTIFY_ROLE,
+               c.DATA_SOURCE,
+               c.DATA_LEVEL,
+               c.PHY_EVIDENCE_FLAG,
+               c.RESERVE2,
+               c.RESERVE3,
+               c.RESERVE4,
+               c.RESERVE5,
+               c.RESERVE6,
+               c.REMARK,
+               c.CREATE_DATETIME,
+               c.CREATE_USER,
+               c.UPDATE_DATETIME,
+               c.UPDATE_USER,
+               c.CASE_VERSION3_NO,
+               c.CASE_ACCEPTOR_PHONE,
+               c.IS_URGENT,
+               c.IS_MURDER,
+               c.INVOLVE_DEATH,
+               c.DEATH_NUM,
+               c.PERSON_IN_CHARGE,
+               c.PIC_DUTY,
+               c.PIC_PHONE,
+               c.PIC_CERTIFICATE_TYPE,
+               c.PIC_CERTIFICATE_NO,
+               c.AUDITOR,
+               c.AUDITOR_PHONE,
+               c.AUDIT_DATETIME,
+               c.SYSTEM_CASE_NO,
+               c.CASE_SERIAL_NO,
+               c.IS_REGISTERED,
+               c.EXT_ID,
+               c.INTERNAL_MATCH,
+               c.LOCAL_STORE_DATETIME,
+               c.LOCAL_CREATE_DATETIME,
+               c.VA,
+              (select i.external_sys_no from external_info i where i.local_data_id = c.id and i.SOURCE_FLAG = 0 and rownum=1 ) as external_sys_no
+        from CASE_INFO c
+        where
+           1=1 AND c.DELETE_FLAG = 0
+          <if test=" entity.initServerNoLike != null and entity.initServerNoLike != '' ">
+           and c.init_server_no like ''||#{entity.initServerNoLike,jdbcType=VARCHAR}||'%'
+          </if>
+        ) t where rownum &lt;=#{rows}
+      ) where rn &gt;#{offset}
+  </select>
+
+  <select id="selectByCaseNo" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select t.ID,t.CASE_NAME,t.CASE_TYPE,t.CASE_NO,t.CASE_BRIEF,t.CREATE_USER AS CREATE_PERSON,t.UPDATE_USER AS UPDATE_PERESON,t.CASE_STATUS,
+          t.CASE_PROPERTY,t.CREATE_DATETIME,t.UPDATE_DATETIME
+    from case_info t left join consignment ct on t.id = ct.event_id where t.case_no = #{caseNo,jdbcType=VARCHAR} and ct.is_append='0'
+  </select>
+
+  <!--selectByCaseId-->
+  <select id="selectByCaseId" parameterType="java.lang.String" resultMap="BaseResultMap">
+      select
+        ID, INIT_SERVER_NO, LAB_ID, CASE_NO, CASE_NAME, SCENE_REGIONALISM, SCENE_PLACE,
+        OCCURRENCE_DATETIME, CASE_LEVEL, CASE_TYPE, CASE_PROPERTY, HARM_LEVEL, SCENE_AREA_TYPE,
+        CASE_INFO_ORIGIN, CASE_BRIEF, CASE_STATUS, DELETE_FLAG, TRANSFER_FLAG, TRANSFER_USER,
+        TRANSFER_DATETIME, IDENTIFY_FLAG, IDENTIFY_ROLE, DATA_SOURCE, DATA_LEVEL, PHY_EVIDENCE_FLAG,
+        RESERVE2, RESERVE3, RESERVE4, RESERVE5, RESERVE6, REMARK, CREATE_DATETIME, CREATE_USER,
+        UPDATE_DATETIME, UPDATE_USER, CASE_VERSION3_NO, CASE_ACCEPTOR_PHONE, IS_URGENT, IS_MURDER,
+        INVOLVE_DEATH, DEATH_NUM, PERSON_IN_CHARGE, PIC_DUTY, PIC_PHONE, PIC_CERTIFICATE_TYPE,
+        PIC_CERTIFICATE_NO, AUDITOR, AUDITOR_PHONE, AUDIT_DATETIME, SYSTEM_CASE_NO, CASE_SERIAL_NO,
+        IS_REGISTERED, EXT_ID, INTERNAL_MATCH, LOCAL_STORE_DATETIME, LOCAL_CREATE_DATETIME,
+        VA
+      from case_info
+      where ID = #{caseId,jdbcType=VARCHAR}
+    </select>
+
+  <!--selectBySampleId-->
+  <select id="selectBySampleId" parameterType="java.lang.String" resultMap="BaseResultMap">
+      select ci.ID, ci.CASE_NO, ci.CASE_NAME,
+      ci.CASE_BRIEF, ci.CASE_TYPE, ci.CASE_PROPERTY,
+      ci.CASE_LEVEL, ci.CASE_STATUS
+      from SAMPLE_INFO si ,consignment ct ,case_info ci
+      where si.CONSIGNMENT_ID = ct.ID AND  ct.EVENT_ID = ci.ID
+      and si.ID = #{sampleId,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

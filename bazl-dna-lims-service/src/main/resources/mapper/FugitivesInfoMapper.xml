@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.lims.dao.FugitivesInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.dna.lims.model.po.FugitivesInfo" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="INVOLVED_NO" property="involvedNo" jdbcType="VARCHAR" />
+    <result column="INVOLVED_NAME" property="involvedName" jdbcType="VARCHAR" />
+    <result column="PERSON_NAME" property="personName" jdbcType="VARCHAR" />
+    <result column="PERSON_TYPE" property="personType" jdbcType="VARCHAR" />
+    <result column="PERSON_GENDER" property="personGender" jdbcType="VARCHAR" />
+    <result column="PERSON_AGE" property="personAge" jdbcType="VARCHAR" />
+    <result column="PERSON_CARD" property="personCard" jdbcType="VARCHAR" />
+    <result column="FUGITIVE_NO" property="fugitiveNo" jdbcType="VARCHAR" />
+    <result column="SUSPECT" property="suspect" jdbcType="VARCHAR" />
+    <result column="NATIVE_PLACE" property="nativePlace" jdbcType="VARCHAR" />
+    <result column="NATION" property="nation" jdbcType="VARCHAR" />
+    <result column="BIRTH_PALCE" property="birthPalce" jdbcType="VARCHAR" />
+    <result column="CURRENT_ADDRESS" property="currentAddress" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="VOBaseResultMap" type="com.bazl.dna.lims.model.vo.FugitivesInfoVo" >
+    <id column="ID" property="entity.id" jdbcType="VARCHAR" />
+    <result column="INVOLVED_NO" property="entity.involvedNo" jdbcType="VARCHAR" />
+    <result column="INVOLVED_NAME" property="entity.involvedName" jdbcType="VARCHAR" />
+    <result column="PERSON_NAME" property="entity.personName" jdbcType="VARCHAR" />
+    <result column="PERSON_TYPE" property="entity.personType" jdbcType="VARCHAR" />
+    <result column="PERSON_GENDER" property="entity.personGender" jdbcType="VARCHAR" />
+    <result column="PERSON_AGE" property="entity.personAge" jdbcType="VARCHAR" />
+    <result column="PERSON_CARD" property="entity.personCard" jdbcType="VARCHAR" />
+    <result column="FUGITIVE_NO" property="entity.fugitiveNo" jdbcType="VARCHAR" />
+    <result column="SUSPECT" property="entity.suspect" jdbcType="VARCHAR" />
+    <result column="NATIVE_PLACE" property="entity.nativePlace" jdbcType="VARCHAR" />
+    <result column="NATION" property="entity.nation" jdbcType="VARCHAR" />
+    <result column="BIRTH_PALCE" property="entity.birthPalce" jdbcType="VARCHAR" />
+    <result column="CURRENT_ADDRESS" property="entity.currentAddress" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="entity.createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="entity.createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="entity.updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="entity.updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="entity.deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="entity.deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="entity.deletePerson" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    ID, INVOLVED_NO, INVOLVED_NAME, PERSON_NAME, PERSON_TYPE,
+    PERSON_GENDER, PERSON_AGE, PERSON_CARD, FUGITIVE_NO, SUSPECT, NATIVE_PLACE, 
+    NATION, BIRTH_PALCE, CURRENT_ADDRESS,
+    CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME,UPDATE_PERSON, DELETE_FLAG,
+    DELETE_DATETIME, DELETE_PERSON
+  </sql>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from FUGITIVES_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <sql id="VO_Query_Where_Clause">
+    <if test="entity.involvedNo != null and entity.involvedNo !=''">
+      and fi.INVOLVED_NO like '%'||#{entity.involvedNo,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="entity.involvedName != null and entity.involvedName !=''">
+      and fi.INVOLVED_NAME like '%'||#{entity.involvedName,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="entity.personName != null and entity.personName !=''">
+      and fi.PERSON_NAME like '%'||#{entity.personName,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="entity.personCard != null and entity.personCard !=''">
+      and fi.PERSON_CARD like '%'||#{entity.personCard,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="entity.fugitiveNo != null and entity.fugitiveNo !=''">
+      and fi.FUGITIVE_NO  like '%'||#{entity.fugitiveNo,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="entity.deleteFlag != null and entity.deleteFlag !=''">
+      and fi.DELETE_FLAG  = #{entity.deleteFlag,jdbcType=VARCHAR}
+    </if>
+    <if test="caseId != null and caseId !=''">
+      and fmt.CASE_ID  = #{caseId,jdbcType=VARCHAR}
+    </if>
+    <if test="consignmentId != null and consignmentId !=''">
+      and fmt.CONSIGNMENT_INFO_ID  = #{consignmentId,jdbcType=VARCHAR}
+    </if>
+    <if test="delegateOrgCode != null and delegateOrgCode !=''">
+      and exists (select 1 from lims_consignment_info lci,FUGITIVES_MIDDLE_TABLE fmt
+      where fmt.fugitives_info_id = fi.id
+      and lci.consignment_id = fmt.consignment_info_id
+      and fi.delete_flag  = '0'
+      and lci.delete_flag = '0'
+      and lci.status = '01'
+      and lci.delegate_org_code = #{delegateOrgCode,jdbcType=VARCHAR}
+      <if test="delegateEndDatetime != null">
+        and TO_CHAR(lci.DELEGATE_DATETIME,'yyyy-MM-dd') &lt;= TO_CHAR(#{delegateEndDatetime,jdbcType=TIMESTAMP},'yyyy-MM-dd')
+      </if>)
+    </if>
+  </sql>
+  <sql id="Query_Where_Clause">
+    <if test="personName != null and personName !=''">
+      and fi.PERSON_NAME = #{personName,jdbcType=VARCHAR}
+    </if>
+    <if test="personCard != null and personCard !=''">
+      and fi.PERSON_CARD = #{personCard,jdbcType=VARCHAR}
+    </if>
+    <if test="fugitiveNo != null and fugitiveNo !=''">
+      and fi.FUGITIVE_NO = #{fugitiveNo,jdbcType=VARCHAR}
+    </if>
+    <if test="deleteFlag != null and deleteFlag !=''">
+      and fi.DELETE_FLAG  = #{deleteFlag,jdbcType=VARCHAR}
+    </if>
+  </sql>
+  
+  <select id="selectListVO" parameterType="com.bazl.dna.lims.model.vo.FugitivesInfoVo" resultMap="VOBaseResultMap">
+    select fi.id, fi.INVOLVED_NO, fi.INVOLVED_NAME, fi.PERSON_NAME, fi.PERSON_TYPE, fi.PERSON_GENDER, fi.PERSON_AGE, fi.PERSON_CARD,
+    fi.FUGITIVE_NO, fi.CREATE_DATETIME, fi.CREATE_PERSON
+    from FUGITIVES_INFO fi
+    left join FUGITIVES_MIDDLE_TABLE fmt on fmt.FUGITIVES_INFO_ID = fi.id
+    <where>
+      <if test="_parameter != null">
+        <include refid="VO_Query_Where_Clause"/>
+      </if>
+    </where>
+  </select>
+  
+  <select id="selectList" parameterType="com.bazl.dna.lims.model.po.FugitivesInfo" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from FUGITIVES_INFO fi
+    <where>
+      <if test="_parameter != null">
+        <include refid="Query_Where_Clause"/>
+      </if>
+    </where>
+  </select>
+  
+  <!--查询与补送list-->
+  <select id="selectVOList" parameterType="com.bazl.dna.lims.model.vo.FugitivesInfoVo" resultMap="VOBaseResultMap">
+    select * from (
+    select rownum as rn, t.* from (
+    select fi.id, fi.INVOLVED_NO, fi.INVOLVED_NAME, fi.PERSON_NAME,
+    fi.PERSON_TYPE, fi.PERSON_GENDER, fi.PERSON_AGE, fi.PERSON_CARD,
+    fi.FUGITIVE_NO, fi.CREATE_DATETIME, fi.CREATE_PERSON,
+    di_1.dict_name as personTypeName,
+    di_2.dict_name as personGenderName
+    from FUGITIVES_INFO fi
+    left join dict_item di_1 on di_1.dict_code = fi.PERSON_TYPE and di_1.DICT_TYPE_CODE='PERSON_TYPE'
+    left join dict_item di_2 on di_2.dict_code = fi.PERSON_GENDER and di_2.DICT_TYPE_CODE='GENDER'
+    <where>
+      <if test="_parameter != null">
+        <include refid="VO_Query_Where_Clause"/>
+      </if>
+    </where>
+    order by fi.CREATE_DATETIME desc
+    ) t where  rownum &lt;=#{rows}
+    ) where rn &gt;#{offset}
+  </select>
+  <!--查询与补送count-->
+  <select id="selectVOCnt" parameterType="com.bazl.dna.lims.model.vo.FugitivesInfoVo" resultType="int">
+    SELECT count(fi.id) from FUGITIVES_INFO fi
+    <where>
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clause"/>
+    </if>
+    </where>
+    order by fi.CREATE_DATETIME desc
+  </select>
+
+  <insert id="insert" parameterType="com.bazl.dna.lims.model.po.FugitivesInfo" >
+    insert into FUGITIVES_INFO (ID, INVOLVED_NO, INVOLVED_NAME, PERSON_NAME,
+    PERSON_TYPE, PERSON_GENDER, PERSON_AGE, PERSON_CARD,
+      FUGITIVE_NO, CREATE_DATETIME, CREATE_PERSON
+      )
+    values (#{id,jdbcType=VARCHAR}, #{involvedNo,jdbcType=VARCHAR}, #{involvedName,jdbcType=VARCHAR},
+      #{personName,jdbcType=VARCHAR}, #{personType,jdbcType=VARCHAR},
+      #{personGender,jdbcType=VARCHAR}, #{personAge,jdbcType=VARCHAR}, #{personCard,jdbcType=VARCHAR},
+      #{fugitiveNo,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.lims.model.po.FugitivesInfo" >
+    update FUGITIVES_INFO
+    set INVOLVED_NO = #{involvedNo,jdbcType=VARCHAR},
+      INVOLVED_NAME = #{involvedName,jdbcType=VARCHAR},
+      PERSON_NAME = #{personName,jdbcType=VARCHAR},
+      PERSON_TYPE = #{personType,jdbcType=VARCHAR},
+      PERSON_GENDER = #{personGender,jdbcType=VARCHAR},
+      PERSON_AGE = #{personAge,jdbcType=VARCHAR},
+      PERSON_CARD = #{personCard,jdbcType=VARCHAR},
+      FUGITIVE_NO = #{fugitiveNo,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+      DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+      DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="deleteFugitivesInfo" parameterType="com.bazl.dna.lims.model.po.FugitivesInfo" >
+    update FUGITIVES_INFO
+    set DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+      DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+      DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select <include refid="Base_Column_List"/>
+    from FUGITIVES_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectFugitivesList" resultMap="VOBaseResultMap" parameterType="java.lang.String" >
+    select fi.id, fi.INVOLVED_NO, fi.INVOLVED_NAME, fi.PERSON_NAME, fi.PERSON_TYPE, fi.PERSON_GENDER, fi.PERSON_AGE, fi.PERSON_CARD,
+    fi.FUGITIVE_NO, fi.CREATE_DATETIME, fi.CREATE_PERSON,
+    di_1.dict_name as personTypeName,
+    di_2.dict_name as personGenderName
+    from FUGITIVES_INFO fi
+    left join dict_item di_1 on di_1.dict_code = fi.PERSON_TYPE and di_1.DICT_TYPE_CODE='PERSON_TYPE'
+    left join dict_item di_2 on di_2.dict_code = fi.PERSON_GENDER and di_2.DICT_TYPE_CODE='GENDER'
+    where fi.PERSON_NAME like '%'||#{searchFugitives}||'%'
+    union all
+    select fi.id, fi.PERSON_NAME, fi.PERSON_TYPE, fi.PERSON_GENDER, fi.PERSON_AGE, fi.PERSON_CARD,
+    fi.FUGITIVE_NO, fi.CREATE_DATETIME, fi.CREATE_PERSON,
+    di_1.dict_name as personTypeName,
+    di_2.dict_name as personGenderName
+    from FUGITIVES_INFO fi
+    left join dict_item di_1 on di_1.dict_code = fi.PERSON_TYPE and di_1.DICT_TYPE_CODE='PERSON_TYPE'
+    left join dict_item di_2 on di_2.dict_code = fi.PERSON_GENDER and di_2.DICT_TYPE_CODE='GENDER'
+    where fi.PERSON_CARD like '%'||#{searchFugitives}||'%'
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select <include refid="Base_Column_List"/>
+    from FUGITIVES_INFO
+  </select>
+
+  <!-- 批量插入生成的兑换码 -->
+  <insert id ="insertBatchFugitives" parameterType="java.util.List" useGeneratedKeys="false">
+    insert into FUGITIVES_INFO (ID, INVOLVED_NO, INVOLVED_NAME, PERSON_NAME, PERSON_TYPE,
+    PERSON_GENDER, PERSON_AGE, PERSON_CARD,
+    FUGITIVE_NO, CREATE_DATETIME, CREATE_PERSON)
+    <foreach collection ="list" item="fugitives" index= "index" separator ="union all">
+      (SELECT
+      #{fugitives.id,jdbcType=VARCHAR}, #{fugitives.involvedNo,jdbcType=VARCHAR}, #{fugitives.involvedName,jdbcType=VARCHAR},
+      #{fugitives.personName,jdbcType=VARCHAR}, #{fugitives.personType,jdbcType=VARCHAR}, #{fugitives.personGender,jdbcType=VARCHAR},
+      #{fugitives.personAge,jdbcType=VARCHAR}, #{fugitives.personCard,jdbcType=VARCHAR}, #{fugitives.fugitiveNo,jdbcType=VARCHAR},
+      #{fugitives.createDatetime,jdbcType=TIMESTAMP}, #{fugitives.createPerson,jdbcType=VARCHAR}
+      FROM DUAL
+      )
+    </foreach >
+  </insert >
+
+  <select id = "selectCountByOrgId" parameterType="com.bazl.dna.lims.model.po.FugitivesInfo" resultType="int">
+    select count(distinct  t.id) from FUGITIVES_INFO t
+    where exists (select 1 from FUGITIVES_MIDDLE_TABLE l,lims_consignment_info lci
+    where l.fugitives_info_id = t.id
+     and lci.consignment_id = l.consignment_info_id
+     and l.delete_flag = '0'
+     and lci.delete_flag = '0'
+     and lci.delegate_org_code = #{orgId,jdbcType=VARCHAR} )
+  </select>
+
+  <select id ="selectCountByCaseStatus" parameterType="com.bazl.dna.lims.model.vo.FugitivesInfoVo" resultType="int">
+    select count(distinct t.id) from FUGITIVES_INFO t
+    left join FUGITIVES_MIDDLE_TABLE l
+    on l.fugitives_info_id = t.id
+    left join lims_consignment_info lci
+    on lci.consignment_id = l.consignment_info_id
+    where l.delete_flag = '0'
+    and lci.delete_flag = '0'
+    and lci.delegate_org_code = #{loginOrgId,jdbcType=VARCHAR}
+    <if test="status != null">
+      and lci.status = #{status, jdbcType=VARCHAR}
+    </if>
+    <if test="appendFlag != null">
+      and lci.APPEND_FLAG = #{appendFlag, jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="selectRelationPersonCnt" parameterType="com.bazl.dna.lims.model.vo.FugitivesInfoVo" resultType="int">
+    select count(distinct lpi.person_id) from lims_person_info lpi
+    left join lims_consignment_info lci
+    on lci.consignment_id  = lpi.consignment_id
+    left join  FUGITIVES_MIDDLE_TABLE fmt
+    on fmt.consignment_info_id = lci.consignment_id
+    left join  FUGITIVES_INFO  fi
+    on fi.id  = fmt.fugitives_info_id
+    where lpi.delete_flag = '0'
+    and lpi.person_type = '08'
+    and fmt.delete_flag = '0'
+    and fi.delete_flag = '0'
+    and lci.CONSIGNMENT_TYPE = '1'
+   <if test="delegateOrgCode !=null and delegateOrgCode !=''">
+     and lci.DELEGATE_ORG_CODE = #{delegateOrgCode, jdbcType=VARCHAR}
+   </if>
+  </select>
+
+  <select id="selectCntByAppraisalBook" parameterType="com.bazl.dna.lims.model.vo.FugitivesInfoVo" resultType="int">
+    select count(distinct fi.id) from FUGITIVES_INFO fi
+    where exists (select 1 from lims_consignment_info lci,
+    FUGITIVES_MIDDLE_TABLE fmt,
+    lims_case_info li
+    where fmt.FUGITIVES_INFO_ID = fi.ID
+     and fmt.consignment_info_id = lci.consignment_id
+     and lci.case_id = li.case_id
+     and lci.CONSIGNMENT_TYPE = '1'
+     and lci.delete_flag = '0'
+     and fi.delete_flag = '0'
+     and li.delete_flag = '0'
+     and li.case_status = '03'
+     <if test="loginOrgId !=null and loginOrgId !=''">
+     and lci.DELEGATE_ORG_CODE = #{loginOrgId, jdbcType=VARCHAR}
+     </if>
+     )
+  </select>
+
+  <select id="selectListByCaseId" parameterType="com.bazl.dna.lims.model.vo.FugitivesInfoVo" resultMap="VOBaseResultMap">
+     select <include refid="Base_Column_List"/>
+    from FUGITIVES_INFO fi
+    where exists (select 1 from lims_consignment_info lci,
+    FUGITIVES_MIDDLE_TABLE fmt,
+    lims_case_info li
+    where fmt.FUGITIVES_INFO_ID = fi.ID
+    and fmt.consignment_info_id = lci.consignment_id
+    and lci.case_id = li.case_id
+    and lci.CONSIGNMENT_TYPE = '1'
+    and lci.delete_flag = '0'
+    and fi.delete_flag = '0'
+    and li.delete_flag = '0'
+    <if test="loginOrgId !=null and loginOrgId !=''">
+      and lci.DELEGATE_ORG_CODE = #{loginOrgId, jdbcType=VARCHAR}
+    </if>
+    <if test="consignmentId !=null and consignmentId !=''">
+      and lci.consignment_id = #{consignmentId, jdbcType=VARCHAR}
+    </if>
+    <if test="caseId !=null and caseId !=''">
+      and li.case_id = #{caseId, jdbcType=VARCHAR}
+    </if>
+    )
+  </select>
+
+  <select id ="fugitivesInfoList" parameterType="com.bazl.dna.lims.model.vo.FugitivesInfoVo" resultMap="VOBaseResultMap">
+        select * from (
+        select rownum as rn, t.* from (
+        select distinct
+         fi.id, fi.INVOLVED_NO, fi.INVOLVED_NAME,
+         fi.PERSON_NAME, fi.PERSON_TYPE, fi.PERSON_GENDER,
+         fi.PERSON_CARD, fi.FUGITIVE_NO,fi.SUSPECT,
+         fi.NATIVE_PLACE, fi.BIRTH_PALCE,
+         fi.CURRENT_ADDRESS,lci.ACCEPT_DATETIME,
+         lc.has_append_flag as  APPENDFLAG,
+         lci.DELEGATOR1_NAME as DELEGATOR1NAME,
+         lci.DELEGATE_DATETIME as DELEGATEDATETIME,
+         di_1.dict_name as NATION
+         from  FUGITIVES_INFO fi
+         left join FUGITIVES_MIDDLE_TABLE fmt
+         on fmt.FUGITIVES_INFO_ID = fi.ID
+         left join lims_consignment_info lci
+         on fmt.consignment_info_id = lci.consignment_id
+         left join lims_case_info lc
+         on fmt.case_id = lc.case_id
+         left join dict_item di_1 on di_1.dict_code = fi.nation and di_1.DICT_TYPE_CODE='NATIONALITY'
+        where fi.delete_flag = '0'
+         and fmt.delete_flag = '0'
+         and lci.case_id = lc.case_id
+         and lci.consignment_type = '1'
+        <if test="_parameter != null">
+          <include refid="Query_Clause"/>
+        </if>
+        order by lci.ACCEPT_DATETIME desc
+        )
+        t where  rownum &lt;=#{rows}
+        ) where rn &gt;#{offset}
+  </select>
+
+  <select id ="selectFugitivesCount"  parameterType="com.bazl.dna.lims.model.vo.FugitivesInfoVo" resultType="int">
+    select count(distinct fi.id)  from  FUGITIVES_INFO fi
+    left join FUGITIVES_MIDDLE_TABLE fmt
+    on fmt.FUGITIVES_INFO_ID = fi.ID
+    left join lims_consignment_info lci
+    on fmt.consignment_info_id = lci.consignment_id
+    left join lims_case_info lc
+    on fmt.case_id = lc.case_id
+    where fi.delete_flag = '0'
+    and fmt.delete_flag = '0'
+    and lci.case_id = lc.case_id
+    and lci.consignment_type = '1'
+    <if test="_parameter != null">
+      <include refid="Query_Clause"/>
+    </if>
+  </select>
+
+  <select id="selectListByConsignmentId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List"/>,
+    di_1.dict_name as personTypeName,
+    di_2.dict_name as personGenderName
+    from FUGITIVES_INFO fi
+    left join FUGITIVES_MIDDLE_TABLE fmt on fmt.FUGITIVES_INFO_ID = fi.ID
+    left join dict_item di_1 on di_1.dict_code = fi.PERSON_TYPE and di_1.DICT_TYPE_CODE='PERSON_TYPE'
+    left join dict_item di_2 on di_2.dict_code = fi.PERSON_GENDER and di_2.DICT_TYPE_CODE='GENDER'
+    where fmt.CONSIGNMENT_INFO_ID = #{consignmentId,jdbcType=VARCHAR}
+    and fmt.DELETE_FLAG = '0'
+  </select>
+
+   <sql id="Query_Clause">
+    <if test="delegateOrgCode != null and delegateOrgCode!= ''">
+      and lci.delegate_org_code = #{delegateOrgCode,jdbcType=VARCHAR}
+    </if>
+    <if test="consignmentNo != null and consignmentNo!= ''">
+      and lci.CONSIGNMENT_NO = #{consignmentNo,jdbcType=VARCHAR}
+    </if>
+    <if test="status != null and status!= ''">
+      <if test="status == 02">
+        and lci.STATUS in ('02')
+      </if>
+      <if test="status == 01">
+        and lci.STATUS in ('01')
+      </if>
+      <if test="status == 03">
+        and lci.STATUS in ('03')
+      </if>
+      <if test="status == 04">
+        and lci.STATUS in ('04')
+      </if>
+      <if test="status == 05">
+        and lci.STATUS in ('05')
+      </if>
+    </if>
+    <if test="caseName != null and caseName!= ''">
+      and lc.CASE_NAME like '%'||#{caseName,jdbcType=VARCHAR}||'%'
+    </if>
+     <if test="caseNo != null and caseNo!= ''">
+       and lc.CASE_NO like '%'||#{caseNo,jdbcType=VARCHAR}||'%'
+     </if>
+    <if test="wzSampleNo !=null and wzSampleNo!= ''">
+      and exists (select 1 from LIMS_SAMPLE_INFO_DNA lsid
+      where lsid.consignment_id = lci.consignment_id
+      and lsid.delete_flag = '0'
+      and lsid.evidence_no = #{wzSampleNo,jdbcType=VARCHAR})
+    </if>
+    <if test="sampleNo !=null and sampleNo!= ''">
+      and exists (select 1 from LIMS_SAMPLE_INFO_DNA lsid
+      where lsid.consignment_id = lci.consignment_id
+      and lsid.delete_flag = '0'
+      and lsid.sample_no = #{sampleNo,jdbcType=VARCHAR})
+    </if>
+    <if test="sampleName !=null and sampleName!= ''">
+      and exists (select 1 from LIMS_SAMPLE_INFO_DNA lsid
+      where lsid.consignment_id = lci.consignment_id
+      and lsid.delete_flag = '0'
+      and lsid.sample_name  like '%'||#{sampleName,jdbcType=VARCHAR}||'%')
+    </if>
+    <if test="phone != null and phone !=''">
+      and (lci.DELEGATOR1_PHONE_NUMBER = #{phone,jdbcType=VARCHAR} or lci.DELEGATOR2_PHONE_NUMBER = #{phone,jdbcType=VARCHAR})
+    </if>
+    <if test="delegator1Name != null and delegator1Name!= ''">
+      and (lci.DELEGATOR1_NAME like '%'||#{delegator1Name,jdbcType=VARCHAR}||'%' or lci.DELEGATOR2_NAME like '%'||#{delegator1Name,jdbcType=VARCHAR}||'%')
+    </if>
+    <choose>
+      <when test="delegateStartDatetime != null">
+        and TO_CHAR(lci.DELEGATE_DATETIME,'yyyy-MM-dd') &gt;= TO_CHAR(#{delegateStartDatetime,jdbcType=TIMESTAMP},'yyyy-MM-dd')
+      </when>
+      <when test="wtStartDate != null">
+        and TO_CHAR(lci.DELEGATE_DATETIME,'yyyy-MM-dd') &gt;= TO_CHAR(#{wtStartDate,jdbcType=TIMESTAMP},'yyyy-MM-dd')
+      </when>
+    </choose>
+
+    <if test="delegateEndDatetime != null">
+      and TO_CHAR(lci.DELEGATE_DATETIME,'yyyy-MM-dd') &lt;= TO_CHAR(#{delegateEndDatetime,jdbcType=TIMESTAMP},'yyyy-MM-dd')
+    </if>
+     <if test="acceptDatetime != null">
+       and TO_CHAR(lci.accept_datetime,'yyyy-MM-dd') &lt;= TO_CHAR(#{acceptDatetime,jdbcType=TIMESTAMP},'yyyy-MM-dd')
+     </if>
+    <if test="acceptOrgId != null and acceptOrgId!= ''">
+      and lci.ACCEPT_ORG_ID = #{acceptOrgId,jdbcType=VARCHAR}
+    </if>
+     <if test="fugitivesName != null">
+     and fi.person_name = #{fugitivesName,jdbcType=VARCHAR}
+    </if>
+     <if test="fugitivesCard != null">
+     and fi.person_card = #{fugitivesCard,jdbcType=VARCHAR}
+    </if>
+     <!--在逃人员 亲属信息查询，查询在逃人员亲属姓名 -->
+     <if test="fugitivesRelationName != null and fugitivesRelationName!= ''">
+       and exists(select 1 from lims_person_info lpi
+       where lpi.case_id =fmt.case_id
+       and lpi.consignment_id = fmt.consignment_info_id
+       and lpi.delete_flag = '0'
+       and lpi.person_type = '08'
+       and lpi.person_name = #{fugitivesRelationName,jdbcType=VARCHAR})
+     </if>
+     <!--在逃人员 亲属信息查询，查询在逃人员亲属身份证号码信息 -->
+     <if test="fugitivesRelationCard != null and fugitivesRelationCard!= ''">
+     and exists(select 1 from lims_person_info lpi,
+       person_detail pd
+       where lpi.case_id =fmt.case_id
+       and lpi.consignment_id = fmt.consignment_info_id
+       and pd.person_detail_id = lpi.person_detail_id
+       and lpi.delete_flag = '0'
+       and pd.delete_flag = '0'
+       and lpi.person_type = '08'
+       and pd.person_id_card = #{fugitivesRelationCard,jdbcType=VARCHAR})
+     </if>
+  </sql>
+  
+  <select id = "selectCountByOrgId" parameterType="com.bazl.dna.lims.model.po.FugitivesInfo" resultType="int">
+    select count(distinct  t.id) from FUGITIVES_INFO t
+    where exists (select 1 from FUGITIVES_MIDDLE_TABLE l,lims_consignment_info lci
+    where l.fugitives_info_id = t.id
+     and lci.consignment_id = l.consignment_info_id
+     and l.delete_flag = '0'
+     and lci.delete_flag = '0'
+     and lci.delegate_org_code = #{orgId,jdbcType=VARCHAR} )
+  </select>
+  
+  <select id="selectRelationPersonCnt" parameterType="com.bazl.dna.lims.model.vo.FugitivesInfoVo" resultType="int">
+    select count(distinct lpi.person_id) from lims_person_info lpi
+    left join lims_consignment_info lci
+    on lci.consignment_id  = lpi.consignment_id
+    left join  FUGITIVES_MIDDLE_TABLE fmt
+    on fmt.consignment_info_id = lci.consignment_id
+    left join  FUGITIVES_INFO  fi
+    on fi.id  = fmt.fugitives_info_id
+    where lpi.delete_flag = '0'
+    and lpi.person_type = '08'
+    and fmt.delete_flag = '0'
+    and fi.delete_flag = '0'
+    and lci.CONSIGNMENT_TYPE = '1'
+   <if test="delegateOrgCode !=null and delegateOrgCode !=''">
+     and lci.DELEGATE_ORG_CODE = #{delegateOrgCode, jdbcType=VARCHAR}
+   </if>
+  </select>
+  
+  <select id="selectListByConsignmentId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List"/>,
+    di_1.dict_name as personTypeName,
+    di_2.dict_name as personGenderName
+    from FUGITIVES_INFO fi
+    left join FUGITIVES_MIDDLE_TABLE fmt on fmt.FUGITIVES_INFO_ID = fi.ID
+    left join dict_item di_1 on di_1.dict_code = fi.PERSON_TYPE and di_1.DICT_TYPE_CODE='PERSON_TYPE'
+    left join dict_item di_2 on di_2.dict_code = fi.PERSON_GENDER and di_2.DICT_TYPE_CODE='GENDER'
+    where fmt.CONSIGNMENT_INFO_ID = #{consignmentId,jdbcType=VARCHAR}
+    and fmt.DELETE_FLAG = '0'
+  </select>
+  
+  <select id="selectInfoByPersonNameAndCard" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select <include refid="Base_Column_List"/>
+    from FUGITIVES_INFO fi
+    where fi.PERSON_NAME = #{personName,jdbcType=VARCHAR} and fi.PERSON_CARD = #{personCard,jdbcType=VARCHAR}
+    and fi.DELETE_FLAG = '0'
+  </select>
+  
+  <select id ="selectCountByCaseStatus" parameterType="com.bazl.dna.lims.model.vo.FugitivesInfoVo" resultType="int">
+    select count(distinct t.id) from FUGITIVES_INFO t
+    left join FUGITIVES_MIDDLE_TABLE l
+    on l.fugitives_info_id = t.id
+    left join lims_consignment_info lci
+    on lci.consignment_id = l.consignment_info_id
+    where l.delete_flag = '0'
+    and lci.delete_flag = '0'
+    and lci.delegate_org_code = #{loginOrgId,jdbcType=VARCHAR}
+    <if test="status != null">
+      and lci.status = #{status, jdbcType=VARCHAR}
+    </if>
+    <if test="appendFlag != null">
+      and lci.APPEND_FLAG = #{appendFlag, jdbcType=VARCHAR}
+    </if>
+  </select>
+  
+  <select id="selectCntByAppraisalBook" parameterType="com.bazl.dna.lims.model.vo.FugitivesInfoVo" resultType="int">
+    select count(distinct fi.id) from FUGITIVES_INFO fi
+    where exists (select 1 from lims_consignment_info lci,
+    FUGITIVES_MIDDLE_TABLE fmt,
+    lims_case_info li
+    where fmt.FUGITIVES_INFO_ID = fi.ID
+     and fmt.consignment_info_id = lci.consignment_id
+     and lci.case_id = li.case_id
+     and lci.CONSIGNMENT_TYPE = '1'
+     and lci.delete_flag = '0'
+     and fi.delete_flag = '0'
+     and li.delete_flag = '0'
+     and li.case_status = '03'
+     <if test="loginOrgId !=null and loginOrgId !=''">
+     and lci.DELEGATE_ORG_CODE = #{loginOrgId, jdbcType=VARCHAR}
+     </if>
+     )
+  </select>
+  
+  <!-- 批量插入生成的兑换码 -->
+  <insert id ="insertBatchFugitives" parameterType="java.util.List" useGeneratedKeys="false">
+    insert into FUGITIVES_INFO (ID, INVOLVED_NO, INVOLVED_NAME, PERSON_NAME, PERSON_TYPE,
+    PERSON_GENDER, PERSON_AGE, PERSON_CARD,
+    FUGITIVE_NO, CREATE_DATETIME, CREATE_PERSON)
+    <foreach collection ="list" item="fugitives" index= "index" separator ="union all">
+      (SELECT
+      #{fugitives.id,jdbcType=VARCHAR}, #{fugitives.involvedNo,jdbcType=VARCHAR}, #{fugitives.involvedName,jdbcType=VARCHAR},
+      #{fugitives.personName,jdbcType=VARCHAR}, #{fugitives.personType,jdbcType=VARCHAR}, #{fugitives.personGender,jdbcType=VARCHAR},
+      #{fugitives.personAge,jdbcType=VARCHAR}, #{fugitives.personCard,jdbcType=VARCHAR}, #{fugitives.fugitiveNo,jdbcType=VARCHAR},
+      #{fugitives.createDatetime,jdbcType=TIMESTAMP}, #{fugitives.createPerson,jdbcType=VARCHAR}
+      FROM DUAL
+      )
+    </foreach >
+  </insert >
+  
+</mapper>

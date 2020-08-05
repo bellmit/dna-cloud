@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.CaseUnidentifiedMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.qo.CaseUnidentifiedQuery">
+        <id column="ID" property="id" />
+        <result column="CASE_NAME" property="caseName" />
+        <result column="CASE_ACCEPT_NO" property="caseAcceptNo" />
+        <result column="CASE_ID" property="caseId" />
+        <result column="CONSIGNMENT_FILE_NO" property="consignmentNo" />
+        <result column="CONSIGN_ORG_CODE" property="consignOrgCode" />
+        <result column="CONSIGN_ORG_NAME" property="consignOrgName" />
+        <result column="CONSIGNMENT_REG_DATETIME" property="consignmentRegDatetime" />
+        <result column="CASE_PROPERTY" property="caseProperty" />
+        <result column="CONSIGN_PERSON1_NAME" property="consignPerson1Name" />
+        <result column="CONSIGN_PERSON2_NAME" property="consignPerson2Name" />
+    </resultMap>
+    
+    <select id="countCaseUnidentifiedList" parameterType="com.bazl.dna.database.service.model.qo.CaseUnidentifiedQuery" resultType="int">
+    		select count(ci.id)
+    			from consignment_info ci, case_info c where ci.CASE_ID=c.ID and ci.CASE_TYPE='10'
+    			<!-- 查询条件 -->
+    			<if test="_parameter != null">
+	            <include refid="paginationQueryWhereClause" />
+	        </if>
+    </select>
+    
+    <select id="findCaseUnidentifiedList" parameterType="com.bazl.dna.database.service.model.qo.CaseUnidentifiedQuery" resultMap="BaseResultMap">
+    		select c.CASE_ACCEPT_NO,c.CASE_NAME,c.CASE_PROPERTY,
+    			ci.id, ci.CASE_ID, ci.CONSIGNMENT_FILE_NO, ci.CONSIGN_ORG_CODE, ci.CONSIGN_ORG_NAME, ci.CONSIGNMENT_REG_DATETIME,
+    			ci.CONSIGN_PERSON1_NAME,ci.CONSIGN_PERSON2_NAME
+    			from consignment_info ci, case_info c where ci.CASE_ID=c.ID and ci.CASE_TYPE='10'
+    			<!-- 查询条件 -->
+    			<if test="_parameter != null">
+	            <include refid="paginationQueryWhereClause" />
+	        </if>
+    			limit #{offset}, #{rows}
+    </select>
+    
+    <sql id="paginationQueryWhereClause">
+    		<if test="query.caseAcceptNo != null and query.caseAcceptNo != '' ">
+    			and c.CASE_ACCEPT_NO = #{query.caseAcceptNo,jdbcType=VARCHAR}
+    		</if>
+    		<if test="query.caseName != null and query.caseName != '' ">
+    			and c.CASE_NAME like concat('%',#{query.caseName,jdbcType=VARCHAR},'%')
+    		</if>
+    		<if test="query.caseProperty != null and query.caseProperty != '' ">
+    			and c.CASE_PROPERTY = #{query.caseProperty,jdbcType=VARCHAR}
+    		</if>
+    		<if test="query.consignmentNo != null and query.consignmentNo != '' ">
+    			and ci.CONSIGNMENT_FILE_NO = #{query.consignmentNo,jdbcType=VARCHAR}
+    		</if>
+    		<if test="query.consignmentRegStartDatetime != null and query.consignmentRegStartDatetime != '' ">
+            and ci.CONSIGNMENT_REG_DATETIME &gt;= #{query.consignmentRegStartDatetime,jdbcType=VARCHAR}
+        </if>
+        <if test="query.consignmentRegEndDatetime != null and query.consignmentRegEndDatetime != '' ">
+            and ci.CONSIGNMENT_REG_DATETIME &lt;= #{query.consignmentRegEndDatetime,jdbcType=VARCHAR}
+        </if>
+    		<if test="query.consignPersonName != null and query.consignPersonName != '' ">
+    			and ci.CONSIGN_PERSON1_NAME = #{query.consignPersonName,jdbcType=VARCHAR} or ci.CONSIGN_PERSON2_NAME = #{query.consignPersonName,jdbcType=VARCHAR}
+    		</if>
+    		<if test="query.clientOrgList != null and query.clientOrgList.size > 0">
+    			and ci.CONSIGN_ORG_CODE in
+			<foreach collection="query.clientOrgList" item="id" open="(" close=")"
+				separator=",">
+				#{id}
+			</foreach>
+    		</if>
+    </sql>
+
+</mapper>

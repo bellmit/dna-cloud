@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.QuickCompareQueueMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.QuickCompareQueue">
+        <id column="ID" property="id" />
+        <result column="COMPARE_WEIGHT" property="compareWeight" />
+        <result column="COMPARE_MODE" property="compareMode" />
+        <result column="PENDING_SAMPLEA_NO" property="pendingSampleaNo" />
+        <result column="PENDING_SAMPLEA_NAME" property="pendingSampleaName" />
+        <result column="PENDING_SAMPLEA_RELATION" property="pendingSampleaRelation" />
+        <result column="PENDING_SAMPLEA_GENE_INFO" property="pendingSampleaGeneInfo" />
+        <result column="PENDING_SAMPLEB_NO" property="pendingSamplebNo" />
+        <result column="PENDING_SAMPLEB_NAME" property="pendingSamplebName" />
+        <result column="PENDING_SAMPLEB_RELATION" property="pendingSamplebRelation" />
+        <result column="PENDING_SAMPLEB_GENE_INFO" property="pendingSamplebGeneInfo" />
+        <result column="PANELA_ID" property="panelaId" />
+        <result column="PANELA_NAME" property="panelaName" />
+        <result column="PANELB_ID" property="panelbId" />
+        <result column="PANELB_NAME" property="panelbName" />
+        <result column="TARGET_RELATION" property="targetReation" />
+        <result column="COMPARE_PARAMS" property="compareParams" />
+        <result column="population_frequency_id" property="populationFrequencyId" />
+        <result column="QUEUE_STATUS" property="queueStatus" />
+        <result column="CREATE_DATETIME" property="createDatetime" />
+        <result column="CREATE_PERSON_ID" property="createPersonId" />
+        <result column="CREATE_PERSON_NAME" property="createPersonName" />
+        <result column="UPDATE_DATETIME" property="updateDatetime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID, COMPARE_WEIGHT, COMPARE_MODE, PENDING_SAMPLEA_NO, PENDING_SAMPLEA_NAME, PENDING_SAMPLEA_RELATION,
+        PENDING_SAMPLEA_GENE_INFO, PENDING_SAMPLEB_NO, PENDING_SAMPLEB_NAME, PENDING_SAMPLEB_RELATION,
+        PENDING_SAMPLEB_GENE_INFO, PANELA_ID, PANELA_NAME,PANELB_ID, PANELB_NAME, COMPARE_PARAMS,
+        TARGET_RELATION,population_frequency_id,
+        QUEUE_STATUS, CREATE_DATETIME, CREATE_PERSON_ID, CREATE_PERSON_NAME, UPDATE_DATETIME
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from quick_compare_queue
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from quick_compare_queue
+        where ID = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bazl.dna.database.service.model.po.QuickCompareQueue"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into quick_compare_queue (ID, COMPARE_WEIGHT, COMPARE_MODE,
+        PENDING_SAMPLEA_NO, PENDING_SAMPLEA_NAME, PENDING_SAMPLEA_RELATION,
+        PENDING_SAMPLEA_GENE_INFO, PENDING_SAMPLEB_NO,
+        PENDING_SAMPLEB_NAME, PENDING_SAMPLEB_RELATION,
+        PENDING_SAMPLEB_GENE_INFO, PANELA_ID, PANELA_NAME,PANELB_ID,
+        PANELB_NAME, TARGET_RELATION,
+        COMPARE_PARAMS, population_frequency_id, QUEUE_STATUS,
+        CREATE_DATETIME, CREATE_PERSON_ID, CREATE_PERSON_NAME,
+        UPDATE_DATETIME)
+        values (#{id,jdbcType=INTEGER}, #{compareWeight,jdbcType=TINYINT}, #{compareMode,jdbcType=INTEGER},
+        #{pendingSampleaNo,jdbcType=VARCHAR}, #{pendingSampleaName,jdbcType=VARCHAR}, #{pendingSampleaRelation,jdbcType=VARCHAR},
+        #{pendingSampleaGeneInfo,jdbcType=CHAR}, #{pendingSamplebNo,jdbcType=VARCHAR},
+        #{pendingSamplebName,jdbcType=VARCHAR}, #{pendingSamplebRelation,jdbcType=VARCHAR},
+        #{pendingSamplebGeneInfo,jdbcType=CHAR}, #{panelaId,jdbcType=INTEGER}, #{panelaName,jdbcType=VARCHAR},
+        #{panelbId,jdbcType=INTEGER}, #{panelbName,jdbcType=VARCHAR}, #{targetReation,jdbcType=VARCHAR},
+        #{compareParams,jdbcType=CHAR}, #{populationFrequencyId,jdbcType=INTEGER}, #{queueStatus,jdbcType=VARCHAR},
+        #{createDatetime,jdbcType=TIMESTAMP}, #{createPersonId,jdbcType=VARCHAR}, #{createPersonName,jdbcType=VARCHAR},
+        #{updateDatetime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bazl.dna.database.service.model.po.QuickCompareQueue">
+        insert into quick_compare_queue
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="compareWeight != null">
+                COMPARE_WEIGHT,
+            </if>
+            <if test="compareMode != null">
+                COMPARE_MODE,
+            </if>
+            <if test="pendingSampleaNo != null">
+                PENDING_SAMPLEA_NO,
+            </if>
+            <if test="pendingSampleaName != null">
+                PENDING_SAMPLEA_NAME,
+            </if>
+            <if test="pendingSampleaRelation != null">
+                PENDING_SAMPLEA_RELATION,
+            </if>
+            <if test="pendingSampleaGeneInfo != null">
+                PENDING_SAMPLEA_GENE_INFO,
+            </if>
+            <if test="pendingSamplebNo != null">
+                PENDING_SAMPLEB_NO,
+            </if>
+            <if test="pendingSamplebName != null">
+                PENDING_SAMPLEB_NAME,
+            </if>
+            <if test="pendingSamplebRelation != null">
+                PENDING_SAMPLEB_RELATION,
+            </if>
+            <if test="pendingSamplebGeneInfo != null">
+                PENDING_SAMPLEB_GENE_INFO,
+            </if>
+            <if test="panelaId != null">
+                PANELA_ID,
+            </if>
+            <if test="panelaName != null">
+                PANELA_NAME,
+            </if>
+            <if test="panelbId != null">
+                PANELB_ID,
+            </if>
+            <if test="panelbName != null">
+                PANELB_NAME,
+            </if>
+            <if test="targetReation != null">
+                TARGET_RELATION,
+            </if>
+            <if test="compareParams != null">
+                COMPARE_PARAMS,
+            </if>
+            <if test="populationFrequencyId != null">
+                population_frequency_id,
+            </if>
+            <if test="queueStatus != null">
+                QUEUE_STATUS,
+            </if>
+            <if test="createDatetime != null">
+                CREATE_DATETIME,
+            </if>
+            <if test="createPersonId != null">
+                CREATE_PERSON_ID,
+            </if>
+            <if test="createPersonName != null">
+                CREATE_PERSON_NAME,
+            </if>
+            <if test="updateDatetime != null">
+                UPDATE_DATETIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="compareWeight != null">
+                #{compareWeight,jdbcType=TINYINT},
+            </if>
+            <if test="compareMode != null">
+                #{compareMode,jdbcType=INTEGER},
+            </if>
+            <if test="pendingSampleaNo != null">
+                #{pendingSampleaNo,jdbcType=VARCHAR},
+            </if>
+            <if test="pendingSampleaName != null">
+                #{pendingSampleaName,jdbcType=VARCHAR},
+            </if>
+            <if test="pendingSampleaRelation != null">
+                #{pendingSampleaRelation,jdbcType=VARCHAR},
+            </if>
+            <if test="pendingSampleaGeneInfo != null">
+                #{pendingSampleaGeneInfo,jdbcType=CHAR},
+            </if>
+            <if test="pendingSamplebNo != null">
+                #{pendingSamplebNo,jdbcType=VARCHAR},
+            </if>
+            <if test="pendingSamplebName != null">
+                #{pendingSamplebName,jdbcType=VARCHAR},
+            </if>
+            <if test="pendingSamplebRelation != null">
+                #{pendingSamplebRelation,jdbcType=VARCHAR},
+            </if>
+            <if test="pendingSamplebGeneInfo != null">
+                #{pendingSamplebGeneInfo,jdbcType=CHAR},
+            </if>
+            <if test="panelaId != null">
+                #{panelaId,jdbcType=INTEGER},
+            </if>
+            <if test="panelaName != null">
+                #{panelaName,jdbcType=VARCHAR},
+            </if>
+            <if test="panelbId != null">
+                #{panelbId,jdbcType=INTEGER},
+            </if>
+            <if test="panelbName != null">
+                #{panelbName,jdbcType=VARCHAR},
+            </if>
+            <if test="targetReation != null">
+                #{targetReation,jdbcType=VARCHAR},
+            </if>
+            <if test="compareParams != null">
+                #{compareParams,jdbcType=CHAR},
+            </if>
+            <if test="populationFrequencyId != null">
+                #{populationFrequencyId,jdbcType=INTEGER},
+            </if>
+            <if test="queueStatus != null">
+                #{queueStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="createDatetime != null">
+                #{createDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createPersonId != null">
+                #{createPersonId,jdbcType=VARCHAR},
+            </if>
+            <if test="createPersonName != null">
+                #{createPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDatetime != null">
+                #{updateDatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bazl.dna.database.service.model.po.QuickCompareQueue">
+        update quick_compare_queue
+        <set>
+            <if test="compareWeight != null">
+                COMPARE_WEIGHT = #{compareWeight,jdbcType=TINYINT},
+            </if>
+            <if test="compareMode != null">
+                COMPARE_MODE = #{compareMode,jdbcType=INTEGER},
+            </if>
+            <if test="pendingSampleaNo != null">
+                PENDING_SAMPLEA_NO = #{pendingSampleaNo,jdbcType=VARCHAR},
+            </if>
+            <if test="pendingSampleaName != null">
+                PENDING_SAMPLEA_NAME = #{pendingSampleaName,jdbcType=VARCHAR},
+            </if>
+            <if test="pendingSampleaRelation != null">
+                PENDING_SAMPLEA_RELATION = #{pendingSampleaRelation,jdbcType=VARCHAR},
+            </if>
+            <if test="pendingSampleaGeneInfo != null">
+                PENDING_SAMPLEA_GENE_INFO = #{pendingSampleaGeneInfo,jdbcType=CHAR},
+            </if>
+            <if test="pendingSamplebNo != null">
+                PENDING_SAMPLEB_NO = #{pendingSamplebNo,jdbcType=VARCHAR},
+            </if>
+            <if test="pendingSamplebName != null">
+                PENDING_SAMPLEB_NAME = #{pendingSamplebName,jdbcType=VARCHAR},
+            </if>
+            <if test="pendingSamplebRelation != null">
+                PENDING_SAMPLEB_RELATION = #{pendingSamplebRelation,jdbcType=VARCHAR},
+            </if>
+            <if test="pendingSamplebGeneInfo != null">
+                PENDING_SAMPLEB_GENE_INFO = #{pendingSamplebGeneInfo,jdbcType=CHAR},
+            </if>
+            <if test="panelaId != null">
+                PANELA_ID = #{panelaId,jdbcType=INTEGER},
+            </if>
+            <if test="panelaName != null">
+                PANELA_NAME = #{panelaName,jdbcType=VARCHAR},
+            </if>
+            <if test="panelbId != null">
+                PANELB_ID = #{panelbId,jdbcType=INTEGER},
+            </if>
+            <if test="panelbName != null">
+                PANELB_NAME = #{panelbName,jdbcType=VARCHAR},
+            </if>
+            <if test="targetReation != null">
+                TARGET_RELATION = #{targetReation,jdbcType=VARCHAR},
+            </if>
+            <if test="compareParams != null">
+                COMPARE_PARAMS = #{compareParams,jdbcType=CHAR},
+            </if>
+            <if test="populationFrequencyId != null">
+                population_frequency_id = #{populationFrequencyId,jdbcType=INTEGER},
+            </if>
+            <if test="queueStatus != null">
+                QUEUE_STATUS = #{queueStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="createDatetime != null">
+                CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createPersonId != null">
+                CREATE_PERSON_ID = #{createPersonId,jdbcType=VARCHAR},
+            </if>
+            <if test="createPersonName != null">
+                CREATE_PERSON_NAME = #{createPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDatetime != null">
+                UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bazl.dna.database.service.model.po.QuickCompareQueue">
+        update quick_compare_queue
+        set COMPARE_WEIGHT = #{compareWeight,jdbcType=TINYINT},
+        COMPARE_MODE = #{compareMode,jdbcType=INTEGER},
+        PENDING_SAMPLEA_NO = #{pendingSampleaNo,jdbcType=VARCHAR},
+        PENDING_SAMPLEA_NAME = #{pendingSampleaName,jdbcType=VARCHAR},
+        PENDING_SAMPLEA_RELATION = #{pendingSampleaRelation,jdbcType=VARCHAR},
+        PENDING_SAMPLEA_GENE_INFO = #{pendingSampleaGeneInfo,jdbcType=CHAR},
+        PENDING_SAMPLEB_NO = #{pendingSamplebNo,jdbcType=VARCHAR},
+        PENDING_SAMPLEB_NAME = #{pendingSamplebName,jdbcType=VARCHAR},
+        PENDING_SAMPLEB_RELATION = #{pendingSamplebRelation,jdbcType=VARCHAR},
+        PENDING_SAMPLEB_GENE_INFO = #{pendingSamplebGeneInfo,jdbcType=CHAR},
+        PANELA_ID = #{panelaId,jdbcType=INTEGER},
+        PANELA_NAME = #{panelaName,jdbcType=VARCHAR},
+        PANELB_ID = #{panelbId,jdbcType=INTEGER},
+        PANELB_NAME = #{panelbName,jdbcType=VARCHAR},
+        TARGET_RELATION = #{targetReation,jdbcType=VARCHAR},
+        COMPARE_PARAMS = #{compareParams,jdbcType=CHAR},
+        population_frequency_id = #{populationFrequencyId,jdbcType=INTEGER},
+        QUEUE_STATUS = #{queueStatus,jdbcType=VARCHAR},
+        CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+        CREATE_PERSON_ID = #{createPersonId,jdbcType=VARCHAR},
+        CREATE_PERSON_NAME = #{createPersonName,jdbcType=VARCHAR},
+        UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP}
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+    
+    <select id="findListByCompareMode" parameterType="map" resultMap="BaseResultMap">
+    	select * from quick_compare_queue where COMPARE_MODE=#{compareMode} and QUEUE_STATUS=#{compareStatus} limit #{pageSize}
+    </select>
+</mapper>

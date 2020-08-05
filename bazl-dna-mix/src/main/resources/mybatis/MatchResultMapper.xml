@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.mix.dao.MatchResultMapper">
+  <resultMap id="BaseResultMap" type="com.bazl.dna.mix.model.po.MatchResult" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="COMPARE_ID" property="compareId" jdbcType="VARCHAR" />
+    <result column="MIXED_SAMPLE_GENE_ID" property="mixedSampleGeneId" jdbcType="VARCHAR" />
+    <result column="SINGLE_GENE_ID" property="singleGeneId" jdbcType="VARCHAR" />
+    <result column="SPLITED_SAMPLE_GENE_ID" property="splitedSampleGeneId" jdbcType="VARCHAR" />
+    <result column="QUSLTY_GENE_ID" property="qusltyGeneId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_GENE_RESULT_TYPE" property="sampleGeneResultType" jdbcType="VARCHAR" />
+    <result column="RATIO" property="ratio" jdbcType="DECIMAL" />
+    <result column="SPLIT_DIGIT" property="splitDigit" jdbcType="DECIMAL" />
+    <result column="COMPARISON_TIME" property="comparisonTime" jdbcType="TIMESTAMP" />
+    <result column="PROPORTION_SAMPLE_NO" property="proportionSampleNo" jdbcType="VARCHAR" />
+    <result column="PROPORTION_SAMPLE_NAME" property="proportionSampleName" jdbcType="VARCHAR" />
+    <result column="PROPORTION_SITE_NUM" property="proportionSiteNum" jdbcType="VARCHAR" />
+    <result column="GENE_INFO" property="geneInfo" jdbcType="VARCHAR" />
+    <result column="GENE_PICTURE" property="genePicture" jdbcType="VARCHAR" />
+    <result column="PROPORTION_CASE_NO" property="proportionCaseNo" jdbcType="VARCHAR" />
+    <result column="PROPORTION_CASE_NAME" property="proportionCaseName" jdbcType="VARCHAR" />
+    <result column="PROPORTION_PERSONNEL" property="proportionPersonnel" jdbcType="VARCHAR" />
+    <result column="PROPORTION_DISTRICT" property="proportionDistrict" jdbcType="VARCHAR" />
+    <result column="PROPORTION_DISTRICT_CODE" property="proportionDistrictCode" jdbcType="VARCHAR" />
+    <result column="EFFECT_FLAG" property="effectFlag" jdbcType="VARCHAR" />
+    <result column="PROPORTION_PERSON_CODE" property="proportionPersonCode" jdbcType="VARCHAR" />
+    <result column="ID_CARD_NO" property="idCardNo" jdbcType="VARCHAR" />
+    <result column="PROPORTION_PERSON_NAME" property="proportionPersonName" jdbcType="VARCHAR" />
+    <result column="PROPORTION_KIL_NAME" property="proportionKilName" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="BaseResultMapVo" type="com.bazl.dna.mix.model.vo.MatchResultVo" >
+    <id column="ID" property="entity.id" jdbcType="VARCHAR" />
+    <result column="COMPARE_ID" property="entity.compareId" jdbcType="VARCHAR" />
+    <result column="MIXED_SAMPLE_GENE_ID" property="entity.mixedSampleGeneId" jdbcType="VARCHAR" />
+    <result column="SINGLE_GENE_ID" property="entity.singleGeneId" jdbcType="VARCHAR" />
+    <result column="SPLITED_SAMPLE_GENE_ID" property="entity.splitedSampleGeneId" jdbcType="VARCHAR" />
+    <result column="QUSLTY_GENE_ID" property="entity.qusltyGeneId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_GENE_RESULT_TYPE" property="entity.sampleGeneResultType" jdbcType="VARCHAR" />
+    <result column="RATIO" property="entity.ratio" jdbcType="DECIMAL" />
+    <result column="SPLIT_DIGIT" property="entity.splitDigit" jdbcType="DECIMAL" />
+    <result column="COMPARISON_TIME" property="entity.comparisonTime" jdbcType="TIMESTAMP" />
+    <result column="PROPORTION_SAMPLE_NO" property="entity.proportionSampleNo" jdbcType="VARCHAR" />
+    <result column="PROPORTION_SAMPLE_NAME" property="entity.proportionSampleName" jdbcType="VARCHAR" />
+    <result column="PROPORTION_SITE_NUM" property="entity.proportionSiteNum" jdbcType="VARCHAR" />
+    <result column="GENE_INFO" property="entity.geneInfo" jdbcType="VARCHAR" />
+    <result column="GENE_PICTURE" property="entity.genePicture" jdbcType="VARCHAR" />
+    <result column="PROPORTION_CASE_NO" property="entity.proportionCaseNo" jdbcType="VARCHAR" />
+    <result column="PROPORTION_CASE_NAME" property="entity.proportionCaseName" jdbcType="VARCHAR" />
+    <result column="PROPORTION_PERSONNEL" property="entity.proportionPersonnel" jdbcType="VARCHAR" />
+    <result column="ID_CARD_NO" property="entity.idCardNo" jdbcType="VARCHAR" />
+    <result column="PROPORTION_PERSON_CODE" property="entity.proportionPersonCode" jdbcType="VARCHAR" />
+    <result column="PROPORTION_DISTRICT" property="entity.proportionDistrict" jdbcType="VARCHAR" />
+    <result column="PROPORTION_DISTRICT_CODE" property="entity.proportionDistrictCode" jdbcType="VARCHAR" />
+    <result column="EFFECT_FLAG" property="entity.effectFlag" jdbcType="VARCHAR" />
+    <result column="PROPORTION_PERSON_NAME" property="entity.proportionPersonName" jdbcType="VARCHAR" />
+    <result column="PROPORTION_KIL_NAME" property="entity.proportionKilName" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="entity.createPerson" jdbcType="VARCHAR" />
+  </resultMap>
+
+    <resultMap id="BaseResultMapVo2" type="com.bazl.dna.mix.model.vo.MatchResultVo" >
+        <id column="ID" property="entity.id" jdbcType="VARCHAR" />
+        <result column="COMPARE_ID" property="entity.compareId" jdbcType="VARCHAR" />
+        <result column="MIXED_SAMPLE_GENE_ID" property="entity.mixedSampleGeneId" jdbcType="VARCHAR" />
+        <result column="SINGLE_GENE_ID" property="entity.singleGeneId" jdbcType="VARCHAR" />
+        <result column="SPLITED_SAMPLE_GENE_ID" property="entity.splitedSampleGeneId" jdbcType="VARCHAR" />
+        <result column="QUSLTY_GENE_ID" property="entity.qusltyGeneId" jdbcType="VARCHAR" />
+        <result column="SAMPLE_GENE_RESULT_TYPE" property="entity.sampleGeneResultType" jdbcType="VARCHAR" />
+        <result column="RATIO" property="entity.ratio" jdbcType="DECIMAL" />
+        <result column="SPLIT_DIGIT" property="entity.splitDigit" jdbcType="DECIMAL" />
+        <result column="COMPARISON_TIME" property="entity.comparisonTime" jdbcType="TIMESTAMP" />
+        <result column="PROPORTION_SAMPLE_NO" property="entity.proportionSampleNo" jdbcType="VARCHAR" />
+        <result column="PROPORTION_SAMPLE_NAME" property="entity.proportionSampleName" jdbcType="VARCHAR" />
+        <result column="PROPORTION_SITE_NUM" property="entity.proportionSiteNum" jdbcType="VARCHAR" />
+        <result column="GENE_INFO" property="entity.geneInfo" jdbcType="VARCHAR" />
+        <result column="GENE_PICTURE" property="entity.genePicture" jdbcType="VARCHAR" />
+        <result column="PROPORTION_CASE_NO" property="entity.proportionCaseNo" jdbcType="VARCHAR" />
+        <result column="PROPORTION_CASE_NAME" property="entity.proportionCaseName" jdbcType="VARCHAR" />
+        <result column="PROPORTION_PERSONNEL" property="entity.proportionPersonnel" jdbcType="VARCHAR" />
+        <result column="ID_CARD_NO" property="entity.idCardNo" jdbcType="VARCHAR" />
+        <result column="PROPORTION_PERSON_CODE" property="entity.proportionPersonCode" jdbcType="VARCHAR" />
+        <result column="PROPORTION_DISTRICT" property="entity.proportionDistrict" jdbcType="VARCHAR" />
+        <result column="PROPORTION_DISTRICT_CODE" property="entity.proportionDistrictCode" jdbcType="VARCHAR" />
+        <result column="EFFECT_FLAG" property="entity.effectFlag" jdbcType="VARCHAR" />
+        <result column="PROPORTION_PERSON_NAME" property="entity.proportionPersonName" jdbcType="VARCHAR" />
+        <result column="PROPORTION_KIL_NAME" property="entity.proportionKilName" jdbcType="VARCHAR" />
+        <result column="CREATE_PERSON" property="entity.createPerson" jdbcType="VARCHAR" />
+    </resultMap>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from match_result
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.mix.model.po.MatchResult" >
+    insert into match_result (ID, COMPARE_ID, MIXED_SAMPLE_GENE_ID,
+    SINGLE_GENE_ID, SPLITED_SAMPLE_GENE_ID, QUSLTY_GENE_ID, SAMPLE_GENE_RESULT_TYPE,
+    RATIO, SPLIT_DIGIT, COMPARISON_TIME,
+    PROPORTION_SAMPLE_NO, PROPORTION_SAMPLE_NAME,
+    PROPORTION_SITE_NUM, GENE_INFO, GENE_PICTURE,
+    PROPORTION_CASE_NO, PROPORTION_CASE_NAME,
+    PROPORTION_PERSON_NAME, PROPORTION_PERSONNEL,
+    PROPORTION_PERSON_CODE, ID_CARD_NO, PROPORTION_DISTRICT,
+    PROPORTION_DISTRICT_CODE,
+    PROPORTION_KIL_NAME, EFFECT_FLAG, CREATE_PERSON)
+    values (#{id,jdbcType=VARCHAR}, #{compareId,jdbcType=VARCHAR}, #{mixedSampleGeneId,jdbcType=VARCHAR},
+    #{singleGeneId,jdbcType=VARCHAR}, #{splitedSampleGeneId,jdbcType=VARCHAR}, #{qusltyGeneId,jdbcType=VARCHAR},
+    #{sampleGeneResultType,jdbcType=VARCHAR},
+    #{ratio,jdbcType=DECIMAL}, #{splitDigit,jdbcType=DECIMAL}, #{comparisonTime,jdbcType=TIMESTAMP},
+    #{proportionSampleNo,jdbcType=VARCHAR}, #{proportionSampleName,jdbcType=VARCHAR},
+    #{proportionSiteNum,jdbcType=VARCHAR}, #{geneInfo,jdbcType=VARCHAR}, #{genePicture,jdbcType=VARCHAR},
+    #{proportionCaseNo,jdbcType=VARCHAR}, #{proportionCaseName,jdbcType=VARCHAR},
+    #{proportionPersonName,jdbcType=VARCHAR}, #{proportionPersonnel,jdbcType=VARCHAR},
+    #{proportionPersonCode,jdbcType=VARCHAR},#{idCardNo,jdbcType=VARCHAR},
+    #{proportionDistrict,jdbcType=VARCHAR}, #{proportionDistrictCode,jdbcType=VARCHAR}, #{proportionKilName,jdbcType=VARCHAR},
+    #{effectFlag,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.mix.model.po.MatchResult" >
+    update match_result
+    set COMPARE_ID = #{compareId,jdbcType=VARCHAR},
+    MIXED_SAMPLE_GENE_ID = #{mixedSampleGeneId,jdbcType=VARCHAR},
+    SINGLE_GENE_ID = #{singleGeneId,jdbcType=VARCHAR},
+    SPLITED_SAMPLE_GENE_ID = #{splitedSampleGeneId,jdbcType=VARCHAR},
+    QUSLTY_GENE_ID = #{qusltyGeneId,jdbcType=VARCHAR},
+    SAMPLE_GENE_RESULT_TYPE = #{sampleGeneResultType,jdbcType=VARCHAR},
+    RATIO = #{ratio,jdbcType=DECIMAL},
+    SPLIT_DIGIT = #{splitDigit,jdbcType=DECIMAL},
+    COMPARISON_TIME = #{comparisonTime,jdbcType=TIMESTAMP},
+    PROPORTION_SAMPLE_NO = #{proportionSampleNo,jdbcType=VARCHAR},
+    PROPORTION_SAMPLE_NAME = #{proportionSampleName,jdbcType=VARCHAR},
+    PROPORTION_SITE_NUM = #{proportionSiteNum,jdbcType=VARCHAR},
+    GENE_INFO = #{geneInfo,jdbcType=VARCHAR},
+    GENE_PICTURE = #{genePicture,jdbcType=VARCHAR},
+    PROPORTION_CASE_NO = #{proportionCaseNo,jdbcType=VARCHAR},
+    PROPORTION_CASE_NAME = #{proportionCaseName,jdbcType=VARCHAR},
+    PROPORTION_PERSON_NAME = #{proportionPersonName,jdbcType=VARCHAR},
+    PROPORTION_PERSONNEL = #{proportionPersonnel,jdbcType=VARCHAR},
+    PROPORTION_PERSON_CODE = #{proportionPersonCode,jdbcType=VARCHAR},
+    ID_CARD_NO = #{idCardNo,jdbcType=VARCHAR},
+    PROPORTION_DISTRICT = #{proportionDistrict,jdbcType=VARCHAR},
+    PROPORTION_DISTRICT_CODE = #{proportionDistrictCode,jdbcType=VARCHAR},
+    PROPORTION_KIL_NAME = #{proportionKilName,jdbcType=VARCHAR},
+    EFFECT_FLAG = #{effectFlag,jdbcType=VARCHAR},
+    CREATE_PERSON = #{createPerson,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from match_result
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select *
+    from match_result
+  </select>
+
+
+
+
+  <select id="queryMatchResultInfo" resultMap="BaseResultMap" parameterType="com.bazl.dna.mix.model.po.MatchResult" >
+    select *
+    from match_result
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="querymatchResultSort" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *  from match_result
+    where PROPORTION_PERSON_CODE = #{personType,jdbcType=VARCHAR}
+      and CREATE_PERSON = #{createPerson,jdbcType=VARCHAR}
+  </select>
+
+
+  <!--查询有比对结果的条数-->
+  <select id="selectByMatchCount" parameterType="java.lang.String"  resultType="int">
+    select count(ID)
+    from match_result
+    where COMPARE_ID = #{compareId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByMatch" parameterType="com.bazl.dna.mix.model.po.MatchResult" resultMap="BaseResultMap">
+    select *
+    from match_result
+    <where>
+      <if test="_parameter != null">
+        <if test="null != id">
+          ID = #{id,jdbcType=VARCHAR}
+        </if>
+        <if test="null != mixedSampleGeneId">
+          and MIXED_SAMPLE_GENE_ID = #{mixedSampleGeneId,jdbcType=VARCHAR}
+        </if>
+        <if test="null != singleGeneId">
+          and SINGLE_GENE_ID = #{singleGeneId,jdbcType=VARCHAR}
+        </if>
+        <if test="null != compareId">
+          and COMPARE_ID = #{compareId,jdbcType=VARCHAR}
+        </if>
+        <if test="null != sampleGeneResultType">
+          and SAMPLE_GENE_RESULT_TYPE = #{sampleGeneResultType,jdbcType=VARCHAR}
+        </if>
+      </if>
+    </where>
+  </select>
+
+  <!--分页条件查询-->
+  <select id="selectByMatchResultVo" parameterType="com.bazl.dna.mix.model.vo.MatchResultVo" resultMap="BaseResultMap" >
+    select mr.*
+    from match_result mr
+    where mr.COMPARE_ID = #{entity.compareId,jdbcType=VARCHAR}
+    order by RATIO desc
+    limit #{offset},#{rows};
+  </select>
+
+  <!--分页条数-->
+  <select id="selectByMatchResultCount" parameterType="com.bazl.dna.mix.model.vo.MatchResultVo" resultType="int" >
+    select count(mr.id)
+    from match_result mr
+    <where>
+      <if test="_parameter != null">
+        <if test="null != entity.compareId">
+          and mr.COMPARE_ID = #{entity.compareId,jdbcType=VARCHAR}
+        </if>
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByMatchResultinfo" resultMap="BaseResultMap" parameterType="com.bazl.dna.mix.model.po.MatchResult" >
+    select * from (
+    select rownum as rn , f.* from (
+    select
+    t.*
+    from match_result t  where t.COMPARE_ID = #{compareId,jdbcType=VARCHAR}
+    AND
+    t.SAMPLE_GENE_RESULT_TYPE = #{sampleGeneResultType,jdbcType=VARCHAR}
+    ) f where rownum &lt;=${endRum}
+    ) where rn &gt;${startRum}
+  </select>
+
+  <select id="selectMatchinfoCount" resultType="int">
+        select count(f.ID)  FROM (
+          select
+          t.*
+          from match_result t where
+           t.COMPARE_ID = #{compareId,jdbcType=VARCHAR}
+            AND
+            t.SAMPLE_GENE_RESULT_TYPE = #{sampleGeneResultType,jdbcType=VARCHAR} )f
+  </select>
+
+  <select id="selectMatchResultByEffect" resultType="int" parameterType="java.lang.String">
+    select count(*) c
+    from match_result
+    where 1=1 
+   		<if test="effectFlag != null">
+   			and EFFECT_FLAG = #{effectFlag,jdbcType=VARCHAR}
+   		</if>
+        <if test="createPerson != null">
+          and CREATE_PERSON = #{createPerson,jdbcType=VARCHAR}
+        </if>
+  </select>
+
+  <select id="selectByMatchResult2" resultMap="BaseResultMap" parameterType="com.bazl.dna.mix.model.po.MatchResult" >
+    select *
+    from match_result
+    where COMPARE_ID = #{compareId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByMatchResult" resultMap="BaseResultMap" parameterType="com.bazl.dna.mix.model.po.MatchResult" >
+    select *
+    from match_result
+    where COMPARE_ID = #{compareId,jdbcType=VARCHAR}
+    AND
+    SAMPLE_GENE_RESULT_TYPE = #{sampleGeneResultType,jdbcType=VARCHAR}
+  </select>
+
+
+
+  <select id="selectMatchResultCount" resultType="int" parameterType="java.lang.String">
+        select count(f.ID)  FROM (
+          select
+          t.*
+          from match_result t where
+           t.PROPORTION_PERSONNEL = '嫌疑人' and t.COMPARE_ID = #{compareId,jdbcType=VARCHAR} )f
+  </select>
+  <select id="selectMatchResultCount2" resultType="int" parameterType="java.lang.String">
+        select count(f.ID)  FROM (
+          select
+          t.*
+          from match_result t where
+           t.PROPORTION_PERSONNEL = '受害人' and t.COMPARE_ID = #{compareId,jdbcType=VARCHAR})f
+  </select>
+  <select id="selectMatchResultCount3" resultType="int" parameterType="java.lang.String">
+        select count(f.ID)  FROM (
+          select
+          t.*
+          from match_result t where
+           t.PROPORTION_PERSONNEL = '质控人' and t.COMPARE_ID = #{compareId,jdbcType=VARCHAR})f
+  </select>
+
+  <!--条件查询-->
+  <select id="selectMatchList" parameterType="com.bazl.dna.mix.model.po.MatchResult" resultMap="BaseResultMap">
+    select *
+    from match_result
+    <where>
+      <if test="_parameter != null">
+        <if test="null != id">
+          ID = #{id,jdbcType=VARCHAR}
+        </if>
+        <if test="null != mixedSampleGeneId">
+          and MIXED_SAMPLE_GENE_ID = #{mixedSampleGeneId,jdbcType=VARCHAR}
+        </if>
+        <if test="null != singleGeneId">
+          and SINGLE_GENE_ID = #{singleGeneId,jdbcType=VARCHAR}
+        </if>
+        <if test="null != compareId">
+          and COMPARE_ID = #{compareId,jdbcType=VARCHAR}
+        </if>
+        <if test="null != sampleGeneResultType">
+          and SAMPLE_GENE_RESULT_TYPE = #{sampleGeneResultType,jdbcType=VARCHAR}
+        </if>
+        <if test="null != createPerson">
+          and CREATE_PERSON = #{createPerson,jdbcType=VARCHAR}
+        </if>
+      </if>
+    </where>
+    order by COMPARISON_TIME desc
+  </select>
+
+
+  <insert id="insertPossibilityGene" parameterType="com.bazl.dna.mix.model.po.possibilityInfo" >
+      insert into contributor_possibility set `ID` = #{Id},COMPARE_ID = #{compareId},GENE_INFO = #{contributorPossibilityGene}
+  </insert>
+
+  <select id="selectByThirtyMatchList" parameterType="java.lang.String"  resultMap="BaseResultMap">
+    select *
+    from match_result
+    where CREATE_PERSON = #{createPerson,jdbcType=VARCHAR}
+    order by COMPARISON_TIME desc
+    limit 0,30;
+  </select>
+
+  <!--selectMatchResultList-->
+  <select id="selectMatchResultList" resultMap="BaseResultMapVo2" parameterType="com.bazl.dna.mix.model.po.MatchResult" >
+    select msg.SAMPLE_NO as mixedSampleNo, msg.SAMPLE_NAME as mixedSampleName,mr.COMPARE_ID as COMPARE_ID,
+    mr.ID, mr.PROPORTION_SAMPLE_NO as PROPORTION_SAMPLE_NO,mr.PROPORTION_SAMPLE_NAME as PROPORTION_SAMPLE_NAME,
+    mr.PROPORTION_SITE_NUM as PROPORTION_SITE_NUM, mr.RATIO as RATIO
+    from match_result mr, compare_queue cq, mixed_sample_gene msg
+    where mr.COMPARE_ID = cq.ID and cq.MIXED_SAMPLE_ID = msg.ID
+    and mr.EFFECT_FLAG='1'
+    and mr.COMPARE_ID = #{compareId,jdbcType=VARCHAR}
+    and mr.SAMPLE_GENE_RESULT_TYPE= #{sampleGeneResultType,jdbcType=VARCHAR}
+    limit #{offset},15
+  </select>
+
+  <select id="selectMatchResultListCount" resultType="java.lang.Integer" parameterType="com.bazl.dna.mix.model.po.MatchResult" >
+    select count(mr.ID)
+    from match_result mr, compare_queue cq, mixed_sample_gene msg
+    where mr.COMPARE_ID = cq.ID and cq.MIXED_SAMPLE_ID = msg.ID
+    and mr.EFFECT_FLAG='1'
+    and mr.COMPARE_ID = #{compareId,jdbcType=VARCHAR}
+    and mr.SAMPLE_GENE_RESULT_TYPE= #{sampleGeneResultType,jdbcType=VARCHAR}
+  </select>
+
+  <!--selectBySplitedId-->
+  <select id="selectBySplitedId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select *
+        from match_result
+        where SPLITED_SAMPLE_GENE_ID = #{id,jdbcType=VARCHAR}
+    </select>
+
+  <!--selectByMixedId-->
+  <select id="selectByMixedId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select *
+        from match_result
+        where MIXED_SAMPLE_GENE_ID = #{id,jdbcType=VARCHAR}
+    </select>
+
+  <!--selectById-->
+  <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select *
+        from match_result
+        where ID = #{matchId,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

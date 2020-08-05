@@ -1,0 +1,239 @@
+a {
+    text-decoration: none;
+}
+
+ol, ul {
+    margin: 0;
+    padding: 0;
+}
+
+.mr-pd-0 > div {
+    margin: 0;
+    padding: 0;
+}
+
+.input_style {
+    display: inline-block;
+    width: 200px;
+    height: 34px;
+    font-size: 14px;
+    line-height: 1.42857;
+    color: rgb(85, 85, 85);
+    background-color: rgb(255, 255, 255);
+    background-image: none;
+    box-shadow: rgba(0, 0, 0, 0.075) 0px 1px 1px inset;
+    padding: 6px 12px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(204, 204, 204);
+    border-image: initial;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+}
+
+.btnInit {
+
+}
+
+/*正常的未被访问过的链接*/
+.header a:link {
+    text-decoration: none;
+}
+
+/*已经访问过的链接*/
+.header a:visited {
+    text-decoration: none;
+}
+
+/*鼠标划过(停留)的链接*/
+.header a:hover {
+    text-decoration: none;
+}
+
+/* 正在点击的链接*/
+.header a:active {
+    text-decoration: none;
+}
+
+.header {
+    padding: 15px 50px 15px 50px;
+}
+
+.header ul {
+    width: 100%;
+    height: 45px;
+    background: #F3FBFF;
+    border: 0.5px solid #0C81F5;
+}
+
+.header ul li {
+    width: 25%;
+    height: 100%;
+    float: left;
+    border-right: 0.5px solid #0C81F5;
+}
+
+.header ul li:last-child {
+    border-right: none;
+}
+
+.header ul li a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 45px;
+    color: #0C81F5;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.header ul li .a_active {
+    background: #007AFD;
+    color: #fff;
+}
+
+.title-con {
+    padding: 10px;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.sp-berfore {
+    display: flex;
+    align-items: center;
+    color: #007EF9;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.sp-berfore::before {
+    display: inline-block;
+    content: "";
+    width: 4px;
+    height: 16px;
+    background: #007EF9;
+    margin-right: 6px;
+}
+
+.bg-white {
+    background: #fff;
+}
+
+.radius {
+    border-radius: 5px;
+}
+
+.radius-top {
+    border-radius: 5px 5px 0px 0px;
+}
+
+.radius-bom {
+    border-radius: 0px 0px 5px 5px;
+}
+
+.pd-20 {
+    padding: 10px 20px 10px 20px;
+}
+
+.pd-bom-10 {
+    padding-bottom: 10px;
+}
+
+.border-bom {
+    border-bottom: 1px solid #ccc;
+}
+
+.mg-top-10 {
+    margin-top: 10px;
+}
+
+.mg-rg-15px {
+    margin-right: 15px;
+}
+
+.float-right {
+    float: right;
+}
+
+.gene-border {
+    border: 1px dashed #1C7BFF;
+    border-radius: 4px;
+    padding: 10px;
+
+}
+
+.gene-name {
+    width: 100px;
+    margin-right: 5px;
+}
+
+.gene-input {
+    display: inline-block;
+    border: none;
+    border-bottom: 1px solid rgba(153, 153, 153, 1);
+    outline-style: none;
+    text-align: center;
+    width: 50px;
+}
+
+.gene-icon {
+    color: rgba(153, 153, 153, 1);
+}
+
+.label-con {
+    width: 15% !important;
+}
+
+.footer {
+    width: 100%;
+    height: 50px;
+    background: #fff;
+    margin-top: 10px;
+    border-radius: 4px;
+    padding: 10px 20px 10px 20px;
+}
+
+.bg-blue {
+    background: #296fff !important;
+}
+
+.modal-style .modal-header {
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+    padding: 10px !important;
+}
+
+.modal-style .modal-body {
+}
+
+.modal-style .model-footer {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    text-align: center;
+    /*display: flex;*/
+    /*justify-content: center;*/
+}
+
+.bg-th th {
+    background: #f6fbff;
+}
+
+.dispaly-at {
+    display: flex;
+    align-items: center;
+}
+.radiosCss .custom-control-label::before {
+    background-image: none;
+    border-radius: 50%;
+}
+
+.radiosCss .custom-control-input:checked ~ .custom-control-label::before {
+    color: #fff;
+    background-color: #296fff;
+    background-image: url(/img/check.svg);
+    background-size: 11px;
+    background-repeat: no-repeat;
+    background-position: 2px;
+}

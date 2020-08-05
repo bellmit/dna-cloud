@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.mix.connector.nation.dao.LimsCompareInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.dna.mix.connector.nation.model.po.LimsCompareInfo" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="INIT_SERVER_NO" property="initServerNo" jdbcType="VARCHAR" />
+    <result column="LAB_ID" property="labId" jdbcType="VARCHAR" />
+    <result column="MATCH_GENE_TYPE" property="matchGeneType" jdbcType="VARCHAR" />
+    <result column="MATCH_MODE" property="matchMode" jdbcType="VARCHAR" />
+    <result column="MATCH_TIME" property="matchTime" jdbcType="TIMESTAMP" />
+    <result column="SRC_OBJECT_ID" property="srcObjectId" jdbcType="VARCHAR" />
+    <result column="MATCH_OBJECT_ID" property="matchObjectId" jdbcType="VARCHAR" />
+    <result column="COMPARE_ALGORITHM" property="compareAlgorithm" jdbcType="VARCHAR" />
+    <result column="MATCHED_DETAIL" property="matchedDetail" jdbcType="VARCHAR" />
+    <result column="LR_VALUE" property="lrValue" jdbcType="VARCHAR" />
+    <result column="REVIEW_TYPE" property="reviewType" jdbcType="VARCHAR" />
+    <result column="REVIEW_USER" property="reviewUser" jdbcType="VARCHAR" />
+    <result column="REVIEW_DATETIME" property="reviewDatetime" jdbcType="TIMESTAMP" />
+    <result column="REVIEW_DESC" property="reviewDesc" jdbcType="VARCHAR" />
+    <result column="TRANSFER_FLAG" property="transferFlag" jdbcType="DECIMAL" />
+    <result column="TRANSFER_DATETIME" property="transferDatetime" jdbcType="TIMESTAMP" />
+    <result column="DATA_SOURCE" property="dataSource" jdbcType="VARCHAR" />
+    <result column="DATA_LEVEL" property="dataLevel" jdbcType="DECIMAL" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="IF_BLINDTHAN" property="ifBlindthan" jdbcType="DECIMAL" />
+    <result column="NOTIFICATION_ID" property="notificationId" jdbcType="VARCHAR" />
+    <result column="RETRY_COUNT" property="retryCount" jdbcType="DECIMAL" />
+    <result column="ERROR_MSG" property="errorMsg" jdbcType="VARCHAR" />
+    <result column="DELAY_TIMES" property="delayTimes" jdbcType="DECIMAL" />
+    <result column="LOCAL_STORE_DATETIME" property="localStoreDatetime" jdbcType="TIMESTAMP" />
+    <result column="LRC_RESULT_ID" property="lrcResultId" jdbcType="VARCHAR" />
+    <result column="REVIEW_CONCLUSION" property="reviewConclusion" jdbcType="VARCHAR" />
+    <result column="LOCAL_CREATE_DATETIME" property="localCreateDatetime" jdbcType="TIMESTAMP" />
+    <result column="CONFIRMED_CLUE_TYPE" property="confirmedClueType" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from LIMS_COMPARE_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.mix.connector.nation.model.po.LimsCompareInfo" >
+    insert into LIMS_COMPARE_INFO (ID, INIT_SERVER_NO, LAB_ID, 
+      MATCH_GENE_TYPE, MATCH_MODE, MATCH_TIME, 
+      SRC_OBJECT_ID, MATCH_OBJECT_ID, COMPARE_ALGORITHM, 
+      MATCHED_DETAIL, LR_VALUE, REVIEW_TYPE, 
+      REVIEW_USER, REVIEW_DATETIME, REVIEW_DESC, 
+      TRANSFER_FLAG, TRANSFER_DATETIME, DATA_SOURCE, 
+      DATA_LEVEL, CREATE_USER, CREATE_DATETIME, 
+      UPDATE_USER, UPDATE_DATETIME, IF_BLINDTHAN, 
+      NOTIFICATION_ID, RETRY_COUNT, ERROR_MSG, 
+      DELAY_TIMES, LOCAL_STORE_DATETIME, LRC_RESULT_ID, 
+      REVIEW_CONCLUSION, LOCAL_CREATE_DATETIME, 
+      CONFIRMED_CLUE_TYPE)
+    values (#{id,jdbcType=VARCHAR}, #{initServerNo,jdbcType=VARCHAR}, #{labId,jdbcType=VARCHAR}, 
+      #{matchGeneType,jdbcType=VARCHAR}, #{matchMode,jdbcType=VARCHAR}, #{matchTime,jdbcType=TIMESTAMP}, 
+      #{srcObjectId,jdbcType=VARCHAR}, #{matchObjectId,jdbcType=VARCHAR}, #{compareAlgorithm,jdbcType=VARCHAR}, 
+      #{matchedDetail,jdbcType=VARCHAR}, #{lrValue,jdbcType=VARCHAR}, #{reviewType,jdbcType=VARCHAR}, 
+      #{reviewUser,jdbcType=VARCHAR}, #{reviewDatetime,jdbcType=TIMESTAMP}, #{reviewDesc,jdbcType=VARCHAR}, 
+      #{transferFlag,jdbcType=DECIMAL}, #{transferDatetime,jdbcType=TIMESTAMP}, #{dataSource,jdbcType=VARCHAR}, 
+      #{dataLevel,jdbcType=DECIMAL}, #{createUser,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}, #{ifBlindthan,jdbcType=DECIMAL}, 
+      #{notificationId,jdbcType=VARCHAR}, #{retryCount,jdbcType=DECIMAL}, #{errorMsg,jdbcType=VARCHAR}, 
+      #{delayTimes,jdbcType=DECIMAL}, #{localStoreDatetime,jdbcType=TIMESTAMP}, #{lrcResultId,jdbcType=VARCHAR}, 
+      #{reviewConclusion,jdbcType=VARCHAR}, #{localCreateDatetime,jdbcType=TIMESTAMP}, 
+      #{confirmedClueType,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.mix.connector.nation.model.po.LimsCompareInfo" >
+    update LIMS_COMPARE_INFO
+    set INIT_SERVER_NO = #{initServerNo,jdbcType=VARCHAR},
+      LAB_ID = #{labId,jdbcType=VARCHAR},
+      MATCH_GENE_TYPE = #{matchGeneType,jdbcType=VARCHAR},
+      MATCH_MODE = #{matchMode,jdbcType=VARCHAR},
+      MATCH_TIME = #{matchTime,jdbcType=TIMESTAMP},
+      SRC_OBJECT_ID = #{srcObjectId,jdbcType=VARCHAR},
+      MATCH_OBJECT_ID = #{matchObjectId,jdbcType=VARCHAR},
+      COMPARE_ALGORITHM = #{compareAlgorithm,jdbcType=VARCHAR},
+      MATCHED_DETAIL = #{matchedDetail,jdbcType=VARCHAR},
+      LR_VALUE = #{lrValue,jdbcType=VARCHAR},
+      REVIEW_TYPE = #{reviewType,jdbcType=VARCHAR},
+      REVIEW_USER = #{reviewUser,jdbcType=VARCHAR},
+      REVIEW_DATETIME = #{reviewDatetime,jdbcType=TIMESTAMP},
+      REVIEW_DESC = #{reviewDesc,jdbcType=VARCHAR},
+      TRANSFER_FLAG = #{transferFlag,jdbcType=DECIMAL},
+      TRANSFER_DATETIME = #{transferDatetime,jdbcType=TIMESTAMP},
+      DATA_SOURCE = #{dataSource,jdbcType=VARCHAR},
+      DATA_LEVEL = #{dataLevel,jdbcType=DECIMAL},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      IF_BLINDTHAN = #{ifBlindthan,jdbcType=DECIMAL},
+      NOTIFICATION_ID = #{notificationId,jdbcType=VARCHAR},
+      RETRY_COUNT = #{retryCount,jdbcType=DECIMAL},
+      ERROR_MSG = #{errorMsg,jdbcType=VARCHAR},
+      DELAY_TIMES = #{delayTimes,jdbcType=DECIMAL},
+      LOCAL_STORE_DATETIME = #{localStoreDatetime,jdbcType=TIMESTAMP},
+      LRC_RESULT_ID = #{lrcResultId,jdbcType=VARCHAR},
+      REVIEW_CONCLUSION = #{reviewConclusion,jdbcType=VARCHAR},
+      LOCAL_CREATE_DATETIME = #{localCreateDatetime,jdbcType=TIMESTAMP},
+      CONFIRMED_CLUE_TYPE = #{confirmedClueType,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, INIT_SERVER_NO, LAB_ID, MATCH_GENE_TYPE, MATCH_MODE, MATCH_TIME, SRC_OBJECT_ID, 
+    MATCH_OBJECT_ID, COMPARE_ALGORITHM, MATCHED_DETAIL, LR_VALUE, REVIEW_TYPE, REVIEW_USER, 
+    REVIEW_DATETIME, REVIEW_DESC, TRANSFER_FLAG, TRANSFER_DATETIME, DATA_SOURCE, DATA_LEVEL, 
+    CREATE_USER, CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME, IF_BLINDTHAN, NOTIFICATION_ID, 
+    RETRY_COUNT, ERROR_MSG, DELAY_TIMES, LOCAL_STORE_DATETIME, LRC_RESULT_ID, REVIEW_CONCLUSION, 
+    LOCAL_CREATE_DATETIME, CONFIRMED_CLUE_TYPE
+    from LIMS_COMPARE_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, INIT_SERVER_NO, LAB_ID, MATCH_GENE_TYPE, MATCH_MODE, MATCH_TIME, SRC_OBJECT_ID, 
+    MATCH_OBJECT_ID, COMPARE_ALGORITHM, MATCHED_DETAIL, LR_VALUE, REVIEW_TYPE, REVIEW_USER, 
+    REVIEW_DATETIME, REVIEW_DESC, TRANSFER_FLAG, TRANSFER_DATETIME, DATA_SOURCE, DATA_LEVEL, 
+    CREATE_USER, CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME, IF_BLINDTHAN, NOTIFICATION_ID, 
+    RETRY_COUNT, ERROR_MSG, DELAY_TIMES, LOCAL_STORE_DATETIME, LRC_RESULT_ID, REVIEW_CONCLUSION, 
+    LOCAL_CREATE_DATETIME, CONFIRMED_CLUE_TYPE
+    from LIMS_COMPARE_INFO
+  </select>
+</mapper>

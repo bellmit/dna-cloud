@@ -1,0 +1,171 @@
+.clearfix:after{
+  content: "";
+  display: block;
+  height: 0;
+  clear:both;
+  visibility: hidden;
+}
+.clearfix{
+  *zoom: 1;/*ie6清除浮动的方式 *号只有IE6-IE7执行，其他浏览器不执行*/
+}
+.widthDiv{
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  // padding: 20px;
+  margin: 0 auto;
+}
+.home-box{
+  .home-top-box{
+    background: #fff;
+    div:first-child{
+      display: flex;
+      height: 100px;
+      span{
+        margin-top:15px;
+        margin-right:15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        width:24%;
+        height:70px;
+        border:1px solid rgba(0,0,0,0);
+        font-weight: bold;
+        color: #fff;
+        // opacity:0.9;
+        // counter-reset: ;
+        cursor:pointer;
+        border-radius:85px;
+        img{
+          width: 43px;
+          height: 40px;
+          margin-right: 10px;
+        }
+      }
+      span:hover{
+        box-shadow: 5px 10px 10px 2px #ccc;
+      }
+      span:nth-child(1){
+        margin-left:15px;
+        background:linear-gradient(360deg,rgba(255,135,63,1) 0%,rgba(255,31,29,1) 100%);
+      }
+      span:nth-child(2){
+        background:linear-gradient(360deg,rgba(251,185,59,1) 0%,rgba(250,115,0,1) 100%);
+      }
+      span:nth-child(3){
+        background:linear-gradient(180deg,rgba(74,101,246,1) 0%,rgba(98,158,255,1) 100%);
+      }
+      span:nth-child(4){
+        background:linear-gradient(180deg,rgba(103,47,221,1) 0%,rgba(146,69,201,1) 100%);
+      }
+    }
+  }
+  .home-center-box>div>div{
+    float: left;
+  }
+  .home-center-box{
+    width: 100%;
+    margin-top:10px;
+    .home-center-leftbox{
+      width: 65%;
+      height: 350px;
+      margin-right: 0.6%;
+      background: #fff;
+      // padding: 10px 15px 0px 30px;
+    }
+    .home-center-rightbox{
+      width: 34.4%;
+      height: 350px;
+    }
+  }
+  .home-bottom-box{
+    margin-top:10px;
+    // margin-bottom: 60px;
+    // .widthDiv{
+    //   border: solid 1px red;
+    //   height: 300px;
+    // }
+  }
+}
+.home-DNA-body{
+  width: 100%;
+  height: 388px;
+  overflow: hidden;
+}
+// 人员类型图表样式
+.home-type-body{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+// 人员类型图表容器
+.MyTypeCharts-con{
+  width: 100%;
+  height: 100%;
+  // margin:0 auto;
+  // height: 200px;
+}
+// DNA样本数据图标容器
+.MyDNACharts-con{
+  width: 100%;
+  height: 100%;
+}
+// 混合样本数量 查分分型样本数量 样式
+.home-center-rightbox{
+  overflow: hidden;
+  background: #fff;
+  .rightbox-title{
+    font-size: 18px;
+    font-weight: bold;
+    font-family: '微软雅黑';
+    color: #000;
+    margin:10px 0px 20px 10px;
+  }
+  .rightbox-body>div{
+    float: left;
+  }
+  .rightbox-body{
+    display: flex;
+    align-items: center;
+    .rabius-con{
+      text-align: center;
+      margin: 0  10% 0 2%;
+      .rabius-first{
+        width: 220px;
+        height: 220px;
+        border: 15px solid #1F5DEA;
+        border-radius: 110px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        div:first-child{
+          width: 180px;
+          height: 180px;
+          background: #CAE4FF;   
+          border-radius: 90px;
+          box-shadow: 3px 3px 3px #666;
+          p{
+            line-height: 180px;
+            font-size: 36px;
+            font-weight: bold;
+            font-family: '微软雅黑';
+            color: #000;
+          }
+        }
+      }
+      .rabius-p-style{
+        font-size: 18px;
+        font-family: '微软雅黑';
+        color: #000;
+        margin-top:10px;
+      }
+    }
+    .class{
+      border: 15px #FFA800 solid  !important;
+      div:first-child{
+        background: #FFF1D5 !important;
+      }
+    }
+  }
+}

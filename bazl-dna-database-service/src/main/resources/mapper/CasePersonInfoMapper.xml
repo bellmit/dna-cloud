@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.CasePersonInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.CasePersonInfo">
+        <id column="ID" property="id" />
+        <result column="LIMS_PERSON_UUID" property="limsPersonUuid" jdbcType="VARCHAR" />
+        <result column="LAB_SERVER_NO" property="labServerNo" />
+        <result column="CASE_ID" property="caseId" />
+        <result column="CONSIGNMENT_ID" property="consignmentId" />
+        <result column="PERSON_TYPE" property="personType" />
+        <result column="PERSON_NAME" property="personName" />
+        <result column="PERSON_ALIAS" property="personAlias" />
+        <result column="PERSON_GENDER" property="personGender" />
+        <result column="PERSON_IDCARD_NO" property="personIdcardNo" />
+        <result column="PERSON_AGE" property="personAge" />
+        <result column="NONE_IDCARD_DESC" property="noneIdcardDesc" />
+        <result column="OTHER_CENTIFICATE_TYPE" property="otherCentificateType" />
+        <result column="OTHER_CENTIFICATE_NO" property="otherCentificateNo" />
+        <result column="nationality" property="nationality" />
+        <result column="PERSON_RACE" property="personRace" />
+        <result column="PERSON_ADDR" property="personAddr" />
+        <result column="PERSON_HEIGHT" property="personHeight" />
+        <result column="PERSON_WEIGHT" property="personWeight" />
+        <result column="PHONE_NUMBER" property="phoneNumber" />
+        <result column="TRANSFER_FLAG" property="transferFlag" />
+        <result column="TRANSFER_DATETIME" property="transferDatetime" />
+        <result column="TRANSFER_PERSON_ID" property="transferPersonId" />
+        <result column="TRANSFER_PERESON_NAME" property="transferPeresonName" />
+        <result column="DELETE_FLAG" property="deleteFlag" />
+        <result column="DELETE_DATETIME" property="deleteDatetime" />
+        <result column="DELETE_REASON" property="deleteReason" />
+        <result column="DELETE_PERSON_ID" property="deletePersonId" />
+        <result column="DELETE_PERSON_NAME" property="deletePersonName" />
+        <result column="STORE_DATETIME" property="storeDatetime" />
+        <result column="STORE_PERSON_ID" property="storePersonId" />
+        <result column="STORE_PERSON_NAME" property="storePersonName" />
+        <result column="UPDATE_DATETIME" property="updateDatetime" />
+        <result column="UPDATE_PERSON_ID" property="updatePersonId" />
+        <result column="UPDATE_PERSON_NAME" property="updatePersonName" />
+    </resultMap>
+
+    <resultMap id="VoResultMap" type="com.bazl.dna.database.service.model.vo.CasePersonInfoVo" extends="BaseResultMap">
+        <result column="PERSON_TYPE_NAME" property="personTypeName" />
+        <result column="PERSON_GENDER_NAME" property="personGenderName" />
+        <result column="RELATION_TYPE_NAME" property="relationTypeName" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        cpi.ID, cpi.LIMS_PERSON_UUID, cpi.LAB_SERVER_NO, cpi.CASE_ID, cpi.CONSIGNMENT_ID, cpi.PERSON_TYPE, cpi.PERSON_NAME,
+        cpi.PERSON_ALIAS, cpi.PERSON_GENDER, cpi.PERSON_IDCARD_NO, cpi.PERSON_AGE, cpi.NONE_IDCARD_DESC, cpi.OTHER_CENTIFICATE_TYPE,
+        cpi.OTHER_CENTIFICATE_NO, cpi.nationality, cpi.PERSON_RACE, cpi.PERSON_ADDR, cpi.PERSON_HEIGHT,
+        cpi.PERSON_WEIGHT, cpi.PHONE_NUMBER, cpi.TRANSFER_FLAG,
+        cpi.TRANSFER_DATETIME, cpi.TRANSFER_PERSON_ID, cpi.TRANSFER_PERESON_NAME,
+        cpi.DELETE_FLAG, cpi.DELETE_DATETIME, cpi.DELETE_REASON, cpi.DELETE_PERSON_ID, cpi.DELETE_PERSON_NAME,
+        cpi.STORE_DATETIME, cpi.STORE_PERSON_ID, cpi.STORE_PERSON_NAME, cpi.UPDATE_DATETIME,
+        cpi.UPDATE_PERSON_ID, cpi.UPDATE_PERSON_NAME
+    </sql>
+
+    <select id="selectVoListById" parameterType="java.lang.Integer" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List" />,
+        di1.DICT_NAME as PERSON_TYPE_NAME,
+        di2.DICT_NAME as PERSON_GENDER_NAME,
+        di3.DICT_NAME as RELATION_TYPE_NAME,
+        di4.DICT_NAME as PERSON_RACE_NAME
+        from CASE_PERSON_INFO cpi
+        LEFT JOIN dict_item di1 on di1.DICT_CODE=cpi.PERSON_TYPE and di1.DICT_TYPE_CODE='CASE_PERSON_TYPE'
+        LEFT JOIN dict_item di2 on di2.DICT_CODE=cpi.PERSON_GENDER and di2.DICT_TYPE_CODE='PERSON_GENDER'
+        left join person_relative_info pri on pri.RELATION_PERSON_UUID=cpi.LIMS_PERSON_UUID
+        left join dict_item di3 on di3.DICT_CODE=pri.RELATION_TYPE_CODE and di3.DICT_TYPE_CODE='PERSON_RELATION_TYPE'
+        LEFT join dict_item di4 on di4.DICT_CODE = cpi.PERSON_RACE and di4.DICT_TYPE_CODE = 'PERSON_RACE'
+        where cpi.ID=#{id, jdbcType=INTEGER}
+    </select>
+
+    <select id="queryCasePerson" resultMap="BaseResultMap">
+        select * from case_person_info c where c.ID = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectVoListByCaseId" parameterType="java.lang.Integer" resultMap="VoResultMap">
+      select
+      <include refid="Base_Column_List" />,
+      di1.DICT_NAME as PERSON_TYPE_NAME,
+      di2.DICT_NAME as PERSON_GENDER_NAME,
+      di3.DICT_NAME as RELATION_TYPE_NAME,
+      di4.DICT_NAME as PERSON_RACE_NAME
+      from CASE_PERSON_INFO cpi
+      LEFT JOIN dict_item di1 on di1.DICT_CODE=cpi.PERSON_TYPE and di1.DICT_TYPE_CODE='CASE_PERSON_TYPE'
+      LEFT JOIN dict_item di2 on di2.DICT_CODE=cpi.PERSON_GENDER and di2.DICT_TYPE_CODE='PERSON_GENDER'
+      left join person_relative_info pri on pri.RELATION_PERSON_UUID=cpi.LIMS_PERSON_UUID
+      left join dict_item di3 on di3.DICT_CODE=pri.RELATION_TYPE_CODE and di3.DICT_TYPE_CODE='PERSON_RELATION_TYPE'
+      LEFT join dict_item di4 on di4.DICT_CODE = cpi.PERSON_RACE and di4.DICT_TYPE_CODE = 'PERSON_RACE'
+      where cpi.CASE_ID=#{caseId, jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByPersonTransferFlag" parameterType="java.lang.Integer" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from CASE_PERSON_INFO cpi
+        where cpi.delete_flag = '0'
+        and cpi.TRANSFER_FLAG = #{transferFlag,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByLabServerNo" parameterType="com.bazl.dna.database.service.model.po.CasePersonInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from CASE_PERSON_INFO cpi
+        where cpi.delete_flag = '0'
+        and cpi.LAB_SERVER_NO = #{labServerNo,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectAllCasePersonCount" parameterType="com.bazl.dna.database.service.model.po.CasePersonInfo" resultType="int">
+        select count(distinct p.id) from case_person_info p
+        where p.delete_flag = '0'
+     </select>
+
+
+    <select id="selectLabServerNo" parameterType="com.bazl.dna.database.service.model.po.CasePersonInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from CASE_PERSON_INFO cpi
+        where cpi.delete_flag = '0'
+        and cpi.LAB_SERVER_NO = #{labServerNo,jdbcType=VARCHAR}
+    </select>
+</mapper>

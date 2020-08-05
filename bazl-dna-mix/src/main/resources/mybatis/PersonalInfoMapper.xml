@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.mix.dao.PersonalInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.dna.mix.model.po.PersonalInfo" >
+    <id column="PERSONAL_ID" property="personalId" jdbcType="VARCHAR" />
+    <result column="PICTURE" property="picture" jdbcType="VARCHAR" />
+    <result column="FULL_NAME" property="fullName" jdbcType="VARCHAR" />
+    <result column="GENDER" property="gender" jdbcType="VARCHAR" />
+    <result column="BORN_DATE" property="bornDate" jdbcType="TIMESTAMP" />
+    <result column="ID_CARD" property="idCard" jdbcType="VARCHAR" />
+    <result column="LEVEL" property="level" jdbcType="VARCHAR" />
+    <result column="RACE" property="race" jdbcType="VARCHAR" />
+    <result column="POLITICAL_OUTLOOK" property="politicalOutlook" jdbcType="VARCHAR" />
+    <result column="RESIDENCE_ADDRESS" property="residenceAddress" jdbcType="VARCHAR" />
+    <result column="POSITION" property="position" jdbcType="VARCHAR" />
+    <result column="POLICE_NO" property="policeNo" jdbcType="VARCHAR" />
+    <result column="PAPERWORK_TYPE" property="paperworkType" jdbcType="VARCHAR" />
+    <result column="PAPERWORK_NO" property="paperworkNo" jdbcType="VARCHAR" />
+    <result column="PHONE_NUMBER" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+    <result column="QUALIFICATION_LEVEL" property="qualificationLevel" jdbcType="VARCHAR" />
+    <result column="START_WORKING_HOURS" property="startWorkingHours" jdbcType="TIMESTAMP" />
+    <result column="ALARM_TIME" property="alarmTime" jdbcType="TIMESTAMP" />
+    <result column="HIGHEST_TITLE" property="highestTitle" jdbcType="VARCHAR" />
+    <result column="TITLE_GAIN_TIME" property="titleGainTime" jdbcType="TIMESTAMP" />
+    <result column="TITLE_VALIDITY" property="titleValidity" jdbcType="TIMESTAMP" />
+    <result column="TITLE_PICTURE" property="titlePicture" jdbcType="VARCHAR" />
+    <result column="WORK_NOW" property="workNow" jdbcType="VARCHAR" />
+    <result column="WORK_YEARS" property="workYears" jdbcType="VARCHAR" />
+    <result column="MAJOR_ADOPT_YEARS" property="majorAdoptYears" jdbcType="VARCHAR" />
+    <result column="MAJOR_ADOPT_SCORE" property="majorAdoptScore" jdbcType="VARCHAR" />
+    <result column="APPRAISER_APTITUDE" property="appraiserAptitude" jdbcType="VARCHAR" />
+    <result column="ORG_PHONE" property="orgPhone" jdbcType="VARCHAR" />
+    <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+    <result column="PERSONAL_EDUCATION" property="personalEducation" jdbcType="VARCHAR" />
+    <result column="EDUCATION_GAIN_TIME" property="educationGainTime" jdbcType="TIMESTAMP" />
+    <result column="PERSONAL_MAJOR" property="personalMajor" jdbcType="VARCHAR" />
+    <result column="PERSONAL_DEGREE" property="personalDegree" jdbcType="VARCHAR" />
+    <result column="DEGREE_GAIN_TIME" property="degreeGainTime" jdbcType="TIMESTAMP" />
+    <result column="DEGREE_MAJOR" property="degreeMajor" jdbcType="VARCHAR" />
+    <result column="PERSONAL_EDUCATION_SCHOOL" property="personalEducationSchool" jdbcType="VARCHAR" />
+    <result column="PERSONAL_DEGREE_SCHOOL" property="personalDegreeSchool" jdbcType="VARCHAR" />
+    <result column="NO_POSITION" property="noPosition" jdbcType="VARCHAR" />
+    <result column="QUALIFICATION" property="qualification" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from personal_info
+    where PERSONAL_ID = #{personalId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.mix.model.po.PersonalInfo" >
+    insert into personal_info (PERSONAL_ID, PICTURE, FULL_NAME, 
+      GENDER, BORN_DATE, ID_CARD, 
+      LEVEL, RACE, POLITICAL_OUTLOOK, 
+      RESIDENCE_ADDRESS, POSITION, POLICE_NO, 
+      PAPERWORK_TYPE, PAPERWORK_NO, PHONE_NUMBER, 
+      ORG_ID, QUALIFICATION_LEVEL, START_WORKING_HOURS, 
+      ALARM_TIME, HIGHEST_TITLE, TITLE_GAIN_TIME, 
+      TITLE_VALIDITY, TITLE_PICTURE, WORK_NOW, 
+      WORK_YEARS, MAJOR_ADOPT_YEARS, MAJOR_ADOPT_SCORE, 
+      APPRAISER_APTITUDE, ORG_PHONE, ORG_NAME, 
+      PERSONAL_EDUCATION, EDUCATION_GAIN_TIME, 
+      PERSONAL_MAJOR, PERSONAL_DEGREE, DEGREE_GAIN_TIME, 
+      DEGREE_MAJOR, PERSONAL_EDUCATION_SCHOOL, PERSONAL_DEGREE_SCHOOL, 
+      NO_POSITION, QUALIFICATION)
+    values (#{personalId,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=VARCHAR}, #{bornDate,jdbcType=TIMESTAMP}, #{idCard,jdbcType=VARCHAR}, 
+      #{level,jdbcType=VARCHAR}, #{race,jdbcType=VARCHAR}, #{politicalOutlook,jdbcType=VARCHAR}, 
+      #{residenceAddress,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{policeNo,jdbcType=VARCHAR}, 
+      #{paperworkType,jdbcType=VARCHAR}, #{paperworkNo,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
+      #{orgId,jdbcType=VARCHAR}, #{qualificationLevel,jdbcType=VARCHAR}, #{startWorkingHours,jdbcType=TIMESTAMP}, 
+      #{alarmTime,jdbcType=TIMESTAMP}, #{highestTitle,jdbcType=VARCHAR}, #{titleGainTime,jdbcType=TIMESTAMP}, 
+      #{titleValidity,jdbcType=TIMESTAMP}, #{titlePicture,jdbcType=VARCHAR}, #{workNow,jdbcType=VARCHAR}, 
+      #{workYears,jdbcType=VARCHAR}, #{majorAdoptYears,jdbcType=VARCHAR}, #{majorAdoptScore,jdbcType=VARCHAR}, 
+      #{appraiserAptitude,jdbcType=VARCHAR}, #{orgPhone,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, 
+      #{personalEducation,jdbcType=VARCHAR}, #{educationGainTime,jdbcType=TIMESTAMP}, 
+      #{personalMajor,jdbcType=VARCHAR}, #{personalDegree,jdbcType=VARCHAR}, #{degreeGainTime,jdbcType=TIMESTAMP}, 
+      #{degreeMajor,jdbcType=VARCHAR}, #{personalEducationSchool,jdbcType=VARCHAR}, #{personalDegreeSchool,jdbcType=VARCHAR}, 
+      #{noPosition,jdbcType=VARCHAR}, #{qualification,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.mix.model.po.PersonalInfo" >
+    update personal_info
+    set PICTURE = #{picture,jdbcType=VARCHAR},
+      FULL_NAME = #{fullName,jdbcType=VARCHAR},
+      GENDER = #{gender,jdbcType=VARCHAR},
+      BORN_DATE = #{bornDate,jdbcType=TIMESTAMP},
+      ID_CARD = #{idCard,jdbcType=VARCHAR},
+      LEVEL = #{level,jdbcType=VARCHAR},
+      RACE = #{race,jdbcType=VARCHAR},
+      POLITICAL_OUTLOOK = #{politicalOutlook,jdbcType=VARCHAR},
+      RESIDENCE_ADDRESS = #{residenceAddress,jdbcType=VARCHAR},
+      POSITION = #{position,jdbcType=VARCHAR},
+      POLICE_NO = #{policeNo,jdbcType=VARCHAR},
+      PAPERWORK_TYPE = #{paperworkType,jdbcType=VARCHAR},
+      PAPERWORK_NO = #{paperworkNo,jdbcType=VARCHAR},
+      PHONE_NUMBER = #{phoneNumber,jdbcType=VARCHAR},
+      ORG_ID = #{orgId,jdbcType=VARCHAR},
+      QUALIFICATION_LEVEL = #{qualificationLevel,jdbcType=VARCHAR},
+      START_WORKING_HOURS = #{startWorkingHours,jdbcType=TIMESTAMP},
+      ALARM_TIME = #{alarmTime,jdbcType=TIMESTAMP},
+      HIGHEST_TITLE = #{highestTitle,jdbcType=VARCHAR},
+      TITLE_GAIN_TIME = #{titleGainTime,jdbcType=TIMESTAMP},
+      TITLE_VALIDITY = #{titleValidity,jdbcType=TIMESTAMP},
+      TITLE_PICTURE = #{titlePicture,jdbcType=VARCHAR},
+      WORK_NOW = #{workNow,jdbcType=VARCHAR},
+      WORK_YEARS = #{workYears,jdbcType=VARCHAR},
+      MAJOR_ADOPT_YEARS = #{majorAdoptYears,jdbcType=VARCHAR},
+      MAJOR_ADOPT_SCORE = #{majorAdoptScore,jdbcType=VARCHAR},
+      APPRAISER_APTITUDE = #{appraiserAptitude,jdbcType=VARCHAR},
+      ORG_PHONE = #{orgPhone,jdbcType=VARCHAR},
+      ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      PERSONAL_EDUCATION = #{personalEducation,jdbcType=VARCHAR},
+      EDUCATION_GAIN_TIME = #{educationGainTime,jdbcType=TIMESTAMP},
+      PERSONAL_MAJOR = #{personalMajor,jdbcType=VARCHAR},
+      PERSONAL_DEGREE = #{personalDegree,jdbcType=VARCHAR},
+      DEGREE_GAIN_TIME = #{degreeGainTime,jdbcType=TIMESTAMP},
+      DEGREE_MAJOR = #{degreeMajor,jdbcType=VARCHAR},
+      PERSONAL_EDUCATION_SCHOOL = #{personalEducationSchool,jdbcType=VARCHAR},
+      PERSONAL_DEGREE_SCHOOL = #{personalDegreeSchool,jdbcType=VARCHAR},
+      NO_POSITION = #{noPosition,jdbcType=VARCHAR},
+      QUALIFICATION = #{qualification,jdbcType=VARCHAR}
+    where PERSONAL_ID = #{personalId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select t.*
+    from personal_info t
+    where PERSONAL_ID = #{personalId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select t.*
+    from personal_info t
+  </select>
+</mapper>

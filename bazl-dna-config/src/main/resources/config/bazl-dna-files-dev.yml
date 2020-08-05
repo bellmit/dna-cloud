@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://39.100.79.169:3316/dnacloud?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&serverTimezone=GMT%2B8
+      username: root
+      password: 123456
+      type: com.alibaba.druid.pool.DruidDataSource
+# FastDFS
+# ===================================================================
+# 分布式文件系统FDFS配置
+# ===================================================================
+fdfs:
+  connect-timeout: 605
+  so-timeout: 1505
+  trackerList: 47.92.219.7:22122
+  thumbImage:
+    height: 150
+    width: 150
+  webServerUrl: http://47.92.219.7/
+  storage:
+    node:
+      flag: true
+      server:
+        ip: 47.92.219.7
+        port: 23000
+  #连接池
+  pool:
+    #连接池最大数量
+    max-total: 200
+    #每个tracker地址的最大连接数
+    max-total-per-key: 50
+    #连接耗尽时等待获取连接的最大毫秒数
+    max-wait-millis: 5000

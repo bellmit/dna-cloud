@@ -1,0 +1,70 @@
+
+server: 
+  port: 8706
+spring:
+  application:
+    name: bazl-dna-mix
+  servlet:
+    multipart:
+      enabled: true  
+      max-file-size: 30MB
+      max-request-size: 30MB
+  main:
+    allow-bean-definition-overriding: true
+  mvc:
+    async-request-timeout: 600000
+
+#整合mybatis框架配置
+mybatis:
+    type-aliases-package: com.bazl.dna.mix.model.po
+    mapper-locations: classpath:mybatis/*.xml
+
+
+minSameMixCount: 8
+Gen: 1
+
+#匹配下线
+matchLimit: 13
+
+#导出文档名称
+excelName: 全库快速比对文档
+#导出数据后在excel表格中左下角显示的工作簿名称（注意：不是导出后的文件名）
+sheetName: strMix快速比对列表数据
+#导出文件后缀
+xlsxName: .xlsx
+
+#调用lims的地址
+#caseAnalystUrl: http://192.168.1.138:9090/newLimsCenter/CaseInfo/getCaseInfoByCaseNo
+caseListUrl: http://192.168.1.138:9090/newLimsCenter/CaseInfoData/getCaseInfoListData
+sampleListUrl: http://192.168.1.138:9090/newLimsCenter/CaseInfoData/getSamplefoListData
+mixedSampleGeneList: http://192.168.1.138:9090/newLimsCenter/CaseInfoData/getMixedSampleGene
+singleSampleGeneList: http://192.168.1.138:9090/newLimsCenter/CaseInfoData/getSingleSampleGene
+personInfoList: http://192.168.1.138:9090/newLimsCenter/CaseInfoData/getPersonInfo
+
+#国家库路径
+caseAnalystUrl: http://192.168.1.138:9090/NationalTreasury/nationalTreasury/getCaseInfoByCaseNo
+#caseAnalystUrl: http://192.168.8.194:8091/nationalTreasury/getCaseInfoByCaseNo
+locusNameUrl: http://192.168.1.138:9090/NationalTreasury/nationalTreasury/selectByLocusName
+#locusNameUrl: http://192.168.8.194:8091/nationalTreasury/selectByLocusName
+singleGeneUrl: http://192.168.1.138:9090/NationalTreasury/nationalTreasury/selectSingleGeneByCwsdPage
+#singleGeneUrl: http://192.168.8.194:8091/nationalTreasury/selectSingleGeneByCwsdPage
+mixGeneUrl: http://192.168.1.138:9090/NationalTreasury/nationalTreasury/selectMixGeneByCwsdPage
+#mixGeneUrl: http://192.168.8.194:8091/nationalTreasury/selectMixGeneByCwsdPage
+provinceAndCityUrl: http://192.168.1.138:9090/NationalTreasury/nationalTreasury/selectProvinceAndCity
+#provinceAndCityUrl: http://192.168.8.194:8091/nationalTreasury/selectProvinceAndCity
+queryMixedSampleGeneUrl: http://192.168.1.138:9090/NationalTreasury/nationalTreasury/queryMixedSampleGenes
+#queryMixedSampleGeneUrl: http://192.168.8.194:8091/nationalTreasury/queryMixedSampleGene
+updateSampleGeneUrl: http://192.168.1.138:9090/NationalTreasury/nationalTreasury/updateSampleDnaGeneDF
+#updateSampleGeneUrl: http://192.168.8.194:8091/nationalTreasury/updateSampleDnaGeneDF
+selectPersonUrl: http://192.168.1.138:9090/NationalTreasury/nationalTreasury/selectPersonCategory
+#selectPersonUrl: http://192.168.8.194:8091/nationalTreasury/selectPersonCategory
+kitNameUrl: http://192.168.1.138:9090/NationalTreasury/nationalTreasury/selectKitName
+#kitNameUrl: http://192.168.8.194:8091/nationalTreasury/selectKitName
+kitIdToLocusIDUrl: http://192.168.1.138:9090/NationalTreasury/nationalTreasury/selectByKitIdToLocusID
+#kitIdToLocusIDUrl: http://192.168.8.194:8091/nationalTreasury/selectByKitIdToLocusID
+singleGeneCountUrl: http://192.168.1.138:9090/NationalTreasury/nationalTreasury/selectSingleGeneByCwsd
+#singleGeneCountUrl: http://192.168.8.194:8091/nationalTreasury/selectSingleGeneByCwsd=======
+mixGeneCountUrl: http://192.168.1.138:9090/NationalTreasury/nationalTreasury/selectMixGeneByCwsd
+#mixGeneCountUrl: http://192.168.1.139:8091/nationalTreasury/selectMixGeneByCwsd>>>>>>> .r1356
+KitNameToLocusName: http://192.168.1.138:9090/NationalTreasury/nationalTreasury/selectByKitNameToLocusName
+#KitNameToLocusName: http://192.168.8.194:8091/nationalTreasury/selectByKitNameToLocusName

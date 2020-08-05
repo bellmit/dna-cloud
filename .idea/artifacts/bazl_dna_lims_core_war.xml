@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="bazl-dna-lims-core:war">
+    <output-path>$PROJECT_DIR$/bazl-dna-lims-core/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>bazl-dna-lims-core</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="bazl-dna-lims-core.war">
+      <element id="artifact" artifact-name="bazl-dna-lims-core:war exploded" />
+    </root>
+  </artifact>
+</component>

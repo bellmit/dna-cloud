@@ -1,0 +1,37 @@
+server:
+  port: 8711
+  servlet:
+   session:
+    timeout: 60m
+spring:
+  application:
+    name: bazl-dna-database-core
+    
+  #使用jsp配置
+  mvc:
+    thymeleaf:
+      cache: false
+      enabled: false
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+      
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+      field-strategy: not_empty
+      table-underline: true
+      db-type: mysql
+  type-aliases-package: com.bazl.dna.service.model.po
+  type-handlers-package: com.bazl.dna.service.typehandler
+  mapper-locations: classpath:/mapper/*.xml
+  configuration:
+   log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl
+#mapper:
+#    mappers: com.bazl.dnadao.YstrBaseMapper
+#    not-empty: false
+#    identity: mysql
+
+logging:
+  config: classpath:logback-spring.xml  

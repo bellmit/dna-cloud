@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.CriminalPersonInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.CriminalPersonInfo">
+        <id column="ID" property="id" />
+        <result column="LIMS_PERSON_UUID" property="limsPersonUuid" jdbcType="VARCHAR" />
+        <result column="LAB_SERVER_NO" property="labServerNo" />
+        <result column="CRIMINAL_PERSON_TYPE" property="criminalPersonType" />
+        <result column="PERSON_NAME" property="personName" />
+        <result column="PERSON_GENDER" property="personGender" />
+        <result column="PERSON_IDCARD_NO" property="personIdcardNo" />
+        <result column="PERSON_RACE" property="personRace" />
+        <result column="PERSON_NATION" property="personNation" />
+        <result column="NATIVE_PLACE_CODE" property="nativePlaceCode" />
+        <result column="NATIVE_PLACE_NAME" property="nativePlaceName" />
+        <result column="PRESENT_ADDRESS" property="presentAddress" />
+        <result column="PERSON_HEIGHT" property="personHeight" />
+        <result column="PERSON_WEIGHT" property="personWeight" />
+        <result column="PERSON_APPEARANCE" property="personAppearance" />
+        <result column="REMARKS" property="remarks" />
+    </resultMap>
+
+    <resultMap id="VoResultMap" type="com.bazl.dna.database.service.model.vo.CriminalPersonInfoVo" extends="BaseResultMap">
+        <result column="SAMPLE_ID" property="sampleId" />
+        <result column="CRIMINAL_PERSON_TYPE_NAME" property="criminalPersonTypeName" />
+        <result column="PERSON_GENDER_NAME" property="personGenderName" />
+        <result column="PERSON_RACE_NAME" property="personRaceName" />
+        <result column="SAMPLE_LAB_NO" property="sampleLabNo" />
+        <result column="SAMPLE_NAME" property="sampleName" />
+        <result column="COLLECT_ORG_NAME" property="collectOrgName" />
+        <result column="COLLECT_DATETIME" property="collectDatetime" />
+        <result column="SAMPLE_TYPE_NAME" property="sampleTypeName" />
+        <result column="INSTORE_DATA_TYPE_NAME" property="instoreDataTypeName" />
+        <result column="NATION_SYS_NO" property="nationSysNo" />
+    </resultMap>
+
+    <resultMap id="QoResultMap" type="com.bazl.dna.database.service.model.qo.CriminalReportQuery" extends="BaseResultMap">
+   </resultMap>
+
+    <sql id="Base_Column_List">
+        cpi.ID, cpi.LIMS_PERSON_UUID, cpi.LAB_SERVER_NO, cpi.CRIMINAL_PERSON_TYPE, cpi.PERSON_NAME,
+        cpi.PERSON_GENDER, cpi.PERSON_IDCARD_NO, cpi.PERSON_RACE, cpi.PERSON_NATION, cpi.NATIVE_PLACE_CODE,
+        cpi.NATIVE_PLACE_NAME, cpi.PRESENT_ADDRESS, cpi.PERSON_HEIGHT, cpi.PERSON_APPEARANCE, cpi.REMARKS
+    </sql>
+
+    <sql id="paginationQueryWhereClause">
+        <if test="id != null  and id != 0" >
+            and cpi.ID=#{id, jdbcType=INTEGER}
+        </if>
+        <if test="collectOrgTopCode != null and collectOrgTopCode != ''" >
+            <if test="parentOrgFlag == 1">
+                and exists (select 1 from  region_info ri
+                where ri.region_code = csi.COLLECT_ORG_CODE
+                and ri.parent_region_code = #{collectOrgTopCode, jdbcType=VARCHAR}
+                )
+            </if>
+            <if test="parentOrgFlag == 0">
+                and csi.COLLECT_ORG_CODE=#{collectOrgTopCode, jdbcType=VARCHAR}
+            </if>
+            <if test="consignOrgId == 'ALLCODE'">
+                and exists (select 1 from  region_info ri
+                where ri.region_code = csi.COLLECT_ORG_CODE)
+            </if>
+        </if>
+        <if test="criminalPersonType != null and criminalPersonType != ''" >
+            and cpi.CRIMINAL_PERSON_TYPE=#{criminalPersonType, jdbcType=VARCHAR}
+        </if>
+        <if test="personName != null  and personName != ''" >
+            <choose>
+                <when test="personNameCondition == 1">
+                    and cpi.PERSON_NAME = #{personName, jdbcType=VARCHAR}
+                </when>
+                <otherwise>
+                    and cpi.PERSON_NAME like concat('%',#{personName, jdbcType=VARCHAR},'%')
+                </otherwise>
+            </choose>
+        </if>
+        <if test="personIdcardNo != null  and personIdcardNo != ''" >
+            <choose>
+                <when test="personIdcardNoCondition == 1">
+                    and cpi.PERSON_IDCARD_NO = #{personIdcardNo, jdbcType=VARCHAR}
+                </when>
+                <otherwise>
+                    and cpi.PERSON_IDCARD_NO like concat('%',#{personIdcardNo, jdbcType=VARCHAR},'%')
+                </otherwise>
+            </choose>
+        </if>
+        <if test="personSex != null and personSex != ''" >
+            and cpi.PERSON_GENDER=#{personSex, jdbcType=VARCHAR}
+        </if>
+        <if test="personRace != null and personRace != ''" >
+            and cpi.PERSON_RACE=#{personRace, jdbcType=VARCHAR}
+        </if>
+        <if test="collectOrgSecondCode != null and collectOrgSecondCode != ''" >
+            and csi.COLLECT_ORG_CODE=#{collectOrgSecondCode, jdbcType=VARCHAR}
+        </if>
+        <if test="collectPersonName != null and collectPersonName != ''" >
+            and csi.COLLECT_PERSON=#{collectPersonName, jdbcType=VARCHAR}
+        </if>
+        <if test="collectPersonPhone != null and collectPersonPhone != ''" >
+            and csi.COLLECT_PHONE=#{collectPersonPhone, jdbcType=VARCHAR}
+        </if>
+        <if test="null != collectDatetimeStartDate">
+            and csi.COLLECT_DATETIME &gt;= #{collectDatetimeStartDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="null != collectDatetimeEndDate">
+            and csi.COLLECT_DATETIME &lt;= #{collectDatetimeEndDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="sampleLabNo != null  and sampleLabNo != ''" >
+            <choose>
+                <when test="sampleLabNoCondition == 1">
+                    and csi.SAMPLE_LAB_NO = #{sampleLabNo, jdbcType=VARCHAR}
+                </when>
+                <otherwise>
+                    and csi.SAMPLE_LAB_NO like concat('%',#{sampleLabNo, jdbcType=VARCHAR},'%')
+                </otherwise>
+            </choose>
+        </if>
+        <if test="nationSysNo != null  and nationSysNo != ''" >
+            <choose>
+                <when test="nationSysNoCondition == 1">
+                    and csi.NATION_SYS_NO = #{nationSysNo, jdbcType=VARCHAR}
+                </when>
+                <otherwise>
+                    and csi.NATION_SYS_NO like concat('%',#{nationSysNo, jdbcType=VARCHAR},'%')
+                </otherwise>
+            </choose>
+        </if>
+        <if test="labServerNo != null and labServerNo != ''" >
+            and cpi.LAB_SERVER_NO=#{labServerNo, jdbcType=VARCHAR}
+        </if>
+        <if test="null != acceptStartDate">
+            and csi.ACCEPT_DATETIME &gt;= #{acceptStartDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="null != acceptEndDate">
+            and csi.ACCEPT_DATETIME &lt;= #{acceptEndDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="dnaLabList != null and dnaLabList.size !=0">
+            and cpi.LAB_SERVER_NO in
+            <foreach collection="dnaLabList" item="labServerNo" index="index"
+                     open="(" close=")" separator=",">
+                #{labServerNo, jdbcType=VARCHAR}
+            </foreach>
+        </if>
+        <if test= "clientOrgList != null and clientOrgList.size > 0">
+        		and csi.COLLECT_ORG_CODE in
+				<foreach collection="clientOrgList" item="id" open="(" close=")"
+					separator=",">
+					#{id}
+				</foreach> 
+        </if>
+    </sql>
+
+    <select id="paginationQuery" parameterType="com.bazl.dna.database.service.model.qo.CriminalPersonInfoQuery" resultMap="VoResultMap" >
+        select DISTINCT
+        <include refid="Base_Column_List" />,
+        csi.SAMPLE_LAB_NO,csi.SAMPLE_NAME,csi.SAMPLE_PACKAGE,
+        csi.NATION_SYS_NO,csi.SAMPLE_PACKAGE,csi.COLLECT_ORG_NAME,csi.COLLECT_ORG_CODE,
+        csi.COLLECT_PERSON, csi.ACCEPT_DATETIME,
+        csi.COLLECT_DATETIME,csi.SAMPLE_TYPE,
+        idt.TYPE_NAME as INSTORE_DATA_TYPE_NAME
+        from CRIMINAL_PERSON_INFO cpi
+        left join CRIMINAL_SAMPLE_INFO csi on csi.REF_PERSON_ID = cpi.ID
+        left join instore_data_type idt on idt.TYPE_CODE=csi.INSTORE_DATA_TYPE
+        where 1=1
+        <if test="_parameter != null">
+            <include refid="paginationQueryWhereClause" />
+        </if>
+        limit #{offset},#{rows}
+    </select>
+
+    <select id="paginationCount" parameterType="com.bazl.dna.database.service.model.qo.CriminalPersonInfoQuery" resultType="int"  >
+        select count(DISTINCT cpi.ID)
+        from CRIMINAL_PERSON_INFO cpi
+        left join CRIMINAL_SAMPLE_INFO csi on csi.REF_PERSON_ID = cpi.ID
+        left join instore_data_type idt on idt.TYPE_CODE=csi.INSTORE_DATA_TYPE
+        where 1=1
+        <if test="_parameter != null">
+            <include refid="paginationQueryWhereClause" />
+        </if>
+    </select>
+
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="VoResultMap"  >
+        select DISTINCT
+        <include refid="Base_Column_List" />,
+        csi.SAMPLE_LAB_NO,csi.SAMPLE_NAME,csi.SAMPLE_PACKAGE,
+        csi.NATION_SYS_NO,csi.SAMPLE_PACKAGE,csi.COLLECT_ORG_NAME,
+        csi.COLLECT_PERSON, csi.ACCEPT_DATETIME,csi.ID as SAMPLE_ID,
+        csi.COLLECT_DATETIME,csi.SAMPLE_TYPE,idt.TYPE_NAME as INSTORE_DATA_TYPE_NAME
+        from CRIMINAL_PERSON_INFO cpi
+        left join CRIMINAL_SAMPLE_INFO csi on csi.REF_PERSON_ID = cpi.ID
+        left join instore_data_type idt on idt.TYPE_CODE=csi.INSTORE_DATA_TYPE
+        where cpi.ID = #{id}
+    </select>
+
+    <select id="selectCriminalReportList" parameterType="com.bazl.dna.database.service.model.qo.CriminalReportQuery" resultMap="QoResultMap">
+        SELECT DISTINCT
+	     t.id ,
+	     d.SAMPLE_LAB_NO as SAMPLE_LAB_NO,
+	     t.PERSON_NAME as PERSON_NAME,
+	     t.PERSON_GENDER as personSex,
+	     t.PERSON_IDCARD_NO as PERSON_IDCARD_NO,
+	     d.STORE_DATETIME as storeDatetime,
+	     t.CRIMINAL_PERSON_TYPE as CRIMINAL_PERSON_TYPE,
+	     d.instore_location  as instore_location,
+	     tc.transfer_status as  transfer_status
+         FROM
+	     criminal_person_info t,
+	     transfer_criminal_queue tc,
+	     dna_sample_info d
+         WHERE
+	     t.id = tc.PERSON_ID
+	     AND d.REF_PERSON_ID = t.id
+        <if test="_parameter != null">
+            <include refid="criminalReportWhereClause" />
+        </if>
+         ORDER BY t.id ASC
+         LIMIT #{offset},#{rows}
+    </select>
+
+    <sql id="criminalReportWhereClause">
+        <if test="personName != null  and personName != ''" >
+            and t.PERSON_NAME  like concat('%',#{personName, jdbcType=VARCHAR},'%')
+        </if>
+        <if test="sampleLabNo != null  and sampleLabNo != ''" >
+            and d.SAMPLE_LAB_NO  like concat('%',#{sampleLabNo, jdbcType=VARCHAR},'%')
+        </if>
+        <if test="criminalPersonType != null  and criminalPersonType != ''" >
+            and t.CRIMINAL_PERSON_TYPE  =#{criminalPersonType, jdbcType=VARCHAR}
+        </if>
+        <if test="personSex != null  and personSex != ''" >
+            and t.PERSON_GENDER  =#{personSex, jdbcType=VARCHAR}
+        </if>
+        <if test="personIdcardNo != null  and personIdcardNo != ''" >
+            and t.PERSON_IDCARD_NO  like concat('%',#{personIdcardNo, jdbcType=VARCHAR},'%')
+        </if>
+
+
+    </sql>
+</mapper>

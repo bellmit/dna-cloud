@@ -1,0 +1,70 @@
+#内置服务端口配置 timeout 1m 是一分钟
+server:
+  port: 8081
+  servlet:
+    session:
+      timeout: 30m
+          
+spring:
+  application:
+    name: bazl-dna-stats
+    #devtools热部署配置
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+      exclude: static/**,public/**,WEB-INF/**
+
+  #使用jsp配置
+  mvc:
+    thymeleaf:
+      cache: false
+      enabled: false
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  shiro:
+    properties:
+      authz: false
+    session-id-cookie:
+      http-only: false
+      name: yui2-token
+      maxAge: 2592000
+    session-dao:
+      #expire: 86400 选用globalSessionTimeout这个值
+      session-prefix: yui2-sid
+    session-mgr:
+      globalSessionTimeout: 86400000
+    shiro-db-realm:
+      authentication-caching-enabled: false
+      authorization-caching-enabled: false
+      authentication-cache-name: yui2-cache-authc
+      authorization-cache-name: yui2-cache-authz
+    freemarker:
+      allow-request-override: false
+      allow-session-override: false
+      cache: false
+      charset: UTF-8
+      check-template-location: true
+      content-type: text/html
+      enabled: true
+      expose-request-attributes: false
+      expose-session-attributes: false
+      expose-spring-macro-helpers: true
+      prefer-file-system-access: true
+      template-loader-path: classpath:/templates/*.ftl
+#整合mybatis框架配置
+mybatis:
+  type-aliases-package: com.bazl.dna.lims.model.po # 注意：对应实体类的路径
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+mapper:
+  mappers:
+    - com.bazl.dna.lims.dao.BaseMapper
+  not-empty: false
+  identity: oracle
+
+logging:
+  config: classpath:logback-spring.xml
+

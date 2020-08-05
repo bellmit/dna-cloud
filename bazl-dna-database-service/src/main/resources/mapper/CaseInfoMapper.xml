@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.CaseInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.CaseInfo">
+        <id column="ID" property="id" />
+        <result column="LIMS_CASE_UUID" property="limsCaseUuid" jdbcType="VARCHAR" />
+        <result column="LAB_SERVER_NO" property="labServerNo" />
+        <result column="SYS_XK_NO" property="sysXkNo" />
+        <result column="SYS_CASE_ANO" property="sysCaseAno" />
+        <result column="CASE_ACCEPT_NO" property="caseAcceptNo" />
+        <result column="CASE_NAME" property="caseName" />
+        <result column="CASE_TYPE" property="caseType" />
+        <result column="CASE_PROPERTY" property="caseProperty" />
+        <result column="CASE_SUB_PROPERTY" property="caseSubProperty" />
+        <result column="CASE_LEVEL" property="caseLevel" />
+        <result column="HARM_LEVEL" property="harmLevel" />
+        <result column="SCENE_REGIONALISM" property="sceneRegionalism" />
+        <result column="SCENE_PLACE" property="scenePlace" />
+        <result column="OCCURRENCE_DATETIME" property="occurrenceDatetime" />
+        <result column="CASE_SUMMARY" property="caseSummary" />
+        <result column="MORE_REMARKS" property="moreRemarks" />
+        <result column="TRANSFER_NATION_FLAG" property="transferNationFlag" />
+        <result column="FIRST_TRANSFER_NATION_TIME" property="firstTransferNationTime" />
+        <result column="LAST_TRANSFER_NATION_TIME" property="lastTransferNationTime" />
+        <result column="TRANSFER_PERSON_ID" property="transferPersonId" />
+        <result column="TRANSFER_PERSON_NAME" property="transferPersonName" />
+        <result column="NATION_SYS_NO" property="nationSysNo" />
+        <result column="DELETE_FLAG" property="deleteFlag" />
+        <result column="DELETE_DATETIME" property="deleteDatetime" />
+        <result column="DELETE_PERSON" property="deletePerson" />
+        <result column="DELETE_REASON" property="deleteReason" />
+        <result column="STORE_DATETIME" property="storeDatetime" />
+        <result column="STORE_PERSON_ID" property="storePersonId" />
+        <result column="STORE_PERSON_NAME" property="storePersonName" />
+        <result column="UPDATE_DATETIME" property="updateDatetime" />
+        <result column="UPDATE_PERSON_ID" property="updatePersonId" />
+        <result column="UPDATE_PERSON_NAME" property="updatePersonName" />
+    </resultMap>
+
+    <resultMap id="BaseResultMapVo" type="com.bazl.dna.database.service.model.vo.CaseInfoVo" extends="BaseResultMap">
+    </resultMap>
+
+    <resultMap id="BaseResultMapQo" type="com.bazl.dna.database.service.model.qo.CaseReportQuery" extends="BaseResultMap">
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ci.ID, ci.LIMS_CASE_UUID, ci.LAB_SERVER_NO, ci.SYS_XK_NO, ci.SYS_CASE_ANO, ci.CASE_ACCEPT_NO,
+	    ci.CASE_NAME, ci.CASE_TYPE, ci.CASE_PROPERTY, ci.CASE_SUB_PROPERTY, ci.CASE_LEVEL, ci.HARM_LEVEL,
+	    ci.SCENE_REGIONALISM, ci.SCENE_PLACE, ci.OCCURRENCE_DATETIME, ci.CASE_SUMMARY, ci.MORE_REMARKS,
+	    ci.TRANSFER_NATION_FLAG, ci.FIRST_TRANSFER_NATION_TIME, ci.LAST_TRANSFER_NATION_TIME, ci.TRANSFER_PERSON_ID,
+	    ci.TRANSFER_PERSON_NAME, ci.NATION_SYS_NO, ci.DELETE_FLAG, ci.DELETE_DATETIME, ci.DELETE_PERSON,
+	    ci.DELETE_REASON, ci.STORE_DATETIME, ci.STORE_PERSON_ID, ci.STORE_PERSON_NAME,
+	    ci.UPDATE_DATETIME, ci.UPDATE_PERSON_ID, ci.UPDATE_PERSON_NAME
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from case_info ci
+        where ci.ID = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByIdDetail" parameterType="java.lang.Integer" resultMap="BaseResultMapVo">
+        select
+        <include refid="Base_Column_List" />,ci.OCCURRENCE_DATETIME as casrDatetime,
+        di1.DICT_NAME as casePropertyName,di2.DICT_NAME as caseSubPropertyName
+        from case_info ci
+        left join DICT_ITEM di1 on di1.DICT_CODE=ci.CASE_PROPERTY and di1.DICT_TYPE_CODE='CASE_PROPERTY'
+        left join DICT_ITEM di2 on di2.DICT_CODE=ci.CASE_SUB_PROPERTY and di2.DICT_TYPE_CODE='CASE_PROPERTY'
+        where ci.ID = #{id,jdbcType=INTEGER}
+    </select>
+
+    <sql id="paginationQueryWhereClause">
+        <if test="id!= null" >
+          and ci.ID = #{id}
+        </if>
+        <if test="caseName != null  and caseName != ''" >
+            <choose>
+                <when test="caseNameCondition == 1">
+                    and ci.CASE_NAME = #{caseName, jdbcType=VARCHAR}
+                </when>
+                <otherwise>
+                    and ci.CASE_NAME like concat('%',#{caseName, jdbcType=VARCHAR},'%')
+                </otherwise>
+            </choose>
+        </if>
+
+        <if test="caseAcceptNo != null  and caseAcceptNo != ''" >
+            <!--<choose>-->
+                <if test="caseAcceptNoCondition == 1">
+                    and ci.CASE_ACCEPT_NO = #{caseAcceptNo, jdbcType=VARCHAR}
+                </if>
+                <if test="caseAcceptNoCondition != 1">
+                    and ci.CASE_ACCEPT_NO like concat('%',#{caseAcceptNo, jdbcType=VARCHAR},'%')
+                </if>
+            <!--</choose>-->
+        </if>
+        <if test="sysXkNo != null  and sysXkNo != ''" >
+            <choose>
+                <when test="sysXkNoCondition == 1">
+                    and ci.SYS_XK_NO = #{sysXkNo, jdbcType=VARCHAR}
+                </when>
+                <otherwise>
+                    and ci.SYS_XK_NO like concat('%',#{sysXkNo, jdbcType=VARCHAR},'%')
+                </otherwise>
+            </choose>
+        </if>
+        <if test="sysCaseAno != null  and sysCaseAno != ''" >
+            <choose>
+                <when test="sysCaseAnoCondition == 1">
+                    and ci.SYS_CASE_ANO = #{sysCaseAno, jdbcType=VARCHAR}
+                </when>
+                <otherwise>
+                    and ci.SYS_CASE_ANO like concat('%',#{sysCaseAno, jdbcType=VARCHAR},'%')
+                </otherwise>
+            </choose>
+        </if>
+        <if test="nationSysNo != null  and nationSysNo != ''" >
+            <choose>
+                <when test="nationSysNoCondition == 1">
+                    and ci.NATION_SYS_NO = #{nationSysNo, jdbcType=VARCHAR}
+                </when>
+                <otherwise>
+                    and ci.NATION_SYS_NO like concat('%',#{nationSysNo, jdbcType=VARCHAR},'%')
+                </otherwise>
+            </choose>
+        </if>
+        <if test="caseType != null and caseType != ''" >
+            <if test="caseType == '03' ">
+                and ci.CASE_TYPE not in ('01','02') or ci.CASE_TYPE is null
+            </if>
+            <if test="caseType == '01' or caseType == '02' ">
+                and ci.CASE_TYPE = #{caseType, jdbcType=VARCHAR}
+            </if>
+        </if>
+        <if test="dnaLabList != null and dnaLabList.size !=0">
+            and ci.LAB_SERVER_NO in
+            <foreach collection="dnaLabList" item="labServerNo" index="index"
+                     open="(" close=")" separator=",">
+                #{labServerNo, jdbcType=VARCHAR}
+            </foreach>
+        </if>
+        <if test="casePropertyList != null and casePropertyList.size != 0" >
+            and ci.CASE_PROPERTY in 
+            <foreach collection="casePropertyList" item="caseProperty" index="index"
+            open="(" close=")" separator=",">
+                #{caseProperty, jdbcType=VARCHAR}
+            </foreach>
+        </if>
+        <if test="sceneRegionalism != null and sceneRegionalism != ''" >
+            and ci.SCENE_REGIONALISM = #{sceneRegionalism, jdbcType=VARCHAR}
+        </if>
+        <if test="scenePlace != null and scenePlace != ''" >
+            and ci.SCENE_PLACE = #{scenePlace, jdbcType=VARCHAR}
+        </if>
+        <if test="null != occurrenceStratDatetime">
+            and ci.OCCURRENCE_DATETIME &gt;= #{occurrenceStratDatetime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="null != occurrenceEndDatetime">
+            and ci.OCCURRENCE_DATETIME &lt;= #{occurrenceEndDatetime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="isLifeCase != null and isLifeCase != ''" >
+            and ci.SCENE_REGIONALISM = #{isLifeCase,jdbcType=INTEGER}
+        </if>
+
+
+
+
+        <if test="consignPersonName != null and consignPersonName != ''" >
+            and con.CONSIGN_PERSON1_NAME = #{consignPersonName, jdbcType=VARCHAR}
+        </if>
+        <if test="consignPersonPhone != null and consignPersonPhone != ''" >
+            and con.CONSIGN_PERSON1_PHONE = #{consignPersonPhone, jdbcType=VARCHAR}
+        </if>
+        <if test="sampleNo != null  and sampleNo != ''" >
+            <choose>
+                <when test="sampleNoCondition == 1">
+                    and si.SAMPLE_LAB_NO = #{sampleNo, jdbcType=VARCHAR}
+                </when>
+                <otherwise>
+                    and si.SAMPLE_LAB_NO like concat('%',#{sampleNo, jdbcType=VARCHAR},'%')
+                </otherwise>
+            </choose>
+        </if>
+        <if test="sampleName != null  and sampleName != ''" >
+            <choose>
+                <when test="sampleNameCondition == 1">
+                    and si.SAMPLE_NAME = #{sampleName, jdbcType=VARCHAR}
+                </when>
+                <otherwise>
+                    and si.SAMPLE_NAME like concat('%',#{sampleName, jdbcType=VARCHAR},'%')
+                </otherwise>
+            </choose>
+        </if>
+        <if test="sampleEvidenceNo != null  and sampleEvidenceNo != ''" >
+            <choose>
+                <when test="sampleEvidenceNoCondition == 1">
+                    and si.SAMPLE_EVIDENCE_NO = #{sampleEvidenceNo, jdbcType=VARCHAR}
+                </when>
+                <otherwise>
+                    and si.SAMPLE_EVIDENCE_NO like concat('%',#{sampleEvidenceNo, jdbcType=VARCHAR},'%')
+                </otherwise>
+            </choose>
+        </if>
+        <if test="sampleTypeList != null and sampleTypeList.size != 0" >
+            and si.SAMPLE_TYPE in
+            <foreach collection="sampleTypeList" item="sampleType" index="index"
+                     open="(" close=")" separator=",">
+                #{sampleType,jdbcType=VARCHAR}
+            </foreach>
+        </if>
+        <if test="null != personType and personType != ''">
+            and pi.PERSON_TYPE = #{personType, jdbcType=VARCHAR}
+        </if>
+        <if test="personName != null  and personName != ''" >
+            <choose>
+                <when test="personNameCondition == 1">
+                    and pi.PERSON_NAME = #{personName, jdbcType=VARCHAR}
+                </when>
+                <otherwise>
+                    and pi.PERSON_NAME like concat('%',#{personName, jdbcType=VARCHAR},'%')
+                </otherwise>
+            </choose>
+        </if>
+        <if test="personIdcardNo != null  and personIdcardNo != ''" >
+            <choose>
+                <when test="personIdcardNoCondition == 1">
+                    and pi.PERSON_IDCARD_NO = #{personIdcardNo, jdbcType=VARCHAR}
+                </when>
+                <otherwise>
+                    and pi.PERSON_IDCARD_NO like concat('%',#{personIdcardNo, jdbcType=VARCHAR},'%')
+                </otherwise>
+            </choose>
+        </if>
+        <if test="null != personSex and personSex != ''">
+            and pi.PERSON_GENDER = #{personSex, jdbcType=VARCHAR}
+        </if>
+        <if test="null != personRace and personRace != ''">
+            and pi.PERSON_RACE = #{personRace, jdbcType=VARCHAR}
+        </if>
+        <if test="null != labServerNo and labServerNo != ''">
+            and ci.LAB_SERVER_NO = #{labServerNo, jdbcType=VARCHAR}
+        </if>
+        <if test="null != acceptorName and acceptorName != ''">
+            and con.ACCEPT_PERSON_NAME = #{acceptorName, jdbcType=VARCHAR}
+        </if>
+        <if test="null != acceptStartDate">
+            and con.ACCEPT_DATETIME &gt;= #{acceptStartDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="null != acceptEndDate">
+            and con.ACCEPT_DATETIME &lt;= #{acceptEndDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test= "clientOrgList != null and clientOrgList.size > 0">
+        		and con.CONSIGN_ORG_ID in
+				<foreach collection="clientOrgList" item="id" open="(" close=")"
+					separator=",">
+					#{id}
+				</foreach> 
+        </if>
+    </sql>
+
+    <select id="paginationQuery" parameterType="com.bazl.dna.database.service.model.qo.CaseInfoQuery" resultMap="BaseResultMapVo" >
+        select DISTINCT ci.ID, ci.CASE_ACCEPT_NO, ci.SYS_XK_NO,ci.CASE_PROPERTY,ci.CASE_SUB_PROPERTY,
+          ci.SYS_CASE_ANO, ci.CASE_NAME,lsi.LAB_SERVER_NAME as labServerName,con.CONSIGN_ORG_ID,
+          con.CONSIGN_ORG_NAME as consignOrgName,con.CONSIGNMENT_REG_DATETIME as consignmentRegDatetime,
+          con.ACCEPT_PERSON_NAME as acceptPersonName, con.ACCEPT_DATETIME as acceptDatetime,
+          con.ID as consignmentId,ci.CASE_STATUS
+        from CASE_INFO ci
+        left join CONSIGNMENT_INFO con on ci.ID = con.CASE_ID
+        left join LAB_SERVER_INFO lsi on lsi.LAB_SERVER_NO=ci.LAB_SERVER_NO
+        left join dna_sample_info si on si.CASE_ID = ci.ID
+        left join case_person_info pi on pi.CASE_ID = ci.ID
+        <where>
+            1=1
+            <if test="_parameter != null">
+                <include refid="paginationQueryWhereClause" />
+            </if>
+        </where>
+        LIMIT #{offset},#{rows}
+    </select>
+
+    <select id="paginationCount" parameterType="com.bazl.dna.database.service.model.qo.CaseInfoQuery" resultType="int"  >
+        select count(DISTINCT ci.ID)
+        from CASE_INFO ci
+        left join CONSIGNMENT_INFO con on ci.ID = con.CASE_ID
+        left join LAB_SERVER_INFO lsi on lsi.LAB_SERVER_NO=ci.LAB_SERVER_NO
+        left join dna_sample_info si on si.CASE_ID = ci.ID
+        left join case_person_info pi on pi.CASE_ID = ci.ID
+        where 1=1
+        <if test="_parameter != null">
+         <include refid="paginationQueryWhereClause" />
+        </if>
+    </select>
+
+    <select id="selectByCaseTransferFlag" parameterType="com.bazl.dna.database.service.model.po.CaseInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from case_info ci
+        where ci.TRANSFER_NATION_FLAG = #{transferNationFlag,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectCaseByLabServerNo" parameterType="com.bazl.dna.database.service.model.po.CaseInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from case_info ci
+        where ci.LAB_SERVER_NO = #{labServerNo, jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectAllCaseCount" resultType="java.lang.Integer" parameterType="com.bazl.dna.database.service.model.po.CaseInfo">
+        select count(DISTINCT t.ID) from  case_info t where t.delete_Flag = '0'
+    </select>
+
+    <select id="selectAcceptNoCount" resultType="java.lang.Integer" parameterType="String">
+        select count(DISTINCT t.ID) from  case_info t where t.delete_Flag = '0' and t.CASE_ACCEPT_NO = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectCaseReportList" parameterType="com.bazl.dna.database.service.model.qo.CaseReportQuery" resultMap="BaseResultMapQo">
+        SELECT
+        distinct ca.id AS id,
+        t.id as transfer_case_queue_id,
+        ca.CASE_PROPERTY AS CASE_PROPERTY,
+        ca.CASE_ACCEPT_NO AS CASE_ACCEPT_NO,
+        ca.case_name AS CASE_NAME,
+        ci.accept_datetime  AS ACCEPT_DATETIME,
+        t.TRANSFER_STATUS AS  TRANSFER_STATUS,
+        COUNT(DISTINCT s.id) AS acceptSampleCount,
+        t.CREATE_DATETIME AS sumbitDatetime
+        FROM case_info ca,
+        transfer_case_queue t,
+        consignment_info ci,
+        dna_sample_info s
+        WHERE  ca.id = t.CASE_ID
+        AND ca.id = ci.CASE_ID
+        AND s.CASE_ID = ca.id
+        AND ca.DELETE_FLAG = '0'
+        AND s.DELETE_FLAG = '0'
+        <if test="_parameter != null">
+            <include refid="CaseReportQueryWhereClause" />
+        </if>
+        GROUP BY ca.id
+        ORDER BY ca.id ASC
+        LIMIT #{offset},#{rows}
+    </select>
+
+    <select id="caseReportpaginationCount" parameterType="com.bazl.dna.database.service.model.qo.CaseReportQuery" resultType="int">
+        SELECT
+        count(distinct ca.id)
+        FROM case_info ca,
+        transfer_case_queue t,
+        consignment_info ci,
+        dna_sample_info s
+        WHERE  ca.id = t.CASE_ID
+        AND ca.id = ci.CASE_ID
+        AND s.CASE_ID = ca.id
+        AND ca.DELETE_FLAG = '0'
+        AND s.DELETE_FLAG = '0'
+        <if test="_parameter != null">
+            <include refid="CaseReportQueryWhereClause" />
+        </if>
+    </select>
+
+    <sql id="CaseReportQueryWhereClause">
+        <if test="caseName != null  and caseName != ''" >
+            and ca.CASE_NAME  like concat('%',#{caseName, jdbcType=VARCHAR},'%')
+        </if>
+        <if test="caseProperty != null  and caseProperty != ''" >
+            and ca.CASE_PROPERTY = #{caseProperty, jdbcType=VARCHAR}
+        </if>
+        <if test="caseAcceptNo != null  and caseAcceptNo != ''" >
+            and ca.CASE_ACCEPT_NO like concat('%',#{caseAcceptNo, jdbcType=VARCHAR},'%')
+        </if>
+        <if test="sampleNo != null  and sampleNo != ''" >
+            and s.SAMPLE_LAB_NO like concat('%',#{sampleNo, jdbcType=VARCHAR},'%')
+        </if>
+        <if test="sampleName != null  and sampleName != ''" >
+            and s.SAMPLE_NAME like concat('%',#{sampleName, jdbcType=VARCHAR},'%')
+        </if>
+        <if test="acceptPersonName != null and acceptPersonName != ''" >
+            and ci.ACCEPT_PERSON_NAME = #{acceptPersonName, jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+</mapper>

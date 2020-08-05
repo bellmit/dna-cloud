@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.database.nation.converter.dao.SysDictMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.dna.database.nation.converter.model.po.SysDict" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="DICT_CATEGORY" property="dictCategory" jdbcType="VARCHAR" />
+    <result column="DICT_SUB_CATEGORY" property="dictSubCategory" jdbcType="VARCHAR" />
+    <result column="ROOT_FLAG" property="rootFlag" jdbcType="DECIMAL" />
+    <result column="DICT_KEY" property="dictKey" jdbcType="VARCHAR" />
+    <result column="DICT_NATIONAL_KEY" property="dictNationalKey" jdbcType="VARCHAR" />
+    <result column="DICT_VALUE1" property="dictValue1" jdbcType="VARCHAR" />
+    <result column="DICT_VALUE2" property="dictValue2" jdbcType="VARCHAR" />
+    <result column="DICT_VALUE3" property="dictValue3" jdbcType="VARCHAR" />
+    <result column="DICT_ALIAS" property="dictAlias" jdbcType="VARCHAR" />
+    <result column="PARENT_KEY" property="parentKey" jdbcType="VARCHAR" />
+    <result column="DOWNLOAD_FLAG" property="downloadFlag" jdbcType="DECIMAL" />
+    <result column="READONLY_FLAG" property="readonlyFlag" jdbcType="DECIMAL" />
+    <result column="ORD" property="ord" jdbcType="DECIMAL" />
+    <result column="DICT_PY" property="dictPy" jdbcType="VARCHAR" />
+    <result column="ACTIVE_FLAG" property="activeFlag" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="BaseResultMap2" type="java.util.Map" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="DICT_VALUE1" property="dictValue1" jdbcType="VARCHAR" />
+    <result column="DICT_KEY" property="dictKey" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_DICT
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.database.nation.converter.model.po.SysDict" >
+    insert into SYS_DICT (ID, DICT_CATEGORY, DICT_SUB_CATEGORY, 
+      ROOT_FLAG, DICT_KEY, DICT_NATIONAL_KEY, 
+      DICT_VALUE1, DICT_VALUE2, DICT_VALUE3, 
+      DICT_ALIAS, PARENT_KEY, DOWNLOAD_FLAG, 
+      READONLY_FLAG, ORD, DICT_PY, 
+      ACTIVE_FLAG, REMARK, CREATE_USER, 
+      CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME
+      )
+    values (#{id,jdbcType=VARCHAR}, #{dictCategory,jdbcType=VARCHAR}, #{dictSubCategory,jdbcType=VARCHAR}, 
+      #{rootFlag,jdbcType=DECIMAL}, #{dictKey,jdbcType=VARCHAR}, #{dictNationalKey,jdbcType=VARCHAR}, 
+      #{dictValue1,jdbcType=VARCHAR}, #{dictValue2,jdbcType=VARCHAR}, #{dictValue3,jdbcType=VARCHAR}, 
+      #{dictAlias,jdbcType=VARCHAR}, #{parentKey,jdbcType=VARCHAR}, #{downloadFlag,jdbcType=DECIMAL}, 
+      #{readonlyFlag,jdbcType=DECIMAL}, #{ord,jdbcType=DECIMAL}, #{dictPy,jdbcType=VARCHAR}, 
+      #{activeFlag,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.database.nation.converter.model.po.SysDict" >
+    update SYS_DICT
+    set DICT_CATEGORY = #{dictCategory,jdbcType=VARCHAR},
+      DICT_SUB_CATEGORY = #{dictSubCategory,jdbcType=VARCHAR},
+      ROOT_FLAG = #{rootFlag,jdbcType=DECIMAL},
+      DICT_KEY = #{dictKey,jdbcType=VARCHAR},
+      DICT_NATIONAL_KEY = #{dictNationalKey,jdbcType=VARCHAR},
+      DICT_VALUE1 = #{dictValue1,jdbcType=VARCHAR},
+      DICT_VALUE2 = #{dictValue2,jdbcType=VARCHAR},
+      DICT_VALUE3 = #{dictValue3,jdbcType=VARCHAR},
+      DICT_ALIAS = #{dictAlias,jdbcType=VARCHAR},
+      PARENT_KEY = #{parentKey,jdbcType=VARCHAR},
+      DOWNLOAD_FLAG = #{downloadFlag,jdbcType=DECIMAL},
+      READONLY_FLAG = #{readonlyFlag,jdbcType=DECIMAL},
+      ORD = #{ord,jdbcType=DECIMAL},
+      DICT_PY = #{dictPy,jdbcType=VARCHAR},
+      ACTIVE_FLAG = #{activeFlag,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, DICT_CATEGORY, DICT_SUB_CATEGORY, ROOT_FLAG, DICT_KEY, DICT_NATIONAL_KEY, 
+    DICT_VALUE1, DICT_VALUE2, DICT_VALUE3, DICT_ALIAS, PARENT_KEY, DOWNLOAD_FLAG, READONLY_FLAG, 
+    ORD, DICT_PY, ACTIVE_FLAG, REMARK, CREATE_USER, CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME
+    from SYS_DICT
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByPrimaryKeyBean" resultMap="BaseResultMap" parameterType="com.bazl.dna.database.nation.converter.model.po.SysDict" >
+    select ID, DICT_CATEGORY, DICT_SUB_CATEGORY, ROOT_FLAG, DICT_KEY, DICT_NATIONAL_KEY,
+    DICT_VALUE1, DICT_VALUE2, DICT_VALUE3, DICT_ALIAS, PARENT_KEY, DOWNLOAD_FLAG, READONLY_FLAG,
+    ORD, DICT_PY, ACTIVE_FLAG, REMARK, CREATE_USER, CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME
+    from SYS_DICT
+    where DICT_CATEGORY = #{dictCategory,jdbcType=VARCHAR} and DICT_KEY = #{dictKey,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, DICT_CATEGORY, DICT_SUB_CATEGORY, ROOT_FLAG, DICT_KEY, DICT_NATIONAL_KEY, 
+    DICT_VALUE1, DICT_VALUE2, DICT_VALUE3, DICT_ALIAS, PARENT_KEY, DOWNLOAD_FLAG, READONLY_FLAG, 
+    ORD, DICT_PY, ACTIVE_FLAG, REMARK, CREATE_USER, CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME
+    from SYS_DICT
+  </select>
+
+  <select id="selectPersonCategory" resultMap="BaseResultMap2" >
+    select ID,DICT_VALUE1,DICT_KEY from SYS_DICT WHERE DICT_CATEGORY = 'PERSON_CATEGORY'
+  </select>
+</mapper>

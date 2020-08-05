@@ -1,0 +1,117 @@
+.Msg-Container{
+  width: 320px;
+  // height: 400px;
+  position: fixed;
+  right: 0;
+  bottom: 50px;
+  background: #fff;
+  z-index: 9999999999999999999;
+  .Msg-herder{
+    width: 100%;
+    height: 40px;
+    background: #0071FF;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: '微软雅黑';
+    color:#fff;
+    text-align: center;
+    line-height: 40px;
+    // span:first-child{
+
+    // }
+  }
+  .Msg-body{
+    width: 95%;
+    height: 350px;
+    margin: 0 auto;
+    // overflow: hidden;
+    overflow-x: hidden;
+    // border:1px solid #ccc;
+    ul{
+      width: 100%;
+      li{
+        width: 100%;
+        height: 35px;
+        border-bottom: #ccc 1px dashed;
+        display: flex;
+        align-items: center;
+        img{
+          width: 20px;
+        }
+        span{
+          display: inline-block;
+          // width: 33%;
+        }
+        span:nth-child(1){
+          width: 15% !important;
+          margin-right: 5px;
+          color: #999999;
+          text-align: center !important;
+        }
+        span:nth-child(2){
+          // margin-right: auto;
+          width: 75% !important;
+          overflow: hidden;
+          text-overflow:ellipsis;
+          white-space: nowrap;
+          cursor: pointer;
+          // margin-right: 2px;
+          color: #003333;
+        }
+        span:nth-child(3){
+          // margin-right: auto;
+          cursor: pointer;
+          // width: 10% !important;
+          width: 22px;
+          height: 22px;
+          border-radius: 11px;
+          text-align: center;
+          line-height: 22px;
+          background: #CCCCCC;
+          font-size: 20px;
+          color: #fff;
+        }
+        span:nth-child(3):hover{
+          background: #FF1F1D;
+          color: #fff;
+        }
+
+      }
+    }
+  }
+  .Msg-footer{
+    width: 100%;
+    height: 50px;
+    border-top:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+    div:first-child{
+      width:80%;
+      height: 100%;
+      margin:auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      span{
+        display: inline-block;
+        width:69px;
+        height:32px;
+        border:1px solid rgba(204,204,204,1);
+        opacity:1;
+        border-radius:3px;
+        text-align: center;
+        line-height: 32px;
+        color:#999999;
+        cursor: pointer;
+      }
+      span:first-child{
+        margin-right: 20px;
+        margin-left: 20px;
+      }
+      span:hover{
+        color:#000;
+        border:1px #619CFE solid;
+        box-shadow: #ccc 0px 5px 5px;  
+      }
+    }
+  }
+}

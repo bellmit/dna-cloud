@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/bazl-dna-caseinfo-accept/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-caseinfo-reg/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-config/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-database-compare/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-database-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-database-lims-converter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-database-nation-converter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-database-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-database-sync/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-database-transfer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-deploy/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-dpznsy/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-elasticsearch/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-eureka/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-files/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-lims-blood/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-lims-connector/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-lims-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-lims-manager/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-lims-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-mix-compare/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-mix/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-nation-connector/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-stats/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-system/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-test/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-turbine/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bazl-dna-zuul/src/main/java" charset="UTF-8" />
+  </component>
+</project>

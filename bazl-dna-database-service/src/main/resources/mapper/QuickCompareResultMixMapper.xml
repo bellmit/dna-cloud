@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.QuickCompareResultMixMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.QuickCompareResultMix">
+        <id column="ID" property="id" />
+        <result column="QUICK_COMPARE_QUEUE_ID" property="quickCompareQueueId" />
+        <result column="MATCHED_GENE_ID" property="matchedGeneId" />
+        <result column="MATCHED_LOCUS_COUNT" property="matchedLocusCount" />
+        <result column="DIFF_LOCUS_COUNT" property="diffLocusCount" />
+        <result column="MATCHED_GENE_DETAILS" property="matchedGeneDetails" />
+        <result column="MATCHED_DATETIME" property="matchedDatetime" />
+    </resultMap>
+
+    <resultMap id="BaseResultMapVo" type="com.bazl.dna.database.service.model.vo.QuickCompareResultMixVo" extends="BaseResultMap">
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID, QUICK_COMPARE_QUEUE_ID, MATCHED_GENE_ID, MATCHED_LOCUS_COUNT, DIFF_LOCUS_COUNT,
+        MATCHED_GENE_DETAILS, MATCHED_DATETIME
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from quick_compare_result_mix
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from quick_compare_result_mix
+        where ID = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bazl.dna.database.service.model.po.QuickCompareResultMix">
+        insert into quick_compare_result_mix (ID, QUICK_COMPARE_QUEUE_ID, MATCHED_GENE_ID,
+        MATCHED_LOCUS_COUNT, DIFF_LOCUS_COUNT, MATCHED_GENE_DETAILS,
+        MATCHED_DATETIME)
+        values (#{id,jdbcType=INTEGER}, #{quickCompareQueueId,jdbcType=INTEGER}, #{matchedGeneId,jdbcType=INTEGER},
+        #{matchedLocusCount,jdbcType=INTEGER}, #{diffLocusCount,jdbcType=INTEGER}, #{matchedGeneDetails,jdbcType=CHAR},
+        #{matchedDatetime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bazl.dna.database.service.model.po.QuickCompareResultMix">
+        insert into quick_compare_result_mix
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="quickCompareQueueId != null">
+                QUICK_COMPARE_QUEUE_ID,
+            </if>
+            <if test="matchedGeneId != null">
+                MATCHED_GENE_ID,
+            </if>
+            <if test="matchedLocusCount != null">
+                MATCHED_LOCUS_COUNT,
+            </if>
+            <if test="diffLocusCount != null">
+                DIFF_LOCUS_COUNT,
+            </if>
+            <if test="matchedGeneDetails != null">
+                MATCHED_GENE_DETAILS,
+            </if>
+            <if test="matchedDatetime != null">
+                MATCHED_DATETIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="quickCompareQueueId != null">
+                #{quickCompareQueueId,jdbcType=INTEGER},
+            </if>
+            <if test="matchedGeneId != null">
+                #{matchedGeneId,jdbcType=INTEGER},
+            </if>
+            <if test="matchedLocusCount != null">
+                #{matchedLocusCount,jdbcType=INTEGER},
+            </if>
+            <if test="diffLocusCount != null">
+                #{diffLocusCount,jdbcType=INTEGER},
+            </if>
+            <if test="matchedGeneDetails != null">
+                #{matchedGeneDetails,jdbcType=CHAR},
+            </if>
+            <if test="matchedDatetime != null">
+                #{matchedDatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bazl.dna.database.service.model.po.QuickCompareResultMix">
+        update quick_compare_result_mix
+        <set>
+            <if test="quickCompareQueueId != null">
+                QUICK_COMPARE_QUEUE_ID = #{quickCompareQueueId,jdbcType=INTEGER},
+            </if>
+            <if test="matchedGeneId != null">
+                MATCHED_GENE_ID = #{matchedGeneId,jdbcType=INTEGER},
+            </if>
+            <if test="matchedLocusCount != null">
+                MATCHED_LOCUS_COUNT = #{matchedLocusCount,jdbcType=INTEGER},
+            </if>
+            <if test="diffLocusCount != null">
+                DIFF_LOCUS_COUNT = #{diffLocusCount,jdbcType=INTEGER},
+            </if>
+            <if test="matchedGeneDetails != null">
+                MATCHED_GENE_DETAILS = #{matchedGeneDetails,jdbcType=CHAR},
+            </if>
+            <if test="matchedDatetime != null">
+                MATCHED_DATETIME = #{matchedDatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bazl.dna.database.service.model.po.QuickCompareResultMix">
+        update quick_compare_result_mix
+        set QUICK_COMPARE_QUEUE_ID = #{quickCompareQueueId,jdbcType=INTEGER},
+        MATCHED_GENE_ID = #{matchedGeneId,jdbcType=INTEGER},
+        MATCHED_LOCUS_COUNT = #{matchedLocusCount,jdbcType=INTEGER},
+        DIFF_LOCUS_COUNT = #{diffLocusCount,jdbcType=INTEGER},
+        MATCHED_GENE_DETAILS = #{matchedGeneDetails,jdbcType=CHAR},
+        MATCHED_DATETIME = #{matchedDatetime,jdbcType=TIMESTAMP}
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectByQuickCompareQueueId" parameterType="java.lang.Integer" resultMap="BaseResultMapVo">
+        select DISTINCT crm.ID, crm.QUICK_COMPARE_QUEUE_ID, crm.MATCHED_GENE_ID,
+          lsi.LAB_SERVER_NAME as LAB_SERVER_NAME,si.SAMPLE_LAB_NO as MATCH_SAMPLE_NO,
+          si.SAMPLE_NAME as MATCH_SAMPLE_NAME,ci.CASE_ACCEPT_NO as MATCH_CASE_NO,ci.CASE_NAME as MATCH_CASE_NAME,
+          crm.MATCHED_LOCUS_COUNT as MATCHED_LOCUS_COUNT,cpi.PERSON_TYPE as personType,
+          si.EVIDENCE_FLAG as EVIDENCE_FLAG,crm.MATCHED_GENE_DETAILS as MATCHED_GENE_DETAILS
+        from quick_compare_result_mix crm
+        left join dna_mix_gene_info mgi on mgi.ID = crm.MATCHED_GENE_ID
+        left join dna_sample_info si on mgi.SAMPLE_ID = si.ID
+        left join case_info ci on ci.ID = si.CASE_ID
+        left join lab_server_info lsi on lsi.LAB_SERVER_NO = si.LAB_SERVER_NO
+        left join case_person_info cpi on si.REF_PERSON_ID = cpi.ID
+        where crm.QUICK_COMPARE_QUEUE_ID = #{quickCompareQueueId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByQueueIdCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(DISTINCT crm.ID)
+        from quick_compare_result_mix crm
+        left join dna_mix_gene_info mgi on mgi.ID = crm.MATCHED_GENE_ID
+        left join dna_sample_info si on mgi.SAMPLE_ID = si.ID
+        left join case_info ci on ci.ID = si.CASE_ID
+        left join lab_server_info lsi on lsi.LAB_SERVER_NO = si.LAB_SERVER_NO
+        left join case_person_info cpi on si.REF_PERSON_ID = cpi.ID
+        where crm.QUICK_COMPARE_QUEUE_ID = #{quickCompareQueueId,jdbcType=INTEGER}
+    </select>
+</mapper>

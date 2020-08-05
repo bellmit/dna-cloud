@@ -1,0 +1,68 @@
+.part{
+  padding: 4px 10px;
+  height: calc(100vh-100px);
+  overflow-y: scroll;
+  .nav{
+    margin: 4px 0;
+  }
+  .part-detail.viewgene{
+    background-color: #fff;
+    border-radius: 4px;
+    .title{
+      border-bottom: 1px solid #3086C1;
+      padding: 8px;
+      .view-tab{
+        float: right;
+        color: #00439E;
+        span{
+          display: inline-block;
+          width: 60px;
+          height: 24px;
+          line-height: 24px;
+          border: 1px solid #00439E;
+          text-align: center;
+          cursor: pointer;
+        }
+        span.active{
+          background-color: #C3E7FF;
+        }
+      }
+    }
+    .bg-title{
+      background-color: #00439E;
+      color: #fff;
+      border-radius: 4px;
+      height: 44px;
+      line-height: 44px;
+      text-align: center;
+      font-size: 16px;
+    }
+    .atlas{
+      text-align: center;
+      img{
+        max-width: 280px;
+      }
+    }
+    .no-anything{
+      text-align: center;
+      .no-anything-img{
+        padding: 40px 15px;
+      }
+      .no-anything-text{
+        font-size: 16px;
+        margin-top: 20px;
+      }
+    }
+  }
+}
+.img-err{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  div {
+    text-align: center;
+    img {
+      width: 90%;
+    }
+  }
+}

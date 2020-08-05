@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.lims.dao.DbIvDnaActionRateViewMapper">
+    <resultMap id="BaseResultMap" type="com.bazl.dna.lims.model.view.DbIvDnaActionRateView">
+        <result column="delegate_org" property="delegateOrgCode" jdbcType="VARCHAR"/>
+        <result column="delegate_at" property="delagateDatetime" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--综合作用率查询案件送检总数 lims-->
+    <select id="selectSjCaseCountList" parameterType="com.bazl.dna.lims.model.view.DbIvDnaActionRateView"
+            resultType="int">
+        select count(distinct dcj.case_sn)
+        from DNA_IV_CASE_SJ_VIEW dcj
+        where 1=1
+        <if test="delegateOrgCode != null">
+           and dcj.delegate_org  like '%'||#{delegateOrgCode,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="delagateDatetimeStart != null">
+            and dcj.delegate_at &gt; = to_date(#{delagateDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="delagateDatetimeEnd != null">
+            and dcj.delegate_at &lt; = to_date(#{delagateDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--综合作用率查询案件送检总数 sylims-->
+    <select id="selectSySjCaseCountList" parameterType="com.bazl.dna.lims.model.view.DbIvDnaActionRateView"
+            resultType="int">
+        select count(distinct dcj.case_no)
+        from DNA_IV_CASE_SJ_SY_VIEW dcj
+        where 1=1
+        <if test="delegateOrgCode != null">
+            and dcj.delegate_org_code  like '%'||#{delegateOrgCode,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="delagateDatetimeStart != null">
+            and dcj.delegate_datetime &gt; = to_date(#{delagateDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="delagateDatetimeEnd != null">
+            and dcj.delegate_datetime &lt; = to_date(#{delagateDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--综合作用率查询出鉴定书数 lims-->
+    <select id="selectIdBooksCountList" parameterType="com.bazl.dna.lims.model.view.DbIvDnaActionRateView"
+            resultType="int">
+        select count(distinct dcj.case_sn)
+        from DNA_IV_CASE_BOOKS_VIEW dcj
+        where 1=1
+        <if test="delegateOrgCode != null">
+            and dcj.delegate_org  like '%'||#{delegateOrgCode,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="delagateDatetimeStart != null">
+            and dcj.delegate_at &gt; = to_date(#{delagateDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="delagateDatetimeEnd != null">
+            and dcj.delegate_at &lt; = to_date(#{delagateDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--综合作用率查询出鉴定书数 sylims-->
+    <select id="selectSyIdBooksCountList" parameterType="com.bazl.dna.lims.model.view.DbIvDnaActionRateView"
+            resultType="int">
+        select count(distinct dcj.case_no)
+        from DNA_IV_CASE_BOOKS_SY_VIEW dcj
+        where 1=1
+        <if test="delegateOrgCode != null">
+            and dcj.delegate_org_code  like '%'||#{delegateOrgCode,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="delagateDatetimeStart != null">
+            and dcj.delegate_datetime &gt; = to_date(#{delagateDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="delagateDatetimeEnd != null">
+            and dcj.delegate_datetime &lt; = to_date(#{delagateDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--综合作用率查询有物证入库但未出鉴定的案件数 lims-->
+    <select id="selectRkNotBookCountList" parameterType="com.bazl.dna.lims.model.view.DbIvDnaActionRateView"
+            resultType="int">
+        select count(distinct dcj.case_sn)
+        from DNA_IV_RK_NOT_BOOK_VIEW dcj
+        where 1=1
+        <if test="delegateOrgCode != null">
+            and dcj.delegate_org  like '%'||#{delegateOrgCode,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="delagateDatetimeStart != null">
+            and dcj.delegate_at &gt; = to_date(#{delagateDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="delagateDatetimeEnd != null">
+            and dcj.delegate_at &lt; = to_date(#{delagateDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+
+    <!--综合作用率查询有物证入库但未出鉴定的案件数 sylims-->
+    <select id="selectSyRkNotBookCountList" parameterType="com.bazl.dna.lims.model.view.DbIvDnaActionRateView"
+            resultType="int">
+        select count(distinct dcj.case_no)
+        from DNA_IV_RK_NOT_BOOK_SY_VIEW dcj
+        where 1=1
+        <if test="delegateOrgCode != null">
+            and dcj.delegate_org  like '%'||#{delegateOrgCode,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="delagateDatetimeStart != null">
+            and dcj.delegate_at &gt; = to_date(#{delagateDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="delagateDatetimeEnd != null">
+            and dcj.delegate_at &lt; = to_date(#{delagateDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--综合作用率查询未出鉴定的案件数 lims-->
+    <select id="selectNotBookCountList" parameterType="com.bazl.dna.lims.model.view.DbIvDnaActionRateView"
+            resultType="int">
+        select count(distinct dcj.case_sn)
+        from DNA_IV_NOT_BOOK_VIEW dcj
+        where 1=1
+        <if test="delegateOrgCode != null">
+            and dcj.delegate_org  like '%'||#{delegateOrgCode,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="delagateDatetimeStart != null">
+            and dcj.delegate_at &gt; = to_date(#{delagateDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="delagateDatetimeEnd != null">
+            and dcj.delegate_at &lt; = to_date(#{delagateDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--综合作用率查询未出鉴定的案件数 sylims-->
+    <select id="selectSyNotBookCountList" parameterType="com.bazl.dna.lims.model.view.DbIvDnaActionRateView"
+            resultType="int">
+        select count(distinct dcj.case_no)
+        from DNA_IV_NOT_BOOK_SY_VIEW dcj
+        where 1=1
+        <if test="delegateOrgCode != null">
+            and dcj.delegate_org  like '%'||#{delegateOrgCode,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="delagateDatetimeStart != null">
+            and dcj.delegate_at &gt; = to_date(#{delagateDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="delagateDatetimeEnd != null">
+            and dcj.delegate_at &lt; = to_date(#{delagateDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+
+    <!--综合作用率查询有物证入库的案件数 lims-->
+    <select id="selectSampleRkCaseCountList" parameterType="com.bazl.dna.lims.model.view.DbIvDnaActionRateView"
+            resultType="int">
+        select count(distinct dcj.case_sn)
+        from DNA_IV_SAMPLE_RK_VIEW dcj
+        where 1=1
+        <if test="delegateOrgCode != null">
+            and dcj.delegate_org  like '%'||#{delegateOrgCode,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="delagateDatetimeStart != null">
+            and dcj.delegate_at &gt; = to_date(#{delagateDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="delagateDatetimeEnd != null">
+            and dcj.delegate_at &lt; = to_date(#{delagateDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--综合作用率查询有物证入库的案件数 sylims-->
+    <select id="selectSySampleRkCaseCountList" parameterType="com.bazl.dna.lims.model.view.DbIvDnaActionRateView"
+            resultType="int">
+        select count(distinct dcj.case_no)
+        from DNA_IV_SAMPLE_RK_SY_VIEW dcj
+        where 1=1
+        <if test="delegateOrgCode != null">
+            and dcj.delegate_org  like '%'||#{delegateOrgCode,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="delagateDatetimeStart != null">
+            and dcj.delegate_at &gt; = to_date(#{delagateDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="delagateDatetimeEnd != null">
+            and dcj.delegate_at &lt; = to_date(#{delagateDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+</mapper>

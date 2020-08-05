@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.mix.dao.SampleInfoDAO">
+    <resultMap id="BaseResultMap" type="com.bazl.dna.mix.model.po.SampleInfo">
+        <result column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="CASE_ID" jdbcType="VARCHAR" property="caseId"/>
+        <result column="SAMPLE_NO" jdbcType="VARCHAR" property="sampleNo"/>
+        <result column="SAMPLE_NAME" jdbcType="VARCHAR" property="sampleName"/>
+        <result column="SAMPLE_TYPE" jdbcType="VARCHAR" property="sampleType"/>
+        <result column="SAMPLE_FLAG" jdbcType="VARCHAR" property="sampleFlag"/>
+        <result column="REF_PERSON_ID" jdbcType="VARCHAR" property="refPersonId"/>
+        <result column="REMARK" jdbcType="VARCHAR" property="remark"/>
+        <result column="CREATE_PERSON" jdbcType="VARCHAR" property="createPerson"/>
+        <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="createDatetime"/>
+        <result column="UPDATE_PERESON" jdbcType="VARCHAR" property="updatePereson"/>
+        <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="updateDatetime"/>
+        <result column="INSTORED_FLAG" jdbcType="VARCHAR" property="instoredFlag"/>
+    </resultMap>
+
+    <resultMap id="VOBaseResultMap" type="com.bazl.dna.mix.model.vo.SampleInfoVo">
+        <result column="ID" jdbcType="VARCHAR" property="entity.id"/>
+        <result column="CASE_ID" jdbcType="VARCHAR" property="entity.caseId"/>
+        <result column="SAMPLE_NO" jdbcType="VARCHAR" property="entity.sampleNo"/>
+        <result column="SAMPLE_NAME" jdbcType="VARCHAR" property="entity.sampleName"/>
+        <result column="SAMPLE_TYPE" jdbcType="VARCHAR" property="entity.sampleType"/>
+        <result column="SAMPLE_FLAG" jdbcType="VARCHAR" property="entity.sampleFlag"/>
+        <result column="REF_PERSON_ID" jdbcType="VARCHAR" property="entity.refPersonId"/>
+        <result column="REMARK" jdbcType="VARCHAR" property="entity.remark"/>
+        <result column="CREATE_PERSON" jdbcType="VARCHAR" property="entity.createPerson"/>
+        <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="entity.createDatetime"/>
+        <result column="UPDATE_PERESON" jdbcType="VARCHAR" property="entity.updatePereson"/>
+        <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="entity.updateDatetime"/>
+        <result column="INSTORED_FLAG" jdbcType="TIMESTAMP" property="entity.instoredFlag"/>
+
+        <result column="MIXED_SAMPLE_GENE_ID" jdbcType="VARCHAR" property="mixedSampleGeneId"/>
+        <result column="SINGLE_SAMPLE_GENE_ID" jdbcType="VARCHAR" property="singleSampleGeneId"/>
+
+    </resultMap>
+
+    <insert id="insert" parameterType="com.bazl.dna.mix.model.po.SampleInfo">
+    insert into sample_info (ID, CASE_ID, SAMPLE_NO, 
+      SAMPLE_NAME, SAMPLE_TYPE, SAMPLE_FLAG, 
+      REF_PERSON_ID, REMARK, CREATE_PERSON, 
+      CREATE_DATETIME, UPDATE_PERESON, UPDATE_DATETIME,INSTORED_FLAG
+      )
+    values (#{id,jdbcType=VARCHAR}, #{caseId,jdbcType=VARCHAR}, #{sampleNo,jdbcType=VARCHAR}, 
+      #{sampleName,jdbcType=VARCHAR}, #{sampleType,jdbcType=VARCHAR}, #{sampleFlag,jdbcType=VARCHAR}, 
+      #{refPersonId,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{updatePereson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}
+      ,#{instoredFlag,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.bazl.dna.mix.model.po.SampleInfo">
+        insert into sample_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="caseId != null">
+                CASE_ID,
+            </if>
+            <if test="sampleNo != null">
+                SAMPLE_NO,
+            </if>
+            <if test="sampleName != null">
+                SAMPLE_NAME,
+            </if>
+            <if test="sampleType != null">
+                SAMPLE_TYPE,
+            </if>
+            <if test="sampleFlag != null">
+                SAMPLE_FLAG,
+            </if>
+            <if test="refPersonId != null">
+                REF_PERSON_ID,
+            </if>
+            <if test="remark != null">
+                REMARK,
+            </if>
+            <if test="createPerson != null">
+                CREATE_PERSON,
+            </if>
+            <if test="createDatetime != null">
+                CREATE_DATETIME,
+            </if>
+            <if test="updatePereson != null">
+                UPDATE_PERESON,
+            </if>
+            <if test="updateDatetime != null">
+                UPDATE_DATETIME,
+            </if>
+            <if test="instoredFlag != null">
+                INSTORED_FLAG
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="caseId != null">
+                #{caseId,jdbcType=VARCHAR},
+            </if>
+            <if test="sampleNo != null">
+                #{sampleNo,jdbcType=VARCHAR},
+            </if>
+            <if test="sampleName != null">
+                #{sampleName,jdbcType=VARCHAR},
+            </if>
+            <if test="sampleType != null">
+                #{sampleType,jdbcType=VARCHAR},
+            </if>
+            <if test="sampleFlag != null">
+                #{sampleFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="refPersonId != null">
+                #{refPersonId,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createPerson != null">
+                #{createPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="createDatetime != null">
+                #{createDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatePereson != null">
+                #{updatePereson,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDatetime != null">
+                #{updateDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="instoredFlag != null">
+                #{instoredFlag,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+
+      <update id="updateSampleInfo" parameterType="com.bazl.dna.mix.model.po.SampleInfo">
+          update sample_info
+          <set>
+          <if test="caseId != null and caseId!='' ">
+              CASE_ID = #{caseId,jdbcType=VARCHAR},
+          </if>
+          <if test="sampleNo != null  and sampleNo!=''">
+              SAMPLE_NO=#{sampleNo,jdbcType=VARCHAR},
+          </if>
+          <if test="sampleName != null and sampleName!=''">
+              SAMPLE_NAME=#{sampleName,jdbcType=VARCHAR},
+          </if>
+          <if test="sampleType != null">
+              SAMPLE_TYPE=#{sampleType,jdbcType=VARCHAR},
+          </if>
+          <if test="sampleFlag != null">
+              SAMPLE_FLAG=#{sampleFlag,jdbcType=VARCHAR},
+          </if>
+          <if test="refPersonId != null">
+              REF_PERSON_ID=#{refPersonId,jdbcType=VARCHAR},
+          </if>
+          <if test="remark != null">
+              REMARK=#{remark,jdbcType=VARCHAR},
+          </if>
+          <if test="createPerson != null">
+              CREATE_PERSON=#{createPerson,jdbcType=VARCHAR},
+          </if>
+          <if test="createDatetime != null">
+              CREATE_DATETIME=#{createDatetime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="updatePereson != null">
+              UPDATE_PERESON=  #{updatePereson,jdbcType=VARCHAR},
+          </if>
+          <if test="updateDatetime != null">
+              UPDATE_DATETIME=#{updateDatetime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="instoredFlag != null">
+              INSTORED_FLAG=#{instoredFlag,jdbcType=VARCHAR}
+          </if>
+              </set>
+         where ID = #{id,jdbcType=VARCHAR}
+      </update>
+
+    <!--lims-->
+    <select id="selectBySampleId" parameterType="java.lang.String" resultMap="BaseResultMap">
+     select si.ID, si.CASE_ID, si.SAMPLE_NO,
+      si.SAMPLE_NAME, si.SAMPLE_TYPE, si.SAMPLE_FLAG,
+      si.REF_PERSON_ID, si.REMARK, si.CREATE_PERSON,
+      si.CREATE_DATETIME, si.UPDATE_PERESON, si.UPDATE_DATETIME from sample_info si
+      left join dict_item di_1 on di_1.dict_code = si.SAMPLE_TYPE and di_1.DICT_TYPE_CODE='SAMPLE_TYPE'
+      where si.ID = #{sampleId,jdbcType=VARCHAR}
+  </select>
+
+    <select id="selectSampleInfoList" parameterType="java.lang.String" resultMap="VOBaseResultMap">
+    select si.ID, si.CASE_ID, si.SAMPLE_NO,
+      si.SAMPLE_NAME, si.SAMPLE_TYPE, si.SAMPLE_FLAG,
+      si.REF_PERSON_ID, si.REMARK, si.CREATE_PERSON,
+      si.CREATE_DATETIME, si.UPDATE_PERESON, si.UPDATE_DATETIME,si.INSTORED_FLAG, msg.id as MIXED_SAMPLE_GENE_ID from sample_info si
+    left join mixed_sample_gene msg on si.id = msg.SAMPLE_ID
+    where msg.id = #{mixedSampleGeneId,jdbcType=VARCHAR}
+  </select>
+
+    <select id="selectSampleInfoListBySingleGeneId" parameterType="java.lang.String" resultMap="VOBaseResultMap">
+     select si.ID, si.CASE_ID, si.SAMPLE_NO,
+      si.SAMPLE_NAME, si.SAMPLE_TYPE, si.SAMPLE_FLAG,
+      si.REF_PERSON_ID, si.REMARK, si.CREATE_PERSON,
+      si.CREATE_DATETIME, si.UPDATE_PERESON, si.UPDATE_DATETIME,si.INSTORED_FLAG, ssg.id as SINGLE_SAMPLE_GENE_ID 
+      from sample_info si left join single_sample_gene ssg on si.id = ssg.SAMPLE_ID 
+      where ssg.id = #{singleSampleGeneId,jdbcType=VARCHAR}
+  </select>
+</mapper>

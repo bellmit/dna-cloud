@@ -1,0 +1,14 @@
+
+server:
+  port: 8709
+  undertow:
+    direct-buffers: true
+    io-threads: 4
+    worker-threads: 150
+
+spring:
+  application:
+    name: bazl-dna-elasticsearch
+
+logging:
+  config: classpath:logback-spring.xml  

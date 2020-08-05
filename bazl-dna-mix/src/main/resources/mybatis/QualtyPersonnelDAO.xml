@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.mix.dao.QualtyPersonnelDAO">
+    <resultMap id="BaseResultMap" type="com.bazl.dna.mix.model.po.QualtyPersonnel">
+        <result column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="SAMPLE_NO" jdbcType="VARCHAR" property="sampleNo"/>
+        <result column="SAMPLE_NAME" jdbcType="VARCHAR" property="sampleName"/>
+        <result column="REAGENT_NAME" jdbcType="VARCHAR" property="reagentName"/>
+        <result column="BOARD_BARCODE" jdbcType="VARCHAR" property="boardBarcode"/>
+        <result column="CREATE_PERSON" jdbcType="VARCHAR" property="createPerson"/>
+        <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="createDatetime"/>
+        <result column="UPDATE_PERESON" jdbcType="VARCHAR" property="updatePereson"/>
+        <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="updateDatetime"/>
+        <result column="GENE_INFO" jdbcType="VARCHAR" property="geneInfo"/>
+        <result column="GENE_PICTURE" jdbcType="VARCHAR" property="genePicture"/>
+    </resultMap>
+
+    <resultMap id="VOBaseResultMap" type="com.bazl.dna.mix.model.vo.SingleSampleGeneVo">
+        <id column="ID" jdbcType="VARCHAR" property="entity.id"/>
+        <result column="SAMPLE_ID" jdbcType="VARCHAR" property="entity.sampleId"/>
+        <result column="REAGENT_NAME" jdbcType="VARCHAR" property="entity.reagentName"/>
+        <result column="BOARD_BARCODE" jdbcType="VARCHAR" property="entity.boardBarcode"/>
+        <result column="GNNE_PICTURE" jdbcType="VARCHAR" property="entity.genePicture"/>
+        <result column="CREATE_PERSON" jdbcType="VARCHAR" property="entity.createPerson"/>
+        <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="entity.createDatetime"/>
+        <result column="UPDATE_PERESON" jdbcType="VARCHAR" property="entity.updatePereson"/>
+        <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="entity.updateDatetime"/>
+        <result column="GENE_INFO" jdbcType="VARCHAR" property="entity.geneInfo"/>
+        <result column="GENE_PICTURE" jdbcType="VARCHAR" property="entity.genePicture"/>
+
+        <result column="CASE_ID" jdbcType="VARCHAR" property="caseId"/>
+        <result column="SAMPLE_NO" jdbcType="VARCHAR" property="sampleNo"/>
+        <result column="SAMPLE_NAME" jdbcType="VARCHAR" property="sampleName"/>
+        <result column="SAMPLE_TYPE" jdbcType="VARCHAR" property="sampleType"/>
+        <result column="SAMPLE_FLAG" jdbcType="VARCHAR" property="sampleFlag"/>
+        <result column="REF_PERSON_ID" jdbcType="VARCHAR" property="refPersonId"/>
+        <result column="REMARK" jdbcType="VARCHAR" property="remark"/>
+        <result column="CASE_NO" jdbcType="VARCHAR" property="caseNo"/>
+        <result column="CASE_NAME" jdbcType="VARCHAR" property="caseName"/>
+        <result column="GENE_INFO" jdbcType="VARCHAR" property="geneInfo"/>
+        <result column="PERSON_NAME" jdbcType="VARCHAR" property="personName"/>
+        <result column="SAMPLE_ID" jdbcType="VARCHAR" property="smpleId"/>
+        <result column="PERSON_ID" jdbcType="VARCHAR" property="personId"/>
+
+    </resultMap>
+    <sql id="Blob_Column_List">
+  </sql>
+    <insert id="insert" parameterType="com.bazl.dna.mix.model.po.QualtyPersonnel">
+    insert into qualty_personnel (ID,SAMPLE_NO,
+      SAMPLE_NAME, REAGENT_NAME, BOARD_BARCODE, 
+      CREATE_PERSON, CREATE_DATETIME, UPDATE_PERESON, 
+      UPDATE_DATETIME, GENE_INFO)
+    values (#{id,jdbcType=VARCHAR}, #{sampleNo,jdbcType=VARCHAR},
+      #{sampleName,jdbcType=VARCHAR}, #{reagentName,jdbcType=VARCHAR}, #{boardBarcode,jdbcType=VARCHAR}, 
+      #{createPerson,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{updatePereson,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{geneInfo,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.bazl.dna.mix.model.po.QualtyPersonnel">
+        insert into qualty_personnel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="sampleNo != null">
+                SAMPLE_NO,
+            </if>
+            <if test="sampleName != null">
+                SAMPLE_NAME,
+            </if>
+            <if test="reagentName != null">
+                REAGENT_NAME,
+            </if>
+            <if test="boardBarcode != null">
+                BOARD_BARCODE,
+            </if>
+            <if test="createPerson != null">
+                CREATE_PERSON,
+            </if>
+            <if test="createDatetime != null">
+                CREATE_DATETIME,
+            </if>
+            <if test="updatePereson != null">
+                UPDATE_PERESON,
+            </if>
+            <if test="updateDatetime != null">
+                UPDATE_DATETIME,
+            </if>
+            <if test="geneInfo != null">
+                GENE_INFO,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="sampleNo != null">
+                #{sampleNo,jdbcType=VARCHAR},
+            </if>
+            <if test="sampleName != null">
+                #{sampleName,jdbcType=VARCHAR},
+            </if>
+            <if test="reagentName != null">
+                #{reagentName,jdbcType=VARCHAR},
+            </if>
+            <if test="boardBarcode != null">
+                #{boardBarcode,jdbcType=VARCHAR},
+            </if>
+            <if test="createPerson != null">
+                #{createPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="createDatetime != null">
+                #{createDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatePereson != null">
+                #{updatePereson,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDatetime != null">
+                #{updateDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="geneInfo != null">
+                #{geneInfo,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <!--查询比中的质控人员样本信息-->
+    <select id="selectMixedSampleQualityDetails" parameterType="java.lang.String" resultMap="BaseResultMap">
+     SELECT QUALTYP.*
+         FROM quality_personnel QUALTYP  WHERE  QUALTYP.ID=#{qusltyId,jdbcType=VARCHAR}
+  </select>
+
+
+    <!--根据质控样本编号查询质控基因信息-->
+    <select id="selectMixedSampleQuality" parameterType="java.lang.String" resultMap="BaseResultMap">
+     SELECT  QUALTYP.ID, QUALTYP.SAMPLE_NO,QUALTYP.SAMPLE_NAME, QUALTYP.REAGENT_NAME,  QUALTYP.BOARD_BARCODE,
+       QUALTYP.CREATE_PERSON,  QUALTYP.CREATE_DATETIME, QUALTYP.UPDATE_PERESON,QUALTYP.UPDATE_DATETIME,
+       QUALTYP.GENE_INFO
+         FROM quality_personnel QUALTYP  WHERE  QUALTYP.ID=#{ratiogeneId,jdbcType=VARCHAR}
+  </select>
+    <!--根据混合id查询质控人员基因信息-->
+    <select id="selecByIdSampleQuality" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT ID,SAMPLE_NO,SAMPLE_NAME, REAGENT_NAME, BOARD_BARCODE,
+        CREATE_PERSON, CREATE_DATETIME, UPDATE_PERESON,
+        UPDATE_DATETIME, GENE_INFO
+        FROM quality_personnel WHERE ID=#{qusltyId,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <if test="sampleName != null">
+                and SAMPLE_NAME like '%'||#{sampleName,jdbcType=VARCHAR}||'%'
+            </if>
+        </if>
+    </select>
+    <select id="selecAllSampleQualityList" parameterType="com.bazl.dna.mix.model.vo.SingleSampleGeneVo" resultMap="VOBaseResultMap">
+       SELECT t2.*
+      FROM (SELECT t1.*, ROWNUM AS rn
+              FROM ( SELECT QUALTYP.ID,
+            QUALTYP.SAMPLE_NO AS SAMPLE_NO,
+            QUALTYP.SAMPLE_NAME  AS SAMPLE_NAME,
+            QUALTYP.REAGENT_NAME,    QUALTYP.BOARD_BARCODE,
+            QUALTYP.CREATE_PERSON,      QUALTYP.CREATE_DATETIME,
+            QUALTYP.UPDATE_PERESON,  QUALTYP.UPDATE_DATETIME,
+            QUALTYP.GENE_INFO
+       FROM quality_personnel QUALTYP
+        ) t1
+             WHERE ROWNUM &lt;= ${endRum}) t2
+     WHERE rn &gt;= ${startRum}
+  </select>
+    <!--查询质控人员信息-->
+    <select id="selectAll" resultMap="BaseResultMap">
+    SELECT t2.*
+      FROM (SELECT t1.*, ROWNUM AS rn
+              FROM ( SELECT QUALTYP.ID, QUALTYP.SAMPLE_NO AS SAMPLE_NO,
+            QUALTYP.SAMPLE_NAME  AS SAMPLE_NAME,
+            QUALTYP.REAGENT_NAME,  QUALTYP.BOARD_BARCODE,
+            QUALTYP.CREATE_PERSON, QUALTYP.CREATE_DATETIME,
+            QUALTYP.UPDATE_PERESON,QUALTYP.UPDATE_DATETIME,
+            QUALTYP.GENE_INFO
+       FROM quality_personnel QUALTYP
+       ) t1
+             WHERE ROWNUM &lt;= ${endRum}) t2
+     WHERE rn &gt;= ${startRum}
+  </select>
+
+    <!--查询所有质控人员信息-->
+    <select id="selectAllList" resultMap="BaseResultMap">
+        SELECT *
+        FROM quality_personnel QUALTYP
+    </select>
+</mapper>

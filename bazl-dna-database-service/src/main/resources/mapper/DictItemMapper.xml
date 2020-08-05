@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.DictItemMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.DictItem">
+        <id column="ID" property="id" />
+        <result column="DICT_TYPE_CODE" property="dictTypeCode" />
+        <result column="DICT_TYPE_NAME" property="dictTypeName" />
+        <result column="DICT_CODE" property="dictCode" />
+        <result column="DICT_NAME" property="dictName" />
+        <result column="PARENT_ID" property="parentId" />
+        <result column="DICT_ITEM_DESC" property="dictItemDesc" />
+        <result column="CREATE_DATETIME" property="createDatetime" />
+    </resultMap>
+
+
+
+    <!--selectNameByTypeCodeAndCode-->
+    <select id="selectNameByTypeCodeAndCode" resultType="java.lang.String"  >
+        select
+        di.DICT_NAME
+        from dict_item di
+        where di.DICT_TYPE_CODE = #{dictTypeCode} and di.DICT_CODE=#{dictCode}
+    </select>
+
+    <select id="selectListByDictType" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        ID, DICT_TYPE_CODE, DICT_TYPE_NAME, DICT_CODE, DICT_NAME
+        from DICT_ITEM
+        where DICT_TYPE_CODE = #{dictTypeCode}
+        order by dict_code
+    </select>
+
+
+</mapper>

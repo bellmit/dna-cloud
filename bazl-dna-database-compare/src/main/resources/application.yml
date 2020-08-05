@@ -1,0 +1,27 @@
+server:
+  port: 8708
+  
+spring:
+  application:
+    name: bazl-dna-database-compare
+    
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+      field-strategy: not_empty
+      table-underline: true
+      db-type: mysql
+  type-aliases-package: com.bazl.dna.service.model.po
+  type-handlers-package: com.bazl.dna.database.service.typehandler
+  mapper-locations: classpath:/mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl
+task:
+  maxPoolSize: 30
+  corePoolSize: 21
+  queueCapacity: 100
+  keepAliveSeconds: 120
+  threadNamePrefix: generateTamilyTask-
+
+

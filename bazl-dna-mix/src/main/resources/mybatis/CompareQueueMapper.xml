@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.mix.dao.CompareQueueMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.dna.mix.model.po.CompareQueue" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="MIXED_SAMPLE_ID" property="mixedSampleId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_NO" property="sampleNo" jdbcType="VARCHAR" />
+    <result column="QUEUE_TYPE" property="queueType" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERESON" property="updatePereson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="MIXSAME_COUNT" property="mixsameCount" jdbcType="DECIMAL" />
+    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+    <result column="CONDITION" property="condition" jdbcType="VARCHAR" />
+    <result column="PERSON_TYPE" property="personType" jdbcType="VARCHAR" />
+    <result column="DISTRICT" property="district" jdbcType="VARCHAR" />
+    <result column="QUEUE_FLAG" property="queueFlag" jdbcType="VARCHAR" />
+    <result column="TARGET_COUNT" property="targetCount" jdbcType="VARCHAR" />
+    <result column="SOURCE" property="source" jdbcType="VARCHAR" />
+    <result column="PERSON_TYPE_NAME" jdbcType="VARCHAR" property="personTypeName" />
+    <result column="DISTRICT_NAME" jdbcType="VARCHAR" property="districtName" />
+    <result column="SERVE_NO" jdbcType="VARCHAR" property="serveNo" />
+  </resultMap>
+
+  <resultMap id="GeneMaps" type="String" >
+    <result column="GENE_INFO" property="geneInfo"
+            javaType="com.bazl.dna.mix.config.DnaGeneInfoDetail"
+            typeHandler="com.bazl.dna.mix.config.ArrayJsonTypeHandler" />
+    <result column="CONTRIBUTOR_COUNT" property="contributorCount" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="BaseResultMaps" type="com.bazl.dna.mix.model.po.mixContributorBean" >
+    <result column="SAMPLE_ID" property="sampleId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_NO" property="sampleNo" jdbcType="VARCHAR" />
+    <result column="GENE_INFO" property="geneInfo"
+            javaType="com.bazl.dna.mix.config.DnaGeneInfoDetail"
+            typeHandler="com.bazl.dna.mix.config.ArrayJsonTypeHandler" />
+    <result column="CONTRIBUTOR_COUNT" property="contributorCount" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="VOBaseResultMap" type="com.bazl.dna.mix.model.vo.CompareQueueVo" >
+    <id column="ID" property="entity.id" jdbcType="VARCHAR" />
+    <result column="MIXED_SAMPLE_ID" property="entity.mixedSampleId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_NO" property="entity.sampleNo" jdbcType="VARCHAR" />
+    <result column="QUEUE_TYPE" property="entity.queueType" jdbcType="VARCHAR" />
+    <result column="STATUS" property="entity.status" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="entity.createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="entity.createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERESON" property="entity.updatePereson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="entity.updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="MIXSAME_COUNT" property="entity.mixsameCount" jdbcType="DECIMAL" />
+    <result column="SEX" property="entity.sex" jdbcType="VARCHAR" />
+    <result column="CONDITION" property="entity.condition" jdbcType="VARCHAR" />
+    <result column="PERSON_TYPE" property="entity.personType" jdbcType="VARCHAR" />
+    <result column="DISTRICT" property="entity.district" jdbcType="VARCHAR" />
+    <result column="QUEUE_FLAG" property="entity.queueFlag" jdbcType="VARCHAR" />
+    <result column="SOURCE" property="source" jdbcType="VARCHAR" />
+    <result column="PERSON_TYPE_NAME" jdbcType="VARCHAR" property="personTypeName" />
+    <result column="DISTRICT_NAME" jdbcType="VARCHAR" property="districtName" />
+    <result column="SERVE_NO" jdbcType="VARCHAR" property="serveNo" />
+    <!--业务字段-->
+    <result column="START_DATETIME" property="startDatetime" jdbcType="TIMESTAMP" />
+    <result column="END_DATETIME" property="endDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from compare_queue
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.mix.model.po.CompareQueue">
+    insert into compare_queue (ID, MIXED_SAMPLE_ID, SAMPLE_NO,
+      QUEUE_TYPE, `STATUS`, CREATE_PERSON,
+      CREATE_DATETIME, UPDATE_PERESON, UPDATE_DATETIME,
+      MIXSAME_COUNT, SEX, `CONDITION`,
+      PERSON_TYPE, DISTRICT, QUEUE_FLAG,
+      TARGET_COUNT, `SOURCE`, PERSON_TYPE_NAME,
+      DISTRICT_NAME, SERVE_NO)
+    values (#{id,jdbcType=VARCHAR}, #{mixedSampleId,jdbcType=VARCHAR}, #{sampleNo,jdbcType=VARCHAR},
+      #{queueType,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR},
+      #{createDatetime,jdbcType=TIMESTAMP}, #{updatePereson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP},
+      #{mixsameCount,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{condition,jdbcType=VARCHAR},
+      #{personType,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, #{queueFlag,jdbcType=VARCHAR},
+      #{targetCount,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, #{personTypeName,jdbcType=VARCHAR},
+      #{districtName,jdbcType=VARCHAR}, #{serveNo,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.mix.model.po.CompareQueue">
+    update compare_queue
+    set MIXED_SAMPLE_ID = #{mixedSampleId,jdbcType=VARCHAR},
+    SAMPLE_NO = #{sampleNo,jdbcType=VARCHAR},
+    QUEUE_TYPE = #{queueType,jdbcType=VARCHAR},
+    STATUS = #{status,jdbcType=VARCHAR},
+    CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+    CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+    UPDATE_PERESON = #{updatePereson,jdbcType=VARCHAR},
+    UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+    MIXSAME_COUNT = #{mixsameCount,jdbcType=VARCHAR},
+    SEX = #{sex,jdbcType=VARCHAR},
+    `CONDITION` = #{condition,jdbcType=VARCHAR},
+    `PERSON_TYPE` = #{personType,jdbcType=VARCHAR},
+    `DISTRICT` = #{district,jdbcType=VARCHAR},
+    `QUEUE_FLAG` = #{queueFlag,jdbcType=VARCHAR},
+    TARGET_COUNT = #{targetCount,jdbcType=VARCHAR},
+    SOURCE = #{source,jdbcType=VARCHAR},
+    PERSON_TYPE_NAME = #{personTypeName,jdbcType=VARCHAR},
+    DISTRICT_NAME = #{districtName,jdbcType=VARCHAR},
+    SERVE_NO = #{serveNo,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from compare_queue
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select *
+    from compare_queue
+  </select>
+
+  <select id="selectByMixedSampleId" resultMap="BaseResultMap" parameterType="com.bazl.dna.mix.model.po.CompareQueue" >
+    select *
+    from compare_queue
+    where MIXED_SAMPLE_ID = #{mixedSampleId,jdbcType=VARCHAR}
+    AND QUEUE_TYPE= #{queueType,jdbcType=VARCHAR}
+  </select>
+
+  <!--条件查询-->
+  <select id="selectQueueList" resultMap="BaseResultMap" parameterType="com.bazl.dna.mix.model.po.CompareQueue" >
+    select *
+    from compare_queue
+    <where>
+      <if test="_parameter != null">
+        <if test="null != id">
+          ID = #{id,jdbcType=VARCHAR}
+        </if>
+        <if test="null != mixedSampleId">
+          and MIXED_SAMPLE_ID = #{mixedSampleId,jdbcType=VARCHAR}
+        </if>
+        <if test="null != queueType">
+          and QUEUE_TYPE = #{queueType,jdbcType=VARCHAR}
+        </if>
+        <if test="null != status">
+          and STATUS = #{status,jdbcType=VARCHAR}
+        </if>
+        <if test="null != createPerson">
+          and CREATE_PERSON = #{createPerson,jdbcType=VARCHAR}
+        </if>
+        <if test="null != queueFlag">
+          and QUEUE_FLAG = #{queueFlag,jdbcType=VARCHAR}
+        </if>
+      </if>
+    </where>
+  </select>
+
+  <select id="selectBySampleNo" parameterType="com.bazl.dna.mix.model.po.CompareQueue" resultMap="BaseResultMap">
+      select * from compare_queue cq where cq.SAMPLE_NO = #{sampleNo,jdbcType=VARCHAR}
+  </select>
+
+  <!--分页查询-->
+  <select id="selectByQueueVoList" parameterType="com.bazl.dna.mix.model.vo.CompareQueueVo" resultMap="BaseResultMap">
+    select cq.*
+    from compare_queue cq
+    <where>
+      <if test="_parameter != null">
+        <if test="null != sampleNo and sampleNo != ''">
+          cq.SAMPLE_NO = #{sampleNo,jdbcType=VARCHAR}
+        </if>
+        <if test="null != startDatetime">
+          and cq.CREATE_DATETIME &gt;= #{startDatetime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="null != endDatetime">
+          and cq.CREATE_DATETIME &lt;= #{endDatetime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="null != entity.createPerson">
+          and cq.CREATE_PERSON = #{entity.createPerson,jdbcType=VARCHAR}
+        </if>
+      </if>
+      and cq.QUEUE_FLAG = '1'
+    </where>
+    order by cq.CREATE_DATETIME desc
+    limit #{offset},#{rows};
+  </select>
+  <!--分页查询的条数-->
+  <select id="selectByQueueVoCount"  resultType="java.lang.Integer">
+    select count(cq.ID)
+    from compare_queue cq
+    <where>
+      <if test="_parameter != null">
+        <if test="null != sampleNo and sampleNo != ''">
+          cq.SAMPLE_NO = #{sampleNo,jdbcType=VARCHAR}
+        </if>
+        <if test="null != startDatetime">
+          and cq.CREATE_DATETIME &gt;= #{startDatetime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="null != endDatetime">
+          and cq.CREATE_DATETIME &lt;= #{endDatetime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="null != entity.createPerson">
+          and cq.CREATE_PERSON = #{entity.createPerson,jdbcType=VARCHAR}
+        </if>
+      </if>
+      and cq.QUEUE_FLAG = '1'
+    </where>
+  </select>
+
+  <!--查询比对任务-->
+  <select id="selectCompareQueueList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from compare_queue
+    where STATUS in (2,3) and QUEUE_FLAG = '1' and QUEUE_TYPE = #{queueType,jdbcType=VARCHAR}
+  </select>
+
+  <!--查询比对任务-->
+  <select id="selectCompareQueueAlloList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from compare_queue
+    where STATUS in (2,3) and QUEUE_FLAG = '1'
+  </select>
+
+
+  <select id="contributorGene" parameterType="java.lang.String" resultMap="GeneMaps">
+        SELECT
+            GENE_INFO
+        FROM
+            contributor_info
+        WHERE
+            MIXED_SAMPLE_GENE_ID = #{0}
+  </select>
+
+  <select id="getMixSampleInfo" parameterType="java.lang.String" resultMap="BaseResultMaps">
+    SELECT
+      SAMPLE_ID,
+      SAMPLE_NO,
+      GENE_INFO,
+      CONTRIBUTOR_COUNT
+    FROM
+      mixed_sample_gene
+    WHERE
+     id = #{0}
+  </select>
+
+    <select id="selectCompareQueueGeneInfo" resultType="java.lang.String" parameterType="java.lang.String">
+    select GENE_INFO from compare_queue cq where cq.id = #{id,jdbcType=VARCHAR}
+  </select>
+</mapper>

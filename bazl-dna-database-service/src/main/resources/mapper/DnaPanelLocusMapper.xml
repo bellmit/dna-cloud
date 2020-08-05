@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.DnaPanelLocusMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.DnaPanelLocus">
+        <id column="ID" property="id" />
+        <result column="PANEL_ID" property="panelId" />
+        <result column="LOCUS_ID" property="locusId" />
+        <result column="LOCUS_ORD" property="locusOrd" />
+    </resultMap>
+
+    <sql id="BASE_COLUMN_SQL">
+        d.ID,d.PANEL_ID,d.LOCUS_ID,d.LOCUS_ORD
+    </sql>
+
+    <select id="listByPanelId" parameterType="com.bazl.dna.database.service.model.po.DnaPanelLocus" resultMap="BaseResultMap">
+      SELECT
+	  d.ID,
+	  d.PANEL_ID,
+	  t.id AS LOCUS_ID,
+	  t.LOCUS_NAME,
+	  d.LOCUS_ORD
+      FROM
+	  dna_panel_locus d
+	  LEFT JOIN dna_locus_info t ON t.id = d.LOCUS_ID
+	  where d.PANEL_ID = #{panelId}
+	  order by d.LOCUS_ORD asc
+	  </select>
+
+    <select id="isSelectId" parameterType="com.bazl.dna.database.service.model.po.DnaPanelLocus" resultType="java.lang.Integer">
+        SELECT
+           COUNT(d.ID)
+        FROM
+        dna_panel_locus d
+        LEFT JOIN dna_locus_info t ON t.id = d.LOCUS_ID
+        where d.PANEL_ID = #{panelId}
+        and d.LOCUS_ID = #{locusId}
+    </select>
+
+
+
+</mapper>

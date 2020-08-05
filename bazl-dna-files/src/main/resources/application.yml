@@ -1,0 +1,10 @@
+server: 
+  port: 8710
+spring:
+  application:
+    name: bazl-dna-files
+  servlet:
+    multipart:
+      enabled: true  
+      max-file-size: 30MB
+      max-request-size: 30MB    

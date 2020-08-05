@@ -1,0 +1,68 @@
+spring:
+  application:
+    name: bazl-dna-zuul 
+  servlet:
+    multipart:
+      enabled: true  
+          
+zuul:
+  sensitive-headers: "Authorization"
+  routes: 
+    system-api:
+      path: /system/**
+      service-id: bazl-dna-system
+      custom-sensitive-headers: true ##转发header参数
+    database-api: 
+      path: /database/**
+      service-id: bazl-dna-database-core
+      custom-sensitive-headers: true
+    nation-api: 
+      path: /nation/**
+      service-id: bazl-dna-nation-connector
+      custom-sensitive-headers: true
+    files-api:
+      path: /files/**
+      service-id: bazl-dna-files
+      custom-sensitive-headers: true
+    mix-api: 
+      path: /mix/**
+      service-id: bazl-dna-mix
+      custom-sensitive-headers: true
+    caseinfo-api:
+      path: /reg/**
+      service-id: bazl-dna-caseinfo-reg
+      custom-sensitive-headers: true
+    accept-api:
+      path: /accept/**
+      service-id: bazl-dna-caseinfo-accept
+      custom-sensitive-headers: true
+    dpznsy-api:
+      path: /dpznsy/**
+      service-id: bazl-dna-dpznsy
+      custom-sensitive-headers: true
+    lims-api:
+      path: /lims/**
+      service-id: bazl-dna-lims-connector
+      custom-sensitive-headers: true
+    lims-stats-api:
+      path: /lims-stats/**
+      service-id: bazl-dna-stats
+      custom-sensitive-headers: true
+    lims-manager-api:
+      path: /lims-manager/**
+      service-id: bazl-dna-lims-manager
+      custom-sensitive-headers: true
+  host:
+    connect-timeout-millis: 60000
+    socket-timeout-millis: 60000
+
+ribbon:
+  ReadTimeout: 50000
+  ConnectTimeout: 50000
+    
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false

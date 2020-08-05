@@ -1,0 +1,117 @@
+server:
+  port: 8715
+  servlet:
+    session:
+      timeout: 30m
+spring:
+  application:
+    name: bazl-dna-database-nation-converter
+
+  jpa:
+    database-platform: org.hibernate.dialect.OracleDialect
+    
+  main:
+    allow-bean-definition-overriding: true
+
+feign: 
+  httpclient:
+    enabled: true
+  hystrix:
+    enabled: true
+    command:
+      default:
+        execution:
+          timeout:
+            enabled: true
+          isolation:
+            thread:
+              timeoutInMilliseconds: 100000
+              
+management: 
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging:
+  config: classpath:logback-spring.xml  
+
+#  CaseInfoCount国家库案件表 SELECT COUNT(ID) FROM CASE_INFO C  WHERE  1=1 AND C.DELETE_FLAG = 0 AND C.INIT_SERVER_NO LIKE '这里是配置文件initServerNoLike值%'
+# totalCount国家库委托表 SELECT COUNT(T.ID) FROM CONSIGNMENT T  WHERE T.EVENT_ID IS NULL AND T.INIT_SERVER_NO LIKE '这里是配置文件initServerNoLike值%'
+task:
+  caseConvertOpen: true
+  unknownPersonConvertOpen: false
+  missingPersonConvertOpen: false
+  criminalPersonConvertOpen: true
+  disasterPersonConvertOpen: false
+  qualityPersonConvertOpen: true
+  basicPersonConvertOpen: false
+  abductionChildConvertOpen: false
+  abductionParentConvertOpen: false
+  pageSize: 10000
+  labServerMap:
+   "4400": "省厅"
+   "4401": "广州"
+   "4402": "韶关"
+   "4403": "深圳"
+   "4404": "珠海"
+   "4405": "汕头"
+   "4406": "佛山"
+   "4407": "江门"
+   "4408": "湛江"
+   "4409": "茂名"
+   "4412": "肇庆"
+   "4413": "惠州"
+   "4414": "梅州"
+   "4415": "汕尾"
+   "4416": "河源"
+   "4417": "阳江"
+   "4418": "清远"
+   "4419": "东莞"
+   "4420": "中山"
+   "4451": "潮州"
+   "4452": "揭阳"
+   "4453": "云浮"
+  instoreDataTypeMap:
+   "010101": "03"
+   "010102": "03"
+   "010103": "03"
+   "010104": "03"
+   "010106": "03"
+   "010107": "03"
+   "010108": "03"
+   "010109": "03"
+   "010110": "12"
+   "010201": "01"
+   "010202": "05"
+   "010301": "06"
+   "010302": "06"
+   "010303": "06"
+   "010304": "06"
+   "010305": "06"
+   "010306": "06"
+   "010307": "10"
+   "010308": "10"
+   "010310": "06"
+   "010311": "10"
+   "010401": "07"
+   "010402": "13"
+   "010403": "13"
+   "010404": "13"
+  #CaseInfoCount: 450907
+  #totalCount: 9669682
+
+CorePoolSize: 10
+MaxPoolSize: 30
+
+#同步数据-模糊查询数据服务器编号init_server_no like 'xxxx%' 请填写%之前位数
+#initServerNoLikeList: 4400,4401,4402,4403,4404,4405,4406
+#initServerNoLikeList: 4407,4408,4409,4412,4413,4414,4415,4416
+#initServerNoLikeList: 4417,4418,4419,4420,4451,4452,4453
+
+#定时同步开关0:关闭 1:开启
+#同步案件
+#CaseIsOpen: 1
+#同步建库
+#DbIsOpen: 1
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.TransferCaseSampleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.TransferCaseSample">
+        <id column="id" property="id" />
+        <result column="TRANSFER_CASE_QUEUE_ID" property="transferCaseQueueId" />
+        <result column="DNA_SAMPLE_ID" property="dnaSampleId" />
+        <result column="TRANSFER_STATS" property="transferStats" />
+
+    </resultMap>
+
+
+    <select id="selectByCaseQueueId" parameterType="com.bazl.dna.database.service.model.po.TransferCaseSample" resultMap="BaseResultMap">
+            select
+            distinct t.dna_sample_id,t.TRANSFER_STATS,t.TRANSFER_CASE_QUEUE_ID from
+            transfer_case_sample  t
+            where t.TRANSFER_CASE_QUEUE_ID=#{transferCaseQueueId}
+    </select>
+</mapper>

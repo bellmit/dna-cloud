@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.TransferCaseQueueMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.TransferCaseQueue">
+        <id column="ID" property="id" />
+        <result column="LAB_SERVER_NO" property="labServerNo" />
+        <result column="CASE_ID" property="caseId" />
+        <result column="TRANSFER_STATUS" property="transferStatus" />
+        <result column="TRANSFER_FILE_ROOT_PATH" property="transferFileRootPath" />
+        <result column="TRANSFER_FILE_NAME" property="transferFileName" />
+        <result column="TRANSFER_ERROR_MSG" property="transferErrorMsg" />
+        <result column="CREATE_DATETIME" property="createDatetime" />
+        <result column="UPDATE_DATETIME" property="updateDatetime" />
+    </resultMap>
+
+</mapper>

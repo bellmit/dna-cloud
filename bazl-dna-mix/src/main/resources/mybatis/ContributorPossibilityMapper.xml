@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.mix.dao.ContributorPossibilityMapper">
+  <resultMap id="BaseResultMap" type="com.bazl.dna.mix.model.po.ContributorPossibility">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="COMPARE_ID" jdbcType="VARCHAR" property="compareId" />
+    <result column="GENE_INFO" jdbcType="CHAR" property="geneInfo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, COMPARE_ID, GENE_INFO
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contributor_possibility
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from contributor_possibility
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.mix.model.po.ContributorPossibility">
+    insert into contributor_possibility (ID, COMPARE_ID, GENE_INFO
+      )
+    values (#{id,jdbcType=VARCHAR}, #{compareId,jdbcType=VARCHAR}, #{geneInfo,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bazl.dna.mix.model.po.ContributorPossibility">
+    insert into contributor_possibility
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="compareId != null">
+        COMPARE_ID,
+      </if>
+      <if test="geneInfo != null">
+        GENE_INFO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="compareId != null">
+        #{compareId,jdbcType=VARCHAR},
+      </if>
+      <if test="geneInfo != null">
+        #{geneInfo,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bazl.dna.mix.model.po.ContributorPossibility">
+    update contributor_possibility
+    <set>
+      <if test="compareId != null">
+        COMPARE_ID = #{compareId,jdbcType=VARCHAR},
+      </if>
+      <if test="geneInfo != null">
+        GENE_INFO = #{geneInfo,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.mix.model.po.ContributorPossibility">
+    update contributor_possibility
+    set COMPARE_ID = #{compareId,jdbcType=VARCHAR},
+      GENE_INFO = #{geneInfo,jdbcType=CHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="findListByCompareId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  	select ID, COMPARE_ID, GENE_INFO
+    from contributor_possibility
+    where COMPARE_ID = #{compareId,jdbcType=VARCHAR}
+  </select>
+</mapper>

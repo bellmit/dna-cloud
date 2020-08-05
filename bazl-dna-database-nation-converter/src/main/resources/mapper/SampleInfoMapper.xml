@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.nation.converter.dao.SampleInfoMapper">
+  <resultMap id="BaseResultMap" type="com.bazl.dna.database.nation.converter.model.po.SampleInfo">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="INIT_SERVER_NO" jdbcType="VARCHAR" property="initServerNo" />
+    <result column="LAB_ID" jdbcType="VARCHAR" property="labId" />
+    <result column="CONSIGNMENT_ID" jdbcType="VARCHAR" property="consignmentId" />
+    <result column="CONSIGN_ORG_CODE" jdbcType="VARCHAR" property="consignOrgCode" />
+    <result column="PHYSICAL_EVIDENCE_ID" jdbcType="VARCHAR" property="physicalEvidenceId" />
+    <result column="SAMPLE_NO" jdbcType="VARCHAR" property="sampleNo" />
+    <result column="SAMPLE_LAB_NO" jdbcType="VARCHAR" property="sampleLabNo" />
+    <result column="SAMPLE_NAME" jdbcType="VARCHAR" property="sampleName" />
+    <result column="SAMPLE_TYPE" jdbcType="VARCHAR" property="sampleType" />
+    <result column="SPECIALTY" jdbcType="VARCHAR" property="specialty" />
+    <result column="COLOR" jdbcType="VARCHAR" property="color" />
+    <result column="PATTERN" jdbcType="VARCHAR" property="pattern" />
+    <result column="TEXTURE" jdbcType="VARCHAR" property="texture" />
+    <result column="SHAPE" jdbcType="VARCHAR" property="shape" />
+    <result column="AMOUNT" jdbcType="DECIMAL" property="amount" />
+    <result column="EVIDENCE_SIZE" jdbcType="VARCHAR" property="evidenceSize" />
+    <result column="SPECIAL_SIGN" jdbcType="VARCHAR" property="specialSign" />
+    <result column="IS_COLLECT" jdbcType="DECIMAL" property="isCollect" />
+    <result column="IS_TEST" jdbcType="DECIMAL" property="isTest" />
+    <result column="COLLECT_METHOD" jdbcType="VARCHAR" property="collectMethod" />
+    <result column="COLLECT_POS" jdbcType="VARCHAR" property="collectPos" />
+    <result column="COLLECT_REASON" jdbcType="VARCHAR" property="collectReason" />
+    <result column="COLLECT_AGENCY_CODE" jdbcType="VARCHAR" property="collectAgencyCode" />
+    <result column="COLLECT_AGENCY_NAME" jdbcType="VARCHAR" property="collectAgencyName" />
+    <result column="COLLECT_DATETIME" jdbcType="TIMESTAMP" property="collectDatetime" />
+    <result column="COLLECT_USER" jdbcType="VARCHAR" property="collectUser" />
+    <result column="TEST_ORG_CODE" jdbcType="VARCHAR" property="testOrgCode" />
+    <result column="TEST_ORG_NAME" jdbcType="VARCHAR" property="testOrgName" />
+    <result column="TEST_DATETIME" jdbcType="TIMESTAMP" property="testDatetime" />
+    <result column="TESTER" jdbcType="VARCHAR" property="tester" />
+    <result column="PRE_EXAM_INFO" jdbcType="VARCHAR" property="preExamInfo" />
+    <result column="PRE_EXAM_METHOD" jdbcType="VARCHAR" property="preExamMethod" />
+    <result column="PRE_EXAM_DESC" jdbcType="VARCHAR" property="preExamDesc" />
+    <result column="SAMPLE_PACKAGING" jdbcType="VARCHAR" property="samplePackaging" />
+    <result column="SAMPLE_DESC" jdbcType="VARCHAR" property="sampleDesc" />
+    <result column="FTA_FLAG" jdbcType="DECIMAL" property="ftaFlag" />
+    <result column="ACCEPT_OPINION" jdbcType="VARCHAR" property="acceptOpinion" />
+    <result column="SAMPLE_STATUS" jdbcType="VARCHAR" property="sampleStatus" />
+    <result column="TEST_PHASE" jdbcType="VARCHAR" property="testPhase" />
+    <result column="DELETE_FLAG" jdbcType="DECIMAL" property="deleteFlag" />
+    <result column="GENE_STORE_FLAG" jdbcType="VARCHAR" property="geneStoreFlag" />
+    <result column="TRANSFER_FLAG" jdbcType="DECIMAL" property="transferFlag" />
+    <result column="TRANSFER_USER" jdbcType="VARCHAR" property="transferUser" />
+    <result column="TRANSFER_DATETIME" jdbcType="TIMESTAMP" property="transferDatetime" />
+    <result column="IS_APPEND" jdbcType="DECIMAL" property="isAppend" />
+    <result column="SPECIMEN_SEQ_NO" jdbcType="DECIMAL" property="specimenSeqNo" />
+    <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1" />
+    <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2" />
+    <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3" />
+    <result column="RESERVE4" jdbcType="VARCHAR" property="reserve4" />
+    <result column="RESERVE5" jdbcType="VARCHAR" property="reserve5" />
+    <result column="RESERVE6" jdbcType="VARCHAR" property="reserve6" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="DATA_SOURCE" jdbcType="VARCHAR" property="dataSource" />
+    <result column="DATA_LEVEL" jdbcType="DECIMAL" property="dataLevel" />
+    <result column="CREATE_USER" jdbcType="VARCHAR" property="createUser" />
+    <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="UPDATE_USER" jdbcType="VARCHAR" property="updateUser" />
+    <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="updateDatetime" />
+    <result column="SELF_OBJECT_ID" jdbcType="VARCHAR" property="selfObjectId" />
+    <result column="RELATION_OBJECT_ID" jdbcType="VARCHAR" property="relationObjectId" />
+    <result column="RELATION" jdbcType="VARCHAR" property="relation" />
+    <result column="PERSON_RELATION_DESC" jdbcType="VARCHAR" property="personRelationDesc" />
+    <result column="COLLECT_PURPOSE" jdbcType="VARCHAR" property="collectPurpose" />
+    <result column="TYPE_EXTRA_INFO" jdbcType="VARCHAR" property="typeExtraInfo" />
+    <result column="SPECIAL_DEAL_OPTION" jdbcType="VARCHAR" property="specialDealOption" />
+    <result column="SAMPLE_SERIAL_NO" jdbcType="VARCHAR" property="sampleSerialNo" />
+    <result column="EXT_ID" jdbcType="VARCHAR" property="extId" />
+    <result column="SIGN_UPLOAD" jdbcType="VARCHAR" property="signUpload" />
+    <result column="LOCAL_STORE_DATETIME" jdbcType="TIMESTAMP" property="localStoreDatetime" />
+    <result column="LOCAL_CREATE_DATETIME" jdbcType="TIMESTAMP" property="localCreateDatetime" />
+    <result column="VA" jdbcType="CLOB" property="va" />
+    <result column="SAMPLE_FLAG" jdbcType="VARCHAR" property="sampleFlag"/>
+    <result column="REF_PERSON_ID" jdbcType="VARCHAR" property="refPersonId"/>
+    <result column="INSTORED_FLAG" jdbcType="VARCHAR" property="instoredFlag"/>
+    <result column="CREATE_PERSON" jdbcType="VARCHAR" property="createPerson" />
+    <result column="UPDATE_PERSON" jdbcType="VARCHAR" property="updatePereson" />
+    <result column="CASE_ID" jdbcType="VARCHAR" property="caseID" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SAMPLE_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.database.nation.converter.model.po.SampleInfo">
+    insert into SAMPLE_INFO (ID, INIT_SERVER_NO, LAB_ID, 
+      CONSIGNMENT_ID, CONSIGN_ORG_CODE, PHYSICAL_EVIDENCE_ID, 
+      SAMPLE_NO, SAMPLE_LAB_NO, SAMPLE_NAME, 
+      SAMPLE_TYPE, SPECIALTY, COLOR, 
+      PATTERN, TEXTURE, SHAPE, 
+      AMOUNT, EVIDENCE_SIZE, SPECIAL_SIGN, 
+      IS_COLLECT, IS_TEST, COLLECT_METHOD, 
+      COLLECT_POS, COLLECT_REASON, COLLECT_AGENCY_CODE, 
+      COLLECT_AGENCY_NAME, COLLECT_DATETIME, COLLECT_USER, 
+      TEST_ORG_CODE, TEST_ORG_NAME, TEST_DATETIME, 
+      TESTER, PRE_EXAM_INFO, PRE_EXAM_METHOD, 
+      PRE_EXAM_DESC, SAMPLE_PACKAGING, SAMPLE_DESC, 
+      FTA_FLAG, ACCEPT_OPINION, SAMPLE_STATUS, 
+      TEST_PHASE, DELETE_FLAG, GENE_STORE_FLAG, 
+      TRANSFER_FLAG, TRANSFER_USER, TRANSFER_DATETIME, 
+      IS_APPEND, SPECIMEN_SEQ_NO, RESERVE1, 
+      RESERVE2, RESERVE3, RESERVE4, 
+      RESERVE5, RESERVE6, REMARK, 
+      DATA_SOURCE, DATA_LEVEL, CREATE_USER, 
+      CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME, 
+      SELF_OBJECT_ID, RELATION_OBJECT_ID, RELATION, 
+      PERSON_RELATION_DESC, COLLECT_PURPOSE, TYPE_EXTRA_INFO, 
+      SPECIAL_DEAL_OPTION, SAMPLE_SERIAL_NO, EXT_ID, 
+      SIGN_UPLOAD, LOCAL_STORE_DATETIME, LOCAL_CREATE_DATETIME, 
+      VA)
+    values (#{id,jdbcType=VARCHAR}, #{initServerNo,jdbcType=VARCHAR}, #{labId,jdbcType=VARCHAR}, 
+      #{consignmentId,jdbcType=VARCHAR}, #{consignOrgCode,jdbcType=VARCHAR}, #{physicalEvidenceId,jdbcType=VARCHAR}, 
+      #{sampleNo,jdbcType=VARCHAR}, #{sampleLabNo,jdbcType=VARCHAR}, #{sampleName,jdbcType=VARCHAR}, 
+      #{sampleType,jdbcType=VARCHAR}, #{specialty,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{pattern,jdbcType=VARCHAR}, #{texture,jdbcType=VARCHAR}, #{shape,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=DECIMAL}, #{evidenceSize,jdbcType=VARCHAR}, #{specialSign,jdbcType=VARCHAR}, 
+      #{isCollect,jdbcType=DECIMAL}, #{isTest,jdbcType=DECIMAL}, #{collectMethod,jdbcType=VARCHAR}, 
+      #{collectPos,jdbcType=VARCHAR}, #{collectReason,jdbcType=VARCHAR}, #{collectAgencyCode,jdbcType=VARCHAR}, 
+      #{collectAgencyName,jdbcType=VARCHAR}, #{collectDatetime,jdbcType=TIMESTAMP}, #{collectUser,jdbcType=VARCHAR}, 
+      #{testOrgCode,jdbcType=VARCHAR}, #{testOrgName,jdbcType=VARCHAR}, #{testDatetime,jdbcType=TIMESTAMP}, 
+      #{tester,jdbcType=VARCHAR}, #{preExamInfo,jdbcType=VARCHAR}, #{preExamMethod,jdbcType=VARCHAR}, 
+      #{preExamDesc,jdbcType=VARCHAR}, #{samplePackaging,jdbcType=VARCHAR}, #{sampleDesc,jdbcType=VARCHAR}, 
+      #{ftaFlag,jdbcType=DECIMAL}, #{acceptOpinion,jdbcType=VARCHAR}, #{sampleStatus,jdbcType=VARCHAR}, 
+      #{testPhase,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=DECIMAL}, #{geneStoreFlag,jdbcType=VARCHAR}, 
+      #{transferFlag,jdbcType=DECIMAL}, #{transferUser,jdbcType=VARCHAR}, #{transferDatetime,jdbcType=TIMESTAMP}, 
+      #{isAppend,jdbcType=DECIMAL}, #{specimenSeqNo,jdbcType=DECIMAL}, #{reserve1,jdbcType=VARCHAR}, 
+      #{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR}, #{reserve4,jdbcType=VARCHAR}, 
+      #{reserve5,jdbcType=VARCHAR}, #{reserve6,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{dataSource,jdbcType=VARCHAR}, #{dataLevel,jdbcType=DECIMAL}, #{createUser,jdbcType=VARCHAR}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}, 
+      #{selfObjectId,jdbcType=VARCHAR}, #{relationObjectId,jdbcType=VARCHAR}, #{relation,jdbcType=VARCHAR}, 
+      #{personRelationDesc,jdbcType=VARCHAR}, #{collectPurpose,jdbcType=VARCHAR}, #{typeExtraInfo,jdbcType=VARCHAR}, 
+      #{specialDealOption,jdbcType=VARCHAR}, #{sampleSerialNo,jdbcType=VARCHAR}, #{extId,jdbcType=VARCHAR}, 
+      #{signUpload,jdbcType=VARCHAR}, #{localStoreDatetime,jdbcType=TIMESTAMP}, #{localCreateDatetime,jdbcType=TIMESTAMP}, 
+      #{va,jdbcType=CLOB})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.database.nation.converter.model.po.SampleInfo">
+    update SAMPLE_INFO
+    set INIT_SERVER_NO = #{initServerNo,jdbcType=VARCHAR},
+      LAB_ID = #{labId,jdbcType=VARCHAR},
+      CONSIGNMENT_ID = #{consignmentId,jdbcType=VARCHAR},
+      CONSIGN_ORG_CODE = #{consignOrgCode,jdbcType=VARCHAR},
+      PHYSICAL_EVIDENCE_ID = #{physicalEvidenceId,jdbcType=VARCHAR},
+      SAMPLE_NO = #{sampleNo,jdbcType=VARCHAR},
+      SAMPLE_LAB_NO = #{sampleLabNo,jdbcType=VARCHAR},
+      SAMPLE_NAME = #{sampleName,jdbcType=VARCHAR},
+      SAMPLE_TYPE = #{sampleType,jdbcType=VARCHAR},
+      SPECIALTY = #{specialty,jdbcType=VARCHAR},
+      COLOR = #{color,jdbcType=VARCHAR},
+      PATTERN = #{pattern,jdbcType=VARCHAR},
+      TEXTURE = #{texture,jdbcType=VARCHAR},
+      SHAPE = #{shape,jdbcType=VARCHAR},
+      AMOUNT = #{amount,jdbcType=DECIMAL},
+      EVIDENCE_SIZE = #{evidenceSize,jdbcType=VARCHAR},
+      SPECIAL_SIGN = #{specialSign,jdbcType=VARCHAR},
+      IS_COLLECT = #{isCollect,jdbcType=DECIMAL},
+      IS_TEST = #{isTest,jdbcType=DECIMAL},
+      COLLECT_METHOD = #{collectMethod,jdbcType=VARCHAR},
+      COLLECT_POS = #{collectPos,jdbcType=VARCHAR},
+      COLLECT_REASON = #{collectReason,jdbcType=VARCHAR},
+      COLLECT_AGENCY_CODE = #{collectAgencyCode,jdbcType=VARCHAR},
+      COLLECT_AGENCY_NAME = #{collectAgencyName,jdbcType=VARCHAR},
+      COLLECT_DATETIME = #{collectDatetime,jdbcType=TIMESTAMP},
+      COLLECT_USER = #{collectUser,jdbcType=VARCHAR},
+      TEST_ORG_CODE = #{testOrgCode,jdbcType=VARCHAR},
+      TEST_ORG_NAME = #{testOrgName,jdbcType=VARCHAR},
+      TEST_DATETIME = #{testDatetime,jdbcType=TIMESTAMP},
+      TESTER = #{tester,jdbcType=VARCHAR},
+      PRE_EXAM_INFO = #{preExamInfo,jdbcType=VARCHAR},
+      PRE_EXAM_METHOD = #{preExamMethod,jdbcType=VARCHAR},
+      PRE_EXAM_DESC = #{preExamDesc,jdbcType=VARCHAR},
+      SAMPLE_PACKAGING = #{samplePackaging,jdbcType=VARCHAR},
+      SAMPLE_DESC = #{sampleDesc,jdbcType=VARCHAR},
+      FTA_FLAG = #{ftaFlag,jdbcType=DECIMAL},
+      ACCEPT_OPINION = #{acceptOpinion,jdbcType=VARCHAR},
+      SAMPLE_STATUS = #{sampleStatus,jdbcType=VARCHAR},
+      TEST_PHASE = #{testPhase,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=DECIMAL},
+      GENE_STORE_FLAG = #{geneStoreFlag,jdbcType=VARCHAR},
+      TRANSFER_FLAG = #{transferFlag,jdbcType=DECIMAL},
+      TRANSFER_USER = #{transferUser,jdbcType=VARCHAR},
+      TRANSFER_DATETIME = #{transferDatetime,jdbcType=TIMESTAMP},
+      IS_APPEND = #{isAppend,jdbcType=DECIMAL},
+      SPECIMEN_SEQ_NO = #{specimenSeqNo,jdbcType=DECIMAL},
+      RESERVE1 = #{reserve1,jdbcType=VARCHAR},
+      RESERVE2 = #{reserve2,jdbcType=VARCHAR},
+      RESERVE3 = #{reserve3,jdbcType=VARCHAR},
+      RESERVE4 = #{reserve4,jdbcType=VARCHAR},
+      RESERVE5 = #{reserve5,jdbcType=VARCHAR},
+      RESERVE6 = #{reserve6,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      DATA_SOURCE = #{dataSource,jdbcType=VARCHAR},
+      DATA_LEVEL = #{dataLevel,jdbcType=DECIMAL},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      SELF_OBJECT_ID = #{selfObjectId,jdbcType=VARCHAR},
+      RELATION_OBJECT_ID = #{relationObjectId,jdbcType=VARCHAR},
+      RELATION = #{relation,jdbcType=VARCHAR},
+      PERSON_RELATION_DESC = #{personRelationDesc,jdbcType=VARCHAR},
+      COLLECT_PURPOSE = #{collectPurpose,jdbcType=VARCHAR},
+      TYPE_EXTRA_INFO = #{typeExtraInfo,jdbcType=VARCHAR},
+      SPECIAL_DEAL_OPTION = #{specialDealOption,jdbcType=VARCHAR},
+      SAMPLE_SERIAL_NO = #{sampleSerialNo,jdbcType=VARCHAR},
+      EXT_ID = #{extId,jdbcType=VARCHAR},
+      SIGN_UPLOAD = #{signUpload,jdbcType=VARCHAR},
+      LOCAL_STORE_DATETIME = #{localStoreDatetime,jdbcType=TIMESTAMP},
+      LOCAL_CREATE_DATETIME = #{localCreateDatetime,jdbcType=TIMESTAMP},
+      VA = #{va,jdbcType=CLOB}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select ID, INIT_SERVER_NO, LAB_ID, CONSIGNMENT_ID, CONSIGN_ORG_CODE, PHYSICAL_EVIDENCE_ID, 
+    SAMPLE_NO, SAMPLE_LAB_NO, SAMPLE_NAME, SAMPLE_TYPE, SPECIALTY, COLOR, PATTERN, TEXTURE, 
+    SHAPE, AMOUNT, EVIDENCE_SIZE, SPECIAL_SIGN, IS_COLLECT, IS_TEST, COLLECT_METHOD, 
+    COLLECT_POS, COLLECT_REASON, COLLECT_AGENCY_CODE, COLLECT_AGENCY_NAME, COLLECT_DATETIME, 
+    COLLECT_USER, TEST_ORG_CODE, TEST_ORG_NAME, TEST_DATETIME, TESTER, PRE_EXAM_INFO, 
+    PRE_EXAM_METHOD, PRE_EXAM_DESC, SAMPLE_PACKAGING, SAMPLE_DESC, FTA_FLAG, ACCEPT_OPINION, 
+    SAMPLE_STATUS, TEST_PHASE, DELETE_FLAG, GENE_STORE_FLAG, TRANSFER_FLAG, TRANSFER_USER, 
+    TRANSFER_DATETIME, IS_APPEND, SPECIMEN_SEQ_NO, RESERVE1, RESERVE2, RESERVE3, RESERVE4, 
+    RESERVE5, RESERVE6, REMARK, DATA_SOURCE, DATA_LEVEL, CREATE_USER, CREATE_DATETIME, 
+    UPDATE_USER, UPDATE_DATETIME, SELF_OBJECT_ID, RELATION_OBJECT_ID, RELATION, PERSON_RELATION_DESC, 
+    COLLECT_PURPOSE, TYPE_EXTRA_INFO, SPECIAL_DEAL_OPTION, SAMPLE_SERIAL_NO, EXT_ID, 
+    SIGN_UPLOAD, LOCAL_STORE_DATETIME, LOCAL_CREATE_DATETIME, VA
+    from SAMPLE_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByPrimaryKeys" parameterType="com.bazl.dna.database.nation.converter.model.po.SampleInfo" resultMap="BaseResultMap">
+    select ID, INIT_SERVER_NO, LAB_ID, CONSIGNMENT_ID, CONSIGN_ORG_CODE, PHYSICAL_EVIDENCE_ID,
+    SAMPLE_NO, SAMPLE_LAB_NO, SAMPLE_NAME, SAMPLE_TYPE, SPECIALTY, COLOR, PATTERN, TEXTURE,
+    SHAPE, AMOUNT, EVIDENCE_SIZE, SPECIAL_SIGN, IS_COLLECT, IS_TEST, COLLECT_METHOD,
+    COLLECT_POS, COLLECT_REASON, COLLECT_AGENCY_CODE, COLLECT_AGENCY_NAME, COLLECT_DATETIME,
+    COLLECT_USER, TEST_ORG_CODE, TEST_ORG_NAME, TEST_DATETIME, TESTER, PRE_EXAM_INFO,
+    PRE_EXAM_METHOD, PRE_EXAM_DESC, SAMPLE_PACKAGING, SAMPLE_DESC, FTA_FLAG, ACCEPT_OPINION,
+    SAMPLE_STATUS, TEST_PHASE, DELETE_FLAG, GENE_STORE_FLAG, TRANSFER_FLAG, TRANSFER_USER,
+    TRANSFER_DATETIME, IS_APPEND, SPECIMEN_SEQ_NO, RESERVE1, RESERVE2, RESERVE3, RESERVE4,
+    RESERVE5, RESERVE6, REMARK, DATA_SOURCE, DATA_LEVEL, CREATE_USER, CREATE_DATETIME,
+    UPDATE_USER, UPDATE_DATETIME, SELF_OBJECT_ID, RELATION_OBJECT_ID, RELATION, PERSON_RELATION_DESC,
+    COLLECT_PURPOSE, TYPE_EXTRA_INFO, SPECIAL_DEAL_OPTION, SAMPLE_SERIAL_NO, EXT_ID,
+    SIGN_UPLOAD, LOCAL_STORE_DATETIME, LOCAL_CREATE_DATETIME, VA
+    from SAMPLE_INFO
+    where CONSIGNMENT_ID = #{consignmentId,jdbcType=VARCHAR}
+    <if test=" initServerNoLike != null and initServerNoLike != '' ">
+      and  INIT_SERVER_NO like ''||#{initServerNoLike,jdbcType=VARCHAR}||'%'
+    </if>
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select ID, INIT_SERVER_NO, LAB_ID, CONSIGNMENT_ID, CONSIGN_ORG_CODE, PHYSICAL_EVIDENCE_ID, 
+    SAMPLE_NO, SAMPLE_LAB_NO, SAMPLE_NAME, SAMPLE_TYPE, SPECIALTY, COLOR, PATTERN, TEXTURE, 
+    SHAPE, AMOUNT, EVIDENCE_SIZE, SPECIAL_SIGN, IS_COLLECT, IS_TEST, COLLECT_METHOD, 
+    COLLECT_POS, COLLECT_REASON, COLLECT_AGENCY_CODE, COLLECT_AGENCY_NAME, COLLECT_DATETIME, 
+    COLLECT_USER, TEST_ORG_CODE, TEST_ORG_NAME, TEST_DATETIME, TESTER, PRE_EXAM_INFO, 
+    PRE_EXAM_METHOD, PRE_EXAM_DESC, SAMPLE_PACKAGING, SAMPLE_DESC, FTA_FLAG, ACCEPT_OPINION, 
+    SAMPLE_STATUS, TEST_PHASE, DELETE_FLAG, GENE_STORE_FLAG, TRANSFER_FLAG, TRANSFER_USER, 
+    TRANSFER_DATETIME, IS_APPEND, SPECIMEN_SEQ_NO, RESERVE1, RESERVE2, RESERVE3, RESERVE4, 
+    RESERVE5, RESERVE6, REMARK, DATA_SOURCE, DATA_LEVEL, CREATE_USER, CREATE_DATETIME, 
+    UPDATE_USER, UPDATE_DATETIME, SELF_OBJECT_ID, RELATION_OBJECT_ID, RELATION, PERSON_RELATION_DESC, 
+    COLLECT_PURPOSE, TYPE_EXTRA_INFO, SPECIAL_DEAL_OPTION, SAMPLE_SERIAL_NO, EXT_ID, 
+    SIGN_UPLOAD, LOCAL_STORE_DATETIME, LOCAL_CREATE_DATETIME, VA
+    from SAMPLE_INFO
+  </select>
+
+  <select id="selectAuditSampleByCaseId" parameterType="java.lang.String" resultMap="BaseResultMap">
+      select
+      si.id,ci.ID AS CASE_ID,si.SAMPLE_NO, si.SAMPLE_NAME ,si.SAMPLE_TYPE,  sdg.sample_flag  as SAMPLE_FLAG,
+      pi.id as REF_PERSON_ID, si.REMARK,si.CREATE_USER as CREATE_PERSON,
+      si.CREATE_DATETIME,si.UPDATE_USER as UPDATE_USER,si.UPDATE_DATETIME,null as INSTORED_FLAG
+     from SAMPLE_INFO si ,consignment ct ,case_info ci,SAMPLE_DNA_GENE sdg ,SAMPLE_PERSON_MAP spm,PERSON_INFO pi
+     where pi.id =spm.person_object_id and spm.sample_id =si.id  and  si.id = sdg.sample_id and
+     si.CONSIGNMENT_ID = ct.ID AND  ct.EVENT_ID = ci.ID and pi.delete_flag ='0' and si.delete_flag = 0 AND ci.ID=#{caseId,jdbcType=VARCHAR}
+  </select>
+
+
+  <sql id="Base_Column_List">
+    si.ID, si.INIT_SERVER_NO, si.LAB_ID, si.CONSIGNMENT_ID, si.CONSIGN_ORG_CODE, si.PHYSICAL_EVIDENCE_ID,
+    si.SAMPLE_NO, si.SAMPLE_LAB_NO, si.SAMPLE_NAME, si.SAMPLE_TYPE, si.SPECIALTY, si.COLOR, si.PATTERN, si.TEXTURE,
+    si.SHAPE, si.AMOUNT, si.EVIDENCE_SIZE, si.SPECIAL_SIGN, si.IS_COLLECT, si.IS_TEST, si.COLLECT_METHOD,
+    si.COLLECT_POS, si.COLLECT_REASON, si.COLLECT_AGENCY_CODE, si.COLLECT_AGENCY_NAME, si.COLLECT_DATETIME,
+    si.COLLECT_USER, si.TEST_ORG_CODE, si.TEST_ORG_NAME, si.TEST_DATETIME, si.TESTER, si.PRE_EXAM_INFO,
+    si.PRE_EXAM_METHOD, si.PRE_EXAM_DESC, si.SAMPLE_PACKAGING, si.SAMPLE_DESC, si.FTA_FLAG, si.ACCEPT_OPINION,
+    si.SAMPLE_STATUS, si.TEST_PHASE, si.DELETE_FLAG, si.GENE_STORE_FLAG, si.TRANSFER_FLAG, si.TRANSFER_USER,
+    si.TRANSFER_DATETIME, si.IS_APPEND, si.SPECIMEN_SEQ_NO, si.RESERVE1, si.RESERVE2, si.RESERVE3, si.RESERVE4,
+    si.RESERVE5, si.RESERVE6, si.REMARK, si.DATA_SOURCE, si.DATA_LEVEL, si.CREATE_USER, si.CREATE_DATETIME,
+    si.UPDATE_USER, si.UPDATE_DATETIME, si.SELF_OBJECT_ID, si.RELATION_OBJECT_ID, si.RELATION, si.PERSON_RELATION_DESC,
+    si.COLLECT_PURPOSE, si.TYPE_EXTRA_INFO, si.SPECIAL_DEAL_OPTION, si.SAMPLE_SERIAL_NO, si.EXT_ID,
+    si.SIGN_UPLOAD, si.LOCAL_STORE_DATETIME, si.LOCAL_CREATE_DATETIME, si.VA
+  </sql>
+
+  <select id="selectSelfSampleByConsignmentId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+      spm.PERSON_OBJECT_ID as REF_PERSON_ID,
+      spm.RELATION,
+      <include refid="Base_Column_List"/>
+    from SAMPLE_INFO si, SAMPLE_PERSON_MAP spm
+    where spm.sample_id =si.id and si.CONSIGNMENT_ID=#{consignmentId,jdbcType=VARCHAR}
+          and spm.RELATION in (#{selfRelation,jdbcType=VARCHAR}, #{selfPossibleRelation,jdbcType=VARCHAR})
+          and si.DELETE_FLAG=0
+  </select>
+
+  <select id="selectAllSampleByConsignmentId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+      spm.PERSON_OBJECT_ID as REF_PERSON_ID,
+      spm.RELATION,
+      <include refid="Base_Column_List"/>
+    from SAMPLE_INFO si, SAMPLE_PERSON_MAP spm
+    where spm.sample_id =si.id
+      and si.CONSIGNMENT_ID=#{consignmentId,jdbcType=VARCHAR}
+      and si.DELETE_FLAG=0
+  </select>
+
+
+</mapper>

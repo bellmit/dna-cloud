@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.QcSamplePolluteRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.QcSamplePolluteRecord">
+        <id column="ID" property="id" />
+        <result column="QC_SAMPLE_ID" property="qcSampleId" />
+        <result column="QC_SAMPLE_GENE_INFO" property="qcSampleGeneInfo" />
+        <result column="MATCH_BOARD_NO" property="matchBoardNo" />
+        <result column="MATCH_SAMPLE_NO" property="matchSampleNo" />
+        <result column="MATCH_SAMPLE_NAME" property="matchSampleName" />
+        <result column="MATCH_SAMPLE_GENE_INFO" property="matchSampleGeneInfo" />
+        <result column="MATCH_LAB_SERVER_NO" property="matchLabServerNo" />
+        <result column="MATCH_LOCUS_COUNT" property="matchLocusCount" />
+        <result column="MATCH_DATETIME" property="matchDatetime" />
+    </resultMap>
+
+    <resultMap id="BaseResultMapVo" type="com.bazl.dna.database.service.model.vo.QcSamplePolluteRecordVo" extends="BaseResultMap">
+        <result column="qcSampleTypeName" property="sampleTypeName" />
+        <result column="CASE_ACCEPT_NO" property="matchCaseNo" />
+        <result column="CASE_NAME" property="matchCaseName" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        qp.ID, qp.QC_SAMPLE_ID, qp.QC_SAMPLE_GENE_INFO, qp.MATCH_BOARD_NO, qp.MATCH_SAMPLE_NO, qp.MATCH_SAMPLE_NAME, qp.MATCH_SAMPLE_GENE_INFO,
+        qp.MATCH_LAB_SERVER_NO, qp.MATCH_LOCUS_COUNT, qp.MATCH_DATETIME
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from qc_sample_pollute_record qp
+        where qp.ID = #{id,jdbcType=INTEGER}
+    </select>
+
+    <!--selectListPaging-->
+    <select id="selectListPaging" parameterType="com.bazl.dna.database.service.model.qo.QcSamplePolluteRecordQuery" resultMap="BaseResultMapVo"  >
+        select DISTINCT qp.ID as ID,qp.QC_SAMPLE_ID as QC_SAMPLE_ID,qp.MATCH_BOARD_NO as MATCH_BOARD_NO,
+          qp.MATCH_SAMPLE_NO as MATCH_SAMPLE_NO,qp.MATCH_SAMPLE_NAME as MATCH_SAMPLE_NAME,qsi.STR_PANEL_NAME as PANEL_NAME,
+          qp.MATCH_LOCUS_COUNT as MATCH_LOCUS_COUNT,qsi.QC_SAMPLE_TYPE as sampleType,
+          ci.CASE_NAME as CASE_NAME,ci.CASE_ACCEPT_NO as CASE_ACCEPT_NO,lsi.LAB_SERVER_NAME,
+          cpi.PERSON_TYPE as personType
+        from qc_sample_pollute_record qp
+        left join qc_sample_info qsi on qsi.ID = qp.QC_SAMPLE_ID
+        left join dna_sample_info si on qp.MATCH_SAMPLE_NO = si.SAMPLE_LAB_NO
+        left join case_info ci on ci.ID = si.CASE_ID
+        left join lab_server_info lsi on lsi.LAB_SERVER_NO = si.LAB_SERVER_NO
+        left join case_person_info cpi on si.REF_PERSON_ID = cpi.ID
+        where qp.QC_SAMPLE_ID = #{id}
+        LIMIT #{offset},#{rows}
+    </select>
+
+    <!--selectListPagingCount-->
+    <select id="selectListPagingCount" parameterType="com.bazl.dna.database.service.model.qo.QcSamplePolluteRecordQuery" resultType="java.lang.Integer"  >
+        select
+        count(qp.ID)
+        from qc_sample_pollute_record qp
+        where qp.QC_SAMPLE_ID = #{id}
+    </select>
+
+    <select id="selectBySampleIdAndId" parameterType="com.bazl.dna.database.service.model.qo.QcSamplePolluteRecordQuery" resultMap="BaseResultMapVo"  >
+        select DISTINCT qp.ID as ID,qp.QC_SAMPLE_ID as QC_SAMPLE_ID,qp.MATCH_BOARD_NO as MATCH_BOARD_NO,
+        qp.MATCH_SAMPLE_NO as MATCH_SAMPLE_NO,qp.MATCH_SAMPLE_NAME as MATCH_SAMPLE_NAME,qsi.STR_PANEL_NAME as PANEL_NAME,
+        qp.MATCH_LOCUS_COUNT as MATCH_LOCUS_COUNT,di1.DICT_NAME as qcSampleTypeName,
+        ci.CASE_NAME as CASE_NAME,ci.CASE_ACCEPT_NO as CASE_ACCEPT_NO
+        from qc_sample_pollute_record qp
+        left join qc_sample_info qsi on qsi.ID = qp.QC_SAMPLE_ID
+        left join dna_sample_info si on qp.MATCH_SAMPLE_NO = si.SAMPLE_LAB_NO
+        left join case_info ci on ci.ID = si.CASE_ID
+        left join dict_item di1 on qsi.QC_SAMPLE_TYPE=di1.DICT_CODE and di1.DICT_TYPE_CODE='QC_SAMPLE_TYPE'
+        where qp.ID = #{id} and qp.QC_SAMPLE_ID = #{qcSampleId}
+    </select>
+</mapper>

@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.lims.dao.DbInvadingWealthCaseViewMapper">
+    <resultMap id="BaseResultMap" type="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView">
+        <id column="case_type" property="caseType" jdbcType="VARCHAR"/>
+        <result column="delegate_org" property="delegateOrg" jdbcType="VARCHAR"/>
+        <result column="delegate_org_name" property="delegateOrgName" jdbcType="VARCHAR"/>
+        <result column="accept_at" property="acceptDatetime" jdbcType="VARCHAR"/>
+        <result column="case_count" property="caseCount" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单位(分局)-->
+    <select id="selectDelagateOrgList" parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView"
+            resultMap="BaseResultMap">
+        SELECT DISTINCT dicr.delegate_org,dicr.delegate_org_name
+        from DB_IV_CASE_RKWZ_VIEW dicr
+        where dicr.delegate_org_name like '%分局%'
+        and dicr.delegate_org not in ('000001','110095','110311','110110')
+    </select>
+
+    <!--根据分局code和案件性质查询送检案件数 lims-->
+    <select id="selectSjCaseByOrgCodeAndCaseTypeList" parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView"
+            resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_CASE_SJ_VIEW dicr
+        where dicr.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        <if test="caseTypeList != null">
+            and dicr.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+        <if test="acceptDatetimeStart != null">
+            and dicr.accept_at &gt; = to_date(#{acceptDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="acceptDatetimeEnd != null">
+            and dicr.accept_at &lt; = to_date(#{acceptDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--根据分局code和案件性质查询送检案件数 sy-->
+    <select id="selectSySjCaseByOrgCodeAndCaseTypeList"
+            parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView" resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_CASE_SJ_SY_VIEW dicr
+        where dicr.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        <if test="caseTypeList != null">
+            and dicr.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+        <if test="acceptDatetimeStart != null">
+            and dicr.accept_at &gt; = to_date(#{acceptDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="acceptDatetimeEnd != null">
+            and dicr.accept_at &lt; = to_date(#{acceptDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--根据分局code和案件性质查询物证入库案件数 lims-->
+    <select id="selectRkWzCaseByOrgCodeAndCaseTypeList"
+            parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView" resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_CASE_RKWZ_VIEW dicr
+        where dicr.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        <if test="caseTypeList != null">
+            and dicr.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+        <if test="acceptDatetimeStart != null">
+            and dicr.accept_at &gt; = to_date(#{acceptDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="acceptDatetimeEnd != null">
+            and dicr.accept_at &lt; = to_date(#{acceptDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--根据分局code和案件性质查询物证入库案件数 sy-->
+    <select id="selectSyRkWzCaseByOrgCodeAndCaseTypeList"
+            parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView" resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_CASE_RKWZ_SY_VIEW dicr
+        where dicr.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        <if test="caseTypeList != null">
+            and dicr.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+        <if test="acceptDatetimeStart != null">
+            and dicr.accept_at &gt; = to_date(#{acceptDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="acceptDatetimeEnd != null">
+            and dicr.accept_at &lt; = to_date(#{acceptDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--根据分局code和案件性质查询入库样本数 lims-->
+    <select id="selectRkSampleByOrgCodeAndCaseTypeList"
+            parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView" resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_RK_SAMPLE_VIEW dicr
+        where dicr.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        <if test="caseTypeList != null">
+            and dicr.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+        <if test="acceptDatetimeStart != null">
+            and dicr.accept_at &gt; = to_date(#{acceptDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="acceptDatetimeEnd != null">
+            and dicr.accept_at &lt; = to_date(#{acceptDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--根据分局code和案件性质查询入库样本数 sy-->
+    <select id="selectSyRkSampleByOrgCodeAndCaseTypeList"
+            parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView" resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_RK_SAMPLE_SY_VIEW dicr
+        where dicr.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        <if test="caseTypeList != null">
+            and dicr.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+        <if test="acceptDatetimeStart != null">
+            and dicr.accept_at &gt; = to_date(#{acceptDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="acceptDatetimeEnd != null">
+            and dicr.accept_at &lt; = to_date(#{acceptDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--根据分局code和案件性质查询送检样本数 lims-->
+    <select id="selectSjSampleByOrgCodeAndCaseTypeList"
+            parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView" resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_SJ_SAMPLE_VIEW dicr
+        where dicr.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        <if test="caseTypeList != null">
+            and dicr.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+        <if test="acceptDatetimeStart != null">
+            and dicr.accept_at &gt; = to_date(#{acceptDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="acceptDatetimeEnd != null">
+            and dicr.accept_at &lt; = to_date(#{acceptDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!--根据分局code和案件性质查询送检样本数 sy-->
+    <select id="selectSySjSampleByOrgCodeAndCaseTypeList"
+            parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView" resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_SJ_SAMPLE_SY_VIEW dicr
+        where dicr.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        <if test="caseTypeList != null">
+            and dicr.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+        <if test="acceptDatetimeStart != null">
+            and dicr.accept_at &gt; = to_date(#{acceptDatetimeStart,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+        <if test="acceptDatetimeEnd != null">
+            and dicr.accept_at &lt; = to_date(#{acceptDatetimeEnd,jdbcType=VARCHAR},'yyyy-MM-dd')
+        </if>
+    </select>
+
+    <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+    <!--根据分局code和年查询送检案件数 lims-->
+    <select id="selectSjCaseCountByOrgCodeAndYear" parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView"
+            resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_CASE_SJ_VIEW dicr
+        where dicr.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+            and to_char(dicr.accept_at, 'yyyy') = #{acceptDatetime,jdbcType=VARCHAR}
+    </select>
+    <!--根据分局code和年查询送检案件数 sylims-->
+    <select id="selectSySjCaseCountByOrgCodeAndYear" parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView"
+            resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_CASE_SJ_SY_VIEW dicr
+        where dicr.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        and to_char(dicr.accept_at, 'yyyy') = #{acceptDatetime,jdbcType=VARCHAR}
+    </select>
+    <!--根据分局code和年查询入库物证案件数 lims-->
+    <select id="selectRkWzCaseByOrgCodeAndYear" parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView"
+            resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_CASE_RKWZ_VIEW dicr
+        where dicr.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        and to_char(dicr.accept_at, 'yyyy') = #{acceptDatetime,jdbcType=VARCHAR}
+    </select>
+    <!--根据分局code和年查询入库物证案件数 sylims-->
+    <select id="selectSyRkWzCaseByOrgCodeAndYear" parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView"
+            resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_CASE_RKWZ_SY_VIEW dicr
+        where dicr.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        and to_char(dicr.accept_at, 'yyyy') = #{acceptDatetime,jdbcType=VARCHAR}
+    </select>
+
+    <!--根据分局code和年查询入库样本数 lims-->
+    <select id="selectRkSampleByOrgCodeAndYear" parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView"
+            resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_RK_SAMPLE_VIEW dicr
+        where dicr.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        and to_char(dicr.accept_at, 'yyyy') = #{acceptDatetime,jdbcType=VARCHAR}
+    </select>
+    <!--根据分局code和年查询入库样本数 sylims-->
+    <select id="selectSyRkSampleByOrgCodeAndYear" parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView"
+            resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_RK_SAMPLE_SY_VIEW dicr
+        where dicr.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        and to_char(dicr.accept_at, 'yyyy') = #{acceptDatetime,jdbcType=VARCHAR}
+    </select>
+
+    <!--根据分局code和年查询送检样本数 lims-->
+    <select id="selectSjSampleByOrgCodeAndYear" parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView"
+            resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_SJ_SAMPLE_VIEW dicr
+        where dicr.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        and to_char(dicr.accept_at, 'yyyy') = #{acceptDatetime,jdbcType=VARCHAR}
+    </select>
+    <!--根据分局code和年查询送检样本数 sylims-->
+    <select id="selectSySjSampleByOrgCodeAndYear" parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView"
+            resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_SJ_SAMPLE_SY_VIEW dicr
+        where dicr.delegate_org  like '%'||#{delegateOrg,jdbcType=VARCHAR}||'%'
+        and to_char(dicr.accept_at, 'yyyy') = #{acceptDatetime,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 1111111111111-->
+    <!--根据年份和案件性质查询送检案件数 lims-->
+    <select id="selectSjCaseByYearAndCaseTypeList" parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView"
+            resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_CASE_SJ_VIEW dicr
+        where  to_char(dicr.accept_at, 'yyyy') = #{acceptDatetime,jdbcType=VARCHAR}
+        <if test="caseTypeList != null">
+            and dicr.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+    </select>
+
+    <!--根据年份和案件性质查询送检案件数 sy-->
+    <select id="selectSySjCaseByYeareAndCaseTypeList"
+            parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView" resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_CASE_SJ_SY_VIEW dicr
+        where to_char(dicr.accept_at, 'yyyy') = #{acceptDatetime,jdbcType=VARCHAR}
+        <if test="caseTypeList != null">
+            and dicr.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+
+    </select>
+
+    <!--根据年份和案件性质查询物证入库案件数 lims-->
+    <select id="selectRkWzCaseByYearAndCaseTypeList"
+            parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView" resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_CASE_RKWZ_VIEW dicr
+        where to_char(dicr.accept_at, 'yyyy') = #{acceptDatetime,jdbcType=VARCHAR}
+        <if test="caseTypeList != null">
+            and dicr.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+
+    </select>
+
+    <!--根据年份和案件性质查询物证入库案件数 sy-->
+    <select id="selectSyRkWzCaseByYearAndCaseTypeList"
+            parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView" resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_CASE_RKWZ_SY_VIEW dicr
+        where to_char(dicr.accept_at, 'yyyy') = #{acceptDatetime,jdbcType=VARCHAR}
+        <if test="caseTypeList != null">
+            and dicr.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+
+    </select>
+
+    <!--根据年份和案件性质查询入库样本数 lims-->
+    <select id="selectRkSampleByYearAndCaseTypeList"
+            parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView" resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_RK_SAMPLE_VIEW dicr
+        where to_char(dicr.accept_at, 'yyyy') = #{acceptDatetime,jdbcType=VARCHAR}
+        <if test="caseTypeList != null">
+            and dicr.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+    </select>
+
+    <!--根据年份和案件性质查询入库样本数 sy-->
+    <select id="selectSyRkSampleByYearAndCaseTypeList"
+            parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView" resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_RK_SAMPLE_SY_VIEW dicr
+        where to_char(dicr.accept_at, 'yyyy') = #{acceptDatetime,jdbcType=VARCHAR}
+        <if test="caseTypeList != null">
+            and dicr.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+    </select>
+
+    <!--根据分局code和案件性质查询送检样本数 lims-->
+    <select id="selectSjSampleByYearAndCaseTypeList"
+            parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView" resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_SJ_SAMPLE_VIEW dicr
+        where to_char(dicr.accept_at, 'yyyy') = #{acceptDatetime,jdbcType=VARCHAR}
+        <if test="caseTypeList != null">
+            and dicr.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+    </select>
+
+    <!--根据分局code和案件性质查询送检样本数 sy-->
+    <select id="selectSySjSampleByYearAndCaseTypeList"
+            parameterType="com.bazl.dna.lims.model.view.DbInvadingWealthCaseView" resultMap="BaseResultMap">
+        SELECT dicr.case_type,
+        dicr.delegate_org,
+        dicr.delegate_org_name,
+        dicr.accept_at,
+        dicr.case_count
+        from DB_IV_SJ_SAMPLE_SY_VIEW dicr
+        where to_char(dicr.accept_at, 'yyyy') = #{acceptDatetime,jdbcType=VARCHAR}
+        <if test="caseTypeList != null">
+            and dicr.case_type in (
+            <foreach collection="caseTypeList" item="item" separator=",">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+            )
+        </if>
+    </select>
+</mapper>

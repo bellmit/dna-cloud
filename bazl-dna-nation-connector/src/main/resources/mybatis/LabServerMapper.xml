@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.mix.connector.nation.dao.LabServerMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.dna.mix.connector.nation.model.po.LabServer" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="LAB_SERVER_NO" property="labServerNo" jdbcType="VARCHAR" />
+    <result column="LAB_SERVER_NAME" property="labServerName" jdbcType="VARCHAR" />
+    <result column="LAB_SERVER_KEY" property="labServerKey" jdbcType="VARCHAR" />
+    <result column="SERVER_TYPE" property="serverType" jdbcType="VARCHAR" />
+    <result column="SERVER_IP_ADDR" property="serverIpAddr" jdbcType="VARCHAR" />
+    <result column="SERVER_PORT" property="serverPort" jdbcType="VARCHAR" />
+    <result column="ROOT_FLAG" property="rootFlag" jdbcType="DECIMAL" />
+    <result column="PARENT_SERVER_NO" property="parentServerNo" jdbcType="VARCHAR" />
+    <result column="ACTIVE_FLAG" property="activeFlag" jdbcType="DECIMAL" />
+    <result column="SERVER_ORD" property="serverOrd" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="LAB_SERVER_ROLE" property="labServerRole" jdbcType="DECIMAL" />
+    <result column="CONTROL_OPERATE" property="controlOperate" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from LAB_SERVER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.mix.connector.nation.model.po.LabServer" >
+    insert into LAB_SERVER (ID, LAB_SERVER_NO, LAB_SERVER_NAME, 
+      LAB_SERVER_KEY, SERVER_TYPE, SERVER_IP_ADDR, 
+      SERVER_PORT, ROOT_FLAG, PARENT_SERVER_NO, 
+      ACTIVE_FLAG, SERVER_ORD, REMARK, 
+      CREATE_USER, CREATE_DATETIME, UPDATE_USER, 
+      UPDATE_DATETIME, LAB_SERVER_ROLE, CONTROL_OPERATE
+      )
+    values (#{id,jdbcType=VARCHAR}, #{labServerNo,jdbcType=VARCHAR}, #{labServerName,jdbcType=VARCHAR}, 
+      #{labServerKey,jdbcType=VARCHAR}, #{serverType,jdbcType=VARCHAR}, #{serverIpAddr,jdbcType=VARCHAR}, 
+      #{serverPort,jdbcType=VARCHAR}, #{rootFlag,jdbcType=DECIMAL}, #{parentServerNo,jdbcType=VARCHAR}, 
+      #{activeFlag,jdbcType=DECIMAL}, #{serverOrd,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{createUser,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{labServerRole,jdbcType=DECIMAL}, #{controlOperate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.mix.connector.nation.model.po.LabServer" >
+    update LAB_SERVER
+    set LAB_SERVER_NO = #{labServerNo,jdbcType=VARCHAR},
+      LAB_SERVER_NAME = #{labServerName,jdbcType=VARCHAR},
+      LAB_SERVER_KEY = #{labServerKey,jdbcType=VARCHAR},
+      SERVER_TYPE = #{serverType,jdbcType=VARCHAR},
+      SERVER_IP_ADDR = #{serverIpAddr,jdbcType=VARCHAR},
+      SERVER_PORT = #{serverPort,jdbcType=VARCHAR},
+      ROOT_FLAG = #{rootFlag,jdbcType=DECIMAL},
+      PARENT_SERVER_NO = #{parentServerNo,jdbcType=VARCHAR},
+      ACTIVE_FLAG = #{activeFlag,jdbcType=DECIMAL},
+      SERVER_ORD = #{serverOrd,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      LAB_SERVER_ROLE = #{labServerRole,jdbcType=DECIMAL},
+      CONTROL_OPERATE = #{controlOperate,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, LAB_SERVER_NO, LAB_SERVER_NAME, LAB_SERVER_KEY, SERVER_TYPE, SERVER_IP_ADDR, 
+    SERVER_PORT, ROOT_FLAG, PARENT_SERVER_NO, ACTIVE_FLAG, SERVER_ORD, REMARK, CREATE_USER, 
+    CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME, LAB_SERVER_ROLE, CONTROL_OPERATE
+    from LAB_SERVER
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, LAB_SERVER_NO, LAB_SERVER_NAME, LAB_SERVER_KEY, SERVER_TYPE, SERVER_IP_ADDR, 
+    SERVER_PORT, ROOT_FLAG, PARENT_SERVER_NO, ACTIVE_FLAG, SERVER_ORD, REMARK, CREATE_USER, 
+    CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME, LAB_SERVER_ROLE, CONTROL_OPERATE
+    from LAB_SERVER
+  </select>
+
+  <select id="queryLabServerByCreateTime" resultMap="BaseResultMap" >
+    select ID, LAB_SERVER_NO, LAB_SERVER_NAME, LAB_SERVER_KEY, SERVER_TYPE, SERVER_IP_ADDR,
+    SERVER_PORT, ROOT_FLAG, PARENT_SERVER_NO, ACTIVE_FLAG, SERVER_ORD, REMARK, CREATE_USER,
+    CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME, LAB_SERVER_ROLE, CONTROL_OPERATE
+    from LAB_SERVER ORDER BY CREATE_DATETIME DESC
+  </select>
+
+  <select id="selectByLabServerNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, LAB_SERVER_NO, LAB_SERVER_NAME, LAB_SERVER_KEY, SERVER_TYPE, SERVER_IP_ADDR,
+    SERVER_PORT, ROOT_FLAG, PARENT_SERVER_NO, ACTIVE_FLAG, SERVER_ORD, REMARK, CREATE_USER,
+    CREATE_DATETIME, UPDATE_USER, UPDATE_DATETIME, LAB_SERVER_ROLE, CONTROL_OPERATE
+    from LAB_SERVER
+    where LAB_SERVER_NO = #{labServerNo,jdbcType=VARCHAR}
+  </select>
+</mapper>

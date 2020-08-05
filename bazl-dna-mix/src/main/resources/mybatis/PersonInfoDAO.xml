@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.mix.dao.PersonInfoDAO">
+  <resultMap id="BaseResultMap" type="PersonInfo">
+    <result column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="CASE_ID" jdbcType="VARCHAR" property="caseId" />
+    <result column="PERSON_NAME" jdbcType="VARCHAR" property="personName" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="ID_CARD" jdbcType="VARCHAR" property="idCard" />
+    <result column="PERSON_TYPE" jdbcType="VARCHAR" property="personType" />
+    <result column="CREATE_PERSON" jdbcType="VARCHAR" property="createPerson" />
+    <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="UPDATE_PERESON" jdbcType="VARCHAR" property="updatePereson" />
+    <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="updateDatetime" />
+    <!--业务字段-->
+    <result column="DICT_NAME" jdbcType="VARCHAR" property="dictName" />
+  </resultMap>
+  <insert id="insert" parameterType="PersonInfo">
+    insert into person_info (ID, CASE_ID, PERSON_NAME, 
+      SEX, ID_CARD, PERSON_TYPE, 
+      CREATE_PERSON, CREATE_DATETIME, UPDATE_PERESON,
+      UPDATE_DATETIME)
+    values (#{id,jdbcType=VARCHAR}, #{caseId,jdbcType=VARCHAR}, #{personName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{personType,jdbcType=VARCHAR}, 
+      #{createPerson,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{updatePereson,jdbcType=VARCHAR},
+      #{updateDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="PersonInfo">
+    insert into person_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="caseId != null">
+        CASE_ID,
+      </if>
+      <if test="personName != null">
+        PERSON_NAME,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="idCard != null">
+        ID_CARD,
+      </if>
+      <if test="personType != null">
+        PERSON_TYPE,
+      </if>
+      <if test="createPerson != null">
+        CREATE_PERSON,
+      </if>
+      <if test="createDatetime != null">
+        CREATE_DATETIME,
+      </if>
+      <if test="updatePereson != null">
+        UPDATE_PERESON,
+      </if>
+      <if test="updateDatetime != null">
+        UPDATE_DATETIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="caseId != null">
+        #{caseId,jdbcType=VARCHAR},
+      </if>
+      <if test="personName != null">
+        #{personName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="personType != null">
+        #{personType,jdbcType=VARCHAR},
+      </if>
+      <if test="createPerson != null">
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePereson != null">
+        #{updatePereson,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null">
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+   <!--根据人员id查询人员信息-->
+  <select id="selectByPersonId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select ID, CASE_ID, PERSON_NAME,
+      SEX, ID_CARD, PERSON_TYPE,
+      CREATE_PERSON, CREATE_DATETIME, UPDATE_PERESON,
+      UPDATE_DATETIME from person_info where ID = #{personId,jdbcType=VARCHAR}
+  </select>
+
+  <update id="updatePersonInfo" parameterType="PersonInfo">
+    update person_info
+    <set>
+    <if test="caseId != null">
+      CASE_ID=#{caseId,jdbcType=VARCHAR},
+    </if>
+    <if test="personName != null">
+      PERSON_NAME=#{personName,jdbcType=VARCHAR},
+    </if>
+    <if test="sex != null">
+      SEX= #{sex,jdbcType=VARCHAR},
+    </if>
+    <if test="idCard != null">
+      ID_CARD=#{idCard,jdbcType=VARCHAR},
+    </if>
+    <if test="personType != null">
+      PERSON_TYPE= #{personType,jdbcType=VARCHAR},
+    </if>
+    <if test="createPerson != null">
+      CREATE_PERSON= #{createPerson,jdbcType=VARCHAR},
+    </if>
+    <if test="createDatetime != null">
+      CREATE_DATETIME= #{createDatetime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="updatePereson != null">
+      UPDATE_PERESON= #{updatePereson,jdbcType=VARCHAR},
+    </if>
+    <if test="updateDatetime != null">
+      UPDATE_DATETIME=#{updateDatetime,jdbcType=TIMESTAMP}
+    </if>
+    </set>
+     where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <!--根据人员id查询人员类型信息-->
+  <select id="selectByPersonType" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select pi.*,dice.dict_name
+    from person_info pi
+    JOIN dict_item dice ON dice.dict_code= pi.PERSON_TYPE
+    where dice.dict_type_code='PERSON_TYPE' and ID = #{personId,jdbcType=VARCHAR}
+  </select>
+</mapper>

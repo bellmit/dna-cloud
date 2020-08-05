@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.QuickCompareResultRelativeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.QuickCompareResultRelative">
+        <id column="ID" property="id" />
+        <result column="QUICK_COMPARE_QUEUE_ID" property="quickCompareQueueId" />
+        <result column="MATCH_GENE_ID1" property="matchGeneId1" />
+        <result column="MATCH_GENE_ID2" property="matchGeneId2" />
+        <result column="MATCH_LOCUS_COUNT" property="matchLocusCount" />
+        <result column="DIFF_LOCUS_COUNT" property="diffLocusCount" />
+        <result column="MATCHED_GENE_DETAILS" property="matchedGeneDetails" />
+        <result column="MATCH_DATETIME" property="matchDatetime" />
+    </resultMap>
+
+    <resultMap id="BaseResultMapVo" type="com.bazl.dna.database.service.model.vo.QuickCompareResultRelativeVo" extends="BaseResultMap">
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID, QUICK_COMPARE_QUEUE_ID, MATCH_GENE_ID1, MATCH_GENE_ID2, MATCH_LOCUS_COUNT, DIFF_LOCUS_COUNT,
+        MATCHED_GENE_DETAILS, MATCH_DATETIME
+    </sql>
+
+    <select id="selectByQuickCompareQueueId" parameterType="java.lang.Integer" resultMap="BaseResultMapVo">
+        select DISTINCT crr.ID, crr.QUICK_COMPARE_QUEUE_ID, crr.MATCH_GENE_ID1,crr.MATCHED_GENE_DETAILS,
+            lsi.LAB_SERVER_NAME as LAB_SERVER_NAME,si.SAMPLE_LAB_NO as MATCH_SAMPLE_NO,
+            si.SAMPLE_NAME as MATCH_SAMPLE_NAME,ci.CASE_ACCEPT_NO as MATCH_CASE_NO,ci.CASE_NAME as MATCH_CASE_NAME,
+            crr.MATCH_LOCUS_COUNT as MATCH_LOCUS_COUNT,cpi.PERSON_TYPE as personType
+            from quick_compare_result_relative crr
+            join dna_str_gene_info sgi on sgi.ID = crr.MATCH_GENE_ID1
+            left join dna_sample_info si on sgi.SAMPLE_ID = si.ID
+            left join case_info ci on ci.ID = si.CASE_ID
+            left join lab_server_info lsi on lsi.LAB_SERVER_NO = si.LAB_SERVER_NO
+            left join case_person_info cpi on si.REF_PERSON_ID = cpi.ID
+        where crr.QUICK_COMPARE_QUEUE_ID =  #{quickCompareQueueId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectBySTRQueueIdCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(crr.ID)
+        from quick_compare_result_relative crr
+            join dna_str_gene_info sgi on sgi.ID = crr.MATCH_GENE_ID1
+            left join dna_sample_info si on sgi.SAMPLE_ID = si.ID
+            left join case_info ci on ci.ID = si.CASE_ID
+            left join lab_server_info lsi on lsi.LAB_SERVER_NO = si.LAB_SERVER_NO
+            left join case_person_info cpi on si.REF_PERSON_ID = cpi.ID
+        where crr.QUICK_COMPARE_QUEUE_ID =  #{quickCompareQueueId,jdbcType=INTEGER}
+    </select>
+
+</mapper>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.DnaGeneInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.DnaGeneInfo">
+        <id column="ID" property="id" />
+        <result column="GENE_TYPE" property="geneType" jdbcType="TINYINT" javaType="java.lang.Integer" />
+        <result column="DNA_PANEL_ID" property="dnaPanelId" />
+        <result column="DATA_SOURCE" property="dataSource" jdbcType="TINYINT" javaType="java.lang.Integer" />
+        <result column="SAMPLE_ID" property="sampleId" />
+        <result column="LOCUS_COUNT" property="locusCount" />
+        <result column="GENE_INFO" property="geneInfoDetail"
+                javaType="com.bazl.dna.database.service.model.po.DnaGeneInfoDetail"
+                typeHandler="com.bazl.dna.database.service.typehandler.ArrayJsonTypeHandler"/>
+        <result column="GENE_IMAGE" property="geneImage" />
+        <result column="TRANSFER_FLAG" property="transferFlag" />
+        <result column="TRANSFER_DATETIME" property="transferDatetime" />
+        <result column="TRANSFER_PERSON_ID" property="transferPersonId" />
+        <result column="TRANSFER_PERSON_NAME" property="transferPersonName" />
+        <result column="DELETE_FLAG" property="deleteFlag" />
+        <result column="DELETE_DATETIME" property="deleteDatetime" />
+        <result column="DELETE_REASON" property="deleteReason" />
+        <result column="DELETE_PERSON_ID" property="deletePersonId" />
+        <result column="DELETE_PERSON_NAME" property="deletePersonName" />
+        <result column="STORE_DATETIME" property="storeDatetime" />
+        <result column="STORE_PERSON_ID" property="storePersonId" />
+        <result column="STORE_PERSON_NAME" property="storePersonName" />
+        <result column="UPDATE_DATETIME" property="updateDatetime" />
+        <result column="UPDATE_PERSON_ID" property="updatePersonId" />
+        <result column="UPDATE_PERSON_NAME" property="updatePersonName" />
+    </resultMap>
+
+    <resultMap id="VoResultMap" type="com.bazl.dna.database.service.model.vo.DnaGeneInfoVo"
+               extends="BaseResultMap">
+        <result column="GENE_TYPE_NAME" property="geneTypeName" />
+        <result column="PANEL_NAME" property="dnaPanelName" />
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        dgi.ID,dgi.GENE_TYPE,dgi.DNA_PANEL_ID,dgi.DATA_SOURCE,dgi.SAMPLE_ID,dgi.LOCUS_COUNT,dgi.GENE_INFO,dgi.GENE_IMAGE,
+        dgi.TRANSFER_FLAG,dgi.TRANSFER_DATETIME,dgi.TRANSFER_PERSON_ID,dgi.TRANSFER_PERSON_NAME,dgi.DELETE_FLAG,
+        dgi.DELETE_DATETIME,dgi.DELETE_REASON,dgi.DELETE_PERSON_ID,dgi.DELETE_PERSON_NAME,dgi.STORE_DATETIME,
+        dgi.STORE_PERSON_ID,dgi.STORE_PERSON_NAME,dgi.UPDATE_DATETIME,dgi.UPDATE_PERSON_ID,dgi.UPDATE_PERSON_NAME
+    </sql>
+
+    <select id="selectVoListBySampleId" parameterType="java.lang.Integer"
+            resultMap="VoResultMap">
+      select
+        <include refid="Base_Column_List"/>,
+        di.DICT_NAME as GENE_TYPE_NAME,
+        dpi.PANEL_NAME
+      from DNA_GENE_INFO dgi
+            left join DICT_ITEM di on di.DICT_CODE=dgi.GENE_TYPE and di.DICT_TYPE_CODE='GENE_TYPE'
+            left join DNA_PANEL_INFO dpi on dpi.ID=dgi.DNA_PANEL_ID
+      where dgi.SAMPLE_ID=#{_parameter, jdbcType=INTEGER}
+    </select>
+
+</mapper>

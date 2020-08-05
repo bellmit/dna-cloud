@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.lims.core.dao.ErsFileMapper">
+  <resultMap id="BaseResultMap" type="com.bazl.dna.lims.core.model.po.ErsFile">
+    <id column="FILE_ID" jdbcType="VARCHAR" property="fileId" />
+    <id column="CONSIGNMENT_ID" jdbcType="VARCHAR" property="consignmentId" />
+    <id column="CASE_ID" jdbcType="VARCHAR" property="caseId" />
+    <id column="FILE_CATEGORY" jdbcType="VARCHAR" property="fileCategory" />
+    <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName" />
+    <result column="ORIGINAL_FILE_DIR" jdbcType="VARCHAR" property="originalFileDir" />
+    <result column="NEW_FILE_DIR" jdbcType="VARCHAR" property="newFileDir" />
+    <result column="FILE_DESC" jdbcType="VARCHAR" property="fileDesc" />
+    <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="CREATE_PERSON" jdbcType="VARCHAR" property="createPerson" />
+    <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="updateDatetime" />
+    <result column="UPDATE_PERSON" jdbcType="VARCHAR" property="updatePerson" />
+    <result column="DELETE_FLAG" jdbcType="VARCHAR" property="deleteFlag" />
+    <result column="DELETE_DATETIME" jdbcType="TIMESTAMP" property="deleteDatetime" />
+    <result column="DELETE_PERSON" jdbcType="VARCHAR" property="deletePerson" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ERS_FILE
+    where FILE_ID = #{fileId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.lims.core.model.po.ErsFile">
+    insert into ERS_FILE (FILE_ID, CONSIGNMENT_ID, CASE_ID, FILE_CATEGORY, FILE_NAME, ORIGINAL_FILE_DIR,
+      NEW_FILE_DIR, FILE_DESC, CREATE_DATETIME, CREATE_PERSON)
+    values (#{fileId,jdbcType=VARCHAR}, #{consignmentId,jdbcType=VARCHAR}, #{caseId,jdbcType=VARCHAR},
+      #{fileCategory,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, #{originalFileDir,jdbcType=VARCHAR},
+      #{newFileDir,jdbcType=VARCHAR}, #{fileDesc,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP},
+      #{createPerson,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.lims.core.model.po.ErsFile">
+    update ERS_FILE
+    set
+      CONSIGNMENT_ID = #{consignmentId,jdbcType=VARCHAR},
+      CASE_ID = #{caseId,jdbcType=VARCHAR},
+      FILE_CATEGORY = #{fileCategory,jdbcType=VARCHAR},
+      FILE_NAME = #{fileName,jdbcType=VARCHAR},
+      ORIGINAL_FILE_DIR = #{originalFileDir,jdbcType=VARCHAR},
+      NEW_FILE_DIR = #{newFileDir,jdbcType=VARCHAR},
+      FILE_DESC = #{fileDesc,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+      DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+      DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR}
+    where FILE_ID = #{fileId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select FILE_ID, CONSIGNMENT_ID, CASE_ID, FILE_CATEGORY, FILE_NAME, ORIGINAL_FILE_DIR,
+      NEW_FILE_DIR, FILE_DESC, CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME,
+    UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON
+    from ERS_FILE
+    where FILE_ID = #{fileId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectList" parameterType="com.bazl.dna.lims.core.model.po.ErsFile" resultMap="BaseResultMap">
+    select FILE_ID, CONSIGNMENT_ID, CASE_ID, FILE_CATEGORY, FILE_NAME, ORIGINAL_FILE_DIR,
+    NEW_FILE_DIR, FILE_DESC, CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME,
+    UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON
+    from ERS_FILE
+    <where>
+          <include refid="Query_Where_Clause"/>
+    </where>
+  </select>
+  <sql id="Query_Where_Clause">
+      <if test="consignmentId != null and consignmentId != '' ">
+        and CONSIGNMENT_ID = #{consignmentId,jdbcType=VARCHAR}
+      </if>
+      <if test="caseId != null and caseId != '' ">
+        and CASE_ID = #{caseId,jdbcType=VARCHAR}
+      </if>
+      <if test="fileCategory != null and fileCategory != '' ">
+        and FILE_CATEGORY = #{fileCategory,jdbcType=VARCHAR}
+      </if>
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select FILE_ID, CONSIGNMENT_ID, CASE_ID, FILE_CATEGORY, FILE_NAME, ORIGINAL_FILE_DIR,
+      NEW_FILE_DIR, FILE_DESC, CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME,
+    UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON
+    from ERS_FILE
+  </select>
+</mapper>

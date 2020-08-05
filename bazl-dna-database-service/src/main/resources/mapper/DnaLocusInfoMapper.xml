@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.DnaLocusInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.DnaLocusInfo">
+        <id column="ID" property="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+        <result column="LOCUS_TYPE" property="locusType" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <result column="LOCUS_NAME" property="locusName" />
+        <result column="NATIONAL_LOCUS_NAME" property="nationalLocusName" />
+        <result column="LOCUS_ALIAS" property="locusAlias" />
+        <result column="VALUE_SCOPE" property="valueScope" />
+        <result column="CORE_LOCUS_FLAG" property="coreLocusFlag" />
+        <result column="LOCUS_ORD" property="locusOrd" />
+        <result column="CREATE_DATETIME" property="createDatetime" />
+        <result column="UPDATE_DATETIME" property="updateDatetime" />
+        <result column="REMARKS" property="remarks" />
+    </resultMap>
+
+    <resultMap id="BaseResultMapPo" type="com.bazl.dna.database.service.model.qo.LocusInfoQuery" extends="BaseResultMap">
+        <result column="CREATE_DATETIME" property="createDatetime" />
+        <result column="UPDATE_DATETIME" property="updateDatetime" />
+    </resultMap>
+
+    <sql id="Base_Column_SQL_With_Prefix">
+      dli.ID, dli.LOCUS_TYPE, dli.LOCUS_NAME, dli.NATIONAL_LOCUS_NAME, dli.LOCUS_ALIAS,
+      dli.VALUE_SCOPE, dli.CORE_LOCUS_FLAG, dli.LOCUS_ORD, dli.CREATE_DATETIME, dli.UPDATE_DATETIME , dli.REMARKS
+    </sql>
+
+    <select id="queryLocusInfo" resultMap="BaseResultMap">
+        SELECT
+          <include refid="Base_Column_SQL_With_Prefix" />
+        from dna_locus_info dli
+        order by dli.LOCUS_ORD asc
+    </select>
+
+    <select id="queryLocusInfos" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_SQL_With_Prefix" />
+        from dna_locus_info dli
+        <where>
+            <if test="type != null  and type != ''" >
+                dli.LOCUS_TYPE = #{type}
+            </if>
+            <if test="name != null  and name != ''" >
+                and dli.LOCUS_NAME = #{name}
+            </if>
+            and 1=1
+        </where>
+        order by dli.LOCUS_ORD asc
+    </select>
+
+    <select id="listByPanelId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_SQL_With_Prefix" />
+        from dna_locus_info dli
+        where exists (
+          select 1 from dna_panel_locus dpl
+          where dpl.LOCUS_ID=dli.ID and dpl.PANEL_ID=#{_parameter, jdbcType=VARCHAR}
+        )
+        order by dli.LOCUS_ORD asc
+    </select>
+
+    <select id="listByLocusType" parameterType="com.bazl.dna.database.service.model.po.DnaLocusInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_SQL_With_Prefix" />
+        from dna_locus_info dli
+        <if test="locus_type != null  and locus_type != ''" >
+        where  dli.locus_type = #{locusType}
+        </if>
+        order by dli.locus_ord asc
+    </select>
+
+    <select id="locusPaginationQuery" parameterType="com.bazl.dna.database.service.model.qo.LocusInfoQuery" resultMap="BaseResultMapPo" >
+        select
+        <include refid="Base_Column_SQL_With_Prefix" />
+        from dna_locus_info dli
+        <if test="locusType != null  and locusType != ''" >
+            where  dli.locus_type = #{locusType}
+        </if>
+        <if test="locusName != null  and locusName != ''" >
+            and   dli.locus_name  like concat('%',#{locusName, jdbcType=VARCHAR},'%')
+        </if>
+        <if test="coreLocusFlag == 0" >
+            and  dli.CORE_LOCUS_FLAG = 0
+        </if>
+        <if test="coreLocusFlag == 1" >
+            and  dli.CORE_LOCUS_FLAG = 1
+        </if>
+        order by dli.locus_ord asc
+        limit #{offset},#{rows}
+    </select>
+
+    <select id="selectById" parameterType="com.bazl.dna.database.service.model.qo.LocusInfoQuery" resultType="String"  >
+        select dli.ID
+        from dna_locus_info dli
+        <if test="locusType != null  and locusType != ''" >
+            where  dli.locus_type = #{locusType}
+        </if>
+        <if test="locusName != null  and locusName != ''" >
+            and  dli.LOCUS_NAME = #{locusName}
+        </if>
+    </select>
+
+    <select id="paginationCount" parameterType="com.bazl.dna.database.service.model.qo.LocusInfoQuery" resultType="int"  >
+        select count(DISTINCT dli.ID)
+        from dna_locus_info dli
+        <if test="locusType != null  and locusType != ''" >
+            where dli.locus_type = #{locusType}
+        </if>
+        <if test="locusName != null  and locusName != ''" >
+            and  dli.locus_name  like concat('%',#{locusName, jdbcType=VARCHAR},'%')
+        </if>
+        <if test="coreLocusFlag == 0" >
+            and  dli.CORE_LOCUS_FLAG = 0
+        </if>
+        <if test="coreLocusFlag == 1" >
+            and  dli.CORE_LOCUS_FLAG = 1
+        </if>
+    </select>
+
+    <select id="selectByLocusName" parameterType ="com.bazl.dna.database.service.model.po.DnaLocusInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_SQL_With_Prefix"/>
+        from
+        dna_locus_info dli
+        where dli.locus_name  like concat('%',#{locusName, jdbcType=VARCHAR},'%')
+    </select>
+
+    <select id="selectByLocusType" parameterType="com.bazl.dna.database.service.model.po.DnaLocusInfo" resultMap="BaseResultMap">
+        select
+         <include refid="Base_Column_SQL_With_Prefix"/>
+        from
+        dna_locus_info dli
+        where dli.locus_type =#{locusType}
+        order by dli.locus_ord asc
+    </select>
+
+</mapper>

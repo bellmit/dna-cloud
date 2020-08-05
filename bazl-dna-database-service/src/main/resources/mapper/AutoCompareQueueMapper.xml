@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.AutoCompareQueueMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.AutoCompareQueue">
+        <id column="ID" property="id" />
+        <result column="COMPARE_WEIGHT" property="compareWeight" />
+        <result column="COMPARE_MODE" property="compareMode" />
+        <result column="GENE_ID" property="geneId" />
+        <result column="COMPARE_PARAMS" property="compareParams" />
+        <result column="COMPARE_STATUS" property="compareStatus" />
+        <result column="CREATE_DATETIME" property="createDatetime" />
+        <result column="UPDATE_DATETIME" property="updateDatetime" />
+    </resultMap>
+    
+    <select id="findListByCompareMode" parameterType="map" resultMap="BaseResultMap">
+    	select * from auto_compare_queue where COMPARE_MODE=#{compareMode} and COMPARE_STATUS=#{compareStatus} limit #{pageSize}
+    </select>
+
+</mapper>

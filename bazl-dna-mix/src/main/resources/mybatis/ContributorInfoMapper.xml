@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.mix.dao.ContributorInfoMapper">
+  <resultMap id="BaseResultMap" type="com.bazl.dna.mix.model.po.ContributorInfo">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="MIXED_SAMPLE_GENE_ID" jdbcType="VARCHAR" property="mixedSampleGeneId" />
+    <result column="SAMPLE_NO" jdbcType="VARCHAR" property="sampleNo"/>
+    <result column="SAMPLE_NAME" jdbcType="VARCHAR" property="sampleName"/>
+    <result column="GENE_INFO" jdbcType="CHAR" property="geneInfo" />
+    <result column="GENE_PICTURE" jdbcType="VARCHAR" property="genePicture" />
+    <result column="GENE_COUNT" jdbcType="CHAR" property="geneCount" />
+    <result column="CREATE_PERSON" jdbcType="VARCHAR" property="createPerson" />
+    <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="UPDATE_PERESON" jdbcType="VARCHAR" property="updatePereson" />
+    <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="updateDatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, MIXED_SAMPLE_GENE_ID, SAMPLE_NO, SAMPLE_NAME, GENE_INFO, GENE_PICTURE,GENE_COUNT, CREATE_PERSON, CREATE_DATETIME,
+    UPDATE_PERESON, UPDATE_DATETIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contributor_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from contributor_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.mix.model.po.ContributorInfo">
+    insert into contributor_info (ID, MIXED_SAMPLE_GENE_ID, SAMPLE_NO, SAMPLE_NAME, GENE_INFO,
+      GENE_PICTURE, GENE_COUNT, CREATE_PERSON, CREATE_DATETIME,
+      UPDATE_PERESON, UPDATE_DATETIME
+      )
+    values (#{id,jdbcType=VARCHAR}, #{mixedSampleGeneId,jdbcType=VARCHAR},#{sampleNo,jdbcType=VARCHAR},
+      #{sampleName,jdbcType=VARCHAR}, #{geneInfo,jdbcType=CHAR},#{genePicture,jdbcType=VARCHAR},
+      #{geneCount,jdbcType=CHAR},#{createPerson,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP},
+      #{updatePereson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bazl.dna.mix.model.po.ContributorInfo">
+    insert into contributor_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="mixedSampleGeneId != null">
+        MIXED_SAMPLE_GENE_ID,
+      </if>
+      <if test="sampleNo != null">
+        SAMPLE_NO,
+      </if>
+      <if test="sampleName != null">
+        SAMPLE_NAME,
+      </if>
+      <if test="geneInfo != null">
+        GENE_INFO,
+      </if>
+      <if test="genePicture != null">
+        GENE_PICTURE,
+      </if>
+      <if test="geneCount != null">
+        GENE_COUNT,
+      </if>
+      <if test="createPerson != null">
+        CREATE_PERSON,
+      </if>
+      <if test="createDatetime != null">
+        CREATE_DATETIME,
+      </if>
+      <if test="updatePereson != null">
+        UPDATE_PERESON,
+      </if>
+      <if test="updateDatetime != null">
+        UPDATE_DATETIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="mixedSampleGeneId != null">
+        #{mixedSampleGeneId,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleNo != null">
+        #{sampleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleName != null">
+        #{sampleName,jdbcType=VARCHAR},
+      </if>
+      <if test="geneInfo != null">
+        #{geneInfo,jdbcType=CHAR},
+      </if>
+      <if test="genePicture != null">
+        #{genePicture,jdbcType=VARCHAR},
+      </if>
+      <if test="geneCount != null">
+        #{geneCount,jdbcType=CHAR},
+      </if>
+      <if test="createPerson != null">
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePereson != null">
+        #{updatePereson,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null">
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bazl.dna.mix.model.po.ContributorInfo">
+    update contributor_info
+    <set>
+      <if test="mixedSampleGeneId != null">
+        MIXED_SAMPLE_GENE_ID = #{mixedSampleGeneId,jdbcType=VARCHAR},
+      </if>
+      <if test="geneInfo != null">
+        GENE_INFO = #{geneInfo,jdbcType=CHAR},
+      </if>
+      <if test="sampleNo != null">
+        SAMPLE_NO =#{sampleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleName != null">
+        SAMPLE_NAME =#{sampleName,jdbcType=VARCHAR},
+      </if>
+      <if test="genePicture != null">
+        GENE_PICTURE = #{genePicture,jdbcType=VARCHAR},
+      </if>
+      <if test="geneCount != null">
+        GENE_COUNT = #{geneCount,jdbcType=CHAR},
+      </if>
+      <if test="createPerson != null">
+        CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null">
+        CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePereson != null">
+        UPDATE_PERESON = #{updatePereson,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null">
+        UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.mix.model.po.ContributorInfo">
+    update contributor_info
+    set MIXED_SAMPLE_GENE_ID = #{mixedSampleGeneId,jdbcType=VARCHAR},
+      SAMPLE_NO =#{sampleNo,jdbcType=VARCHAR},
+      SAMPLE_NAME =#{sampleName,jdbcType=VARCHAR},
+      GENE_INFO = #{geneInfo,jdbcType=CHAR},
+      GENE_PICTURE = #{genePicture,jdbcType=VARCHAR},
+      GENE_COUNT = #{geneCount,jdbcType=CHAR},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERESON = #{updatePereson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="findListByMixSampleGeneId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  	select ID, MIXED_SAMPLE_GENE_ID, SAMPLE_NO, SAMPLE_NAME, GENE_INFO, GENE_PICTURE, GENE_COUNT,
+		 CREATE_PERSON, CREATE_DATETIME, UPDATE_PERESON, UPDATE_DATETIME
+    from contributor_info
+    where MIXED_SAMPLE_GENE_ID = #{mixedSampleGeneId,jdbcType=VARCHAR}
+  </select>
+</mapper>

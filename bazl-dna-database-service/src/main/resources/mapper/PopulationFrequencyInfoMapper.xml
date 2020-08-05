@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.PopulationFrequencyInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.PopulationFrequencyInfo">
+        <id column="ID" property="id"  jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="DEFAULT_FLAG" property="defaultFlag" jdbcType="TINYINT" javaType="java.lang.Integer" />
+        <result column="POPULATION_NAME" property="populationName" jdbcType="VARCHAR" />
+        <result column="GENE_TYPE" property="geneType" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <result column="LOCUS_COUNT" property="locusCount" />
+        <result column="DATA_SOURCE" property="dataSource" />
+        <result column="STATS_DATETIME" property="statsDatetime" />
+        <result column="CDP_VAL" property="cdpVal" />
+        <result column="CPE" property="cpe" />
+        <result column="POPULATION_DESC" property="populationDesc" />
+        <result column="CREATE_DATETIME" property="createDatetime" />
+        <result column="CREATE_PERSON_ID" property="createPersonId" />
+        <result column="CREATE_PERSON_NAME" property="createPersonName" />
+        <result column="UPDATE_DATETIME" property="updateDatetime" />
+        <result column="UPDATE_PERSON_ID" property="updatePersonId" />
+        <result column="UPDATE_PERSON_NAME" property="updatePersonName" />
+        <result column="STATS_COUNTRY" property="statsCountry" />
+        <result column="STATS_RACE" property="statsRace" />
+        <result column="STATS_AREA" property="statsArea" />
+        <result column="REMARKS" property="remarks" />
+        <result column="POPULATION_NO" property="populationNo" />
+
+
+
+        <collection property="alleleFrequencyInfoList" ofType="com.bazl.dna.database.service.model.po.AlleleFrequencyInfo" javaType="java.util.List">
+			<id column="AID" property="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+			<result column="POPULATION_FREQUENCY_ID" property="populationFrequencyId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+			<result column="LOCUS_ID" property="locusId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+			<result column="LOCUS_NAME" property="locusName" />
+			<result column="ALLELE_VALUE" property="alleleValue" />
+			<result column="PROBABILITY" property="probability" />
+		</collection>
+
+
+    </resultMap>
+
+
+    <resultMap id="BaseResultMapVo" type="com.bazl.dna.database.service.model.vo.PopulationFrequencyInfoVo" extends="BaseResultMap">
+    </resultMap>
+
+
+    <sql id="Base_column_list">
+       p.id,p.DEFAULT_FLAG,p.POPULATION_NAME,p.GENE_TYPE,p.LOCUS_COUNT,p.DATA_SOURCE,p.STATS_DATETIME,p.CDP_VAL,
+       p.CPE,p.POPULATION_DESC,p.CREATE_DATETIME,p.CREATE_PERSON_ID,p.CREATE_PERSON_NAME,p.UPDATE_DATETIME,p.UPDATE_PERSON_ID,
+       p.STATS_COUNTRY,p.STATS_RACE,p.STATS_AREA,p.REMARKS,p.POPULATION_NO
+    </sql>
+    
+    <select id="findList" resultMap="BaseResultMap" parameterType="int">
+		select p.*, a.id as AID, a.POPULATION_FREQUENCY_ID, a.LOCUS_ID,a.LOCUS_NAME,a.ALLELE_VALUE,a.PROBABILITY
+			from population_frequency_info p, allele_frequency_info a
+			where p.ID=a.POPULATION_FREQUENCY_ID
+			<if test="id != null">
+				and p.id=#{id}
+			</if>
+			<if test="populationName != null">
+				and p.POPULATION_NAME like concat('%',#{populationName, jdbcType=VARCHAR},'%')
+			</if>
+			<if test="geneType != null">
+				and p.GENE_TYPE=#{geneType}
+			</if>
+	</select>
+
+    <select id="populationPaginationQuery" resultMap="BaseResultMapVo" parameterType="com.bazl.dna.database.service.model.qo.PopulationFrequencyQuery">
+        select
+        <include refid="Base_column_list" />
+        from population_frequency_info p
+        where 1=1
+        <if test="id != null">
+            and p.id=#{id}
+        </if>
+        <if test="populationName != null">
+            and p.POPULATION_NAME like concat('%',#{populationName, jdbcType=VARCHAR},'%')
+        </if>
+        <if test="geneType != null">
+            and p.GENE_TYPE=#{geneType}
+        </if>
+        <if test="statsCountry !=null">
+            and p.stats_country=#{statsCountry}
+        </if>
+        <if test="statsRace !=null">
+            and p.stats_race=#{statsRace}
+        </if>
+        <if test="populationName !=null">
+            and p.POPULATION_NAME =#{populationName}
+        </if>
+         limit #{offset},#{rows}
+    </select>
+
+    <select id ="populationPaginationCount" parameterType="com.bazl.dna.database.service.model.qo.PopulationFrequencyQuery" resultType="int" >
+        select count(distinct p.id)
+        from population_frequency_info p
+        where 1=1
+        <if test="id != null">
+            and p.id=#{id}
+        </if>
+        <if test="populationName != null">
+            and p.POPULATION_NAME like concat('%',#{populationName, jdbcType=VARCHAR},'%')
+        </if>
+        <if test="geneType != null">
+            and p.GENE_TYPE=#{geneType}
+        </if>
+        <if test="statsCountry !=null">
+            and p.stats_country=#{statsCountry}
+        </if>
+        <if test="statsRace !=null">
+            and p.stats_race=#{statsRace}
+        </if>
+    </select>
+
+    <select id="listByPopulationId"  parameterType="com.bazl.dna.database.service.model.qo.PopulationFrequencyQuery"  resultMap="BaseResultMapVo">
+         select
+         <include refid="Base_column_list"/>
+         from population_frequency_info p
+         where p.id = #{id}
+    </select>
+
+    <delete id="deleteAlleleFrequencyByPopulationId" parameterType="com.bazl.dna.database.service.model.qo.PopulationFrequencyQuery">
+        delete from population_frequency_info where id = #{arg0}
+    </delete>
+
+    <select id="selectByGeneType"  parameterType="com.bazl.dna.database.service.model.qo.PopulationFrequencyQuery"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_column_list"/>
+        from population_frequency_info p
+        where p.GENE_TYPE=#{geneType}
+    </select>
+
+</mapper>

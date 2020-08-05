@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.mix.dao.MixedSampleGeneDAO">
+    <resultMap id="BaseResultMap" type="com.bazl.dna.mix.model.po.MixedSampleGene">
+        <result column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="CASE_ID" jdbcType="VARCHAR" property="caseID"/>
+        <result column="SAMPLE_ID" jdbcType="VARCHAR" property="sampleId"/>
+        <result column="SAMPLE_NO" jdbcType="VARCHAR" property="sampleNo"/>
+        <result column="SAMPLE_NAME" jdbcType="VARCHAR" property="sampleName"/>
+        <result column="REAGENT_NAME" jdbcType="VARCHAR" property="reagentName"/>
+        <result column="BOARD_BARCODE" jdbcType="VARCHAR" property="boardBarcode"/>
+        <result column="GENE_PICTURE" jdbcType="VARCHAR" property="genePicture"/>
+        <result column="CREATE_PERSON" jdbcType="VARCHAR" property="createPerson"/>
+        <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="createDatetime"/>
+        <result column="UPDATE_PERESON" jdbcType="VARCHAR" property="updatePereson"/>
+        <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="updateDatetime"/>
+        <result column="GENE_INFO" jdbcType="VARCHAR" property="geneInfo"/>
+        <result column="IS_DELETED" jdbcType="VARCHAR" property="isDeleted"/>
+        <result column="CONTRIBUTOR_COUNT" jdbcType="VARCHAR" property="contributorCount"/>
+    </resultMap>
+
+    <resultMap id="VOBaseResultMap" type="com.bazl.dna.mix.model.vo.MixedSampleGeneVo">
+        <id column="ID" jdbcType="VARCHAR" property="entity.id"/>
+        <result column="SAMPLE_ID" jdbcType="VARCHAR" property="entity.sampleId"/>
+        <result column="REAGENT_NAME" jdbcType="VARCHAR" property="entity.reagentName"/>
+        <result column="BOARD_BARCODE" jdbcType="VARCHAR" property="entity.boardBarcode"/>
+        <result column="GENE_PICTURE" jdbcType="VARCHAR" property="entity.genePicture"/>
+        <result column="CREATE_PERSON" jdbcType="VARCHAR" property="entity.createPerson"/>
+        <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="entity.createDatetime"/>
+        <result column="UPDATE_PERESON" jdbcType="VARCHAR" property="entity.updatePereson"/>
+        <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="entity.updateDatetime"/>
+        <result column="GENE_INFO" jdbcType="VARCHAR" property="entity.geneInfo"/>
+        <result column="IS_DELETED" jdbcType="VARCHAR" property="entity.isDeleted"/>
+        <result column="CONTRIBUTOR_COUNT" jdbcType="VARCHAR" property="entity.contributorCount"/>
+
+
+        <result column="CASE_ID" jdbcType="VARCHAR" property="caseId"/>
+        <result column="SAMPLE_NO" jdbcType="VARCHAR" property="sampleNo"/>
+        <result column="SAMPLE_NO_BZ" jdbcType="VARCHAR" property="sampleNobizhong"/>
+        <result column="SAMPLE_NAME" jdbcType="VARCHAR" property="sampleName"/>
+        <result column="SAMPLE_TYPE" jdbcType="VARCHAR" property="sampleType"/>
+        <result column="SAMPLE_FLAG" jdbcType="VARCHAR" property="sampleFlag"/>
+        <result column="REF_PERSON_ID" jdbcType="VARCHAR" property="refPersonId"/>
+        <result column="REMARK" jdbcType="VARCHAR" property="remark"/>
+        <result column="CASE_NO" jdbcType="VARCHAR" property="caseNo"/>
+        <result column="CASE_NAME" jdbcType="VARCHAR" property="caseName"/>
+        <result column="MIXED_SAMPLE_GENE_ID" jdbcType="VARCHAR" property="mixedSampleGendId"/>
+        <result column="SINGLE_GENE_ID" jdbcType="VARCHAR" property="singlegeneId"/>
+        <result column="RATIO" jdbcType="DECIMAL" property="ratio"/>
+        <result column="SPLIT_DIGIT" jdbcType="DECIMAL" property="splitDigit"/>
+        <result column="COMPARISON_TIME" jdbcType="TIMESTAMP" property="comparisonTime"/>
+        <result column="PERSON_NAME" jdbcType="VARCHAR" property="personName"/>
+    </resultMap>
+
+    <!--案件混合样本信息-->
+    <resultMap id="BaseResultMapVO" type="com.bazl.dna.mix.model.vo.CaseMixedSampleGeneVo">
+        <result column="CASE_ID" jdbcType="VARCHAR" property="caseId"/>
+        <result column="GENE_ID" jdbcType="VARCHAR" property="geneId"/>
+        <result column="SAMPLE_ID" jdbcType="VARCHAR" property="sampleid"/>
+        <result column="CASE_NO" jdbcType="VARCHAR" property="caseNo"/>
+        <result column="CASE_NAME" jdbcType="VARCHAR" property="caseName"/>
+        <result column="SAMPLE_NO" jdbcType="VARCHAR" property="sampleNo"/>
+        <result column="SAMPLE_NAME" jdbcType="VARCHAR" property="sampleName"/>
+        <result column="REAGENT_NAME" jdbcType="VARCHAR" property="reagentName"/>
+        <result column="BOARD_BARCODE" jdbcType="VARCHAR" property="boardBarcode"/>
+    </resultMap>
+
+
+    <sql id="Blob_Column_List">
+      ID, SAMPLE_ID, SAMPLE_NO, SAMPLE_NAME, REAGENT_NAME,BOARD_BARCODE, GENE_PICTURE, CREATE_PERSON,
+      CREATE_DATETIME, UPDATE_PERESON, UPDATE_DATETIME,GENE_INFO
+    </sql>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from mixed_sample_gene
+        where ID = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.bazl.dna.mix.model.po.MixedSampleGene">
+     insert into mixed_sample_gene (ID, SAMPLE_ID, SAMPLE_NO, SAMPLE_NAME,  REAGENT_NAME,
+      BOARD_BARCODE, GENE_PICTURE, CREATE_PERSON,
+      CREATE_DATETIME, UPDATE_PERESON, UPDATE_DATETIME,
+      GENE_INFO,CONTRIBUTOR_COUNT,IS_DELETED)
+    values (#{id,jdbcType=VARCHAR}, #{sampleId,jdbcType=VARCHAR}, #{sampleNo,jdbcType=VARCHAR},
+      #{sampleName,jdbcType=VARCHAR}, #{reagentName,jdbcType=VARCHAR},
+      #{boardBarcode,jdbcType=VARCHAR}, #{genePicture,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR},
+      #{createDatetime,jdbcType=TIMESTAMP}, #{updatePereson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP},
+      #{geneInfo,jdbcType=VARCHAR},#{contributorCount,jdbcType=VARCHAR},#{isDeleted,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.bazl.dna.mix.model.po.MixedSampleGene">
+        insert into mixed_sample_gene
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="sampleId != null">
+                SAMPLE_ID,
+            </if>
+            <if test="sampleNo != null">
+                SAMPLE_NO,
+            </if>
+            <if test="sampleName != null">
+                SAMPLE_NAME,
+            </if>
+            <if test="reagentName != null">
+                REAGENT_NAME,
+            </if>
+            <if test="boardBarcode != null">
+                BOARD_BARCODE,
+            </if>
+            <if test="genePicture != null">
+                GENE_PICTURE,
+            </if>
+            <if test="createPerson != null">
+                CREATE_PERSON,
+            </if>
+            <if test="createDatetime != null">
+                CREATE_DATETIME,
+            </if>
+            <if test="updatePereson != null">
+                UPDATE_PERESON,
+            </if>
+            <if test="updateDatetime != null">
+                UPDATE_DATETIME,
+            </if>
+            <if test="geneInfo != null">
+                GENE_INFO
+            </if>
+            <if test="contributorCount != null">
+                CONTRIBUTOR_COUNT
+            </if>
+            <if test="isDeleted != null">
+                IS_DELETED
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="sampleId != null">
+                #{sampleId,jdbcType=VARCHAR},
+            </if>
+            <if test="sampleNo != null">
+                #{sampleNo,jdbcType=VARCHAR},
+            </if>
+            <if test="sampleName != null">
+                #{sampleName,jdbcType=VARCHAR},
+            </if>
+            <if test="reagentName != null">
+                #{reagentName,jdbcType=VARCHAR},
+            </if>
+            <if test="boardBarcode != null">
+                #{boardBarcode,jdbcType=VARCHAR},
+            </if>
+            <if test="genePicture != null">
+                #{genePicture,jdbcType=VARCHAR},
+            </if>
+            <if test="createPerson != null">
+                #{createPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="createDatetime != null">
+                #{createDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatePereson != null">
+                #{updatePereson,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDatetime != null">
+                #{updateDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="geneInfo != null">
+                #{geneInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="contributorCount != null">
+                #{contributorCount,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+
+    <!--查询混合样本总数-->
+    <select id="selectMixedSampleGeneCount" resultType="int">
+      SELECT COUNT(si.ID) FROM mixed_sample_gene msg  left join SAMPLE_INFO si on msg.SAMPLE_ID = si.ID
+    </select>
+
+    <!--查看混合样本基因分型及图谱-->
+    <select id="selectMixedSampleSuspectsDetails" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT SSS.*    FROM mixed_sample_gene SSS   WHERE  SSS.ID=#{geneID,jdbcType=VARCHAR}
+    </select>
+    <!--根据检材编号查询混合样本-->
+    <select id="selectMixedSampleSuspect" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT CAS.id AS CASE_ID,SSS.*
+      FROM mixed_sample_gene SSS
+      LEFT JOIN sample_info SAMPL    ON SAMPL.ID = SSS.SAMPLE_ID
+      LEFT JOIN case_info CAS   ON SAMPL.CASE_ID = CAS.ID
+     WHERE SSS.ID =#{sampleGeneId,jdbcType=VARCHAR}
+    </select>
+    <!--根据id查询混合审核通过基因型信息-->
+    <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+      select * from mixed_sample_gene where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <sql id="VO_Query_Where_Clause">
+        <if test="caseNo != null">
+            and csa.CASE_NO like '%'||#{caseNo,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="caseName != null">
+            and csa.CASE_NAME like '%'||#{caseName,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="sampleNo != null">
+            and SAMPL.SAMPLE_NO like '%'||#{sampleNo,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="sampleName != null">
+            and SAMPL.SAMPLE_NAME like '%'||#{sampleName,jdbcType=VARCHAR}||'%'
+        </if>
+    </sql>
+
+
+    <update id="updateMixedSampleGene" parameterType="com.bazl.dna.mix.model.po.MixedSampleGene">
+        update mixed_sample_gene
+        <set>
+            <if test="sampleId != null">
+                SAMPLE_ID=#{sampleId,jdbcType=VARCHAR},
+            </if>
+            <if test="sampleNo != null">
+                SAMPLE_NO =#{sampleNo,jdbcType=VARCHAR},
+            </if>
+            <if test="sampleName != null">
+                SAMPLE_NAME =#{sampleName,jdbcType=VARCHAR},
+            </if>
+            <if test="reagentName != null">
+                REAGENT_NAME= #{reagentName,jdbcType=VARCHAR},
+            </if>
+            <if test="boardBarcode != null">
+                BOARD_BARCODE=#{boardBarcode,jdbcType=VARCHAR},
+            </if>
+            <if test="genePicture != null">
+                GENE_PICTURE= #{genePicture,jdbcType=VARCHAR},
+            </if>
+            <if test="createPerson != null">
+                CREATE_PERSON= #{createPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="createDatetime != null">
+                CREATE_DATETIME= #{createDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatePereson != null">
+                UPDATE_PERESON= #{updatePereson,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDatetime != null">
+                UPDATE_DATETIME=#{updateDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="geneInfo != null">
+                GENE_INFO=#{geneInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="contributorCount != null">
+                CONTRIBUTOR_COUNT=#{contributorCount,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null">
+                IS_DELETED=#{isDeleted,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <!--根据案件id查询混合样本库信息-->
+    <select id="selectMixedSampleGeneList" parameterType="java.lang.String" resultMap="VOBaseResultMap">
+     SELECT MSG.*   FROM mixed_sample_gene MSG
+      LEFT JOIN sample_info SI    ON MSG.SAMPLE_ID = SI.ID
+         WHERE SI.CASE_ID = #{caseId,jdbcType=VARCHAR}
+    </select>
+    <!--根据基因id删除案件混合样本-->
+    <delete id="deleteMixedDateBaseGene" parameterType="java.lang.String">
+           delete from  mixed_sample_gene where ID = #{geneId,jdbcType=VARCHAR}
+    </delete>
+    <!--查询混合样本信息库-->
+    <select id="selectMixedDateBaseGeneList" parameterType="java.lang.String" resultMap="BaseResultMapVO">
+        select * from (
+        select rownum as rn, t.* from (
+        select distinct csa.ID AS CASE_ID,csa.CASE_NO,csa.CASE_NAME,
+        SAMPL.SAMPLE_NO,SAMPL.SAMPLE_NAME,
+        msg.id AS  GENE_ID,
+        msg.SAMPLE_ID,
+        msg.REAGENT_NAME,
+        msg.BOARD_BARCODE
+        from mixed_sample_gene msg
+        left join sample_info SAMPL on msg.sample_id = SAMPL.id
+        left join case_info csa on csa.id = SAMPL.CASE_ID
+        where SAMPL.INSTORED_FLAG='1'
+        <if test="_parameter != null">
+            <include refid="VO_Query_Where_Clause"/>
+        </if>
+        ) t where rownum &lt;=#{rows}
+        ) where rn &gt;#{offset}
+    </select>
+    <!--查询混合样本信息库条数-->
+    <select id="selectMixedDateBaseGeneCount" parameterType="java.lang.String" resultType="int">
+        select COUNT (distinct msg.id)
+        from mixed_sample_gene msg
+        left join sample_info SAMPL on msg.sample_id = SAMPL.id
+        left join case_info csa on csa.id = SAMPL.CASE_ID
+        where SAMPL.INSTORED_FLAG='1'
+        <if test="_parameter != null">
+            <include refid="VO_Query_Where_Clause"/>
+        </if>
+    </select>
+
+    <!--查询混合样本信息-->
+    <select id="selectMixedSampleGeneVoList" parameterType="java.lang.String" resultMap="VOBaseResultMap">
+        SELECT  MSG.*,CSA.CASE_NO as CASE_NO, CSA.CASE_NAME as CASE_NAME, SI.SAMPLE_NO as SAMPLE_NO, SI.SAMPLE_NAME as SAMPLE_NAME
+        FROM mixed_sample_gene MSG
+        LEFT JOIN sample_info SI  ON MSG.SAMPLE_ID = SI.ID
+        LEFT JOIN case_info CSA  ON CSA.ID = SI.CASE_ID
+        WHERE  MSG.ID=#{id,jdbcType=VARCHAR}
+    </select>
+
+    <!--根据样本id查询混合样本数据-->
+    <select id="selectMixedSampleGeneBySampleId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <!-- select mixed.*,sai.case_id as CASE_ID from MIXED_SAMPLE_GENE mixed
+       LEFT JOIN SAMPLE_INFO sai ON sai.id= mixed.SAMPLE_ID  where mixed.SAMPLE_ID = #{sampleId,jdbcType=VARCHAR} -->
+       select mixed.* from mixed_sample_gene mixed where mixed.SAMPLE_ID = #{sampleId,jdbcType=VARCHAR}
+    </select>
+
+    <sql id="More_Query_Where_Clause">
+        <if test="caseNo != null">
+            and CI.CASE_NO like '%'||#{caseNo,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="caseName != null">
+            and CI.CASE_NAME like '%'||#{caseName,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="sampleNo != null">
+            and SI_1.SAMPLE_NO like '%'||#{sampleNo,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="sampleName != null">
+            and SI_1.SAMPLE_NAME like '%'||#{sampleName,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="orgId != null">
+            and CI.ORG_ID = #{orgId,jdbcType=VARCHAR}
+        </if>
+        <if test="userId != null">
+            and CI.CREATE_PERSON = #{userId,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <!--首页查询更多混合样本比中嫌疑人的比中列表-->
+    <select id="selectMoreMixedSampleGeneVoList" parameterType="com.bazl.dna.mix.model.vo.MixedSampleGeneVo"
+            resultMap="VOBaseResultMap">
+        select * from (
+        select rownum as rn, t.* from ( SELECT distinct CI.ID AS CASE_ID, CI.CASE_NO AS CASE_NO,
+        CI.CASE_NAME AS CASE_NAME, SI_1.SAMPLE_NO AS SAMPLE_NO,
+        SI_1.SAMPLE_NAME AS SAMPLE_NAME, SI_2.SAMPLE_NO AS SAMPLE_NO_BZ,
+        PI.PERSON_NAME AS PERSON_NAME, T.MIXED_SAMPLE_GENE_ID AS MIXED_SAMPLE_GENE_ID,
+        T.SINGLE_GENE_ID AS SINGLE_GENE_ID, T.RATIO AS RATIO,
+        T.SPLIT_DIGIT AS SPLIT_DIGIT, T.COMPARISON_TIME AS COMPARISON_TIME
+        FROM match_result_mix_single T
+        LEFT JOIN mixed_sample_gene MAG ON MAG.ID = T.MIXED_SAMPLE_GENE_ID
+        LEFT JOIN sample_info SI_1 ON SI_1.ID = MAG.SAMPLE_ID
+        LEFT JOIN case_info CI ON CI.ID = SI_1.CASE_ID
+        LEFT JOIN single_sample_gene SSG ON SSG.ID = T.SINGLE_GENE_ID
+        LEFT JOIN sample_info SI_2 ON SI_2.ID = SSG.SAMPLE_ID
+        LEFT JOIN person_info PI ON PI.ID = SI_2.REF_PERSON_ID
+        WHERE PI.PERSON_TYPE = '01'
+        <if test="_parameter != null">
+            <include refid="More_Query_Where_Clause"/>
+        </if>
+        ) t where rownum &lt;=#{rows}
+        ) where rn &gt;#{offset}
+    </select>
+    <!--首页查询更多混合样本比中嫌疑人的比中条数-->
+    <select id="selectMatchedSuspectCountByQuery" parameterType="com.bazl.dna.mix.model.vo.MixedSampleGeneVo"
+            resultType="int">
+        SELECT COUNT(distinct T.ID) FROM match_result_mix_single T
+        LEFT JOIN mixed_sample_gene MAG ON MAG.ID = T.MIXED_SAMPLE_GENE_ID
+        LEFT JOIN sample_info SI_1 ON SI_1.ID = MAG.SAMPLE_ID
+        LEFT JOIN case_info CI ON CI.ID = SI_1.CASE_ID
+        LEFT JOIN single_sample_gene SSG ON SSG.ID = T.SINGLE_GENE_ID
+        LEFT JOIN sample_info SI_2 ON SI_2.ID = SSG.SAMPLE_ID
+        LEFT JOIN person_info PI ON PI.ID = SI_2.REF_PERSON_ID
+        WHERE PI.PERSON_TYPE = '01'
+        <if test="_parameter != null">
+            <include refid="More_Query_Where_Clause"/>
+        </if>
+    </select>
+    <!--首页查询更多混合基因串并案比中嫌疑人列表-->
+    <select id="selectMoreDifferentGeneVoList" parameterType="com.bazl.dna.mix.model.vo.MixedSampleGeneVo"
+            resultMap="VOBaseResultMap">
+        select * from (
+        select rownum as rn, t.* from (
+        SELECT distinct CI.ID AS CASE_ID, CI.CASE_NO AS CASE_NO,
+        CI.CASE_NAME AS CASE_NAME, SI_1.SAMPLE_NO AS SAMPLE_NO,
+        SI_1.SAMPLE_NAME AS SAMPLE_NAME, SI_2.SAMPLE_NO AS SAMPLE_NO_BZ,
+        PI.PERSON_NAME AS PERSON_NAME, T.MIXED_SAMPLE_GENE_ID AS MIXED_SAMPLE_GENE_ID,
+        T.SINGLE_GENE_ID AS SINGLE_GENE_ID, T.RATIO AS RATIO,
+        T.SPLIT_DIGIT AS SPLIT_DIGIT, T.COMPARISON_TIME AS COMPARISON_TIME
+        FROM match_result_mix_single T
+        LEFT JOIN mixed_sample_gene MAG ON MAG.ID = T.MIXED_SAMPLE_GENE_ID
+        LEFT JOIN sample_info SI_1 ON SI_1.ID = MAG.SAMPLE_ID
+        LEFT JOIN case_info CI ON CI.ID = SI_1.CASE_ID
+        LEFT JOIN single_sample_gene SSG ON SSG.ID = T.SINGLE_GENE_ID
+        LEFT JOIN sample_info SI_2 ON SI_2.ID = SSG.SAMPLE_ID
+        LEFT JOIN person_info PI ON PI.ID = SI_2.REF_PERSON_ID and CI.ID &lt;&gt; SI_2.CASE_ID
+        WHERE PI.PERSON_TYPE = '01'
+        <if test="_parameter != null">
+            <include refid="More_Query_Where_Clause"/>
+        </if>
+        ) t where rownum &lt;=#{rows}
+        ) where rn &gt;#{offset}
+    </select>
+    <!--首页查询更多串并案比中的混合样本条数-->
+    <select id="selectDifferentSuspectCountByQuery" parameterType="com.bazl.dna.mix.model.vo.MixedSampleGeneVo"
+            resultType="int">
+        SELECT COUNT(distinct T.ID)
+        FROM match_result_mix_single T
+        LEFT JOIN mixed_sample_gene MAG ON MAG.ID = T.MIXED_SAMPLE_GENE_ID
+        LEFT JOIN sample_info SI_1 ON SI_1.ID = MAG.SAMPLE_ID
+        LEFT JOIN case_info CI ON CI.ID = SI_1.CASE_ID
+        LEFT JOIN single_sample_gene SSG ON SSG.ID = T.SINGLE_GENE_ID
+        LEFT JOIN sample_info SI_2 ON SI_2.ID = SSG.SAMPLE_ID
+        LEFT JOIN person_info PI ON PI.ID = SI_2.REF_PERSON_ID and CI.ID &lt;&gt; SI_2.CASE_ID
+        WHERE PI.PERSON_TYPE = '01'
+        <if test="_parameter != null">
+            <include refid="More_Query_Where_Clause"/>
+        </if>
+    </select>
+    <!--首页查询更多混合样本比中质控人员样本列表-->
+    <select id="selectMoreQualityGeneVoList" parameterType="com.bazl.dna.mix.model.vo.MixedSampleGeneVo"
+            resultMap="VOBaseResultMap">
+        select * from (
+        select rownum as rn, t.* from ( SELECT distinct CI.ID AS CASE_ID,
+        CI.CASE_NO AS CASE_NO, CI.CASE_NAME AS CASE_NAME,
+        SI_1.SAMPLE_NO AS SAMPLE_NO, SI_1.SAMPLE_NAME AS SAMPLE_NAME,
+        SSG.SAMPLE_NO AS SAMPLE_NO_BZ, SSG.SAMPLE_NAME AS PERSON_NAME,
+        T.MIXED_ID AS MIXED_SAMPLE_GENE_ID, T.QUSLTY_ID AS SINGLE_GENE_ID,
+        T.RATIO AS RATIO, T.SPLIT_DIGIT AS SPLIT_DIGIT,
+        T.COMPARISON_TIME AS COMPARISON_TIME
+        FROM match_result_mix_qualty T
+        LEFT JOIN mixed_sample_gene MAG ON MAG.ID = T.MIXED_ID
+        LEFT JOIN sample_info SI_1 ON SI_1.ID = MAG.SAMPLE_ID
+        LEFT JOIN case_info CI ON CI.ID = SI_1.CASE_ID
+        LEFT JOIN quality_personnel SSG ON SSG.ID = T.QUSLTY_ID
+        WHERE 1=1
+        <if test="_parameter != null">
+            <include refid="QUALITY_More_Query_Where_Clause"/>
+        </if>
+        ) t where rownum &lt;=#{rows}
+        ) where rn &gt;#{offset}
+    </select>
+    <!--查询更多混合样本比中质控人员样本条数-->
+    <select id="selectMixedQualityPersonnelCount" parameterType="com.bazl.dna.mix.model.vo.MixedSampleGeneVo" resultType="int">
+        SELECT count(distinct T.id)
+        FROM match_result_mix_qualty T
+        LEFT JOIN mixed_sample_gene MAG ON MAG.ID = T.MIXED_ID
+        LEFT JOIN sample_info SI_1 ON SI_1.ID = MAG.SAMPLE_ID
+        LEFT JOIN case_info CI ON CI.ID = SI_1.CASE_ID
+        LEFT JOIN quality_personnel SSG ON SSG.ID = T.QUSLTY_ID
+        WHERE 1=1
+        <if test="_parameter != null">
+            <include refid="QUALITY_More_Query_Where_Clause"/>
+        </if>
+    </select>
+
+    <sql id="QUALITY_More_Query_Where_Clause">
+        <if test="caseNo != null">
+            and CI.CASE_NO like '%'||#{caseNo,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="caseName != null">
+            and CI.CASE_NAME like '%'||#{caseName,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="sampleNo != null">
+            and SI_1.SAMPLE_NO like '%'||#{sampleNo,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="sampleName != null">
+            and SI_1.SAMPLE_NAME like '%'||#{sampleName,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="orgId != null">
+            and CI.ORG_ID = #{orgId,jdbcType=VARCHAR}
+        </if>
+        <if test="userId != null">
+            and CI.CREATE_PERSON = #{userId,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <!--首页查询最新的混合样本比中嫌疑人的比中列表-->
+    <select id="selectALLMixMatchedVoList" resultMap="VOBaseResultMap">
+        SELECT T1.*, ROWNUM AS RN
+        FROM (  SELECT distinct CI.ID  AS CASE_ID,        CI.CASE_NO AS CASE_NO,
+        CI.CASE_NAME   AS CASE_NAME,        SI_1.SAMPLE_NO  AS SAMPLE_NO,
+        SI_1.SAMPLE_NAME AS SAMPLE_NAME,        SI_2.SAMPLE_NO AS SAMPLE_NO_BZ,
+        PI.PERSON_NAME AS PERSON_NAME,        T.MIXED_SAMPLE_GENE_ID AS MIXED_SAMPLE_GENE_ID,
+        T.SINGLE_GENE_ID AS SINGLE_GENE_ID,        T.RATIO AS  RATIO,
+        T.SPLIT_DIGIT AS SPLIT_DIGIT,        T.COMPARISON_TIME AS COMPARISON_TIME
+        FROM match_result_mix_single T
+        LEFT JOIN mixed_sample_gene MAG            ON MAG.ID = T.MIXED_SAMPLE_GENE_ID
+        LEFT JOIN sample_info SI_1            ON SI_1.ID = MAG.SAMPLE_ID
+        LEFT JOIN case_info CI            ON CI.ID = SI_1.CASE_ID
+        LEFT JOIN single_sample_gene SSG            ON SSG.ID = T.SINGLE_GENE_ID
+        LEFT JOIN sample_info SI_2            ON SI_2.ID = SSG.SAMPLE_ID
+        LEFT JOIN person_info PI            ON PI.ID = SI_2.REF_PERSON_ID
+        WHERE PI.PERSON_TYPE = '01' and CI.CREATE_PERSON = #{userId,jdbcType=VARCHAR}
+        ) T1
+        WHERE ROWNUM &lt;= #{lastestCount,jdbcType=INTEGER}
+    </select>
+
+    <!--首页查询混合基因串并案比中嫌疑人列表-->
+    <select id="selectDifferentCaseMatchedSuspectList" resultMap="VOBaseResultMap">
+        SELECT T1.*, ROWNUM AS RN
+        FROM (
+        SELECT distinct CI.ID  AS CASE_ID,        CI.CASE_NO AS CASE_NO,
+        CI.CASE_NAME   AS CASE_NAME,        SI_1.SAMPLE_NO  AS SAMPLE_NO,
+        SI_1.SAMPLE_NAME AS SAMPLE_NAME,        SI_2.SAMPLE_NO AS SAMPLE_NO_BZ,
+        PI.PERSON_NAME AS PERSON_NAME,        T.MIXED_SAMPLE_GENE_ID AS MIXED_SAMPLE_GENE_ID,
+        T.SINGLE_GENE_ID AS SINGLE_GENE_ID,        T.RATIO AS  RATIO,
+        T.SPLIT_DIGIT AS SPLIT_DIGIT,        T.COMPARISON_TIME AS COMPARISON_TIME
+        FROM match_result_mix_single T
+        LEFT JOIN mixed_sample_gene MAG            ON MAG.ID = T.MIXED_SAMPLE_GENE_ID
+        LEFT JOIN sample_info SI_1            ON SI_1.ID = MAG.SAMPLE_ID
+        LEFT JOIN case_info CI            ON CI.ID = SI_1.CASE_ID
+        LEFT JOIN single_sample_gene SSG            ON SSG.ID = T.SINGLE_GENE_ID
+        LEFT JOIN sample_info SI_2            ON SI_2.ID = SSG.SAMPLE_ID
+        LEFT JOIN person_info PI            ON PI.ID = SI_2.REF_PERSON_ID and CI.ID &lt;&gt; SI_2.CASE_ID
+        WHERE PI.PERSON_TYPE = '01'   and CI.CREATE_PERSON = #{userId,jdbcType=VARCHAR}
+        ) T1
+        WHERE ROWNUM &lt;= #{lastestCount,jdbcType=INTEGER}
+    </select>
+    <!--首页查询混合样本比中质控人员样本列表-->
+    <select id="selectALLMixMatchedVoQualtyList" resultMap="VOBaseResultMap">
+        SELECT T1.*, ROWNUM AS RN
+        FROM (
+           SELECT distinct CI.ID  AS CASE_ID,        CI.CASE_NO AS CASE_NO,
+        CI.CASE_NAME   AS CASE_NAME,        SI_1.SAMPLE_NO  AS SAMPLE_NO,
+        SI_1.SAMPLE_NAME AS SAMPLE_NAME,        SSG.SAMPLE_NO AS SAMPLE_NO_BZ,
+        SSG.SAMPLE_NAME AS PERSON_NAME,        T.MIXED_ID AS MIXED_SAMPLE_GENE_ID,
+        T.QUSLTY_ID AS SINGLE_GENE_ID,        T.RATIO AS  RATIO,
+        T.SPLIT_DIGIT AS SPLIT_DIGIT,        T.COMPARISON_TIME AS COMPARISON_TIME
+        FROM match_result_mix_qualty T
+        LEFT JOIN mixed_sample_gene MAG            ON MAG.ID = T.MIXED_ID
+        LEFT JOIN sample_info SI_1            ON SI_1.ID = MAG.SAMPLE_ID
+        LEFT JOIN case_info CI            ON CI.ID = SI_1.CASE_ID
+        LEFT JOIN quality_personnel SSG            ON SSG.ID = T.QUSLTY_ID
+        WHERE CI.CREATE_PERSON = #{userId,jdbcType=VARCHAR}
+        ) T1
+        WHERE ROWNUM &lt;= #{lastestCount,jdbcType=INTEGER}
+    </select>
+
+    <!--首页查询混合样本比中嫌疑人的总数-->
+    <select id="selectMatchedSuspectCount" resultType="int">
+        SELECT COUNT(T.ID)       FROM match_result_mix_single T
+        LEFT JOIN mixed_sample_gene MAG            ON MAG.ID = T.MIXED_SAMPLE_GENE_ID
+        LEFT JOIN sample_info SI_1            ON SI_1.ID = MAG.SAMPLE_ID
+        LEFT JOIN case_info CI            ON CI.ID = SI_1.CASE_ID
+        LEFT JOIN single_sample_gene SSG            ON SSG.ID = T.SINGLE_GENE_ID
+        LEFT JOIN sample_info SI_2            ON SI_2.ID = SSG.SAMPLE_ID
+        LEFT JOIN person_info PI            ON PI.ID = SI_2.REF_PERSON_ID
+        WHERE PI.PERSON_TYPE = '01'
+    </select>
+    <!--首页查询混合基因串并案比中嫌疑人总数-->
+    <select id="selectSerialCaseMixedSampleCount" resultType="int">
+        SELECT COUNT(T.ID)
+         FROM match_result_mix_single T
+        LEFT JOIN mixed_sample_gene MAG     ON MAG.ID = T.MIXED_SAMPLE_GENE_ID
+        LEFT JOIN sample_info SI_1          ON SI_1.ID = MAG.SAMPLE_ID
+        LEFT JOIN case_info CI              ON CI.ID = SI_1.CASE_ID
+        LEFT JOIN single_sample_gene SSG    ON SSG.ID = T.SINGLE_GENE_ID
+        LEFT JOIN sample_info SI_2          ON SI_2.ID = SSG.SAMPLE_ID
+        LEFT JOIN person_info PI      ON PI.ID = SI_2.REF_PERSON_ID and CI.ID &lt;&gt; SI_2.CASE_ID
+        WHERE PI.PERSON_TYPE = '01'
+    </select>
+
+    <!--首页查询混合样本比中质控人员的总数-->
+    <select id="selectMoreQualityGeneCount" resultType="int">
+        SELECT count(T.id)
+        FROM match_result_mix_qualty T
+        LEFT JOIN mixed_sample_gene MAG    ON MAG.ID = T.MIXED_ID
+        LEFT JOIN sample_info SI_1        ON SI_1.ID = MAG.SAMPLE_ID
+        LEFT JOIN case_info CI            ON CI.ID = SI_1.CASE_ID
+        LEFT JOIN quality_personnel SSG   ON SSG.ID = T.QUSLTY_ID
+    </select>
+
+    <!--根据检材id查询混合信息-->
+    <select id="selectBySampleId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select *
+        from mixed_sample_gene
+        where SAMPLE_ID = #{sampleId,jdbcType=VARCHAR}
+    </select>
+
+    <!--查询全库混合样本数量-->
+    <select id="selectMixCount"  parameterType="java.lang.String" resultType="int">
+        select count(ID)
+        from mixed_sample_gene
+        where is_deleted = 0
+        <if test="createPerson != null">
+            and CREATE_PERSON = #{createPerson,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+
+
+
+
+
+    <resultMap id="BaseResultMapPaging" type="com.bazl.dna.mix.model.vo.MixedSampleGenePagingVo">
+        <result column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="SAMPLE_ID" jdbcType="VARCHAR" property="sampleId"/>
+        <result column="SAMPLE_NO" jdbcType="VARCHAR" property="sampleNo"/>
+        <result column="SAMPLE_NAME" jdbcType="VARCHAR" property="sampleName"/>
+        <result column="REAGENT_NAME" jdbcType="VARCHAR" property="reagentName"/>
+        <result column="BOARD_BARCODE" jdbcType="VARCHAR" property="boardBarcode"/>
+        <result column="GENE_INFO" jdbcType="VARCHAR" property="geneInfo"/>
+        <result column="GENE_PICTURE" jdbcType="VARCHAR" property="geneImagePath"/>
+        <result column="CREATE_PERSON" jdbcType="VARCHAR" property="createPerson"/>
+        <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="createDatetime"/>
+        <result column="UPDATE_PERESON" jdbcType="VARCHAR" property="updatePereson"/>
+        <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="updateDatetime"/>
+        <result column="CONTRIBUTOR_COUNT" jdbcType="TIMESTAMP" property="contributorCount"/>
+    </resultMap>
+
+    <sql id="Base_Column_List_Paging">
+        msg.ID, msg.SAMPLE_ID, msg.SAMPLE_NO, msg.SAMPLE_NAME, msg.REAGENT_NAME, msg.BOARD_BARCODE, msg.GENE_INFO,
+        msg.GENE_PICTURE, msg.CREATE_PERSON, msg.CREATE_DATETIME, msg.UPDATE_PERESON, msg.UPDATE_DATETIME, msg.CONTRIBUTOR_COUNT,
+        msg.IS_DELETED
+    </sql>
+
+    <!--selectListPaging-->
+    <select id="selectListPaging" parameterType="com.bazl.dna.mix.model.vo.MixedTypingVo" resultMap="BaseResultMapPaging">
+        select
+        <include refid="Base_Column_List_Paging" />
+        from mixed_sample_gene msg
+        where msg.IS_DELETED=0
+        <if test="sampleNo != null  and sampleNo != ''" >
+            and msg.SAMPLE_NO like "%" #{sampleNo,jdbcType=VARCHAR} "%"
+        </if>
+        <if test="sampleName != null  and sampleName != ''" >
+            and msg.SAMPLE_NAME like "%" #{sampleName,jdbcType=VARCHAR} "%"
+        </if>
+        <if test="createPerson != null  and createPerson != ''" >
+            and msg.CREATE_PERSON = #{createPerson,jdbcType=VARCHAR}
+        </if>
+        LIMIT #{offset},15
+    </select>
+
+    <!--selectListPagingCount-->
+    <select id="selectListPagingCount" parameterType="com.bazl.dna.mix.model.vo.MixedTypingVo" resultType="java.lang.Integer">
+        select
+        count(msg.ID)
+        from mixed_sample_gene msg
+        where msg.IS_DELETED=0
+        <if test="sampleNo != null  and sampleNo != ''" >
+            and msg.SAMPLE_NO like "%" #{sampleNo,jdbcType=VARCHAR} "%"
+        </if>
+        <if test="sampleName != null  and sampleName != ''" >
+            and msg.SAMPLE_NAME like "%" #{sampleName,jdbcType=VARCHAR} "%"
+        </if>
+    </select>
+
+    <!--deleteById-->
+    <update id="deleteById" parameterType="java.lang.String">
+        update mixed_sample_gene
+        set IS_DELETED = 1
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <!--deleteByIds-->
+    <update id="deleteByIds" parameterType="java.util.List">
+        <foreach collection="list" item="item" separator=";">
+            update mixed_sample_gene
+            set IS_DELETED = 1
+            where ID = #{item,jdbcType=VARCHAR}
+        </foreach>
+    </update>
+
+    <!--selectPagingVoById-->
+    <select id="selectPagingVoById" parameterType="java.lang.String" resultMap="BaseResultMapPaging">
+        select
+        <include refid="Base_Column_List_Paging" />
+        from mixed_sample_gene msg
+        where msg.ID= #{id,jdbcType=VARCHAR}
+    </select>
+
+    <!--updateGenePictureById-->
+    <update id="updateGenePictureById" parameterType="com.bazl.dna.mix.model.po.MixedSampleGene">
+        update mixed_sample_gene
+        set GENE_PICTURE = #{genePicture,jdbcType=VARCHAR}
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <!--deleteGenePictureById-->
+    <update id="deleteGenePictureById" parameterType="com.bazl.dna.mix.model.po.MixedSampleGene">
+        update mixed_sample_gene
+        set GENE_PICTURE = ''
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+
+
+</mapper>

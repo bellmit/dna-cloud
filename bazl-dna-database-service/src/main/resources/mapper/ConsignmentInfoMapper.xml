@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.ConsignmentInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.ConsignmentInfo">
+        <id column="ID" property="id" />
+        <result column="LIMS_CONSIGNMENT_UUID" property="limsConsignmentUuid" jdbcType="VARCHAR" />
+        <result column="CASE_ID" property="caseId" />
+        <result column="LAB_SERVER_NO" property="labServerNo" />
+        <result column="CONSIGNMENT_FILE_NO" property="consignmentFileNo" />
+        <result column="SYS_XK_WTNO" property="sysXkWtno" />
+        <result column="CONSIGN_ORG_ID" property="consignOrgId" />
+        <result column="CONSIGN_ORG_CODE" property="consignOrgCode" />
+        <result column="CONSIGN_ORG_NAME" property="consignOrgName" />
+        <result column="CONSIGN_ORG_PHONE" property="consignOrgPhone" />
+        <result column="CONSIGN_ORG_FAX" property="consignOrgFax" />
+        <result column="CONSIGN_ORG_ADDRESS" property="consignOrgAddress" />
+        <result column="CONSIGN_ORG_ZIP_CODE" property="consignOrgZipCode" />
+        <result column="CONSIGN_PERSON1_ID" property="consignPerson1Id" />
+        <result column="CONSIGN_PERSON1_NAME" property="consignPerson1Name" />
+        <result column="CONSIGN_PERSON1_PHONE" property="consignPerson1Phone" />
+        <result column="CONSIGN_PERSON1_CERTIFICATE_TYPE" property="consignPerson1CertificateType" />
+        <result column="CONSIGN_PERSON1_CERTIFICATE_NO" property="consignPerson1CertificateNo" />
+        <result column="CONSIGN_PERSON1_POSITION_NAME" property="consignPerson1PositionName" />
+        <result column="CONSIGN_PERSON2_ID" property="consignPerson2Id" />
+        <result column="CONSIGN_PERSON2_NAME" property="consignPerson2Name" />
+        <result column="CONSIGN_PERSON2_PHONE" property="consignPerson2Phone" />
+        <result column="CONSIGN_PERSON2_CERTIFICATE_TYPE" property="consignPerson2CertificateType" />
+        <result column="CONSIGN_PERSON2_CERTIFICATE_NO" property="consignPerson2CertificateNo" />
+        <result column="CONSIGN_PERSON2_POSITION_NAME" property="consignPerson2PositionName" />
+        <result column="CONSIGNMENT_REG_DATETIME" property="consignmentRegDatetime" />
+        <result column="IDENTIFY_REQUIREMENT" property="identifyRequirement" />
+        <result column="ACCEPT_PERSON_ID" property="acceptPersonId" />
+        <result column="ACCEPT_PERSON_NAME" property="acceptPersonName" />
+        <result column="ACCEPT_DATETIME" property="acceptDatetime" />
+        <result column="APPEND_FLAG" property="appendFlag" />
+        <result column="APPEND_SNO" property="appendSno" />
+        <result column="TRANSFER_FLAG" property="transferFlag" />
+        <result column="TRANSFER_DATETIME" property="transferDatetime" />
+        <result column="TRANSFER_PERSON_ID" property="transferPersonId" />
+        <result column="TRANSFER_PERSON_NAME" property="transferPersonName" />
+        <result column="DELETE_FLAG" property="deleteFlag" />
+        <result column="DELETE_DATETIME" property="deleteDatetime" />
+        <result column="DELETE_PERSON_ID" property="deletePersonId" />
+        <result column="DELETE_PERSON_NAME" property="deletePersonName" />
+        <result column="STORE_DATETIME" property="storeDatetime" />
+        <result column="STORE_PERSON_ID" property="storePersonId" />
+        <result column="STORE_PERSON_NAME" property="storePersonName" />
+        <result column="UPDATE_DATETIME" property="updateDatetime" />
+        <result column="UPDATE_PERSON_ID" property="updatePersonId" />
+        <result column="UPDATE_PERSON_NAME" property="updatePersonName" />
+        <result column="MORE_REMARKS" property="moreRemarks" />
+    </resultMap>
+
+    <resultMap id="BaseResultMapVo" type="com.bazl.dna.database.service.model.vo.ConsignmentInfoVo" extends="BaseResultMap">
+    </resultMap>
+
+    <select id="selectByPrimaryKeyCount" parameterType="String" resultType="java.lang.Integer">
+        select COUNT(ID)
+        from consignment_info
+        where ACCEPT_NO = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select *
+        from consignment_info
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMapVo">
+        select *
+        from consignment_info
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+
+</mapper>

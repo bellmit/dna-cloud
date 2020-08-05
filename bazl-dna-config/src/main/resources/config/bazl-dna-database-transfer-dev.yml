@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://39.100.79.169:3316/dnadata?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&serverTimezone=GMT%2B8
+      username: root
+      password: 123456
+      type: com.alibaba.druid.pool.DruidDataSource
+    
+      initial-size: 30
+      min-idle: 50
+      max-active: 200
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select * from `dict_item` limit 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+  quartz:
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: quartzScheduler
+            instanceId: AUTO
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 10
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+    
+  redis:
+    database: 2
+    
+filePath: /usr/local/tomcat/dnacloud

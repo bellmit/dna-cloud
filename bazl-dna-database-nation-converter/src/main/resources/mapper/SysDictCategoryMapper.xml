@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.database.nation.converter.dao.SysDictCategoryMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.dna.database.nation.converter.model.po.SysDictCategory" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="DICT_CATEGORY_CODE" property="dictCategoryCode" jdbcType="VARCHAR" />
+    <result column="DICT_CATEGORY_NAME" property="dictCategoryName" jdbcType="VARCHAR" />
+    <result column="DICT_CATEGORY_DESC" property="dictCategoryDesc" jdbcType="VARCHAR" />
+    <result column="ORD" property="ord" jdbcType="DECIMAL" />
+    <result column="DEPLOY_LEVELS" property="deployLevels" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_DICT_CATEGORY
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.dna.database.nation.converter.model.po.SysDictCategory" >
+    insert into SYS_DICT_CATEGORY (ID, DICT_CATEGORY_CODE, DICT_CATEGORY_NAME, 
+      DICT_CATEGORY_DESC, ORD, DEPLOY_LEVELS
+      )
+    values (#{id,jdbcType=VARCHAR}, #{dictCategoryCode,jdbcType=VARCHAR}, #{dictCategoryName,jdbcType=VARCHAR}, 
+      #{dictCategoryDesc,jdbcType=VARCHAR}, #{ord,jdbcType=DECIMAL}, #{deployLevels,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.dna.database.nation.converter.model.po.SysDictCategory" >
+    update SYS_DICT_CATEGORY
+    set DICT_CATEGORY_CODE = #{dictCategoryCode,jdbcType=VARCHAR},
+      DICT_CATEGORY_NAME = #{dictCategoryName,jdbcType=VARCHAR},
+      DICT_CATEGORY_DESC = #{dictCategoryDesc,jdbcType=VARCHAR},
+      ORD = #{ord,jdbcType=DECIMAL},
+      DEPLOY_LEVELS = #{deployLevels,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, DICT_CATEGORY_CODE, DICT_CATEGORY_NAME, DICT_CATEGORY_DESC, ORD, DEPLOY_LEVELS
+    from SYS_DICT_CATEGORY
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, DICT_CATEGORY_CODE, DICT_CATEGORY_NAME, DICT_CATEGORY_DESC, ORD, DEPLOY_LEVELS
+    from SYS_DICT_CATEGORY
+  </select>
+</mapper>

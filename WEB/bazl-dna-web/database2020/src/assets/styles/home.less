@@ -1,0 +1,49 @@
+.part{
+  padding: 4px 10px;
+  .bg-part{
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 4px 0 10px;
+    margin-bottom: 10px;
+    .title{
+      padding: 0 10px;
+    }
+  }
+}
+.data-sum{
+  background-color: #eeeff8;
+  padding: 4px 4px 4px 10px;
+  .sum-box{
+    background-color: #fff;
+  }
+  .sum-part{
+    li:first-of-type{
+      background-color: #00439E;
+      border-radius: 4px;
+      color: #fff;
+      height: 32px;
+      line-height: 32px;
+      padding-left: 10px;
+    }
+    li:not(:first-child){
+      border-bottom: 1px dashed #D2D2D2;
+      height: 32px;
+      line-height: 32px;
+      span:first-of-type{
+        display: inline-block;
+        width: 70%;
+        padding-left: 10px;
+      }
+      span:last-of-type{
+        color: #FF5353;
+        display: inline-block;
+        width: 30%;
+        text-align: right;
+        padding-right: 10px;
+      }
+    }
+    .red-border{
+      border-bottom: 1px dashed #FF5353 !important;
+    }
+  }
+}

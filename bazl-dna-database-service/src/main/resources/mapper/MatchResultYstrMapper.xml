@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.MatchResultYstrMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.MatchResultYstr">
+        <id column="ID" property="id" />
+        <result column="MATCH_GROUP_ID" property="matchGroupId" />
+        <result column="MATCH_DATETIME" property="matchDatetime" />
+        <result column="MATCH_LOCUS_COUNT" property="matchLocusCount" />
+        <result column="SAMPLEA_ID" property="sampleaId" />
+        <result column="SAMPLEB_ID" property="samplebId" />
+        <!--<result column="MATCHED_GENE_DETAILS" property="matchedGeneDetails" />-->
+        <result column="MATCHED_GENE_DETAILS" property="matchedGeneDetails" />
+        <result column="REVIEW_FLAG" property="reviewFlag" jdbcType="TINYINT" javaType="java.lang.Integer" />
+        <result column="REVIEW_DATETIME" property="reviewDatetime" />
+        <result column="REVIEW_PERSON_ID" property="reviewPersonId" />
+        <result column="REVIEW_PERSON_NAME" property="reviewPersonName" />
+        <result column="REVIEW_RESULT_CODE" property="reviewResultCode" />
+        <result column="REVIEW_RESULT_DESC" property="reviewResultDesc" />
+        <result column="CREATE_DATETIME" property="createDatetime" />
+        <result column="UPDATE_DATETIME" property="updateDatetime" />
+    </resultMap>
+    
+    <select id="getMatchResultGroupNo" resultType="int" parameterType="map">
+    		SELECT MATCH_GROUP_ID from match_result_ystr
+    			where SAMPLEA_ID in (${sampleAId},${sampleBId}) or SAMPLEB_ID in (${sampleAId},${sampleBId}) limit 1
+    </select>
+
+</mapper>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.DnaSampleInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.DnaSampleInfo">
+        <id column="ID" property="id" />
+        <result column="LIMS_SAMPLE_UUID" property="limsSampleUuid" jdbcType="VARCHAR" />
+        <result column="LAB_SERVER_NO" property="labServerNo" />
+        <result column="INSTORE_DATA_TYPE" property="instoreDataType" />
+        <result column="CASE_ID" property="caseId" />
+        <result column="CONSIGNMENT_ID" property="consignmentId" />
+        <result column="EVIDENCE_FLAG" property="evidenceFlag" />
+        <result column="ref_person_id" property="refPersonId" />
+        <result column="SAMPLE_TYPE" property="sampleType" />
+        <result column="SAMPLE_LAB_NO" property="sampleLabNo" />
+        <result column="SAMPLE_EVIDENCE_NO" property="sampleEvidenceNo" />
+        <result column="SAMPLE_NAME" property="sampleName" />
+        <result column="SAMPLE_DESC" property="sampleDesc" />
+        <result column="SAMPLE_PACKAGE" property="samplePackage" />
+        <result column="SAMPLE_CARRIER" property="sampleCarrier" />
+        <result column="TRANSFER_FLAG" property="transferFlag" />
+        <result column="TRANSFER_DATETIME" property="transferDatetime" />
+        <result column="TRANSFER_PERSON_ID" property="transferPersonId" />
+        <result column="TRANSFER_PERSON_NAME" property="transferPersonName" />
+        <result column="DELETE_FLAG" property="deleteFlag" />
+        <result column="DELETE_REASON" property="deleteReason" />
+        <result column="DELETE_DATETIME" property="deleteDatetime" />
+        <result column="DELETE_PERSON_NAME" property="deletePersonName" />
+        <result column="STORE_DATETIME" property="storeDatetime" />
+        <result column="STORE_PERSON_ID" property="storePersonId" />
+        <result column="STORE_PERSON_NAME" property="storePersonName" />
+        <result column="UPDATE_DATETIME" property="updateDatetime" />
+        <result column="UPDATE_PERSON_ID" property="updatePersonId" />
+        <result column="UPDATE_PERSON_NAME" property="updatePersonName" />
+        
+        <collection property="dnaSampleImageList" column="ID" select="selectImageBySampleId"/>
+    </resultMap>
+
+    <resultMap id="VoResultMap" type="com.bazl.dna.database.service.model.vo.DnaSampleInfoVo" extends="BaseResultMap">
+        <result column="INSTORE_DATA_TYPE_NAME" property="instoreDataTypeName" />
+        <result column="SAMPLE_TYPE_NAME" property="sampleTypeName" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        dsi.ID,dsi.LIMS_SAMPLE_UUID,dsi.LAB_SERVER_NO,dsi.INSTORE_DATA_TYPE,dsi.CASE_ID,dsi.CONSIGNMENT_ID,dsi.EVIDENCE_FLAG,
+	    dsi.REF_PERSON_ID,dsi.SAMPLE_TYPE,dsi.SAMPLE_LAB_NO,dsi.SAMPLE_EVIDENCE_NO,dsi.SAMPLE_NAME,dsi.SAMPLE_DESC,
+	    dsi.SAMPLE_PACKAGE,dsi.SAMPLE_CARRIER,dsi.TRANSFER_FLAG,dsi.NATION_SYS_NO,dsi.TRANSFER_DATETIME,dsi.TRANSFER_PERSON_ID,
+	    dsi.TRANSFER_PERSON_NAME,dsi.DELETE_FLAG,dsi.DELETE_REASON,dsi.DELETE_DATETIME,dsi.DELETE_PERSON_NAME,dsi.STORE_DATETIME,
+	    dsi.STORE_PERSON_ID,dsi.STORE_PERSON_NAME,dsi.UPDATE_DATETIME,dsi.UPDATE_PERSON_ID,dsi.UPDATE_PERSON_NAME
+    </sql>
+
+    <select id="selectImageBySampleId" parameterType="java.lang.Integer" resultType="com.bazl.dna.database.service.model.po.DnaSampleImage">
+        select
+          ID as id,
+          SAMPLE_ID as sampleId,
+          IMAGE_DESC as imageDesc,
+          SAMPLE_IMAGE as sampleImage
+        from DNA_SAMPLE_IMAGE
+        where SAMPLE_ID=#{_parameter}
+    </select>
+
+    <select id="selectByIdVoList" parameterType="java.lang.Integer" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List" />,
+        di.DICT_NAME as SAMPLE_TYPE_NAME
+        from DNA_SAMPLE_INFO dsi
+        left join DICT_ITEM di on di.DICT_CODE=dsi.SAMPLE_TYPE and di.DICT_TYPE_CODE='SAMPLE_TYPE'
+        where dsi.ID=#{id} and dsi.DELETE_FLAG = '0'
+    </select>
+
+    <select id="selectVoListByCaseId" parameterType="java.lang.Integer" resultMap="VoResultMap">
+      select
+        <include refid="Base_Column_List" />,
+        di.DICT_NAME as SAMPLE_TYPE_NAME,pi.PERSON_NAME as PERSON_NAME
+      from DNA_SAMPLE_INFO dsi
+      left join case_person_info pi on dsi.REF_PERSON_ID = pi.ID
+      left join DICT_ITEM di on di.DICT_CODE=dsi.SAMPLE_TYPE and di.DICT_TYPE_CODE='SAMPLE_TYPE'
+      where dsi.CASE_ID=#{caseId} and dsi.DELETE_FLAG = '0'
+    </select>
+
+    <select id="selectVoListPersonId" parameterType="java.lang.Integer" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List" />,
+        di.DICT_NAME as SAMPLE_TYPE_NAME,pi.PERSON_NAME as PERSON_NAME
+        from DNA_SAMPLE_INFO dsi
+        left join case_person_info pi on dsi.REF_PERSON_ID = pi.ID
+        left join DICT_ITEM di on di.DICT_CODE=dsi.SAMPLE_TYPE and di.DICT_TYPE_CODE='SAMPLE_TYPE'
+        where dsi.REF_PERSON_ID=#{personId} and dsi.DELETE_FLAG = '0'
+    </select>
+
+    <select id="selectSampleByLabServerNo" parameterType="com.bazl.dna.database.service.model.po.DnaSampleInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from DNA_SAMPLE_INFO dsi
+        where dsi.LAB_SERVER_NO = #{labServerNo}
+    </select>
+
+    <select id="selectAllSampleCount" resultType="int" parameterType="com.bazl.dna.database.service.model.po.DnaSampleInfo">
+        select count(distinct dsi.id) from DNA_SAMPLE_INFO dsi
+        where dsi.delete_flag = '0'
+    </select>
+
+</mapper>

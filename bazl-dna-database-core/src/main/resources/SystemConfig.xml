@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<!--下载路径 -->
+	<entry key="SuggestBloodPath">d:\\download\\suggestBlood</entry>
+
+	<!--下载路径 -->
+	<entry key="FamilyInvestigatePath">d:\\download\\familyInvestigate</entry>
+
+	<!-- 人口系统webservice地址 -->
+	<entry key="rkdbServiceUrl">http://localhost:8080/rkdbWebService/rk/idcard/</entry>
+
+	<!-- 国家库二期webservice地址 -->
+	<entry key="dnadbServiceUrl">http://localhost:8080/dnadbWebService/dna/sampleLabNo/</entry>
+
+
+	<entry key="FilePath">c:\\upload\\</entry>
+
+	<entry key="SavePath">\\upload</entry>
+
+	<entry key="SystemID">zjystr</entry>
+
+</properties>

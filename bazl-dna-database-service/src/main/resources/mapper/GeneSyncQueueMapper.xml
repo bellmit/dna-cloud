@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.GeneSyncQueueMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.GeneSyncQueue">
+        <id column="ID" property="id" />
+        <result column="LAB_SERVER_NO" property="labServeNo" jdbcType="VARCHAR"/>
+        <result column="SYNC_TYPE" property="syncType" />
+        <result column="GENE_ID" property="geneId" />
+        <result column="SYNC_STATUS" property="syncStatus" />
+        <result column="CREATE_DATETIME" property="createDatetime" />
+        <result column="UPDATE_DATETIME" property="updateDatetime" />
+        <result column="INSTORE_DATA_TYPE" property="instoreDataType" />
+        <result column="GENE_INFO" property="geneInfo" />
+        <result column="GENE_TYPE" property="geneType" />
+        <result column="ref_person_id" property="refPersonId" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="queryGeneInfoList" resultMap="BaseResultMap">
+        select *  from gene_sync_queue gsq
+        left join dna_gene_info dgi on gsq.gene_id = dgi.id
+        left join dna_sample_info dsi on gsq.lab_server_no = dsi.lab_server_no 
+        where gsq.sync_status = #{syncStatus,jdbcType=VARCHAR} and gsq.lab_server_no = #{labServeNo,jdbcType=VARCHAR}
+    </select>
+</mapper>

@@ -1,0 +1,18 @@
+server:
+  port: 8705
+
+spring:
+  application:
+    name: bazl-dna-nation-connector
+  mvc:
+      async-request-timeout: 600000
+  jpa:
+    database-platform: org.hibernate.dialect.OracleDialect
+
+        
+#导出文档名称
+excelName: 全库快速比对文档
+#导出数据后在excel表格中左下角显示的工作簿名称（注意：不是导出后的文件名）
+sheetName: strMix快速比对列表数据
+#导出文件后缀
+xlsxName: .xlsx

@@ -1,0 +1,260 @@
+统一认证系统接口文档：
+
+客户端请求规则
+Content-Type ：application/json
+Authorization：登陆时获取的accessToken
+
+http://ip:port/sys/{path}
+
+添加机构 -》 数据源测试
+post
+/org/isConnection
+{
+    "ip":"192.168.1.121",
+    "port":1521,
+    "dbType":"orcl",
+    "userName":"strMix",
+    "password":"strMix"
+}
+
+result:
+{
+    "code": 1,
+    "result": {
+        "status": true
+    },
+    "message": null
+}
+---------------------------------------------------------------------------------
+
+添加机构 -》 判断orgCode是否重复
+post
+/org/checkCode
+{
+	"orgId":"ff80808171aa458d0171aa604d5e0003",
+	"code":"16000000",
+	"type":"orgCode"
+}
+---------------------------------------------------------------------------------
+
+
+添加机构 -》 保存
+post
+/org/save
+
+{
+    "id": "",
+    "orgName": "检察院",
+    "orgCode": "15000000",
+    "orgCreditCode": "10001",
+    "businessName": "张3",
+    "businessPhone": "13800138000",
+    "technicalName": "李四",
+    "technicalPhone": "13800138001",
+    "orgType": "1",
+    "status":1,
+    "delStatus": "0",
+    "dataSourceConfig": {
+        "ip": "192.168.1.121",
+        "port": 1521,
+        "dbType": "orcl",
+        "userName": "strMix",
+        "password": "strMix"
+    }
+}
+
+result:
+{
+    "code": 1,
+    "result": {
+        "id": "ff80808171aa7aa80171aa8056500000",
+        "orgName": "法医中心",
+        "orgCode": "16000000",
+        "orgCreditCode": "10002",
+        "orgAreaCode": null,
+        "orgType": "1",
+        "orgLogo": null,
+        "orgLogoUrl": null,
+        "orgOrder": 1,
+        "parentId": "-1",
+        "status": "1",
+        "updateTime": "2020-04-24 12:44:29",
+        "createTime": "2020-04-24 12:44:29",
+        "delStatus": "0",
+        "businessName": "张3",
+        "businessPhone": "13800138000",
+        "technicalName": "李四",
+        "technicalPhone": "13800138001",
+        "dataSourceConfig": {
+            "id": "ff80808171b9442c0171b946db9a0000",
+            "connectName": "16000000",
+            "dbType": "orcl",
+            "dsType": null,
+            "ip": "39.100.79.169",
+            "driverName": "oracle.jdbc.driver.OracleDriver",
+            "url": "jdbc:oracle:thin:@39.100.79.169:1521:orcl",
+            "dbName": "oracle",
+            "port": 1521,
+            "userName": "gdna2",
+            "password": "dna",
+            "createTime": "2020-04-27 09:36:00",
+            "updateTime": "2020-04-27 10:01:48"
+        }
+
+    },
+    "message": null
+}
+---------------------------------------------------------------------------------
+
+列表 -》 查询
+get
+/org/get/ff80808171aa7aa80171aa8056500000
+
+result:
+{
+    "code": 1,
+    "result": {
+        "id": "ff80808171aa7aa80171aa8056500000",
+        "orgName": "法医中心",
+        "orgCode": "16000000",
+        "orgCreditCode": "10002",
+        "orgAreaCode": null,
+        "orgType": "1",
+        "orgLogo": null,
+        "orgLogoUrl": null,
+        "orgOrder": 1,
+        "parentId": "-1",
+        "status": "1",
+        "updateTime": "2020-04-24 12:44:29",
+        "createTime": "2020-04-24 12:44:29",
+        "delStatus": "0",
+        "businessName": "张3",
+        "businessPhone": "13800138000",
+        "technicalName": "李四",
+        "technicalPhone": "13800138001",
+        "dataSourceConfig": {
+            "id": "ff80808171b9442c0171b946db9a0000",
+            "connectName": "16000000",
+            "dbType": "orcl",
+            "dsType": null,
+            "ip": "39.100.79.169",
+            "driverName": "oracle.jdbc.driver.OracleDriver",
+            "url": "jdbc:oracle:thin:@39.100.79.169:1521:orcl",
+            "dbName": "oracle",
+            "port": 1521,
+            "userName": "gdna2",
+            "password": "dna",
+            "createTime": "2020-04-27 09:36:00",
+            "updateTime": "2020-04-27 10:01:48"
+        }
+    },
+    "message": null
+}
+---------------------------------------------------------------------------------
+
+列表 -》 数据源测试
+get
+/org/checkConnection/ff80808171aa458d0171aa604d5e0003
+
+result:
+{
+    "code": 1,
+    "result": {
+        "status": true
+    },
+    "message": null
+}
+---------------------------------------------------------------------------------
+
+列表 -》 删除
+get
+/org/delete/ff80808171aa458d0171aa604d5e0003
+
+result:
+{
+    "code": 1,
+    "result": {
+        "status": true
+    },
+    "message": null
+}
+---------------------------------------------------------------------------------
+
+列表 -》 查询条件
+post
+/org/list
+{
+	"order": {
+        "key": "createTime",
+        "val": "DESC"
+    },
+	"pageNum": 1,
+    "pageSize": 10,
+    "whereList": [
+        {
+            "key": "orgName",
+            "opt":"LIKE",
+            "val": "法医"
+        },
+        {
+            "key": "orgCode",
+            "opt":"LIKE",
+            "val": "160"
+        }
+    ]
+}
+
+result:
+{
+    "code": 1,
+    "result": {
+        "count": 1,
+        "list": [
+            {
+                "id": "ff80808171aa7aa80171aa8056500000",
+                "orgName": "法医中心",
+                "orgCode": "16000000",
+                "orgCreditCode": "10002",
+                "orgAreaCode": null,
+                "orgType": "1",
+                "orgLogo": null,
+                "orgLogoUrl": null,
+                "orgOrder": 1,
+                "parentId": "-1",
+                "status": "1",
+                "updateTime": "2020-04-24 12:44:29",
+                "createTime": "2020-04-24 12:44:29",
+                "delStatus": "0",
+                "businessName": "张3",
+                "businessPhone": "13800138000",
+                "technicalName": "李四",
+                "technicalPhone": "13800138001",
+                "dataSourceConfig": {
+                    "id": "ff80808171b9442c0171b946db9a0000",
+                    "connectName": "16000000",
+                    "dbType": "orcl",
+                    "dsType": null,
+                    "ip": "39.100.79.169",
+                    "driverName": "oracle.jdbc.driver.OracleDriver",
+                    "url": "jdbc:oracle:thin:@39.100.79.169:1521:orcl",
+                    "dbName": "oracle",
+                    "port": 1521,
+                    "userName": "gdna2",
+                    "password": "dna",
+                    "createTime": "2020-04-27 09:36:00",
+                    "updateTime": "2020-04-27 10:01:48"
+                }
+            }
+        ]
+    },
+    "message": null
+}
+
+
+
+
+
+
+
+
+

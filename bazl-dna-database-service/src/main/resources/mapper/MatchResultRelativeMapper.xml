@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.dna.database.service.mapper.MatchResultRelativeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bazl.dna.database.service.model.po.MatchResultRelative">
+        <result column="ID" property="id" />
+        <result column="RELATIVE_MATCH_TYPE" property="relativeMatchType" />
+        <result column="MATCH_DATETIME" property="matchDatetime" />
+        <result column="MATCH_LOCUS_COUNT" property="matchLocusCount" />
+        <result column="SAMPLE_FATHER_ID" property="sampleFatherId" />
+        <result column="SAMPLE_MOTHER_ID" property="sampleMotherId" />
+        <result column="SAMPLE_CHILD_ID" property="sampleChildId" />
+        <result column="MATCHED_SAMPLE_ID" property="matchedSampleId" />
+        <!--<result column="MATCHED_GENE_DETAILS" property="matchedGeneDetails" />-->
+        <result column="MATCHED_GENE_DETAILS" property="matchedGeneDetails" />
+        <result column="REVIEW_FLAG" property="reviewFlag" jdbcType="TINYINT" javaType="java.lang.Integer" />
+        <result column="REVIEW_DATETIME" property="reviewDatetime" />
+        <result column="REVIEW_PERSON_ID" property="reviewPersonId" />
+        <result column="REVIEW_PERSON_NAME" property="reviewPersonName" />
+        <result column="REVIEW_RESULT_CODE" property="reviewResultCode" />
+        <result column="REVIEW_RESULT_DESC" property="reviewResultDesc" />
+        <result column="CREATE_DATETIME" property="createDatetime" />
+        <result column="UPDATE_DATETIME" property="updateDatetime" />
+    </resultMap>
+
+    <resultMap id="MatchRelativeResultMap" type="com.bazl.dna.database.service.model.qo.MatchRelativeResultQuery">
+        <id column="id" property="id" />
+        <result column="groupId" property="groupId" />
+        <result column="SAMPLE_EVIDENCE_NO" property="sampleNo" />
+        <result column="SAMPLE_NAME" property="sampleName" />
+        <result column="SAMPLE_TYPE" property="sampleType" />
+        <result column="MATCH_LOCUS_COUNT" property="matchLocusCount" />
+        <result column="MATCH_DATETIME" property="matchDateTime" />
+        <result column="MATCH_SAMPLE_ID" property="matchSampleId" />
+        <result column="STORE_DATETIME" property="caseAcceptDateTime" />
+        <result column="CASE_ID" property="caseId" />
+        <result column="CASE_NAME" property="caseName" />
+        <result column="CASE_ACCEPT_NO" property="caseAcceptNo" />
+        <result column="SYS_XK_NO" property="sysXkNo" />
+        <result column="CASE_PROPERTY" property="caseProperty" />
+        <result column="CASE_STATUS" property="caseStates" />
+        <result column="REVIEW_FLAG" property="reviewFlag" />
+        <result column="REVIEW_RESULT_CODE" property="reviewResultCode" />
+        <result column="RELATIVE_MATCH_TYPE" property="relativeMatchType" />
+        <result column="relationType" property="relationType" />
+    </resultMap>
+
+    <sql id="paginationQueryWhereClause">
+        <if test="id != null  and id != 0" >
+            and ID=#{id}
+        </if>
+        <if test="sampleNo != null  and sampleNo != ''" >
+            and SAMPLE_EVIDENCE_NO=#{sampleNo}
+        </if>
+        <if test="sampleName != null  and sampleName != ''" >
+            and SAMPLE_NAME like concat('%',#{sampleName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="sampleType != null  and sampleType != 0" >
+            and SAMPLE_TYPE=#{sampleType}
+        </if>
+        <if test="sampleTypes != null and sampleTypes.length > 0">
+			and dsi.SAMPLE_TYPE in
+			<foreach collection="sampleTypes" item="id" open="(" close=")"
+				separator=",">
+				#{id}
+			</foreach>
+		</if>
+        <if test="matchLocusCount != null  and matchLocusCount != 0" >
+            and MATCH_LOCUS_COUNT=#{matchLocusCount}
+        </if>
+        <if test="caseName != null  and caseName != ''" >
+            and CASE_NAME like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="caseAcceptNo != null  and caseAcceptNo != ''" >
+            and CASE_ACCEPT_NO=#{caseAcceptNo}
+        </if>
+        <if test="sysXkNo != null  and sysXkNo != ''" >
+            and SYS_XK_NO=#{sysXkNo}
+        </if>
+        <if test="caseProperty != null  and caseProperty != 0" >
+            and CASE_PROPERTY=#{caseProperty}
+        </if>
+        <if test="casePropertys != null and casePropertys.length > 0">
+			and ci.CASE_PROPERTY in
+			<foreach collection="casePropertys" item="id" open="(" close=")"
+				separator=",">
+				#{id}
+			</foreach>
+		</if>
+        <if test="reviewFlag != null  and reviewFlag != 0" >
+            and REVIEW_FLAG=#{reviewFlag}
+        </if>
+        <if test="compareStartDatetime != null and compareEndDatetime != null">
+        		and MATCH_DATETIME between #{compareStartDatetime} and #{compareEndDatetime}
+        </if>
+        <if test="caseAcceptStartDatetime != null and caseAcceptEndDatetime != null">
+        		and STORE_DATETIME between #{caseAcceptStartDatetime} and #{caseAcceptEndDatetime}
+        </if>
+        <if test= "clientOrgList != null and clientOrgList.size > 0">
+        		and ci.LAB_SERVER_NO in
+				<foreach collection="clientOrgList" item="id" open="(" close=")"
+					separator=",">
+					#{id}
+				</foreach> 
+        </if>
+    </sql>
+    <sql id="datailQueryWhereClause">
+        <if test="id != null  and id != 0" >
+            and ci.ID=#{id, jdbcType=INTEGER}
+        </if>
+        <if test="caseName != null  and caseName != 0" >
+            and ci.case_name=#{caseName, jdbcType=VARCHAR}
+        </if>
+        <if test="sampleName != null  and sampleName != 0" >
+            and dsi.sample_name=#{sampleName, jdbcType=VARCHAR}
+        </if>
+        <if test="personName != null  and personName != 0" >
+            and ci.PERSON_NAME=#{personName, jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+	<select id="relativeResultCount"
+            parameterType="com.bazl.dna.database.service.model.qo.MatchRelativeResultQuery"
+            resultType="int">
+        select count(ms.id)
+		FROM
+			match_result_relative ms	
+			LEFT JOIN dna_sample_info dsi ON ms.SAMPLE_CHILD_ID = dsi.id
+			LEFT JOIN case_info ci ON dsi.case_id = ci.id 
+		WHERE ms.REVIEW_RESULT_CODE &lt;&gt; '2'
+        	<if test="_parameter != null">
+            <include refid="paginationQueryWhereClause" />
+        </if>
+    </select>
+
+    <select id="relativeResultInfo"
+            parameterType="com.bazl.dna.database.service.model.qo.MatchRelativeResultQuery"
+            resultMap="MatchRelativeResultMap">
+        select a.*,ci.id as CASE_ID, ci.CASE_NAME, ci.LAB_SERVER_NO,ci.CASE_ACCEPT_NO,ci.CASE_STATUS,ci.CASE_TYPE,ci.SYS_XK_NO,ci.CASE_PROPERTY,ci.CASE_SUB_PROPERTY,ci.STORE_DATETIME
+		from		(
+				select ms.id, ms.id as groupId, ms.MATCHED_SAMPLE_ID as MATCH_SAMPLE_ID, ms.MATCH_LOCUS_COUNT, ms.MATCH_DATETIME, ms.REVIEW_FLAG, ms.REVIEW_RESULT_CODE,
+					'1' as relationType, ds.id as sampleId, ds.SAMPLE_NAME, ds.SAMPLE_DESC, ds.SAMPLE_LAB_NO as SAMPLE_EVIDENCE_NO,ds.SAMPLE_TYPE,ds.case_id
+				from match_result_relative ms 
+					left join dna_sample_info ds on ms.SAMPLE_FATHER_ID=ds.id where  ms.SAMPLE_FATHER_ID is not null
+				union all
+				select ms.id, ms.id as groupId, ms.MATCHED_SAMPLE_ID as MATCH_SAMPLE_ID, ms.MATCH_LOCUS_COUNT, ms.MATCH_DATETIME, ms.REVIEW_FLAG, ms.REVIEW_RESULT_CODE,
+					'2' as relationType, ds.id as sampleId, ds.SAMPLE_NAME, ds.SAMPLE_DESC, ds.SAMPLE_LAB_NO as SAMPLE_EVIDENCE_NO,ds.SAMPLE_TYPE,ds.case_id
+				from match_result_relative ms
+					left join dna_sample_info ds on ms.SAMPLE_MOTHER_ID=ds.id  where  ms.SAMPLE_MOTHER_ID is not null
+				union all
+				select ms.id, ms.id as groupId, ms.MATCHED_SAMPLE_ID as MATCH_SAMPLE_ID, ms.MATCH_LOCUS_COUNT, ms.MATCH_DATETIME, ms.REVIEW_FLAG, ms.REVIEW_RESULT_CODE,
+					'3' as relationType, ds.id as sampleId, ds.SAMPLE_NAME, ds.SAMPLE_DESC, ds.SAMPLE_LAB_NO as SAMPLE_EVIDENCE_NO,ds.SAMPLE_TYPE,ds.case_id
+				from match_result_relative ms
+					left join dna_sample_info ds on ms.SAMPLE_CHILD_ID=ds.id  where  ms.SAMPLE_CHILD_ID is not null ) a
+			left join case_info ci on a.case_id = ci.id
+		WHERE REVIEW_RESULT_CODE &lt;&gt; '2'
+        	<if test="_parameter != null">
+            <include refid="paginationQueryWhereClause" />
+        </if>
+    </select>
+
+    <select id="relativeDatailCount"
+            parameterType="com.bazl.dna.database.service.model.qo.MatchRelativeDetailQuery"
+            resultType="int">
+        select count(ms.rr)
+        from match_result_relative mrr where 1=1
+        <if test="_parameter != null">
+            <include refid="datailQueryWhereClause" />
+        </if>
+
+    </select>
+
+
+    <select id="relativeDatailInfo"
+            parameterType="com.bazl.dna.database.service.model.qo.MatchRelativeDetailQuery"
+            resultMap="MatchRelativeResultMap">
+        select count(ms.rr)
+        from match_result_relative mrr where 1=1
+        <if test="_parameter != null">
+            <include refid="datailQueryWhereClause" />
+        </if>
+
+    </select>
+</mapper>

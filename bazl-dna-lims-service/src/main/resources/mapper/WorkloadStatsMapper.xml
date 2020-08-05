@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.dna.lims.dao.WorkloadStatsMapper">
+    <resultMap id="BaseResultMap" type="com.bazl.dna.lims.model.bo.WorkloadStatsModel">
+        <result column="name" property="tester" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询法医做建库实验的实验员-->
+    <select id="selectFyTesterList" resultMap="BaseResultMap">
+        select  di.name
+       from DICT_ITEM@lims di
+       where di.dict_info_id = 'TESTER'
+       order by di.order_no asc
+    </select>
+
+    <!--查询完成板数（审核/未审核）-->
+    <select id="selectAuditStateCnt" parameterType="com.bazl.dna.lims.model.bo.WorkloadStatsModel"
+            resultType="int">
+        select count(distinct ar.sample_board_barcode) from ANALYSIS_RESULT@lims ar
+        left join sample_gene@lims sg on sg.sample_board_barcode = ar.sample_board_barcode
+        left join sample_info@lims si on si.barcode = sg.sample_barcode
+        left join case_info@lims ci on ci.case_id = si.case_id
+        where ci.case_handle_type = '5'
+        <if test="_parameter != null">
+            <include refid="Query_Where_Clause"/>
+        </if>
+    </select>
+
+    <!--查询首次的试验样本总数、入库成功的样本数 、入库失败的样本数-->
+    <select id="selectOneTestCnt" parameterType="com.bazl.dna.lims.model.bo.WorkloadStatsModel"
+            resultType="int">
+        select count(t.sample_barcode) from (
+        select distinct sg.sample_barcode from ANALYSIS_RESULT@lims ar
+        left join sample_gene@lims sg on sg.sample_board_barcode = ar.sample_board_barcode
+        left join sample_info@lims si on si.barcode = sg.sample_barcode
+        left join case_info@lims ci on ci.case_id = si.case_id
+        where ci.case_handle_type = '5'
+        <if test="_parameter != null">
+            <include refid="Query_Where_Clause"/>
+        </if>
+        group by sg.sample_barcode having COUNT (sg.sample_barcode) &lt; 2
+        ) t
+    </select>
+
+    <!--查询重做试验的样本总数、入库成功的样本数-->
+    <select id="selectTwoTestCnt" parameterType="com.bazl.dna.lims.model.bo.WorkloadStatsModel"
+            resultType="int">
+        select count(t.sample_barcode) from (
+        select distinct sg.sample_barcode from ANALYSIS_RESULT@lims ar
+        left join sample_gene@lims sg on sg.sample_board_barcode = ar.sample_board_barcode
+        left join sample_info@lims si on si.barcode = sg.sample_barcode
+        left join case_info@lims ci on ci.case_id = si.case_id
+        where ci.case_handle_type = '5'
+        <if test="_parameter != null">
+            <include refid="Query_Where_Clause"/>
+        </if>
+        group by sg.sample_barcode having COUNT (sg.sample_barcode) &gt; 1
+        ) t
+    </select>
+
+    <!--需重做试验的样本数-->
+    <select id="selectNeedTestCnt" parameterType="com.bazl.dna.lims.model.bo.WorkloadStatsModel"
+            resultType="int">
+        select count(t.sample_barcode) from (
+        select sg.sample_barcode from ANALYSIS_RESULT@lims ar
+        left join sample_gene@lims sg on sg.sample_board_barcode = ar.sample_board_barcode
+        left join sample_info@lims si on si.barcode = sg.sample_barcode
+        left join case_info@lims ci on ci.case_id = si.case_id
+        where ci.case_handle_type = '5'
+        and sg.markerallel1 is null
+        group by sg.sample_barcode having COUNT (sg.sample_barcode) &lt; 2
+        ) t
+    </select>
+
+    <sql id="Query_Where_Clause">
+        /*入库状态*/
+        <if test="isStore != null">
+            and si.is_store = #{isStore,jdbcType=VARCHAR}
+        </if>
+        /*试验员*/
+        <if test="tester != null">
+            and ar.tester = #{tester,jdbcType=VARCHAR}
+        </if>
+        /*审核状态*/
+        <if test="auditState != null">
+            and ar.audit_status = #{auditState,jdbcType=VARCHAR}
+        </if>
+        /*实验完成时间*/
+        <if test="testFulfilDateTimeStart != null">
+            and ar.over_date &gt;= #{testFulfilDateTimeStart,jdbcType=TIMESTAMP}
+        </if>
+        <if test="testFulfilDateTimeEnd != null">
+            and ar.over_date &lt;= #{testFulfilDateTimeEnd,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+
+    <select id="rollback">
+        ROLLBACK
+    </select>
+
+</mapper>
